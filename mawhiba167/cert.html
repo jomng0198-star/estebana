@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>شهادات ورش الموهبة</title>
+<style>
+/* Layout: a certificate desk — workshop tabs on top, the live certificate as the hero, the attendee list beside it */
+@font-face{font-family:'Tajawal';font-weight:500;src:url(cert/fonts/Tajawal-Medium.ttf) format('truetype');font-display:swap}
+@font-face{font-family:'Tajawal';font-weight:700;src:url(cert/fonts/Tajawal-Bold.ttf) format('truetype');font-display:swap}
+@font-face{font-family:'Tajawal';font-weight:800;src:url(cert/fonts/Tajawal-ExtraBold.ttf) format('truetype');font-display:swap}
+@font-face{font-family:'Aref Ruqaa';font-weight:700;src:url(cert/fonts/ArefRuqaa-Bold.ttf) format('truetype');font-display:swap}
+:root{
+  --bg:#f3e9e6; --chrome:#fdf9f7; --ink:#4f4237; --ink-2:#8a7869; --rose:#b9718d; --rose-soft:#f4e1e7;
+  --gold:#c9a47a; --line:rgba(140,100,80,.2); --paper:#fffdfc; --field:#f7efec; --ok:#3f8f61; --bad:#c2524a;
+  --font:'Tajawal','Segoe UI',Tahoma,Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#1d1719;--chrome:#2a2124;--ink:#f3e8e3;--ink-2:#c7b2a8;--rose:#e29ab6;--rose-soft:#4a2c38;--gold:#e0bf95;--line:rgba(240,215,200,.16);--paper:#33282c;--field:#261e21;--ok:#6cc58f;--bad:#f08b83;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1d1719;--chrome:#2a2124;--ink:#f3e8e3;--ink-2:#c7b2a8;--rose:#e29ab6;--rose-soft:#4a2c38;--gold:#e0bf95;--line:rgba(240,215,200,.16);--paper:#33282c;--field:#261e21;--ok:#6cc58f;--bad:#f08b83;color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);padding-block:16px 28px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+button,input,select,textarea{font-family:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--rose);outline-offset:2px}
+.wrap{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+header{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:10px}
+header h1{margin:0;font-size:clamp(22px,4vw,30px);font-weight:800;text-wrap:balance}
+header p{margin:4px 0 0;color:var(--ink-2);font-size:15px}
+header a{color:var(--rose);font-weight:800;text-decoration:none;font-size:15px}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.tabs button{flex:none;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:30px;padding:8px 14px;font-weight:700;font-size:14px;display:flex;gap:8px;align-items:center}
+.tabs button[aria-pressed="true"]{background:var(--rose);border-color:var(--rose);color:#fff}
+.tabs b{font-variant-numeric:tabular-nums;background:rgba(0,0,0,.08);border-radius:20px;padding:0 8px;font-size:12px}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:16px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.stage{display:flex;flex-direction:column;gap:12px;min-width:0}
+.cv{position:relative;width:100%;aspect-ratio:2000/1414;border-radius:10px;overflow:hidden;box-shadow:0 18px 44px rgba(90,50,40,.22);background:#fcf9f7}
+.cv canvas{width:100%;height:100%;display:block}
+.cv .ld{position:absolute;inset:0;display:grid;place-items:center;color:#8a7869;font-weight:700}
+.acts{display:flex;flex-wrap:wrap;gap:8px}
+.btn{border:0;border-radius:30px;background:var(--rose);color:#fff;font-weight:800;font-size:15px;padding:11px 18px}
+.btn.alt{background:var(--paper);color:var(--ink);border:1px solid var(--line)}
+.btn:disabled{opacity:.55;cursor:default}
+.side{display:flex;flex-direction:column;gap:14px;min-width:0}
+.box{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.box h2{margin:0;font-size:16px;display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.box h2 span{font-size:13px;font-weight:500;color:var(--ink-2)}
+label.f{display:flex;flex-direction:column;gap:6px;font-weight:700;font-size:14px}
+.box input,.box textarea,.box select{font-size:16px;padding:9px 11px;border-radius:12px;border:1px solid var(--line);background:var(--field);color:var(--ink);width:100%}
+.box textarea{min-height:110px;resize:vertical;line-height:1.7}
+.hint{margin:0;font-size:13px;color:var(--ink-2);line-height:1.6}
+.list{display:flex;flex-direction:column;gap:6px;max-height:340px;overflow:auto}
+.row{display:grid;grid-template-columns:24px 1fr auto;gap:8px;align-items:center;background:var(--field);border-radius:10px;padding:7px 10px;font-size:14px;border:2px solid transparent;cursor:pointer;text-align:start;color:var(--ink);width:100%}
+.row[aria-current="true"]{border-color:var(--rose)}
+.row b{font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.row small{color:var(--ink-2);font-size:12px;white-space:nowrap}
+.row .nm{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.none{color:var(--ink-2);font-size:14px;text-align:center;padding:12px;background:var(--field);border-radius:10px;line-height:1.7}
+.status{margin:0;font-weight:700;font-size:14px;padding:10px 12px;border-radius:12px;background:var(--rose-soft);line-height:1.6}
+.student .side{display:none}
+.student .grid{grid-template-columns:1fr}
+.student .stage{max-width:980px;margin-inline:auto;width:100%}
+.hello{font-size:17px;font-weight:700;text-align:center;margin:0;line-height:1.7}
+#toast{position:fixed;z-index:60;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--chrome);padding:10px 18px;border-radius:30px;font-weight:700;font-size:14px;max-width:calc(100% - 32px);text-align:center}
+#printArea{display:none}
+@media print{
+  @page{size:A4 landscape;margin:0}
+  body{background:#fff;padding:0}
+  .wrap,#toast{display:none!important}
+  #printArea{display:block}
+  #printArea img{display:block;width:297mm;height:210mm;page-break-after:always;break-after:page}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app">
+  <header>
+    <div><h1 id="h1">شهادات ورش الموهبة</h1><p id="hsub">المتوسطة ١٦٧ · اختاري الورشة ثم أصدري شهادات الحاضرات</p></div>
+    <a href="./" id="homeLink">← كل الورش</a>
+  </header>
+  <div class="tabs" id="tabs" role="group" aria-label="الورش"></div>
+  <div class="grid">
+    <section class="stage">
+      <p class="hello" id="hello" hidden></p>
+      <div class="cv"><canvas id="cv" width="2000" height="1414" aria-label="معاينة الشهادة"></canvas><div class="ld" id="ld">جارٍ تجهيز الشهادة…</div></div>
+      <div class="acts">
+        <button class="btn" type="button" id="dlPng">تنزيل الشهادة (صورة)</button>
+        <button class="btn alt" type="button" id="dlPdf">تنزيل الشهادة (PDF)</button>
+        <button class="btn alt" type="button" id="prOne">طباعة الشهادة</button>
+      </div>
+    </section>
+    <aside class="side">
+      <div class="box">
+        <h2>بيانات الشهادة</h2>
+        <label class="f" for="fName">اسم الطالبة<input id="fName" maxlength="60" placeholder="اتركيه فارغًا لشهادة تُكتب باليد"></label>
+        <label class="f" for="fGrade">الصف<select id="fGrade"><option value="">بدون صف</option><option>الأول المتوسط</option><option>الثاني المتوسط</option><option>الثالث المتوسط</option></select></label>
+        <label class="f" for="fDate">تاريخ تنفيذ الورشة<input id="fDate" type="date"></label>
+        <p class="hint" id="dateHint"></p>
+      </div>
+      <div class="box">
+        <h2>الحاضرات <span id="cnt"></span></h2>
+        <div class="list" id="list"></div>
+        <label class="f" for="extra">أسماء إضافية<textarea id="extra" placeholder="اسم في كل سطر، ويمكن كتابة الصف بعد فاصلة&#10;مثال: سارة محمد العتيبي، الثاني المتوسط"></textarea></label>
+        <button class="btn" type="button" id="dlAll">تنزيل كل شهادات الورشة (PDF)</button>
+        <button class="btn alt" type="button" id="prAll">طباعة كل شهادات الورشة</button>
+        <p class="status" id="st" hidden></p>
+      </div>
+    </aside>
+  </div>
+</div>
+<div id="printArea"></div>
+<div id="toast" hidden role="status"></div>
+<script>
+const W = [
+  { key: 'w1', title: 'كيف يرى العلماء ما لا يراه الآخرون؟', kind: 'برنامج علمي' },
+  { key: 'w2', title: 'المستقبل والعلم والتقنية', kind: 'برنامج علمي' },
+  { key: 'w3', title: 'حل المشكلات بطريقة إبداعية', kind: 'برنامج مهاري' },
+  { key: 'w4', title: 'أنا أقرأ', kind: 'برنامج مهاري' },
+  { key: 'w5', title: 'سكامبر: أطلق العنان لفكرتك', kind: 'برنامج مهاري' },
+  { key: 'w6', title: 'فن الشعر والخطابة والإلقاء', kind: 'برنامج مهاري' },
+];
+const SCHOOL = 'المتوسطة ١٦٧', COORD_DEF = 'نوره بداح القحطاني', PRIN_DEF = 'ريم البيشي';
+const $ = id => document.getElementById(id);
+const T = (tag, txt, cls) => { const e = document.createElement(tag); if (txt != null) e.textContent = txt; if (cls) e.className = cls; return e; };
+const ls = { get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { } } };
+function toast(m) { const t = $('toast'); t.textContent = m; t.hidden = false; clearTimeout(toast.h); toast.h = setTimeout(() => t.hidden = true, 3200); }
+const AR = s => String(s).replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+
+/* ---------- state ---------- */
+const P = new URLSearchParams(location.search);
+let cur = W.find(w => w.key === P.get('w')) || W[0];
+const STUDENT = !!P.get('n');
+const S = { name: P.get('n') || '', grade: P.get('g') || '', date: P.get('d') || '' };
+function fields(w) { return Object.assign({ coord: COORD_DEF, principal: PRIN_DEF }, ls.get('mawhiba167:' + w.key + ':fields', {})); }
+function attendees(w) { return ls.get('mawhiba167:' + w.key + ':attendance', []); }
+function extras() { return $('extra').value.split('\n').map(l => l.trim()).filter(Boolean).map(l => { const [n, g] = l.split(/[،,]/).map(x => (x || '').trim()); return { name: n.replace(/\s+/g, ' '), grade: g || '' }; }); }
+function people() { const seen = new Set(); return [...attendees(cur), ...extras()].filter(p => p.name && !seen.has(p.name) && seen.add(p.name)); }
+
+/* ---------- dates ---------- */
+function hijri(iso) {
+  const d = iso ? new Date(iso + 'T12:00:00') : new Date();
+  try { return new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura-nu-arab', { day: 'numeric', month: 'long', year: 'numeric' }).format(d).replace(/\s*هـ$/, '') + ' هـ'; }
+  catch (e) { return AR(d.toLocaleDateString('en-GB')); }
+}
+
+/* ---------- drawing ---------- */
+const BG = {};
+function bg(w) { return BG[w.key] || (BG[w.key] = new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = 'cert/bg-' + w.key + '.jpg'; })); }
+const fontsReady = Promise.all(['500 40px Tajawal', '700 40px Tajawal', '800 40px Tajawal', '700 40px "Aref Ruqaa"'].map(f => document.fonts.load(f).catch(() => null)));
+function fit(ctx, text, font, size, max) { let s = size; do { ctx.font = font.replace('#', s); if (ctx.measureText(text).width <= max) break; s -= 2; } while (s > 18); return s; }
+function txt(ctx, text, x, y, font, color) { ctx.font = font; ctx.fillStyle = color; ctx.fillText(text, x, y); }
+function ornament(ctx, cx, y, half) {
+  ctx.strokeStyle = '#ddbb95'; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(cx - half, y); ctx.lineTo(cx - 22, y); ctx.moveTo(cx + 22, y); ctx.lineTo(cx + half, y); ctx.stroke();
+  ctx.fillStyle = '#d3ae84'; ctx.beginPath(); ctx.moveTo(cx, y - 12); ctx.lineTo(cx + 12, y); ctx.lineTo(cx, y + 12); ctx.lineTo(cx - 12, y); ctx.closePath(); ctx.fill();
+  [cx - half, cx + half].forEach(x => { ctx.beginPath(); ctx.arc(x, y, 5, 0, Math.PI * 2); ctx.fill(); });
+}
+async function draw(ctx, w, p) {
+  const img = await bg(w); await fontsReady;
+  const f = fields(w);
+  ctx.save(); ctx.clearRect(0, 0, 2000, 1414); ctx.drawImage(img, 0, 0, 2000, 1414);
+  ctx.direction = 'rtl'; ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+  const cx = 1320, colW = 1060, INK = '#6b5b4b', SOFT = '#8a7362', ROSE = '#a35d79';
+  // letterhead
+  ctx.textAlign = 'right';
+  txt(ctx, 'المملكة العربية السعودية', 1850, 168, '700 30px Tajawal', '#7a6656');
+  txt(ctx, 'وزارة التعليم', 1850, 210, '700 30px Tajawal', '#7a6656');
+  txt(ctx, SCHOOL, 1850, 252, '800 30px Tajawal', '#9b5f79');
+  ctx.textAlign = 'center';
+  // title
+  txt(ctx, 'شهادة مشاركة', cx, 380, '700 150px "Aref Ruqaa"', '#b5708c');
+  ornament(ctx, cx, 432, 230);
+  txt(ctx, 'تشهد إدارة ' + SCHOOL + ' بأن الطالبة', cx, 520, '500 44px Tajawal', INK);
+  // name
+  if (p.name) {
+    const s = fit(ctx, p.name, '800 #px Tajawal', 96, colW - 80); ctx.font = '800 ' + s + 'px Tajawal'; ctx.fillStyle = '#5b3f33'; ctx.fillText(p.name, cx, 640);
+    const nw = Math.min(colW, ctx.measureText(p.name).width + 120);
+    ctx.strokeStyle = '#e2c39c'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(cx - nw / 2, 672); ctx.lineTo(cx + nw / 2, 672); ctx.stroke();
+  } else {
+    ctx.strokeStyle = '#d9b892'; ctx.lineWidth = 3; ctx.setLineDash([2, 12]); ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(cx - 420, 650); ctx.lineTo(cx + 420, 650); ctx.stroke(); ctx.setLineDash([]);
+  }
+  let y = 735;
+  if (p.grade) { txt(ctx, 'من الصف ' + p.grade, cx, y, '500 40px Tajawal', SOFT); y += 72; }
+  else if (!p.name) { txt(ctx, 'من الصف: ........................', cx, y, '500 38px Tajawal', SOFT); y += 72; }
+  else y += 10;
+  txt(ctx, 'قد حضرت وشاركت بتميّز في ورشة', cx, y, '500 44px Tajawal', INK); y += 98;
+  // workshop pill
+  const ts = fit(ctx, '«' + w.title + '»', '800 #px Tajawal', 58, colW - 120); ctx.font = '800 ' + ts + 'px Tajawal';
+  const tw = ctx.measureText('«' + w.title + '»').width + 90, ph = ts + 46;
+  ctx.fillStyle = '#f6e3ea'; ctx.beginPath(); ctx.roundRect(cx - tw / 2, y - ts - 12, tw, ph, ph / 2); ctx.fill();
+  ctx.strokeStyle = '#ecc9d6'; ctx.lineWidth = 2; ctx.stroke();
+  ctx.fillStyle = ROSE; ctx.fillText('«' + w.title + '»', cx, y + 4); y += 88;
+  txt(ctx, 'ضمن البرامج الإثرائية لطالبات الموهبة · ' + w.kind, cx, y, '500 36px Tajawal', SOFT); y += 58;
+  txt(ctx, p.date ? 'وذلك بتاريخ ' + hijri(p.date) : 'وذلك بتاريخ:   ......  /  ......  /  ١٤٤٨ هـ', cx, y, '700 36px Tajawal', SOFT); y += 60;
+  txt(ctx, 'متمنين لها دوام التميّز والإبداع', cx, y, '700 38px Tajawal', '#b5708c');
+  // signatures
+  const sy = 1196;
+  [[1690, 'منسقة الموهوبات', f.coord || COORD_DEF], [950, 'مديرة المدرسة', f.principal || PRIN_DEF]].forEach(([x, lab, nm]) => {
+    txt(ctx, lab, x, sy, '700 32px Tajawal', '#9b8676');
+    const s = fit(ctx, nm, '800 #px Tajawal', 40, 380); txt(ctx, nm, x, sy + 56, '800 ' + s + 'px Tajawal', INK);
+    ctx.strokeStyle = '#e2c39c'; ctx.lineWidth = 2; ctx.setLineDash([2, 9]); ctx.beginPath(); ctx.moveTo(x - 150, sy + 108); ctx.lineTo(x + 150, sy + 108); ctx.stroke(); ctx.setLineDash([]);
+  });
+  // seal spot
+  ctx.strokeStyle = '#e6cfb2'; ctx.lineWidth = 3; ctx.setLineDash([6, 10]); ctx.beginPath(); ctx.arc(1320, sy + 34, 84, 0, Math.PI * 2); ctx.stroke(); ctx.setLineDash([]);
+  txt(ctx, 'الختم', 1320, sy + 44, '700 32px Tajawal', '#d8c2a8');
+  ctx.restore();
+}
+
+/* ---------- export ---------- */
+function canvasFor() { const c = document.createElement('canvas'); c.width = 2000; c.height = 1414; return c; }
+const jpegBytes = c => new Promise(r => c.toBlob(b => b.arrayBuffer().then(a => r(new Uint8Array(a))), 'image/jpeg', .9));
+async function makePdf(list) {   /* tiny PDF writer: one A4-landscape page per JPEG */
+  const enc = new TextEncoder(), parts = [], offs = []; let len = 0;
+  const push = x => { const b = typeof x === 'string' ? enc.encode(x) : x; parts.push(b); len += b.length; };
+  const obj = (n, body) => { offs[n] = len; push(n + ' 0 obj\n'); body.forEach(push); push('\nendobj\n'); };
+  const n = list.length, pw = 841.89, ph = 595.28;
+  push('%PDF-1.4\n%\xE2\xE3\xCF\xD3\n');
+  const kids = []; for (let i = 0; i < n; i++) kids.push((3 + i * 3) + ' 0 R');
+  obj(1, ['<< /Type /Catalog /Pages 2 0 R >>']);
+  obj(2, ['<< /Type /Pages /Count ' + n + ' /Kids [' + kids.join(' ') + '] >>']);
+  for (let i = 0; i < n; i++) {
+    const p = 3 + i * 3, jpg = list[i], cs = 'q ' + pw + ' 0 0 ' + ph + ' 0 0 cm /Im0 Do Q';
+    obj(p, ['<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ' + pw + ' ' + ph + '] /Resources << /XObject << /Im0 ' + (p + 1) + ' 0 R >> >> /Contents ' + (p + 2) + ' 0 R >>']);
+    obj(p + 1, ['<< /Type /XObject /Subtype /Image /Width 2000 /Height 1414 /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ' + jpg.length + ' >>\nstream\n', jpg, '\nendstream']);
+    obj(p + 2, ['<< /Length ' + cs.length + ' >>\nstream\n' + cs + '\nendstream']);
+  }
+  const xref = len, total = 3 + n * 3;
+  push('xref\n0 ' + total + '\n0000000000 65535 f \n'); for (let i = 1; i < total; i++) push(String(offs[i]).padStart(10, '0') + ' 00000 n \n');
+  push('trailer\n<< /Size ' + total + ' /Root 1 0 R >>\nstartxref\n' + xref + '\n%%EOF');
+  return new Blob(parts, { type: 'application/pdf' });
+}
+function save(blob, name) { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 4000); }
+const safe = s => (s || 'شهادة').replace(/[\\/:*?"<>|]/g, '').slice(0, 60);
+const fileBase = p => 'شهادة - ' + (p.name ? safe(p.name) : 'فارغة') + ' - ' + safe(cur.title);
+
+/* ---------- UI ---------- */
+const cv = $('cv'), ctx = cv.getContext('2d');
+let sel = { name: S.name, grade: S.grade };
+let drawTok = 0;
+async function render() { const tok = ++drawTok; const p = { name: sel.name, grade: sel.grade, date: $('fDate').value }; const c = canvasFor(); await draw(c.getContext('2d'), cur, p); if (tok !== drawTok) return; ctx.drawImage(c, 0, 0); $('ld').hidden = true; }
+function tabs() {
+  const t = $('tabs'); t.innerHTML = '';
+  W.forEach(w => { const b = T('button'); b.type = 'button'; b.setAttribute('aria-pressed', String(w === cur)); b.append(T('span', w.title)); const n = attendees(w).length; if (n) b.append(T('b', AR(n)));
+    b.onclick = () => { cur = w; sel = { name: '', grade: '' }; $('fName').value = ''; $('fGrade').value = ''; tabs(); list(); render(); try { history.replaceState(null, '', '?w=' + w.key); } catch (e) { } }; t.appendChild(b); });
+}
+function list() {
+  const L = $('list'); L.innerHTML = ''; const ps = people(); $('cnt').textContent = AR(ps.length) + ' طالبة';
+  if (!ps.length) L.appendChild(T('div', 'لا توجد حاضرات مسجلات لهذه الورشة على هذا الجهاز. أضيفي الأسماء في المربع بالأسفل، أو اكتبي اسمًا في بيانات الشهادة.', 'none'));
+  ps.forEach((p, i) => { const r = T('button', null, 'row'); r.type = 'button'; r.setAttribute('aria-current', String(p.name === sel.name)); r.append(T('b', AR(i + 1)), T('span', p.name, 'nm'), T('small', p.grade || ''));
+    r.onclick = () => { sel = { name: p.name, grade: p.grade }; $('fName').value = p.name; $('fGrade').value = [...$('fGrade').options].some(o => o.value === p.grade) ? p.grade : ''; list(); render(); }; L.appendChild(r); });
+}
+$('fName').addEventListener('input', () => { sel.name = $('fName').value.trim().replace(/\s+/g, ' '); list(); render(); });
+$('fGrade').addEventListener('change', () => { sel.grade = $('fGrade').value; render(); });
+$('fDate').addEventListener('change', () => { ls.set('mawhiba167:cert-date:' + cur.key, $('fDate').value); $('dateHint').textContent = $('fDate').value ? 'يظهر في الشهادة: ' + hijri($('fDate').value) : 'التاريخ فارغ، ويُكتب باليد.'; render(); });
+let et; $('extra').addEventListener('input', () => { clearTimeout(et); et = setTimeout(() => { ls.set('mawhiba167:cert-extra:' + cur.key, $('extra').value); list(); }, 300); });
+
+$('dlPng').onclick = () => cv.toBlob(b => { save(b, fileBase(sel) + '.png'); toast('بدأ تنزيل الشهادة.'); }, 'image/png');
+$('dlPdf').onclick = async () => { save(await makePdf([await jpegBytes(cv)]), fileBase(sel) + '.pdf'); toast('بدأ تنزيل الشهادة PDF.'); };
+async function allCanvases() { const ps = people(); const out = []; for (const p of ps) { const c = canvasFor(); await draw(c.getContext('2d'), cur, { name: p.name, grade: p.grade, date: $('fDate').value }); out.push(c); } return out; }
+$('dlAll').onclick = async () => { const st = $('st'); st.hidden = false; const ps = people(); if (!ps.length) { st.textContent = 'أضيفي أسماء الحاضرات أولًا.'; return; }
+  $('dlAll').disabled = true; st.textContent = 'جارٍ تجهيز ' + AR(ps.length) + ' شهادة…'; const cs = await allCanvases(); const jp = []; for (const c of cs) jp.push(await jpegBytes(c));
+  save(await makePdf(jp), 'شهادات ورشة ' + safe(cur.title) + ' (' + ps.length + ').pdf'); st.textContent = 'تم تجهيز ملف واحد فيه ' + AR(ps.length) + ' شهادة، صفحة لكل طالبة.'; $('dlAll').disabled = false; };
+async function printImgs(cs) { const pa = $('printArea'); pa.innerHTML = ''; for (const c of cs) { const i = new Image(); i.src = c.toDataURL('image/jpeg', .92); pa.appendChild(i); } await Promise.all([...pa.images || pa.querySelectorAll('img')].map(i => i.decode().catch(() => null))); window.print(); }
+$('prOne').onclick = () => printImgs([cv]);
+$('prAll').onclick = async () => { const ps = people(); if (!ps.length) { const st = $('st'); st.hidden = false; st.textContent = 'أضيفي أسماء الحاضرات أولًا.'; return; } printImgs(await allCanvases()); };
+
+/* ---------- boot ---------- */
+(function boot() {
+  const today = new Date(); const iso = S.date || ls.get('mawhiba167:cert-date:' + cur.key, '') || today.toISOString().slice(0, 10);
+  $('fDate').value = iso; $('dateHint').textContent = 'يظهر في الشهادة: ' + hijri(iso);
+  $('extra').value = ls.get('mawhiba167:cert-extra:' + cur.key, '');
+  if (STUDENT) {
+    document.body.classList.add('student'); $('tabs').hidden = true; $('prOne').hidden = true;
+    $('h1').textContent = 'شهادتك من ورشة «' + cur.title + '»'; $('hsub').textContent = 'البرامج الإثرائية لطالبات الموهبة · ' + SCHOOL;
+    const h = $('hello'); h.hidden = false; h.textContent = 'مبارك يا ' + S.name.split(' ')[0] + '! هذه شهادة مشاركتك، نزّليها واحتفظي بها.';
+    $('homeLink').href = cur.key + '.html'; $('homeLink').textContent = '← العودة للورشة';
+  } else { tabs(); list(); }
+  render();
+})();
+</script>
+</body>
+</html>

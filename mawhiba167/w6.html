@@ -203,6 +203,7 @@ label.f{display:flex;flex-direction:column;gap:6px;font-weight:700;font-size:15p
 .sig .clr{position:absolute;top:6px;left:6px;border:1px solid #e6d3cb;background:#fff;color:#6b5b4b;border-radius:20px;font-size:12px;padding:3px 10px;font-weight:700}
 .btn{border:0;border-radius:30px;background:var(--rose);color:#fff;font-weight:800;font-size:16px;padding:12px}
 .btn.alt{background:var(--paper);color:var(--ink);border:1px solid var(--line)}
+.certlink{display:block;text-align:center;text-decoration:none;background:linear-gradient(90deg,var(--gold),var(--rose))}
 .btn:disabled{opacity:.6}
 .err{color:var(--bad);font-weight:700;font-size:14px;margin:0}
 .status{font-weight:700;font-size:14.5px;padding:10px 12px;border-radius:12px;background:var(--rose-soft);line-height:1.6;margin:0}
@@ -259,11 +260,13 @@ label.f{display:flex;flex-direction:column;gap:6px;font-weight:700;font-size:15p
       <p class="err" id="aErr" hidden></p>
       <button class="btn" type="submit" id="aSend">تسجيل الحضور وإرساله لبريد المدرسة</button>
       <p class="status" id="aStat" hidden></p>
+      <a class="btn certlink" id="aCert" href="cert.html" hidden>🎓 اصدري شهادة مشاركتك</a>
     </form>
     <section class="box">
       <h3>الحاضرات <span id="aCount"></span></h3>
       <div class="list" id="aList"></div>
       <div class="row2"><button class="btn alt" type="button" id="aMailAll">إرسال السجل كاملًا للبريد</button><button class="btn alt" type="button" id="aCopy">نسخ السجل</button></div>
+      <a class="btn certlink" id="aCertAll" href="cert.html">🎓 إصدار شهادات الحاضرات</a>
       <p class="status" id="aStat2" hidden></p>
       <div class="mail">بريد المدرسة: <code id="mailTxt"></code><button type="button" id="mailCopy">نسخ</button></div>
     </section>
@@ -479,6 +482,7 @@ $('aform').addEventListener('submit', async e => { e.preventDefault(); const err
   const btn = $('aSend'); btn.disabled = true; st.hidden = false; st.className = 'status'; st.textContent = 'جارٍ الإرسال إلى بريد المدرسة…';
   const res = await mail('حضور ورشة: ' + D.title, { 'المدرسة': D.school, 'الورشة': D.title, 'اسم الطالبة': name, 'الصف': grade, 'التوقيع': 'وقّعت إلكترونيًا', 'وقت التسجيل': rec.at, 'رقمها في السجل': String(A.length), 'منسقة الموهوبات': F.coord || '' });
   rec.sent = res === 'ok'; ls.set('attendance', A); st.className = 'status' + (res === 'ok' ? ' ok' : ''); st.textContent = res === 'ok' ? 'تم تسجيل حضورك يا ' + name.split(' ')[0] + '، ووصل إلى بريد المدرسة.' : MSG[res];
+  { const c = $('aCert'); c.href = 'cert.html?w=' + D.key + '&n=' + encodeURIComponent(name) + '&g=' + encodeURIComponent(grade); c.hidden = false; }
   btn.disabled = false; $('aName').value = ''; $('aGrade').value = ''; sigSize(); celebrate(els[ATT]); });
 function sheetText() { return 'سجل حضور ورشة «' + D.title + '» — ' + D.school + '\n' + A.map((r, i) => (i + 1) + '. ' + r.name + ' — ' + r.grade + ' — ' + r.at).join('\n') + '\nالعدد: ' + A.length + '\nمنفذة البرنامج: ' + (F.coord || '') + ' · مديرة المدرسة: ' + (F.principal || ''); }
 $('aMailAll').onclick = async () => { const st = $('aStat2'); st.hidden = false; st.className = 'status'; if (!A.length) { st.textContent = 'لا توجد أسماء في السجل بعد.'; return; } st.textContent = 'جارٍ إرسال السجل…';
@@ -487,6 +491,8 @@ $('aMailAll').onclick = async () => { const st = $('aStat2'); st.hidden = false;
 async function copyTxt(t, ok) { try { await navigator.clipboard.writeText(t); toast(ok); } catch (e) { toast('تعذر النسخ التلقائي، حددي النص يدويًا.'); } }
 $('aCopy').onclick = () => copyTxt(sheetText(), 'نُسخ السجل، الصقيه في رسالة أو مستند.');
 $('mailCopy').onclick = () => copyTxt(EMAIL, 'نُسخ البريد.');
+$('aCertAll').href = 'cert.html?w=' + D.key;
+$('aName').addEventListener('input', () => { $('aCert').hidden = true; });
 renderAtt();
 
 const h0 = location.hash; if (h0 === '#attend') { show(ATT); setTimeout(openAtt, 400); } else { const m = /^#s(\d+)$/.exec(h0); show(m ? +m[1] - 1 : 0); }
