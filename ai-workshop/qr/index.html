@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>باركود الورشة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet" />
+<style>
+/* Cyanotype QR card: one sun-printed sheet pegged to a Prussian wall; editor on the side. */
+:root {
+  --table: #cbc3ae; --ink: #1d2117; --soft: rgba(29, 33, 23, 0.66); --rule: rgba(29, 33, 23, 0.16);
+  --paper: #f5f1e6; --blue: #173b8a; --lime: #d6f06b; --wall: #0f1830; --sky: #8fb0ff;
+  --serif: 'Amiri', 'Times New Roman', serif; --sans: 'IBM Plex Sans Arabic', system-ui, sans-serif; --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { font-family: var(--sans); color: var(--paper); background: radial-gradient(80% 60% at 50% 0%, #15214a, transparent 70%), var(--wall); -webkit-font-smoothing: antialiased; }
+:focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; }
+.app { min-height: 100%; display: grid; grid-template-columns: minmax(280px, 360px) 1fr; }
+.panel { padding: 28px 24px; border-left: 1px solid rgba(245, 241, 230, 0.12); background: rgba(9, 14, 30, 0.45); }
+.panel h1 { margin: 0 0 4px; font: 700 28px/1.3 var(--serif); }
+.panel > p { margin: 0 0 22px; color: rgba(245, 241, 230, 0.65); font-size: 14px; line-height: 1.7; }
+.field { margin-bottom: 16px; }
+.field label, .field > span { display: block; margin-bottom: 7px; font: 500 12px/1 var(--mono); color: rgba(245, 241, 230, 0.6); }
+.field input { width: 100%; padding: 11px 12px; border: 1px solid rgba(245, 241, 230, 0.25); background: rgba(245, 241, 230, 0.06); color: var(--paper); font: 15px/1.4 var(--sans); border-radius: 6px; }
+.field input[dir='ltr'] { font-family: var(--mono); font-size: 13px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { appearance: none; border: 1px solid rgba(245, 241, 230, 0.3); background: transparent; color: var(--paper); padding: 8px 13px; border-radius: 999px; font: 500 13px/1 var(--sans); cursor: pointer; }
+.chip[aria-pressed='true'] { background: var(--lime); border-color: var(--lime); color: var(--ink); }
+.row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 22px; }
+.btn { appearance: none; border: 1px solid var(--lime); background: var(--lime); color: var(--ink); padding: 12px 18px; border-radius: 999px; font: 600 14px/1 var(--sans); cursor: pointer; }
+.btn--ghost { background: transparent; color: var(--paper); border-color: rgba(245, 241, 230, 0.4); }
+.status { font-size: 13px; color: var(--lime); align-self: center; }
+.tip { margin-top: 22px; padding: 14px; border: 1px dashed rgba(245, 241, 230, 0.25); font-size: 13px; line-height: 1.8; color: rgba(245, 241, 230, 0.7); }
+
+.stage { display: grid; place-items: center; padding: 60px 24px; }
+.card { position: relative; width: min(560px, 100%); background: var(--paper); color: var(--ink); padding: 54px clamp(22px, 5vw, 48px) 34px; text-align: center; transform: rotate(-0.8deg);
+  box-shadow: 0 44px 90px -36px rgba(0, 0, 0, 0.85); }
+.card::after { content: ''; position: absolute; inset: 0; pointer-events: none; mix-blend-mode: multiply; opacity: 0.55;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .47 0 0 0 0 .4 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.peg { position: absolute; top: -28px; width: 28px; height: 62px; border-radius: 3px; background: linear-gradient(90deg, #b88a55, #dcb27a 45%, #a47844); box-shadow: 0 6px 10px rgba(0, 0, 0, 0.35); }
+.peg::after { content: ''; position: absolute; left: 15%; right: 15%; top: 38%; height: 12%; background: #7c7f86; border-radius: 2px; }
+.peg--a { right: 18%; } .peg--b { left: 18%; }
+.kicker { margin: 0 0 12px; font: 500 12px/1.5 var(--mono); color: var(--blue); }
+.kicker::before { content: ''; display: inline-block; width: 8px; height: 8px; margin-left: 10px; background: var(--lime); }
+.card h2 { margin: 0; font: 700 clamp(30px, 4.4vw, 46px)/1.2 var(--serif); color: var(--blue); text-wrap: balance; }
+.card h2 em { font-style: italic; font-weight: 400; }
+.card .sub { margin: 8px 0 20px; color: var(--soft); font-size: 16px; line-height: 1.7; }
+.qr { display: inline-block; padding: 14px; background: #fff; border: 1px solid var(--rule); position: relative; z-index: 1; }
+.qr canvas { display: block; width: min(320px, 68vw); height: auto; image-rendering: pixelated; }
+.target { margin: 14px 0 0; font: 500 13px/1.4 var(--mono); color: var(--blue); }
+.sign { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--rule); font: 700 24px/1.3 var(--serif); color: var(--blue); }
+.url { margin: 6px 0 0; direction: ltr; font: 500 11px/1.5 var(--mono); color: var(--soft); word-break: break-all; }
+
+/* display mode: only the card, as big as the screen allows */
+.app.is-show { grid-template-columns: 1fr; }
+.app.is-show .panel { display: none; }
+.app.is-show .stage { min-height: 100vh; min-height: 100svh; padding: 50px 16px; }
+.app.is-show .card { width: min(720px, 100%); }
+.app.is-show .qr canvas { width: min(440px, 62vh, 80vw); }
+.exit { position: fixed; top: 14px; left: 14px; z-index: 5; display: none; }
+.app.is-show + .exit { display: inline-block; }
+
+@media (max-width: 860px) { .app { grid-template-columns: 1fr; } .panel { border-left: 0; border-bottom: 1px solid rgba(245, 241, 230, 0.12); } }
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <aside class="panel" aria-label="تعديل القالب">
+    <h1>قالب الباركود</h1>
+    <p>عدّلي النصوص واختاري وجهة الرمز، ثم اعرضيه على الشاشة لتمسحه المشاركات.</p>
+    <div class="field"><label for="inTitle">العنوان</label><input id="inTitle" value="ورشة الذكاء الاصطناعي" /></div>
+    <div class="field"><label for="inTitle2">السطر الثاني</label><input id="inTitle2" value="في البيئة المدرسية" /></div>
+    <div class="field"><label for="inSub">التعليمات</label><input id="inSub" value="وجّهي كاميرا الجوال إلى الرمز لفتح الورشة" /></div>
+    <div class="field"><label for="inSign">اسم المدربة</label><input id="inSign" value="المدربة: هيله فهد" /></div>
+    <div class="field" role="group" aria-labelledby="destL"><span id="destL">وجهة الرمز في الورشة</span><div class="chips" id="dest"></div></div>
+    <div class="field"><label for="inUrl">رابط الورشة</label><input id="inUrl" dir="ltr" value="https://jomng0198-star.github.io/estebana/ai-workshop/" /></div>
+    <div class="row">
+      <button type="button" class="btn" id="show">اعرضيه على الشاشة</button>
+      <button type="button" class="btn btn--ghost" id="copy">انسخي الرابط</button>
+      <span class="status" id="status" role="status"></span>
+    </div>
+    <p class="tip">ليعمل الرمز مع المشاركات، شاركي صفحة الورشة نفسها بالرابط من زر Share فيها. يمكنك وضع أي رابط آخر في خانة الرابط، ويتغيّر الرمز فوراً.</p>
+  </aside>
+
+  <main class="stage">
+    <article class="card" aria-live="polite">
+      <i class="peg peg--a" aria-hidden="true"></i><i class="peg peg--b" aria-hidden="true"></i>
+      <p class="kicker">ورشة تدريبية</p>
+      <h2><span id="oTitle"></span><br /><em id="oTitle2"></em></h2>
+      <p class="sub" id="oSub"></p>
+      <div class="qr"><canvas id="qr" width="320" height="320" role="img" aria-label="رمز QR لفتح الورشة"></canvas></div>
+      <p class="target" id="oTarget"></p>
+      <div class="sign" id="oSign"></div>
+      <p class="url" id="oUrl"></p>
+    </article>
+  </main>
+</div>
+<button type="button" class="btn btn--ghost exit" id="exit">رجوع للتعديل</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+(() => {
+const DEST = [['', 'الورشة كاملة'], ['goals', 'الأهداف'], ['scenes', 'المشاهد'], ['lab', 'مختبر الأوامر'], ['claude-code', 'تطبيق Claude Code'], ['quiz-part', 'النشاط']];
+let dest = '';
+const $ = (id) => document.getElementById(id);
+const destBox = $('dest');
+DEST.forEach(([k, label]) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'chip'; b.textContent = label; b.dataset.k = k;
+  b.addEventListener('click', () => { dest = k; render(); }); destBox.appendChild(b); });
+const url = () => { const base = $('inUrl').value.trim().split('#')[0]; return dest ? `${base}#${dest}` : base; };
+function drawQR(cv, text) { const ctx = cv.getContext('2d');
+  if (typeof window.qrcode !== 'function' || !text) { cv.width = cv.height = 320; ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, 320, 320); ctx.fillStyle = '#173b8a'; ctx.font = '16px sans-serif'; ctx.textAlign = 'center'; ctx.fillText('تعذّر إنشاء الرمز', 160, 165); return; }
+  const q = qrcode(0, 'M'); q.addData(text); q.make(); const n = q.getModuleCount(); const quiet = 2; const cell = Math.max(1, Math.floor(880 / (n + quiet * 2)));
+  const size = cell * (n + quiet * 2); cv.width = size; cv.height = size; ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, size, size); ctx.fillStyle = '#173b8a';
+  for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (q.isDark(r, c)) ctx.fillRect((c + quiet) * cell, (r + quiet) * cell, cell, cell); }
+function render() {
+  $('oTitle').textContent = $('inTitle').value; $('oTitle2').textContent = $('inTitle2').value; $('oSub').textContent = $('inSub').value; $('oSign').textContent = $('inSign').value;
+  const d = DEST.find(([k]) => k === dest); $('oTarget').textContent = dest ? `يفتح على: ${d[1]}` : '';
+  const u = url(); $('oUrl').textContent = u; drawQR($('qr'), u);
+  destBox.querySelectorAll('.chip').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.k === dest)));
+}
+['inTitle', 'inTitle2', 'inSub', 'inSign', 'inUrl'].forEach((id) => $(id).addEventListener('input', render));
+const app = $('app');
+$('show').addEventListener('click', async () => { app.classList.add('is-show'); $('exit').focus(); try { await document.documentElement.requestFullscreen(); } catch {} });
+$('exit').addEventListener('click', async () => { app.classList.remove('is-show'); try { if (document.fullscreenElement) await document.exitFullscreen(); } catch {} $('show').focus(); });
+addEventListener('keydown', (e) => { if (e.key === 'Escape' && app.classList.contains('is-show')) $('exit').click(); });
+$('copy').addEventListener('click', async () => { const s = $('status'); try { await navigator.clipboard.writeText(url()); s.textContent = 'نُسخ الرابط.'; } catch { s.textContent = 'ظلّلي الرابط وانسخيه.'; } setTimeout(() => (s.textContent = ''), 3000); });
+render();
+})();
+</script>
+</body>
+</html>
