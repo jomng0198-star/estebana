@@ -9,7 +9,7 @@ const ADMIN_EMAIL = 'asmaalmaliky1400@gmail.com';
 const SHEET_ID = '1fAe_tRvWPZFolgfKFECxgZmJ0m3FpjzGzXWmq7hZHvU'; // جدول «أفق STEM - بيانات المنصة»
 const APP_NAME = 'أفق STEM | منصة العلوم والابتكار';
 // الأنواع التي يصل عنها بريد فوري (الزيارات العادية تُجمع في الملخص اليومي فقط)
-const EMAIL_FOR = ['login', 'comment', 'opinion', 'result', 'certificate', 'game'];
+const EMAIL_FOR = ['login', 'comment', 'opinion', 'result', 'certificate', 'game', 'worksheet'];
 
 const SHEETS = {
   view:        ['الزيارات',       ['التاريخ', 'الوقت']],
@@ -21,7 +21,8 @@ const SHEETS = {
   certificate: ['الشهادات',        ['التاريخ', 'الاسم', 'النوع', 'أصدرتها', 'الصفة']],
   watch:       ['المشاهدات',       ['التاريخ', 'الاسم', 'الصفة', 'الشرح']],
   plan:        ['الخطط',           ['المعرف', 'الفصل', 'الأسابيع', 'الوحدة', 'المجال', 'النشاط']],
-  video:       ['الفيديوهات',      ['المعرف', 'العنوان', 'الرابط', 'المجال', 'التاريخ']]
+  video:       ['الفيديوهات',      ['المعرف', 'العنوان', 'الرابط', 'المجال', 'التاريخ']],
+  worksheet:   ['أوراق العمل',     ['المعرف', 'التاريخ', 'الطالبة', 'الصف', 'المادة', 'المجال', 'الدرجة', 'من', 'إجابة الشرح', 'إجابة الإثراء']]
 };
 
 function sheet_(type) {
@@ -66,6 +67,7 @@ function doPost(e) {
       case 'watch':       sheet_('watch').appendRow([now, s(d.name), roleAr_(d.role), s(d.video)]); break;
       case 'plan':        sheet_('plan').appendRow([s(d.id), d.term, s(d.week), s(d.unit), s(d.field), s(d.activity)]); break;
       case 'video':       sheet_('video').appendRow([s(d.id), s(d.title), s(d.url), s(d.field), now]); break;
+      case 'worksheet':   sheet_('worksheet').appendRow([s(d.id), now, s(d.name), s(d.grade), s(d.subject), s(d.domain), d.score, d.total, s(d.explain), s(d.enrich)]); break;
       case 'plan_delete': deleteById_('plan', d.id); break;
       case 'video_delete':deleteById_('video', d.id); break;
     }
@@ -96,20 +98,22 @@ function doGet() {
   const plans    = planRows.length ? planRows.map(r => ({ id: r[0], term: r[1], week: r[2], unit: r[3], field: r[4], activity: r[5] })) : null;
   const videos   = rows('video').map(r => ({ id: r[0], title: r[1], url: r[2], field: r[3], ts: ts(r[4]) })).reverse();
 
-  const out = { ok: true, stats, daily, comments, opinions, results, videos };
+  const worksheets = rows('worksheet').map(r => ({ id: r[0], ts: ts(r[1]), name: r[2], grade: r[3], subject: r[4], domain: r[5], score: r[6], total: r[7], explain: r[8], enrich: r[9] })).reverse().slice(0, 500);
+  const out = { ok: true, stats, daily, comments, opinions, results, videos, worksheets };
   if (plans) out.plans = plans; // إن لم تُضف المعلمة خطة بعد تبقى الخطة المقترحة
   return json_(out);
 }
 
 /* ---------- البريد ---------- */
 function notify_(d) {
-  const titles = { login: 'دخول جديد', comment: 'تعليق جديد', opinion: 'رأي ولية أمر', result: 'نتيجة نموذج', certificate: 'إصدار شهادة', game: 'إنجاز في اللعبة' };
+  const titles = { login: 'دخول جديد', comment: 'تعليق جديد', opinion: 'رأي ولية أمر', result: 'نتيجة نموذج', certificate: 'إصدار شهادة', game: 'إنجاز في اللعبة', worksheet: 'ورقة عمل مسلّمة' };
   let body = '';
   if (d.type === 'login')       body = `<b>${esc_(d.name)}</b> — ${roleAr_(d.role)} ${d.grade ? '· ' + esc_(d.grade) : ''} ${d.kind ? '· ' + esc_(d.kind) : ''}`;
   if (d.type === 'comment')     body = `<b>${esc_(d.name)}</b> (${roleAr_(d.role)}):<br>${esc_(d.text)}`;
   if (d.type === 'opinion')     body = `<b>${esc_(d.name)}</b> ${d.child ? '— ولية أمر ' + esc_(d.child) : ''}<br>التقييم: ${'★'.repeat(Number(d.rating) || 0)}<br>${esc_(d.text)}`;
   if (d.type === 'result')      body = `<b>${esc_(d.name)}</b> ${d.grade ? '(' + esc_(d.grade) + ')' : ''}<br>النموذج ${d.model}: ${esc_(d.title)}<br>الدرجة: ${d.score}/${d.total} — ${d.pct}%`;
   if (d.type === 'certificate') body = `شهادة «${certAr_(d.certType)}» باسم <b>${esc_(d.name)}</b> — أصدرتها ${esc_(d.by)}`;
+  if (d.type === 'worksheet')   body = `<b>${esc_(d.name)}</b> ${d.grade ? '(' + esc_(d.grade) + ')' : ''}<br>${esc_(d.subject)} — ${esc_(d.domain)}<br>الدرجة: ${d.score}/${d.total}<br><br><b>الشرح:</b> ${esc_(d.explain) || '—'}<br><b>الإثراء:</b> ${esc_(d.enrich) || '—'}`;
   if (d.type === 'game')        body = `<b>${esc_(d.name)}</b> أنهت ${esc_(d.levelName)} — ${d.points} نقطة، ${d.stars} نجوم`;
   MailApp.sendEmail({
     to: ADMIN_EMAIL,
@@ -142,7 +146,7 @@ function deleteById_(type, id) {
   for (let i = v.length - 1; i >= 1; i--) if (String(v[i][0]) === String(id)) sh.deleteRow(i + 1);
 }
 function roleAr_(r) { return { student: 'طالبة', teacher: 'معلمة', visitor: 'زائرة' }[r] || 'زائرة'; }
-function certAr_(t) { return { excellence: 'شهادة تميّز', complete: 'شهادة إتمام', thanks: 'شهادة شكر وتقدير' }[t] || 'شهادة'; }
+function certAr_(t) { return { excellence: 'شهادة تميّز', complete: 'شهادة إتمام', thanks: 'شهادة شكر وتقدير', tahsili: 'شهادة إتمام خطة قادرون' }[t] || 'شهادة'; }
 function esc_(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
 function json_(o) { return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }
 function wrapMail_(title, body) {

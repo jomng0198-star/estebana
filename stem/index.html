@@ -606,6 +606,31 @@ th{background:rgba(0,0,0,.18);color:rgba(255,255,255,.6)}
 .tah-act{display:flex;flex-wrap:wrap;gap:6px}
 .mcard.tah{cursor:default}
 @media (max-width:620px){.tah-opts{grid-template-columns:1fr}}
+.ws{max-width:760px;margin:6px auto 0;padding:24px}
+.ws-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;border-bottom:1px solid rgba(255,255,255,.1);padding-bottom:14px}
+.ws-head h1{font-size:clamp(22px,3vw,30px);font-weight:600;line-height:1.3}
+.ws-head p{font-size:13px}
+.ws-score{min-width:86px;text-align:center;padding:10px;border-radius:16px;background:#000;border:1px solid rgba(255,255,255,.1)}
+.ws-score b{display:block;font-size:30px;line-height:1.1}.ws-score small{font-size:11px;color:rgba(255,255,255,.6)}
+.ws-name{margin:14px 0 6px;font-size:14px}
+.wsq{margin:14px 0;padding:16px;border-radius:16px;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.08)}
+.wsq > b{display:block;margin-bottom:10px;font-weight:600}
+.wsopts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.topt .lt{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:6px;background:rgba(255,255,255,.1);font-size:12px;margin-inline-end:4px}
+.topt.sel{background:rgba(255,255,255,.14);border-color:#fff}
+.tfrow{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:12px;margin-top:6px;background:rgba(255,255,255,.03);flex-wrap:wrap}
+.tfrow > span:first-child{flex:1;min-width:200px}
+.tfrow.right{background:rgba(74,222,128,.12)}.tfrow.wrong{background:rgba(251,113,133,.12)}
+.tfrow small{font-size:12px;color:var(--bad)}
+.tfbtns{display:flex;gap:6px}
+.tfb{width:38px;height:34px;border-radius:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);font-size:15px;color:#fff}
+.tfb.sel{background:#fff;color:#000}
+.wsq textarea{margin-top:2px;min-height:80px}
+.okt{color:var(--good);font-size:12.5px}.badt{color:var(--bad);font-size:12.5px}
+.ws-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:18px}
+.ws-btns{display:flex;gap:8px;flex-wrap:wrap}
+.ws-res{font-weight:600}
+@media (max-width:620px){.wsopts{grid-template-columns:1fr}.ws{padding:16px}}
 </style>
 </head>
 <body>
@@ -976,6 +1001,7 @@ const store = {
   results:  S.get('results', []),
   plans:    S.get('plans', null) || DEFAULT_PLANS,
   videos:   S.get('videos', []),
+  worksheets: S.get('worksheets', []),
 };
 let remote = null;
 let session = S.get('session', null);
@@ -1161,7 +1187,7 @@ const NAV = [
   ['tahsili', 'قادرون — التحصيلي', 'tahsili'], ['game', 'لعبة ثلاثية الأبعاد', 'game'], ['quizzes', 'النماذج العشرة', 'quizzes'],
   ['impact', 'قياس الأثر', 'impact'], ['community', 'الآراء والتعليقات', 'community']
 ];
-const VIEWS = ['dashboard', 'plans', 'videos', 'tahsili', 'game', 'quizzes', 'certificate', 'impact', 'community', 'teacher'];
+const VIEWS = ['dashboard', 'plans', 'videos', 'tahsili', 'worksheet', 'game', 'quizzes', 'certificate', 'impact', 'community', 'teacher'];
 function showApp() {
   $('#landing').hidden = true; $('#appShell').hidden = false; document.body.classList.add('in-app');
   const nav = NAV.concat(session.role === 'teacher' ? [['teacher', 'لوحة المعلمة', 'teacher']] : []);
@@ -1178,7 +1204,7 @@ function route() {
   let v = location.hash.slice(1);
   if (!VIEWS.includes(v) || (v === 'teacher' && session.role !== 'teacher')) v = 'dashboard';
   if (v !== 'game') stopGame();
-  $$('#sideNav a').forEach(a => a.classList.toggle('active', a.dataset.nav === v));
+  $$('#sideNav a').forEach(a => a.classList.toggle('active', a.dataset.nav === (v === 'worksheet' ? 'tahsili' : v)));
   $$('#views > .view').forEach(s => { s.hidden = s.dataset.view !== v; });
   const el = $(`#views > [data-view="${v}"]`); RENDER[v](el);
   el.style.animation = 'none'; el.offsetHeight; el.style.animation = '';
@@ -1398,28 +1424,32 @@ function renderQuiz(el) {
 /* ---------- الشهادة ---------- */
 function certEligible() {
   if (!session) return false; if (session.role !== 'student') return true;
-  const p = getProg(); return Object.values(p.quizzes).some(v => v >= 60) || Object.keys(p.game.best).length > 0;
+  const p = getProg(); return Object.values(p.quizzes).some(v => v >= 60) || Object.keys(p.game.best).length > 0 || Object.values(p.ws || {}).some(v => v >= 3) || tahsiliDone(p).length > 0;
+}
+function tahsiliDone(p) { const t = p.tahsili || {}; return Object.keys(TAHSILI).filter(k => TAHSILI[k].domains.every((d, i) => !d || t[k + i] != null)); }
+function tahsiliStats(p) { const t = p.tahsili || {}, ws = p.ws || {}; const vals = Object.values(ws); return { answered: Object.keys(t).length, right: Object.values(t).filter(Boolean).length, wsN: vals.length, wsAvg: vals.length ? Math.round(vals.reduce((a, b) => a + b, 0) / vals.length / 5 * 100) : 0, subjects: tahsiliDone(p).map(k => TAHSILI[k].name) };
 }
 RENDER.certificate = el => {
   const p = getProg(), isS = session.role === 'student';
   if (!certEligible()) {
-    el.innerHTML = `<div class="page-head"><h1>شهادة التميّز</h1></div><div class="glass lock-box" style="max-width:520px;margin:0 auto"><div class="big">🔒</div><h2 style="font-size:20px;margin:8px 0 4px">شهادتكِ بانتظارك!</h2><p class="muted">أكملي نموذجًا واحدًا بدرجة ٦٠٪ فأكثر، أو أنهي مستوى في اللعبة ثلاثية الأبعاد لتُفتح شهادتكِ.</p><div style="display:flex;gap:8px;justify-content:center;margin-top:16px"><a class="btn btn-white" href="#quizzes">النماذج</a><a class="btn btn-ghost" href="#game">اللعبة</a></div></div>`; return;
+    el.innerHTML = `<div class="page-head"><h1>شهادة التميّز</h1></div><div class="glass lock-box" style="max-width:520px;margin:0 auto"><div class="big">🔒</div><h2 style="font-size:20px;margin:8px 0 4px">شهادتكِ بانتظارك!</h2><p class="muted">أكملي نموذجًا بدرجة ٦٠٪ فأكثر، أو ورقة عمل بدرجة ٣ من ٥، أو أنهي مستوى في اللعبة، أو كل مجالات مادة في قادرون — لتُفتح شهادتكِ.</p><div style="display:flex;gap:8px;justify-content:center;margin-top:16px;flex-wrap:wrap"><a class="btn btn-sun" href="#tahsili">قادرون — التحصيلي</a><a class="btn btn-white" href="#quizzes">النماذج</a><a class="btn btn-ghost" href="#game">اللعبة</a></div></div>`; return;
   }
   const qDone = Object.keys(p.quizzes).length, avg = qDone ? Math.round(Object.values(p.quizzes).reduce((a, b) => a + b, 0) / qDone) : 0;
-  const defType = session.role === 'visitor' ? 'thanks' : 'excellence';
+  const T = tahsiliStats(p);
+  const defType = session.role === 'visitor' ? 'thanks' : (isS && T.subjects.length ? 'tahsili' : 'excellence');
   el.innerHTML = `<div class="page-head"><h1>${session.role === 'teacher' ? 'إصدار الشهادات' : 'شهادتكِ جاهزة 🏅'}</h1><p>${session.role === 'teacher' ? 'اكتبي اسم الطالبة واختاري نوع الشهادة ثم حمّليها.' : 'يمكنكِ تحميلها صورةً أو طباعتها.'}</p></div>
   <div class="cert-layout">
     <div class="glass panel"><form class="form-grid" id="certForm">
       <label class="field">الاسم على الشهادة<input class="input" name="name" value="${esc(session.name)}" ${isS ? 'readonly' : ''}></label>
-      <label class="field">نوع الشهادة<select class="input" name="type" ${isS ? 'disabled' : ''}>
-        <option value="excellence" ${defType === 'excellence' ? 'selected' : ''}>شهادة تميّز</option><option value="complete">شهادة إتمام</option><option value="thanks" ${defType === 'thanks' ? 'selected' : ''}>شهادة شكر وتقدير</option></select></label>
-      ${isS ? `<div class="item" style="font-size:13px"><span class="muted">النماذج المنجزة:</span> ${AR(qDone)} · <span class="muted">المتوسط:</span> ${AR(avg)}٪ · <span class="muted">النقاط:</span> ${AR(p.game.points)}</div>` : ''}
+      <label class="field">نوع الشهادة<select class="input" name="type">
+        <option value="excellence" ${defType === 'excellence' ? 'selected' : ''}>شهادة تميّز</option>${!isS || T.subjects.length ? `<option value="tahsili" ${defType === 'tahsili' ? 'selected' : ''}>شهادة إتمام خطة قادرون (التحصيلي)</option>` : ''}${isS ? '' : `<option value="complete">شهادة إتمام</option><option value="thanks" ${defType === 'thanks' ? 'selected' : ''}>شهادة شكر وتقدير</option>`}</select></label>
+      ${isS ? `<div class="item" style="font-size:13px"><span class="muted">النماذج المنجزة:</span> ${AR(qDone)} · <span class="muted">المتوسط:</span> ${AR(avg)}٪ · <span class="muted">النقاط:</span> ${AR(p.game.points)}<br><span class="muted">مجالات قادرون:</span> ${AR(T.answered)} · <span class="muted">أوراق العمل:</span> ${AR(T.wsN)} (${AR(T.wsAvg)}٪)${T.subjects.length ? '<br><span class="muted">أتمّت:</span> ' + T.subjects.join('، ') : ''}</div>` : ''}
       <button class="btn btn-sun" type="button" data-dl>⬇ تحميل الشهادة</button>
       <button class="btn btn-ghost" type="button" data-print>🖨 طباعة</button>
     </form></div>
     <canvas id="certCanvas" width="2000" height="1414" aria-label="معاينة الشهادة"></canvas>
   </div>`;
-  const form = $('#certForm', el), draw = () => drawCert($('#certCanvas', el), { name: form.name.value.trim() || '—', type: form.type.value, qDone, avg, points: p.game.points });
+  const form = $('#certForm', el), draw = () => drawCert($('#certCanvas', el), { name: form.name.value.trim() || '—', type: form.type.value, qDone, avg, points: p.game.points, T });
   form.addEventListener('input', draw); document.fonts.ready.then(draw); draw();
   $('[data-dl]', el).onclick = () => {
     const c = $('#certCanvas', el); c.toBlob(b => { const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'شهادة-أفق-STEM-' + form.name.value.trim() + '.png'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); });
@@ -1442,19 +1472,20 @@ function drawCert(c, d) {
   x.strokeStyle = '#ffd98a'; x.lineWidth = 6; x.strokeRect(50, 50, W - 100, H - 100); x.lineWidth = 2; x.strokeStyle = 'rgba(255,217,138,.6)'; x.strokeRect(72, 72, W - 144, H - 144);
   [[50, 50], [W - 50, 50], [50, H - 50], [W - 50, H - 50]].forEach(([a, b]) => { x.fillStyle = '#ffb24f'; x.beginPath(); x.arc(a, b, 16, 0, 7); x.fill(); });
   x.direction = 'rtl'; x.textAlign = 'center'; x.textBaseline = 'alphabetic';
-  x.fillStyle = 'rgba(238,244,255,.85)'; x.font = `500 40px ${F}`; x.fillText('أفق STEM  |  منصة العلوم والابتكار', W / 2, 170);
+  x.fillStyle = 'rgba(238,244,255,.85)'; x.font = `500 40px ${F}`; x.fillText(d.type === 'tahsili' ? 'أفق STEM  |  خطة قادرون — الاختبار التحصيلي' : 'أفق STEM  |  منصة العلوم والابتكار', W / 2, 170);
   x.fillStyle = 'rgba(238,244,255,.55)'; x.font = `400 30px ${F}`; x.fillText(CONFIG.schoolName, W / 2, 218);
-  const title = { excellence: 'شهادة تميّز', complete: 'شهادة إتمام', thanks: 'شهادة شكر وتقدير' }[d.type];
+  const title = { excellence: 'شهادة تميّز', complete: 'شهادة إتمام', thanks: 'شهادة شكر وتقدير', tahsili: 'شهادة إتمام' }[d.type];
   const tg = x.createLinearGradient(0, 260, 0, 380); tg.addColorStop(0, '#ffe6ad'); tg.addColorStop(1, '#ffad45'); x.fillStyle = tg; x.font = `700 132px ${F}`; x.fillText(title, W / 2, 380);
   x.fillStyle = '#c9d6ec'; x.font = `400 42px ${F}`; x.fillText(d.type === 'thanks' ? 'تتقدّم منصة أفق STEM بخالص الشكر والتقدير إلى' : 'تتشرّف منصة أفق STEM بمنح هذه الشهادة إلى', W / 2, 480);
   x.fillStyle = '#ffffff'; x.font = `700 96px ${F}`; x.fillText(d.name, W / 2, 610);
   x.strokeStyle = 'rgba(255,217,138,.6)'; x.lineWidth = 2; x.beginPath(); x.moveTo(W / 2 - 420, 645); x.lineTo(W / 2 + 420, 645); x.stroke();
   x.fillStyle = '#d6e1f3'; x.font = `400 40px ${F}`;
-  const reason = d.type === 'thanks' ? 'لزيارتها المنصة ومشاركتها الفاعلة في دعم مسيرة العلوم والابتكار'
+  const subjTxt = d.T && d.T.subjects.length ? d.T.subjects.join(' و') : 'الفيزياء والكيمياء والأحياء';
+  const reason = d.type === 'tahsili' ? `لإتمامها مجالات خطة قادرون للاختبار التحصيلي في ${subjTxt} بتميّز` : d.type === 'thanks' ? 'لزيارتها المنصة ومشاركتها الفاعلة في دعم مسيرة العلوم والابتكار'
     : d.type === 'complete' ? 'لإتمامها متطلبات منصة أفق STEM في العلوم والفيزياء والكيمياء والأحياء'
     : 'لتميّزها وتفوّقها في منصة أفق STEM للعلوم والابتكار، متمنّين لها مستقبلًا علميًا مشرقًا';
   x.fillText(reason, W / 2, 720);
-  if (session.role === 'student' && d.type !== 'thanks') { x.fillStyle = '#ffd98a'; x.font = `500 34px ${F}`; x.fillText(`النماذج المنجزة: ${AR(d.qDone)}  ·  متوسط الدرجات: ${AR(d.avg)}٪  ·  نقاط اللعبة: ${AR(d.points)}`, W / 2, 785); }
+  if (session.role === 'student' && d.type !== 'thanks') { x.fillStyle = '#ffd98a'; x.font = `500 34px ${F}`; x.fillText(d.type === 'tahsili' && d.T ? `مجالات قادرون: ${AR(d.T.answered)}  ·  الإجابات الصحيحة: ${AR(d.T.right)}  ·  أوراق العمل: ${AR(d.T.wsN)} (${AR(d.T.wsAvg)}٪)` : `النماذج المنجزة: ${AR(d.qDone)}  ·  متوسط الدرجات: ${AR(d.avg)}٪  ·  نقاط اللعبة: ${AR(d.points)}`, W / 2, 785); }
   // التواقيع
   x.font = `400 32px ${F}`; x.fillStyle = 'rgba(238,244,255,.7)';
   x.fillText('معلمة الفيزياء', W - 420, 1000); x.fillText('مديرة المدرسة', 420, 1000);
@@ -1579,6 +1610,8 @@ RENDER.teacher = el => {
         <button class="btn btn-white">إضافة الشرح</button></form>
       ${list('videos').length ? `<div class="list" style="max-height:180px">${list('videos').map(v => `<div class="item" style="display:flex;align-items:center;gap:8px;padding:10px 12px"><span style="flex:1">${esc(v.title)}</span><button class="del" data-delvid="${esc(v.id)}">حذف</button></div>`).join('')}</div>` : ''}</div>
   </div>
+  <div class="panel glass" style="margin-top:14px"><h3>📄 أوراق العمل التفاعلية</h3><p class="lead">إجابات الطالبات المكتوبة ودرجاتهن.</p>
+    <div class="table-wrap" style="max-height:380px"><table><thead><tr><th>الطالبة</th><th>المادة · المجال</th><th>الدرجة</th><th>الشرح</th><th>الإثراء</th></tr></thead><tbody>${list('worksheets').length ? list('worksheets').slice(0, 200).map(w => `<tr><td>${esc(w.name)}<br><small class="dim">${esc(w.grade || '')}</small></td><td>${esc(w.subject)} · ${esc(w.domain)}</td><td><b class="num">${AR(w.score)}/٥</b></td><td style="max-width:240px;white-space:pre-wrap">${esc(w.explain || '—')}</td><td style="max-width:200px;white-space:pre-wrap" class="muted">${esc(w.enrich || '—')}</td></tr>`).join('') : '<tr><td colspan="5"><div class="empty"><b>لا توجد أوراق عمل مسلّمة بعد</b>تظهر هنا فور تسليمها.</div></td></tr>'}</tbody></table></div></div>
   <div class="panel glass" style="margin-top:14px">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><h3>📋 نتائج الطالبات</h3>
       <div style="display:flex;gap:8px;flex-wrap:wrap"><input class="input" id="resSearch" placeholder="بحث بالاسم…" style="width:180px;padding:8px 12px"><button class="btn btn-ghost btn-sm" id="csvBtn">⬇ تصدير CSV</button>${CONFIG.sheetUrl ? `<a class="btn btn-ghost btn-sm" href="${esc(CONFIG.sheetUrl)}" target="_blank" rel="noopener">فتح Google Sheets</a>` : ''}</div></div>
@@ -1701,7 +1734,8 @@ RENDER.tahsili = el => {
       <div class="tah-act">
         ${vids.map(v => `<a class="btn btn-ghost btn-sm" href="#videos" data-gov="${v.id}">🎬 ${esc(v.title)}</a>`).join('')}
         <a class="btn btn-ghost btn-sm" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=${encodeURIComponent('شرح ' + d[0] + ' ' + S0.name + ' تحصيلي')}">▶ فيديو إثرائي</a>
-        <button class="btn btn-ghost btn-sm" data-ws="${i}">📄 ورقة عمل</button>
+        <button class="btn btn-ghost btn-sm" data-iws="${i}">📄 ورقة عمل تفاعلية${p.ws && p.ws[tahSubj + i] != null ? ' · ' + AR(p.ws[tahSubj + i]) + '/٥' : ''}</button>
+        <button class="btn btn-ghost btn-sm" data-ws="${i}" title="نسخة للطباعة">🖨</button>
         <button class="btn btn-ghost btn-sm" data-mini="${i}">📝 اختبار قصير</button>
       </div>
     </div>`; }).join('')}</div>`;
@@ -1728,6 +1762,7 @@ RENDER.tahsili = el => {
   });
   $$('[data-gov]', el).forEach(a => a.onclick = () => { location.hash = 'videos'; });
   $$('[data-ws]', el).forEach(b => b.onclick = () => openWorksheet(tahSubj, +b.dataset.ws));
+  $$('[data-iws]', el).forEach(b => b.onclick = () => openInteractiveWS(tahSubj, +b.dataset.iws));
   $$('[data-mini]', el).forEach(b => b.onclick = () => startMini(el, tahSubj, +b.dataset.mini));
 };
 
@@ -1772,6 +1807,65 @@ function openWorksheet(subj, i) {
   if (!w) toast('اسمحي بالنوافذ المنبثقة لفتح ورقة العمل');
   send('watch', { name: session.name, role: session.role, video: 'ورقة عمل: ' + S0.name + ' — ' + d[0] });
 }
+
+/* ورقة عمل تفاعلية */
+let wsState = null;
+function openInteractiveWS(subj, i) {
+  const S0 = TAHSILI[subj], d = S0.domains[i];
+  const others = shuffle(S0.domains.filter((x, j) => x && j !== i)).slice(0, 2);
+  const stem = d[1].replace(/[:؟]\s*$/, '');
+  wsState = { subj, i, done: false,
+    mc: [d].concat(others).map(q => ({ q: q[1], right: q[2][0], opts: shuffle(q[2]), pick: null })),
+    tf: shuffle([{ t: stem + ': ' + d[2][0], v: true, pick: null }, { t: stem + ': ' + d[2][1], v: false, pick: null }]),
+    explain: '', enrich: '' };
+  location.hash = 'worksheet'; if (location.hash === '#worksheet') route();
+}
+RENDER.worksheet = el => {
+  const st = wsState;
+  if (!st) { el.innerHTML = `<div class="glass lock-box" style="max-width:520px;margin:0 auto"><div class="big">📄</div><p class="muted">اختاري ورقة عمل من صفحة قادرون — التحصيلي.</p><a class="btn btn-white" href="#tahsili" style="margin-top:12px">قادرون — التحصيلي</a></div>`; return; }
+  const S0 = TAHSILI[st.subj], d = S0.domains[st.i], wk = WEEKS[st.i], dis = st.done ? 'disabled' : '';
+  const mcHTML = (q, n, qi) => `<div class="wsq" data-mc="${qi}"><b>${AR(n)}) ${esc(q.q)}</b><div class="wsopts">${q.opts.map((o, k) => {
+      const cls = st.done ? (o === q.right ? 'right' : (q.pick === o ? 'wrong' : '')) : (q.pick === o ? 'sel' : '');
+      return `<button class="topt ${cls}" data-pick="${esc(o)}" ${dis}><span class="lt">${'أبجد'[k]}</span> ${esc(o)}</button>`; }).join('')}</div></div>`;
+  el.innerHTML = `
+  <div class="ws glass">
+    <div class="ws-head"><div><span class="eyebrow">ورقة عمل تفاعلية · ${S0.icon} ${S0.name}</span><h1>${esc(d[0])}</h1><p class="muted">${wk[0]} (${wk[1]} ١٤٤٧ هـ) · خطة قادرون — الاختبار التحصيلي</p></div>
+      <div class="ws-score">${st.done ? `<b class="num">${AR(st.score)}</b><small>من ٥</small>` : `<b>✎</b><small>أجيبي ثم سلّمي</small>`}</div></div>
+    <div class="ws-name"><span class="muted">الطالبة:</span> <b>${esc(session.name)}</b>${session.grade ? ` · <span class="muted">${esc(session.grade)}</span>` : ''}</div>
+    ${mcHTML(st.mc[0], 1, 0)}
+    <div class="wsq"><b>٢) ضعي ✓ أمام العبارة الصحيحة و✗ أمام الخاطئة:</b>${st.tf.map((t, k) => {
+      const res = st.done ? (t.pick === t.v ? 'right' : 'wrong') : '';
+      return `<div class="tfrow ${res}" data-tf="${k}"><span>${esc(t.t)}</span><span class="tfbtns"><button class="tfb ${t.pick === true ? 'sel' : ''}" data-v="1" ${dis} aria-label="صحيحة">✓</button><button class="tfb ${t.pick === false ? 'sel' : ''}" data-v="0" ${dis} aria-label="خاطئة">✗</button></span>${st.done && t.pick !== t.v ? `<small>الصحيح: ${t.v ? '✓' : '✗'}</small>` : ''}</div>`; }).join('')}</div>
+    <div class="wsq"><b>٣) اشرحي بأسلوبكِ المفهوم الآتي: «${esc(st.mc[0].right)}»</b><textarea class="input" data-txt="explain" placeholder="اكتبي شرحكِ هنا…" ${dis}>${esc(st.explain)}</textarea>${st.done ? `<small class="${st.explain.trim().length >= 10 ? 'okt' : 'badt'}">${st.explain.trim().length >= 10 ? '✓ أحسنتِ، تُراجعها المعلمة' : 'الإجابة قصيرة جدًا'}</small>` : ''}</div>
+    ${mcHTML(st.mc[1], 4, 1)}${mcHTML(st.mc[2], 5, 2)}
+    <div class="wsq"><b>💡 إثراء (اختياري): اذكري تطبيقًا من حياتكِ اليومية على «${esc(d[0])}»</b><textarea class="input" data-txt="enrich" placeholder="مثال من حياتكِ…" ${dis}>${esc(st.enrich)}</textarea></div>
+    <div class="ws-foot">
+      ${st.done ? `<div class="ws-res">${['💪 واصلي — راجعي الفيديو الإثرائي', '💪 واصلي — راجعي الفيديو الإثرائي', '👏 جيد', '🌟 رائعة', '🌟 ممتازة', '🏆 مبدعة'][Math.floor(st.score)]} · ${CONFIG.gasUrl ? 'أُرسلت إجاباتكِ للمعلمة' : 'حُفظت إجاباتكِ'}</div>
+        <div class="ws-btns"><button class="btn btn-white" data-again>ورقة جديدة</button>${certEligible() ? '<a class="btn btn-sun" href="#certificate">🏅 شهادتي</a>' : ''}<button class="btn btn-ghost" data-printws>🖨 نسخة للطباعة</button><a class="btn btn-ghost" href="#tahsili">العودة للتحصيلي</a></div>`
+      : `<span class="muted" id="wsLeft"></span><div class="ws-btns"><button class="btn btn-ghost" data-printws>🖨 نسخة للطباعة</button><button class="btn btn-sun" data-submit>تسليم ورقة العمل ✓</button></div>`}
+    </div>
+  </div>`;
+  const left = () => { const n = st.mc.filter(q => !q.pick).length + st.tf.filter(t => t.pick === null).length + (st.explain.trim() ? 0 : 1); const e = $('#wsLeft', el); if (e) e.textContent = n ? `باقي ${AR(n)} ${n === 1 ? 'إجابة' : 'إجابات'}` : 'جاهزة للتسليم ✓'; };
+  left();
+  $$('[data-mc]', el).forEach(box => $$('[data-pick]', box).forEach(b => b.onclick = () => { st.mc[+box.dataset.mc].pick = b.dataset.pick; $$('[data-pick]', box).forEach(x => x.classList.toggle('sel', x === b)); sfx('pop'); left(); }));
+  $$('[data-tf]', el).forEach(r => $$('.tfb', r).forEach(b => b.onclick = () => { st.tf[+r.dataset.tf].pick = b.dataset.v === '1'; $$('.tfb', r).forEach(x => x.classList.toggle('sel', x === b)); sfx('pop'); left(); }));
+  $$('[data-txt]', el).forEach(t => t.oninput = () => { st[t.dataset.txt] = t.value; left(); });
+  const pr = $('[data-printws]', el); if (pr) pr.onclick = () => openWorksheet(st.subj, st.i);
+  const ag = $('[data-again]', el); if (ag) ag.onclick = () => openInteractiveWS(st.subj, st.i);
+  const sb = $('[data-submit]', el);
+  if (sb) sb.onclick = () => {
+    const miss = st.mc.filter(q => !q.pick).length + st.tf.filter(t => t.pick === null).length;
+    if (miss) { toast(`أجيبي على كل الأسئلة أولًا (باقي ${AR(miss)})`); return; }
+    let score = st.mc.filter(q => q.pick === q.right).length + st.tf.filter(t => t.pick === t.v).length * .5 + (st.explain.trim().length >= 10 ? 1 : 0);
+    st.score = score; st.done = true;
+    const p = getProg(); p.ws = p.ws || {}; const key = st.subj + st.i; p.ws[key] = Math.max(p.ws[key] || 0, score);
+    p.tahsili = p.tahsili || {}; if (p.tahsili[key] == null) p.tahsili[key] = st.mc[0].pick === st.mc[0].right; setProg(p);
+    const rec = { id: uid(), name: session.name, role: session.role, grade: session.grade || '', subject: S0.name, domain: d[0], score, total: 5, explain: st.explain.trim(), enrich: st.enrich.trim(), ts: Date.now() };
+    pushItem('worksheets', rec); send('worksheet', rec);
+    if (score >= 4) { confetti(); sfx('win'); } else sfx(score >= 3 ? 'good' : 'bad');
+    RENDER.worksheet(el); $('#main').scrollTop = 0;
+  };
+};
 
 /* =========================================================
    🎮 اللعبة ثلاثية الأبعاد
