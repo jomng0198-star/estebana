@@ -1,16 +1,12 @@
 /**
  * أفق STEM | منصة العلوم والابتكار — ربط Google Sheets + Gmail
  * --------------------------------------------------------------
- * طريقة التشغيل:
- * 1) أنشئي جدول Google Sheets جديدًا باسم «أفق STEM».
- * 2) من القائمة: الإضافات ← Apps Script، احذفي الموجود والصقي هذا الملف كاملًا، ثم احفظي.
- * 3) شغّلي الدالة setup مرة واحدة (اسمحي بالأذونات) — تنشئ الأوراق وتضبط الملخص اليومي.
- * 4) نشر ← نشر جديد ← النوع: تطبيق ويب
- *      التنفيذ باسم: أنا   |   من يمكنه الوصول: أي شخص
- * 5) انسخي رابط تطبيق الويب (ينتهي بـ /exec) والصقيه في index.html داخل CONFIG.gasUrl
+ * البيانات تُحفظ في جدول «أفق STEM - بيانات المنصة» (SHEET_ID بالأسفل)
+ * والإشعارات تصل إلى ADMIN_EMAIL. بعد أي تعديل: نشر ← إدارة عمليات النشر ← تعديل ← إصدار جديد.
  */
 
 const ADMIN_EMAIL = 'asmaalmaliky1400@gmail.com';
+const SHEET_ID = '1fAe_tRvWPZFolgfKFECxgZmJ0m3FpjzGzXWmq7hZHvU'; // جدول «أفق STEM - بيانات المنصة»
 const APP_NAME = 'أفق STEM | منصة العلوم والابتكار';
 // الأنواع التي يصل عنها بريد فوري (الزيارات العادية تُجمع في الملخص اليومي فقط)
 const EMAIL_FOR = ['login', 'comment', 'opinion', 'result', 'certificate', 'game'];
@@ -29,7 +25,7 @@ const SHEETS = {
 };
 
 function sheet_(type) {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const ss = SpreadsheetApp.openById(SHEET_ID);
   const [name, head] = SHEETS[type];
   let sh = ss.getSheetByName(name);
   if (!sh) {
@@ -66,7 +62,7 @@ function doPost(e) {
       case 'opinion':     sheet_('opinion').appendRow([s(d.id), now, s(d.name), s(d.child), Number(d.rating) || 0, s(d.text)]); break;
       case 'result':      sheet_('result').appendRow([s(d.id), now, s(d.name), roleAr_(d.role), s(d.grade), d.model, s(d.title), d.score, d.total, d.pct]); break;
       case 'game':        sheet_('game').appendRow([now, s(d.name), d.level, s(d.levelName), d.points, d.stars]); break;
-      case 'certificate': sheet_('certificate').appendRow([now, s(d.name), certAr_(d.type), s(d.by), roleAr_(d.role)]); break;
+      case 'certificate': sheet_('certificate').appendRow([now, s(d.name), certAr_(d.certType), s(d.by), roleAr_(d.role)]); break;
       case 'watch':       sheet_('watch').appendRow([now, s(d.name), roleAr_(d.role), s(d.video)]); break;
       case 'plan':        sheet_('plan').appendRow([s(d.id), d.term, s(d.week), s(d.unit), s(d.field), s(d.activity)]); break;
       case 'video':       sheet_('video').appendRow([s(d.id), s(d.title), s(d.url), s(d.field), now]); break;
@@ -113,7 +109,7 @@ function notify_(d) {
   if (d.type === 'comment')     body = `<b>${esc_(d.name)}</b> (${roleAr_(d.role)}):<br>${esc_(d.text)}`;
   if (d.type === 'opinion')     body = `<b>${esc_(d.name)}</b> ${d.child ? '— ولية أمر ' + esc_(d.child) : ''}<br>التقييم: ${'★'.repeat(Number(d.rating) || 0)}<br>${esc_(d.text)}`;
   if (d.type === 'result')      body = `<b>${esc_(d.name)}</b> ${d.grade ? '(' + esc_(d.grade) + ')' : ''}<br>النموذج ${d.model}: ${esc_(d.title)}<br>الدرجة: ${d.score}/${d.total} — ${d.pct}%`;
-  if (d.type === 'certificate') body = `شهادة «${certAr_(d.type)}» باسم <b>${esc_(d.name)}</b> — أصدرتها ${esc_(d.by)}`;
+  if (d.type === 'certificate') body = `شهادة «${certAr_(d.certType)}» باسم <b>${esc_(d.name)}</b> — أصدرتها ${esc_(d.by)}`;
   if (d.type === 'game')        body = `<b>${esc_(d.name)}</b> أنهت ${esc_(d.levelName)} — ${d.points} نقطة، ${d.stars} نجوم`;
   MailApp.sendEmail({
     to: ADMIN_EMAIL,
