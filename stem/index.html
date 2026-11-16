@@ -784,9 +784,9 @@ const CONFIG = {
   schoolName:    'متوسطة وثانوية العطف',        // اسم المدرسة
   teacherPin:    '2026',               // رمز دخول المعلمة
   // رابط تطبيق Google Apps Script بعد النشر (ينتهي بـ /exec) — اتركيه فارغًا للعمل محليًا
-  gasUrl:        '',
+  gasUrl:        'https://script.google.com/macros/s/AKfycbyijDLC5umPaRQlPbJDxoDE9lkXR_afcziQxvexKZCuoCLl_Pr0Et5KSFcLPmfAvJ0P/exec',
   // رابط جدول Google Sheets (اختياري — يظهر زر له في لوحة المعلمة)
-  sheetUrl:      ''
+  sheetUrl:      'https://docs.google.com/spreadsheets/d/1fAe_tRvWPZFolgfKFECxgZmJ0m3FpjzGzXWmq7hZHvU/edit'
 };
 
 /* =========================================================
@@ -958,7 +958,7 @@ function send(type, data) {
   if (!CONFIG.gasUrl) return;
   try {
     fetch(CONFIG.gasUrl, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify({ type, ...data, ts: new Date().toISOString() }) }).catch(() => {});
+      body: JSON.stringify({ ...data, type, ts: new Date().toISOString() }) }).catch(() => {});
   } catch (e) {}
 }
 async function loadRemote() {
@@ -1359,7 +1359,7 @@ RENDER.certificate = el => {
   form.addEventListener('input', draw); document.fonts.ready.then(draw); draw();
   $('[data-dl]', el).onclick = () => {
     const c = $('#certCanvas', el); c.toBlob(b => { const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'شهادة-أفق-STEM-' + form.name.value.trim() + '.png'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); });
-    send('certificate', { name: form.name.value.trim(), type: form.type.value, by: session.name, role: session.role }); confetti(60); toast('تم تحميل الشهادة 🎉');
+    send('certificate', { name: form.name.value.trim(), certType: form.type.value, by: session.name, role: session.role }); confetti(60); toast('تم تحميل الشهادة 🎉');
   };
   $('[data-print]', el).onclick = () => { try { window.print(); } catch (e) { toast('الطباعة غير متاحة هنا — حمّلي الصورة ثم اطبعيها'); } };
 };
