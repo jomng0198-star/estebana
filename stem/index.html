@@ -634,6 +634,19 @@ th{background:rgba(0,0,0,.18);color:rgba(255,255,255,.6)}
 </style>
 </head>
 <body>
+<script>
+/* عرض أي خطأ يمنع ظهور المنصة (لتسهيل معرفة السبب) */
+window.addEventListener('error', function (e) {
+  try {
+    var b = document.getElementById('errBox'); if (!b) { b = document.createElement('div'); b.id = 'errBox';
+      b.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:999;background:#7f1d1d;color:#fff;font:13px/1.6 Tahoma,sans-serif;padding:10px 14px;direction:rtl';
+      document.body.appendChild(b); }
+    b.textContent = 'تعذّر تشغيل جزء من المنصة: ' + (e.message || '') + ' — صوّري هذه الرسالة وأرسليها';
+    var l = document.getElementById('landing'), a = document.getElementById('appShell');
+    if (l && a && a.hidden) l.hidden = false;
+  } catch (x) {}
+});
+</script>
 
 <!-- =========================================================
      الخلفية — نفس المشهد: سماء، نجوم، مدارات، شمس، أفق، شبكة
@@ -1095,6 +1108,8 @@ function setProg(p) { S.set(progKey(), p); }
 /* انتقال بالحروف (مثل الفيديو): تتحول الشاشة إلى رموز ثم تنكشف الصفحة الجديدة */
 function pixelTransition(mid) {
   const c = $('#pix'), x = c.getContext('2d');
+  let called = false; const m0 = mid; mid = () => { if (!called) { called = true; m0(); } };
+  setTimeout(() => { mid(); try { x.clearRect(0, 0, c.width, c.height); } catch (e) {} }, 2500);
   if (reduceMotion) { mid(); return; }
   const W = c.width = innerWidth, H = c.height = innerHeight, cw = 9, ch = 13;
   const cols = Math.ceil(W / cw), rows = Math.ceil(H / ch), N = cols * rows;
@@ -2167,7 +2182,7 @@ $$('[data-logo-dark]').forEach(e => e.innerHTML = LOGO.replace(/#0b1430/g, '#fff
 (function boot() {
   let first = false; try { first = !sessionStorage.getItem('ufuq_seen'); sessionStorage.setItem('ufuq_seen', '1'); } catch (e) { first = true; }
   if (first) logEvent('view');
-  if (session && location.hash && location.hash !== '#top') { showApp(); route(); }
+  if (session && location.hash && location.hash !== '#top') { try { showApp(); route(); } catch (e) { console.error(e); $('#appShell').hidden = true; $('#landing').hidden = false; document.body.classList.remove('in-app'); history.replaceState(null, '', location.pathname); } }
   else if (session) { $('#landing').hidden = false; }
   refreshLanding();
   loadRemote();
