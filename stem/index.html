@@ -597,6 +597,15 @@ th{background:rgba(0,0,0,.18);color:rgba(255,255,255,.6)}
 .lightbox figcaption{color:#fff;margin-top:10px;font-size:14px}
 .lightbox button{position:absolute;top:16px;left:16px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.15);color:#fff;font-size:18px}
 .vbody .tags{gap:12px}
+.tah-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.topt{padding:10px 12px;border-radius:12px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.12);text-align:start;font-size:14px;color:#fff;transition:.15s}
+.topt:hover:not(:disabled){background:rgba(255,255,255,.08)}
+.topt.right{background:rgba(74,222,128,.16);border-color:var(--good)}
+.topt.wrong{background:rgba(251,113,133,.15);border-color:var(--bad)}
+.tah-fb{font-size:13.5px;font-weight:600;min-height:20px;margin-top:8px}
+.tah-act{display:flex;flex-wrap:wrap;gap:6px}
+.mcard.tah{cursor:default}
+@media (max-width:620px){.tah-opts{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -843,6 +852,7 @@ const I = {
   community: ic('<path d="M21 12a8 8 0 0 1-11.6 7.1L4 21l1.9-5.4A8 8 0 1 1 21 12z"/>'),
   teacher: ic('<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>'),
   logout: ic('<path d="M9 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h4"/><path d="m14 17 5-5-5-5M19 12H9"/>'),
+  tahsili: ic('<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/>'),
   menu: ic('<path d="M4 6h16M4 12h16M4 18h16"/>')
 };
 const LOGO = `<svg viewBox="0 0 24 24" fill="none"><path d="M5 16a7 7 0 0 1 14 0" fill="#ffb24f"/><path d="M2 16h20" stroke="#0b1430" stroke-width="2" stroke-linecap="round"/><path d="M4 19h16M7 22h10" stroke="#0b1430" stroke-width="1.6" stroke-linecap="round" opacity=".55"/><ellipse cx="12" cy="13" rx="10" ry="4.2" stroke="#0b1430" stroke-width="1.4" opacity=".7"/><circle cx="20.5" cy="9" r="1.4" fill="#0b1430"/></svg>`;
@@ -1148,10 +1158,10 @@ function logout() {
    ========================================================= */
 const NAV = [
   ['dashboard', 'الرئيسية', 'home'], ['plans', 'الخطط السنوية', 'plans'], ['videos', 'شروحات الفيديو', 'videos'],
-  ['game', 'لعبة ثلاثية الأبعاد', 'game'], ['quizzes', 'النماذج العشرة', 'quizzes'],
+  ['tahsili', 'قادرون — التحصيلي', 'tahsili'], ['game', 'لعبة ثلاثية الأبعاد', 'game'], ['quizzes', 'النماذج العشرة', 'quizzes'],
   ['impact', 'قياس الأثر', 'impact'], ['community', 'الآراء والتعليقات', 'community']
 ];
-const VIEWS = ['dashboard', 'plans', 'videos', 'game', 'quizzes', 'certificate', 'impact', 'community', 'teacher'];
+const VIEWS = ['dashboard', 'plans', 'videos', 'tahsili', 'game', 'quizzes', 'certificate', 'impact', 'community', 'teacher'];
 function showApp() {
   $('#landing').hidden = true; $('#appShell').hidden = false; document.body.classList.add('in-app');
   const nav = NAV.concat(session.role === 'teacher' ? [['teacher', 'لوحة المعلمة', 'teacher']] : []);
@@ -1231,6 +1241,10 @@ RENDER.dashboard = el => {
     <div class="burst"><div class="halo"></div><svg class="rays" viewBox="0 0 200 200">${Array.from({ length: 36 }, (_, i) => { const a = i / 36 * Math.PI * 2, r1 = 30, r2 = i % 2 ? 70 : 95; return `<line x1="${100 + r1 * Math.cos(a)}" y1="${100 + r1 * Math.sin(a)}" x2="${100 + r2 * Math.cos(a)}" y2="${100 + r2 * Math.sin(a)}" stroke="#fff" stroke-opacity="${i % 2 ? .25 : .5}" stroke-width="1"/>`; }).join('')}</svg><span class="mark">${LOGO}</span></div>
   </div></div>
   <div class="cards">
+    <div class="mcard-title"><span class="mini">ق</span>خطة قادرون — الاختبار التحصيلي</div>
+    <a class="mcard glass" href="#tahsili"><span class="chev">⌄</span><p>مجالات الفيزياء والكيمياء والأحياء أسبوعًا بأسبوع — سؤال سهل لكل مجال مع فيديو وورقة عمل واختبار قصير.</p>
+      <div class="tags"><span>فيزياء</span><span>كيمياء</span><span>أحياء</span></div>
+      <div class="mstats">${['phy', 'chem', 'bio'].map(k => { const t = TAHSILI[k], n = t.domains.filter(Boolean).length, a = t.domains.filter((d, i) => d && (p.tahsili || {})[k + i] != null).length; return `<div><small>${t.name}</small><b class="num">${AR(a)}/${AR(n)}</b></div>`; }).join('')}<div><small>اختبار قادرون</small><b style="font-size:15px">١٢/١٠</b></div></div></a>
     <div class="mcard-title"><span class="mini">ل</span>لعبة المختبر ثلاثية الأبعاد</div>
     <a class="mcard glass" href="#game"><span class="chev">⌄</span><p>أربعة مستويات كرتونية مبهجة في الفيزياء والكيمياء والأحياء والفضاء — أجيبي بالضغط على الكوكب الصحيح.</p>
       <div class="tags"><span>فيزياء</span><span>كيمياء</span><span>أحياء</span><span>فضاء</span></div>
@@ -1341,7 +1355,7 @@ RENDER.quizzes = el => {
   $$('[data-quiz]', el).forEach(b => b.onclick = () => { const i = +b.dataset.quiz; quizState = { m: i, i: 0, score: 0, qs: QUIZ[i].qs.map(q => ({ q: q[0], right: q[1][0], opts: shuffle(q[1]) })), answered: false }; renderQuiz(el); });
 };
 function renderQuiz(el) {
-  const s = quizState, M = QUIZ[s.m];
+  const s = quizState, M = s.custom || QUIZ[s.m];
   if (s.i >= s.qs.length) {
     const pct = Math.round(s.score / s.qs.length * 100), stars = pct >= 100 ? 3 : pct >= 80 ? 2 : pct >= 60 ? 1 : 0;
     el.innerHTML = `<div class="quiz glass"><div class="result">
@@ -1350,12 +1364,12 @@ function renderQuiz(el) {
       <p class="muted" style="margin-top:8px">${M.title} — ${AR(pct)}٪ ${CONFIG.gasUrl ? '· أُرسلت النتيجة للمعلمة' : ''}</p>
       <div style="display:flex;gap:8px;justify-content:center;margin-top:18px;flex-wrap:wrap"><button class="btn btn-white" data-again>إعادة النموذج</button><button class="btn btn-ghost" data-back>كل النماذج</button>${certEligible() ? '<a class="btn btn-sun" href="#certificate">🏅 شهادتي</a>' : ''}</div></div></div>`;
     $('[data-again]', el).onclick = () => { quizState = { ...s, i: 0, score: 0, answered: false, qs: shuffle(s.qs).map(q => ({ ...q, opts: shuffle(q.opts) })) }; renderQuiz(el); };
-    $('[data-back]', el).onclick = () => { quizState = null; RENDER.quizzes(el); };
+    $('[data-back]', el).onclick = () => { const c = s.custom; quizState = null; if (c) location.hash = 'tahsili'; else RENDER.quizzes(el); };
     return;
   }
   const q = s.qs[s.i];
   el.innerHTML = `<div class="quiz glass">
-    <div class="quiz-top"><span>${M.icon} النموذج ${AR(s.m + 1)} · ${M.title}</span><span class="num">سؤال ${AR(s.i + 1)} من ${AR(s.qs.length)}</span></div>
+    <div class="quiz-top"><span>${M.icon} ${s.custom ? s.custom.label : 'النموذج ' + AR(s.m + 1)} · ${M.title}</span><span class="num">سؤال ${AR(s.i + 1)} من ${AR(s.qs.length)}</span></div>
     <div class="bar"><i style="width:${s.i / s.qs.length * 100}%"></i></div>
     <h2>${esc(q.q)}</h2>
     <div class="opts">${q.opts.map((o, k) => `<button class="opt" data-o="${k}"><b>${'أبجد'[k]}</b><span>${esc(o)}</span></button>`).join('')}</div>
@@ -1372,13 +1386,13 @@ function renderQuiz(el) {
   $('[data-next]', el).onclick = () => {
     s.i++; s.answered = false;
     if (s.i >= s.qs.length) {
-      const pct = Math.round(s.score / s.qs.length * 100), p = getProg(); p.quizzes[s.m] = Math.max(p.quizzes[s.m] || 0, pct); setProg(p);
-      const rec = { id: uid(), name: session.name, role: session.role, grade: session.grade || '', model: s.m + 1, title: M.title, score: s.score, total: s.qs.length, pct, date: today(), ts: Date.now() };
+      const pct = Math.round(s.score / s.qs.length * 100), p = getProg(); if (!s.custom) { p.quizzes[s.m] = Math.max(p.quizzes[s.m] || 0, pct); setProg(p); }
+      const rec = { id: uid(), name: session.name, role: session.role, grade: session.grade || '', model: s.custom ? 'قصير' : s.m + 1, title: s.custom ? s.custom.label + ': ' + M.title : M.title, score: s.score, total: s.qs.length, pct, date: today(), ts: Date.now() };
       pushItem('results', rec); send('result', rec); if (pct >= 80) { confetti(); sfx('win'); }
     }
     renderQuiz(el);
   };
-  $('[data-exit]', el).onclick = () => { quizState = null; RENDER.quizzes(el); };
+  $('[data-exit]', el).onclick = () => { const c = s.custom; quizState = null; if (c) location.hash = 'tahsili'; else RENDER.quizzes(el); };
 }
 
 /* ---------- الشهادة ---------- */
@@ -1597,6 +1611,167 @@ RENDER.teacher = el => {
     if (remote && remote.videos) remote.videos = remote.videos.filter(v => v.id !== id); send('video_delete', { id }); RENDER.teacher(el);
   });
 };
+
+/* =========================================================
+   خطة قادرون — الاختبار التحصيلي (الفترة الثانية ١٤٤٧ – ١٤٤٨ هـ)
+   لكل مجال: سؤال سهل (الخيار الأول هو الصحيح) + إثراء
+   ========================================================= */
+const WEEKS = [
+  ['الأسبوع الثاني', '٨/٦ – ٨/١٠'], ['الأسبوع الثالث', '٨/١٣ – ٨/١٧'], ['الأسبوع الرابع', '٨/٢٠ – ٨/٢٤'],
+  ['الأسبوع الخامس', '٨/٢٧ – ٩/٢'], ['الأسبوع السادس', '٩/٥ – ٩/٩'], ['الأسبوع السابع', '٩/١٢ – ٩/١٦'],
+  ['الأسبوع الثامن', '١٠/١٠ – ١٠/١٤'], ['الأسبوع التاسع', '١٠/١٧ – ١٠/٢١'], ['الأسبوع العاشر', '١٠/٢٤ – ١٠/٢٨'],
+  ['الأسبوع الحادي عشر', '١١/٢ – ١١/٦'], ['الأسبوع الثاني عشر', '١١/٩ – ١١/١٣'], ['الأسبوع الثالث عشر', '١١/١٦ – ١١/٢٠'],
+  ['الأسبوع الرابع عشر', '١١/٢٣ – ١١/٢٧']
+];
+const TAHSILI = {
+  phy: { name: 'فيزياء', icon: '⚡', color: '#ffb24f', domains: [
+    ['علم الفيزياء والجاذبية', 'من صاغ قانون الجذب العام؟', ['نيوتن', 'أينشتاين', 'جاليليو', 'أرخميدس']],
+    ['علم الميكانيكا', 'التسارع هو المعدل الزمني لتغيّر:', ['السرعة', 'المسافة', 'الكتلة', 'القوة']],
+    ['الطاقة والآلات', 'الشغل يساوي:', ['القوة × الإزاحة', 'القوة ÷ الزمن', 'الكتلة × التسارع', 'الطاقة × الزمن']],
+    ['حالات المادة (الديناميكا)', 'تنتقل الحرارة تلقائيًا من الجسم:', ['الأسخن إلى الأبرد', 'الأبرد إلى الأسخن', 'الأكبر إلى الأصغر', 'لا تنتقل أبدًا']],
+    ['الموجات والاهتزازات', 'عدد الموجات التي تمر بنقطة في الثانية الواحدة هو:', ['التردد', 'الطول الموجي', 'السعة', 'الزمن الدوري']],
+    ['الصوت', 'يحتاج الصوت لكي ينتقل إلى:', ['وسط مادي', 'فراغ', 'ضوء', 'مجال مغناطيسي'], ['p4v1', 'p4v2']],
+    null,
+    ['الضوء', 'انحراف الضوء عند انتقاله بين وسطين مختلفين يُسمى:', ['الانكسار', 'الانعكاس', 'الحيود', 'الاستقطاب'], ['p4i1']],
+    ['علم الكهرباء', 'ينص قانون أوم على أن:', ['الجهد = التيار × المقاومة', 'التيار = الجهد × المقاومة', 'المقاومة = التيار × الجهد', 'القدرة = التيار ÷ الجهد']],
+    ['المجالات المغناطيسية والحث المغناطيسي', 'يتولّد تيار حثّي في ملف عندما:', ['يتغيّر المجال المغناطيسي خلاله', 'يثبت المجال المغناطيسي', 'يُسخَّن الملف', 'يُقطع سلك الملف'], ['p4v4']],
+    ['الكهرومغناطيسية', 'تنتقل الموجات الكهرومغناطيسية في الفراغ بسرعة:', ['الضوء', 'الصوت', 'تساوي صفرًا', 'أقل من سرعة الصوت']],
+    ['الفيزياء الحديثة', 'تُسمّى كمّات الضوء:', ['الفوتونات', 'الإلكترونات', 'البروتونات', 'النيوترونات']],
+    ['الفيزياء النووية', 'انقسام نواة ثقيلة إلى نواتين أخف يُسمّى:', ['الانشطار النووي', 'الاندماج النووي', 'التفاعل الكيميائي', 'التأيّن'], ['p4v3']]
+  ]},
+  chem: { name: 'كيمياء', icon: '⚗️', color: '#3ddc97', domains: [
+    ['مقدمة في علم الكيمياء', 'الكيمياء علم يدرس:', ['المادة وتغيّراتها', 'المخلوقات الحية', 'الحركة والقوى', 'النجوم والكواكب']],
+    ['نظريات الذرة والجدول الدوري', 'يُرتَّب الجدول الدوري الحديث حسب:', ['العدد الذري', 'الكتلة الذرية', 'عدد النيوترونات', 'الكثافة']],
+    ['قوى التجاذب والروابط', 'الرابطة الناتجة عن مشاركة الإلكترونات بين ذرتين هي الرابطة:', ['التساهمية', 'الأيونية', 'الفلزية', 'الهيدروجينية']],
+    ['الحسابات الكيميائية', 'وحدة قياس كمية المادة:', ['المول', 'الجرام', 'اللتر', 'الجول']],
+    ['سرعة التفاعل', 'زيادة درجة الحرارة غالبًا:', ['تزيد سرعة التفاعل', 'تُبطئ التفاعل', 'توقف التفاعل', 'لا تؤثر فيه']],
+    ['الاتزان الكيميائي', 'عند الاتزان الكيميائي تتساوى:', ['سرعتا التفاعلين الأمامي والعكسي', 'كتل المتفاعلات والنواتج', 'درجات حرارة المواد', 'ألوان المواد']],
+    null,
+    ['المخاليط والمحاليل', 'المادة التي توجد بكمية أقل في المحلول تُسمّى:', ['المذاب', 'المذيب', 'المعلّق', 'الراسب']],
+    ['الأحماض والقواعد', 'محلول قيمة الرقم الهيدروجيني (pH) له ٣ يكون:', ['حمضيًا', 'قاعديًا', 'متعادلًا', 'مشبعًا']],
+    ['الكيمياء الكهربائية', 'في الخلية الجلفانية تحدث الأكسدة عند:', ['المصعد (الأنود)', 'المهبط (الكاثود)', 'القنطرة الملحية', 'السلك الخارجي']],
+    ['الهيدروكربونات', 'تتكوّن الهيدروكربونات من عنصري:', ['الكربون والهيدروجين', 'الكربون والأكسجين', 'الهيدروجين والأكسجين', 'النيتروجين والكربون']],
+    ['مشتقات الهيدروكربونات', 'المجموعة الوظيفية في الكحولات هي:', ['الهيدروكسيل', 'الكربوكسيل', 'الأمين', 'الكربونيل']],
+    ['المركبات العضوية الحيوية', 'الوحدات البنائية للبروتينات هي:', ['الأحماض الأمينية', 'الجلوكوز', 'الأحماض الدهنية', 'النيوكليوتيدات']]
+  ]},
+  bio: { name: 'أحياء', icon: '🧬', color: '#ff7eb6', domains: [
+    ['مقدمة في علم الأحياء', 'من خصائص المخلوقات الحية:', ['التكاثر', 'عدم الحاجة إلى الطاقة', 'عدم النمو', 'عدم الاستجابة']],
+    ['التصنيف الحديث', 'أدق مستوى في التصنيف هو:', ['النوع', 'الجنس', 'الفصيلة', 'المملكة']],
+    ['الطلائعيات', 'من أمثلة الطلائعيات:', ['الأميبا', 'عيش الغراب', 'البكتيريا', 'السرخس']],
+    ['الفطريات', 'تحصل الفطريات على غذائها عن طريق:', ['الامتصاص', 'البناء الضوئي', 'البلع', 'التنفس فقط']],
+    ['المملكة النباتية', 'النباتات التي لا تحتوي على أنسجة وعائية:', ['الحزازيات', 'السراخس', 'المخروطيات', 'النباتات الزهرية']],
+    ['المملكة الحيوانية: اللافقاريات — الطوائف', 'الحيوانات التي لا تملك عمودًا فقريًا تُسمّى:', ['اللافقاريات', 'الفقاريات', 'الثدييات', 'الطيور']],
+    null,
+    ['المملكة الحيوانية: الفقاريات', 'من الفقاريات ثابتة درجة الحرارة:', ['الطيور', 'الأسماك', 'البرمائيات', 'الزواحف']],
+    ['أجهزة جسم الإنسان', 'الجهاز المسؤول عن نقل الأكسجين والغذاء إلى الخلايا:', ['الدوري', 'الهضمي', 'العصبي', 'الإخراجي'], ['p4v2']],
+    ['الخلية', 'العضيّة المسؤولة عن تصنيع البروتين:', ['الرايبوسوم', 'الفجوة', 'الجدار الخلوي', 'الليسوسوم']],
+    ['الوراثة', 'الصفة التي تظهر في الجيل الأول عند تلقيح سلالتين نقيتين:', ['السائدة', 'المتنحية', 'المختفية', 'الطافرة']],
+    ['علم البيئة', 'العلاقة التي يستفيد فيها الطرفان تُسمّى:', ['التقايض', 'التطفّل', 'التعايش', 'الافتراس']],
+    ['التنوّع البيئي', 'التنوّع الحيوي يعني:', ['تنوّع المخلوقات الحية في منطقة ما', 'عدد أفراد نوع واحد', 'مساحة النظام البيئي', 'درجة حرارة البيئة']]
+  ]}
+};
+let tahSubj = 'phy';
+const tahKey = (s, i) => s + i;
+
+RENDER.tahsili = el => {
+  const S0 = TAHSILI[tahSubj], p = getProg(); p.tahsili = p.tahsili || {};
+  const doms = S0.domains.map((d, i) => [d, i]).filter(x => x[0]);
+  const answered = doms.filter(([, i]) => p.tahsili[tahKey(tahSubj, i)] != null).length;
+  const right = doms.filter(([, i]) => p.tahsili[tahKey(tahSubj, i)] === true).length;
+  el.innerHTML = `
+  <div class="page-head"><h1>خطة قادرون — الاختبار التحصيلي</h1><p>الفترة الثانية ١٤٤٧ – ١٤٤٨ هـ · لكل مجال سؤال سهل مع فيديو إثرائي وورقة عمل واختبار قصير.</p></div>
+  <div class="tabs" role="tablist">${Object.entries(TAHSILI).map(([k, v]) => `<button role="tab" aria-selected="${k === tahSubj}" data-subj="${k}">${v.icon} ${v.name}</button>`).join('')}</div>
+  <div class="start-card" style="margin-bottom:22px"><div class="start-inner" style="grid-template-columns:1fr">
+    <div class="start-top" style="margin:0"><span>${S0.icon} تحصيلي ${S0.name} — تقدّمكِ</span><span class="num prog">${AR(answered)}/${AR(doms.length)} مجال · ${AR(right)} إجابة صحيحة</span></div>
+    <div class="bar" style="margin-top:10px"><i style="width:${answered / doms.length * 100}%"></i></div>
+  </div></div>
+  <div class="cards" style="max-width:760px">${S0.domains.map((d, i) => {
+    const wk = WEEKS[i];
+    if (!d) return `<div class="mcard-title"><span class="mini">${AR(i + 1)}</span>اختبار قادرون</div>
+      <div class="mcard glass" style="border-color:rgba(255,178,79,.45);text-align:center"><p style="padding:0"><b>📌 ${wk[0]} (${wk[1]} ١٤٤٧ هـ)</b></p><p class="muted" style="padding:0;margin-top:4px">اختبار قادرون يوم الثلاثاء ١٢/١٠/١٤٤٧ هـ — راجعي مجالات الأسابيع السابقة.</p></div>`;
+    const st = p.tahsili[tahKey(tahSubj, i)];
+    const vids = (d[3] || []).map(id => PHY4.find(v => v.id === id)).filter(Boolean);
+    return `<div class="mcard-title"><span class="mini">${AR(i + 1)}</span>${esc(d[0])}</div>
+    <div class="mcard glass tah" data-i="${i}">
+      <span class="chev" title="${st == null ? 'لم تُجب بعد' : st ? 'صحيحة' : 'راجعيه'}">${st == null ? '○' : st ? '✓' : '↻'}</span>
+      <p>${esc(d[1])}</p>
+      <div class="tah-opts">${shuffle(d[2]).map(o => `<button class="topt" data-o="${esc(o)}">${esc(o)}</button>`).join('')}</div>
+      <div class="tah-fb"></div>
+      <div class="tags" style="margin:12px 0 10px"><span>${wk[0]}</span><span>${wk[1]} ١٤٤٧ هـ</span><span>${S0.name}</span></div>
+      <div class="tah-act">
+        ${vids.map(v => `<a class="btn btn-ghost btn-sm" href="#videos" data-gov="${v.id}">🎬 ${esc(v.title)}</a>`).join('')}
+        <a class="btn btn-ghost btn-sm" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=${encodeURIComponent('شرح ' + d[0] + ' ' + S0.name + ' تحصيلي')}">▶ فيديو إثرائي</a>
+        <button class="btn btn-ghost btn-sm" data-ws="${i}">📄 ورقة عمل</button>
+        <button class="btn btn-ghost btn-sm" data-mini="${i}">📝 اختبار قصير</button>
+      </div>
+    </div>`; }).join('')}</div>`;
+  $$('[data-subj]', el).forEach(b => b.onclick = () => { tahSubj = b.dataset.subj; RENDER.tahsili(el); });
+  $$('.mcard.tah', el).forEach(card => {
+    const i = +card.dataset.i, d = S0.domains[i];
+    $$('.topt', card).forEach(b => b.onclick = () => {
+      if (card.dataset.done) return; card.dataset.done = 1; const ok = b.dataset.o === d[2][0];
+      $$('.topt', card).forEach(x => { x.disabled = true; if (x.dataset.o === d[2][0]) x.classList.add('right'); });
+      if (!ok) b.classList.add('wrong');
+      $('.tah-fb', card).innerHTML = ok ? '<span style="color:var(--good)">إجابة صحيحة 🌟</span>' : '<span style="color:var(--bad)">الإجابة الصحيحة: ' + esc(d[2][0]) + ' — شاهدي الفيديو الإثرائي 💡</span>';
+      sfx(ok ? 'good' : 'bad');
+      const pr = getProg(); pr.tahsili = pr.tahsili || {}; const first = pr.tahsili[tahKey(tahSubj, i)] == null;
+      pr.tahsili[tahKey(tahSubj, i)] = ok; setProg(pr);
+      const all = S0.domains.map((x, j) => [x, j]).filter(x => x[0]);
+      const done = all.filter(([, j]) => pr.tahsili[tahKey(tahSubj, j)] != null);
+      if (first && done.length === all.length) {
+        const sc = done.filter(([, j]) => pr.tahsili[tahKey(tahSubj, j)] === true).length, pct = Math.round(sc / all.length * 100);
+        const rec = { id: uid(), name: session.name, role: session.role, grade: session.grade || '', model: 'تحصيلي', title: 'تحصيلي ' + S0.name, score: sc, total: all.length, pct, date: today(), ts: Date.now() };
+        pushItem('results', rec); send('result', rec); confetti(); toast(`أنهيتِ مجالات ${S0.name}: ${AR(sc)}/${AR(all.length)} 🎉`);
+      }
+      setTimeout(() => RENDER.tahsili(el), 1600);
+    });
+  });
+  $$('[data-gov]', el).forEach(a => a.onclick = () => { location.hash = 'videos'; });
+  $$('[data-ws]', el).forEach(b => b.onclick = () => openWorksheet(tahSubj, +b.dataset.ws));
+  $$('[data-mini]', el).forEach(b => b.onclick = () => startMini(el, tahSubj, +b.dataset.mini));
+};
+
+/* اختبار قصير: سؤال المجال + سؤالان من مجالات المادة الأخرى */
+function startMini(el, subj, i) {
+  const S0 = TAHSILI[subj], own = S0.domains[i];
+  const others = shuffle(S0.domains.filter((d, j) => d && j !== i)).slice(0, 2);
+  quizState = { m: -1, custom: { title: own[0], icon: S0.icon, label: 'اختبار قصير · تحصيلي ' + S0.name }, i: 0, score: 0, answered: false,
+    qs: [own].concat(others).map(d => ({ q: d[1], right: d[2][0], opts: shuffle(d[2]) })) };
+  location.hash = 'quizzes';
+}
+
+/* ورقة عمل قابلة للطباعة */
+function openWorksheet(subj, i) {
+  const S0 = TAHSILI[subj], d = S0.domains[i], wk = WEEKS[i], wrong = d[2][1];
+  const others = shuffle(S0.domains.filter((x, j) => x && j !== i)).slice(0, 2);
+  const mc = (q, n) => `<div class="q"><b>${AR(n)}) ${q[1]}</b><div class="opts">${shuffle(q[2]).map((o, k) => `<span>${'أبجد'[k]}) ${o}</span>`).join('')}</div></div>`;
+  const html = `<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><title>ورقة عمل — ${d[0]}</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>body{font-family:"IBM Plex Sans Arabic",Tahoma,sans-serif;max-width:780px;margin:24px auto;padding:0 22px;color:#111;line-height:1.9}
+  header{border:2px solid #0d2149;border-radius:14px;padding:14px 18px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  header h1{font-size:22px;margin:0;color:#0d2149}.meta{font-size:13px;color:#444}
+  .row{display:flex;gap:24px;margin:14px 0;font-size:14px}.row span{flex:1;border-bottom:1px dotted #999;padding-bottom:4px}
+  .q{margin:18px 0;padding:12px 16px;border:1px solid #ddd;border-radius:12px}.q b{display:block;margin-bottom:6px}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:4px 20px;padding-inline-start:10px}.lines{border-bottom:1px solid #bbb;height:30px}
+  .tf{display:flex;justify-content:space-between}.foot{margin-top:20px;font-size:12px;color:#666;text-align:center}
+  .pb{display:block;margin:16px auto;padding:10px 26px;border:0;border-radius:999px;background:#0d2149;color:#fff;font:inherit;cursor:pointer}
+  @media print{.pb{display:none}body{margin:0}}</style></head><body>
+  <header><div><h1>ورقة عمل: ${d[0]}</h1><div class="meta">${S0.name} · خطة قادرون — الاختبار التحصيلي · ${wk[0]} (${wk[1]} ١٤٤٧ هـ)</div></div>
+  <div class="meta" style="text-align:left">أفق STEM | منصة العلوم والابتكار<br>${CONFIG.schoolName}</div></header>
+  <div class="row"><span>اسم الطالبة:</span><span>الصف:</span><span>الدرجة:&nbsp;&nbsp;&nbsp;/ ٥</span></div>
+  ${mc(d, 1)}
+  <div class="q"><b>٢) ضعي علامة (✓) أمام العبارة الصحيحة و(✗) أمام الخاطئة:</b>
+    <div class="tf"><span>${d[1].replace(/[:؟]\s*$/, '')}: ${d[2][0]}</span><span>(&nbsp;&nbsp;&nbsp;)</span></div>
+    <div class="tf"><span>${d[1].replace(/[:؟]\s*$/, '')}: ${wrong}</span><span>(&nbsp;&nbsp;&nbsp;)</span></div></div>
+  <div class="q"><b>٣) اشرحي بأسلوبكِ المفهوم الآتي: «${d[2][0]}»</b><div class="lines"></div><div class="lines"></div></div>
+  ${mc(others[0], 4)}${mc(others[1], 5)}
+  <div class="q"><b>إثراء: اذكري تطبيقًا من حياتكِ اليومية على «${d[0]}»</b><div class="lines"></div></div>
+  <button class="pb" onclick="print()">🖨 طباعة ورقة العمل</button>
+  <div class="foot">معلمة ${S0.name === 'فيزياء' ? 'الفيزياء' : 'المادة'}: ${CONFIG.teacherName} · مديرة المدرسة: ${CONFIG.principalName}</div></body></html>`;
+  const w = window.open(URL.createObjectURL(new Blob([html], { type: 'text/html' })), '_blank');
+  if (!w) toast('اسمحي بالنوافذ المنبثقة لفتح ورقة العمل');
+  send('watch', { name: session.name, role: session.role, video: 'ورقة عمل: ' + S0.name + ' — ' + d[0] });
+}
 
 /* =========================================================
    🎮 اللعبة ثلاثية الأبعاد
