@@ -591,6 +591,12 @@ th{background:rgba(0,0,0,.18);color:rgba(255,255,255,.6)}
   .tags{gap:10px}
 }
 @media print{ .side,.main-top{display:none} main#main{box-shadow:none} }
+.lightbox{position:fixed;inset:0;z-index:95;background:rgba(0,0,0,.85);display:grid;place-items:center;padding:20px;animation:fade .2s}
+.lightbox figure{max-width:min(1100px,100%);text-align:center}
+.lightbox img{max-width:100%;max-height:82vh;border-radius:12px;margin:0 auto}
+.lightbox figcaption{color:#fff;margin-top:10px;font-size:14px}
+.lightbox button{position:absolute;top:16px;left:16px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.15);color:#fff;font-size:18px}
+.vbody .tags{gap:12px}
 </style>
 </head>
 <body>
@@ -931,6 +937,17 @@ const DEFAULT_PLANS = [
   { id: 'p9', term: 3, week: '٥–٧', unit: 'النبات والبيئة', field: 'bio', activity: 'حديقة صغيرة ومتابعة النمو' },
   { id: 'p10', term: 3, week: '٨–١٠', unit: 'الأرض والفضاء', field: 'sci', activity: 'مجسم المجموعة الشمسية بمقياس رسم' }
 ];
+/* فيزياء ٤ — شرح المادة (ملفات المعلمة) */
+const PHY4 = [
+  { id: 'p4v1', kind: 'video', title: 'لماذا تقلّ سرعة الصوت في البرد؟', src: 'media/phy4-1.mp4', poster: 'media/phy4-1.jpg', tags: ['الصوت', 'السرعة'], dur: '١:١٢' },
+  { id: 'p4v2', kind: 'video', title: 'كيف يُصدر الإنسان الصوت؟ الحنجرة والأحبال الصوتية', src: 'media/phy4-2.mp4', poster: 'media/phy4-2.jpg', tags: ['الصوت', 'الاهتزاز'], dur: '٠:١٦' },
+  { id: 'p4v3', kind: 'video', title: 'الانشطار النووي في محطات توليد الطاقة', src: 'media/phy4-3.mp4', poster: 'media/phy4-3.jpg', tags: ['الطاقة النووية', 'الانشطار'], dur: '١:٢٤' },
+  { id: 'p4v4', kind: 'video', title: 'الطهي بالحث الكهرومغناطيسي', src: 'media/phy4-4.mp4', poster: 'media/phy4-4.jpg', tags: ['المغناطيسية', 'الحث'], dur: '٣:١٨' },
+  { id: 'p4v5', kind: 'video', title: 'جولة على سطح المريخ', src: 'media/phy4-5.mp4', poster: 'media/phy4-5.jpg', tags: ['الفضاء', 'المريخ'], dur: '٠:٢٦' },
+  { id: 'p4i1', kind: 'image', title: 'الطيف المتصل — المنشور ودرجة الحرارة', src: 'media/spectrum.jpg', tags: ['الضوء', 'الطيف'] },
+  { id: 'p4y1', kind: 'youtube', title: 'شرح فيزياء ٤ على يوتيوب', yt: '87BhpKz5Trc', url: 'https://youtu.be/87BhpKz5Trc', tags: ['يوتيوب', 'شرح'] },
+  { id: 'p4t1', kind: 'link', title: 'قناة الشرح على تيليجرام', url: 'https://t.me/daliaalghamdi/866', tags: ['تيليجرام', 'مرجع'] }
+];
 const DEFAULT_VIDEOS = [
   { t: 'حالات المادة', e: '🧊', f: 'chem' }, { t: 'قوانين نيوتن للحركة', e: '🍎', f: 'phy' },
   { t: 'الدائرة الكهربائية البسيطة', e: '💡', f: 'phy' }, { t: 'انعكاس الضوء وانكساره', e: '🌈', f: 'phy' },
@@ -1257,8 +1274,25 @@ function ytId(u) { const m = String(u).match(/(?:youtu\.be\/|v=|embed\/|shorts\/
 const THUMB_BG = { phy: 'linear-gradient(135deg,#ffcf85,#ff8a5b)', chem: 'linear-gradient(135deg,#8ef0b2,#3bb2d0)', bio: 'linear-gradient(135deg,#f9a8d4,#a78bfa)', sci: 'linear-gradient(135deg,#8be6f7,#6366f1)' };
 RENDER.videos = el => {
   const p = getProg(), vids = list('videos').concat(DEFAULT_VIDEOS);
+  const phy4 = PHY4.map(v => {
+    const seen = p.watched.includes(v.id);
+    const thumb = v.kind === 'video' ? `<img alt="" src="${v.poster}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">`
+      : v.kind === 'image' ? `<img alt="${esc(v.title)}" src="${v.src}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">`
+      : v.kind === 'youtube' ? `<img alt="" src="https://i.ytimg.com/vi/${v.yt}/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" onerror="this.remove()"><span style="position:relative;z-index:1">▶️</span>`
+      : `<span style="position:relative;z-index:1">✈️</span>`;
+    const bg = v.kind === 'link' ? 'linear-gradient(135deg,#5fd4e6,#2a7bd4)' : v.kind === 'youtube' ? 'linear-gradient(135deg,#ff6b6b,#b31217)' : '#000';
+    const icon = { video: '▶', image: '⤢', youtube: '▶', link: '↗' }[v.kind];
+    const label = { video: 'فيديو' + (v.dur ? ' · ' + v.dur : ''), image: 'صورة توضيحية', youtube: 'يوتيوب', link: 'رابط خارجي' }[v.kind];
+    return `<article class="vcard glass"><div class="thumb" style="background:${bg}">${thumb}
+      <button class="play" data-p4="${v.id}" aria-label="فتح ${esc(v.title)}">${icon}</button></div>
+      <div class="vbody"><h3>${esc(v.title)}</h3><div class="tags" style="margin:2px 0 0">${v.tags.map(t => `<span>${t}</span>`).join('')}</div>
+      <div class="row"><span>${label}</span>${seen ? '<span class="seen">✓ شاهدتِه</span>' : '<span>لم تشاهديه بعد</span>'}</div></div></article>`;
+  }).join('');
   el.innerHTML = `
   <div class="page-head"><h1>شروحات الفيديو</h1><p>اضغطي على الشرح لمشاهدته — يُحتسب في تقدّمكِ تلقائيًا.</p></div>
+  <div class="mcard-title"><span class="mini">٤</span>فيزياء ٤ — شرح المادة</div>
+  <div class="grid-3" style="margin-bottom:30px">${phy4}</div>
+  <div class="mcard-title"><span class="mini">ش</span>شروحات عامة</div>
   <div class="grid-3">${vids.map(v => {
     const id = ytId(v.url), f = v.field || 'sci', seen = p.watched.includes(v.id);
     const href = v.url || ('https://www.youtube.com/results?search_query=' + encodeURIComponent('شرح ' + v.title + ' علوم'));
@@ -1268,6 +1302,16 @@ RENDER.videos = el => {
       <div class="vbody"><h3>${esc(v.title)}</h3><span class="tag ${(FIELD[f] || FIELD.sci)[1]}" style="width:max-content">${(FIELD[f] || FIELD.sci)[0]}</span>
         <div class="row"><span>${v.builtin ? 'بحث في يوتيوب' : 'شرح المعلمة'}</span>${seen ? '<span class="seen">✓ شاهدتِه</span>' : '<span>لم تشاهديه بعد</span>'}</div></div>
     </article>`; }).join('')}</div>`;
+  $$('[data-p4]', el).forEach(b => b.onclick = () => {
+    const v = PHY4.find(x => x.id === b.dataset.p4), pr = getProg();
+    if (!pr.watched.includes(v.id)) { pr.watched.push(v.id); setProg(pr); send('watch', { name: session.name, role: session.role, video: 'فيزياء ٤: ' + v.title }); }
+    const th = b.parentElement;
+    if (v.kind === 'video') th.insertAdjacentHTML('beforeend', `<video src="${v.src}" poster="${v.poster}" controls autoplay playsinline style="position:absolute;inset:0;width:100%;height:100%;z-index:2;background:#000"></video>`);
+    else if (v.kind === 'youtube') th.insertAdjacentHTML('beforeend', `<iframe src="https://www.youtube-nocookie.com/embed/${v.yt}?autoplay=1&rel=0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen title="${esc(v.title)}"></iframe>`);
+    else if (v.kind === 'image') openLightbox(v.src, v.title);
+    else { const a = document.createElement('a'); a.href = v.url; a.target = '_blank'; a.rel = 'noopener'; a.click(); }
+    const row = b.closest('.vcard').querySelector('.row span:last-child'); row.className = 'seen'; row.textContent = '✓ شاهدتِه';
+  });
   $$('[data-play]', el).forEach(b => b.onclick = () => {
     const pr = getProg(); if (!pr.watched.includes(b.dataset.play)) { pr.watched.push(b.dataset.play); setProg(pr); send('watch', { name: session.name, role: session.role, video: b.closest('.vcard').querySelector('h3').textContent }); }
     if (b.dataset.yt) {
@@ -1276,6 +1320,12 @@ RENDER.videos = el => {
     const row = b.closest('.vcard').querySelector('.row span:last-child'); row.className = 'seen'; row.textContent = '✓ شاهدتِه';
   });
 };
+
+function openLightbox(src, title) {
+  const d = document.createElement('div'); d.className = 'lightbox';
+  d.innerHTML = `<figure><img src="${src}" alt="${esc(title)}"><figcaption>${esc(title)}</figcaption></figure><button aria-label="إغلاق">✕</button>`;
+  d.onclick = e => { if (e.target.tagName !== 'IMG') d.remove(); }; document.body.appendChild(d);
+}
 
 /* ---------- النماذج ---------- */
 let quizState = null;
