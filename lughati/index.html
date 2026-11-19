@@ -721,7 +721,7 @@ h1,h2{color:#2A4D6E}
 /* ===== لغتي السعادة: الربط مع Google (جدول + بريد المعلمة) + تخزين محلي ===== */
 var LS_CONFIG={GOOGLE_SCRIPT_URL:'https://script.google.com/macros/s/AKfycbwuFsA8XO-EsPWO1jesZIWtk3iAv8MnuQ7neqpDD3YYQRHpp1Bcj0oAe5b5Hj-WDIlh/exec',TEACHER_EMAIL:'fatimaa700fff@gmail.com',TEACHER:'فاطمة شراحيلي',PRINCIPAL:'صالحة السهلي'};
 function lsUrl(){try{return localStorage.getItem('ls-script')||LS_CONFIG.GOOGLE_SCRIPT_URL}catch(e){return LS_CONFIG.GOOGLE_SCRIPT_URL}}
-function lsSend(rec){var u=lsUrl();if(!u)return;try{fetch(u,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(rec)})}catch(e){}}
+function lsSend(rec){var u=lsUrl();if(!u)return;try{fetch(u,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(rec)}).catch(function(){})}catch(e){}}
 (function(){
   var TYPE={visits:'دخول',comments:'تعليق',opinions:'رأي ولي أمر',certs:'شهادة',results:'نتيجة'};
   var subs={};var remote={};
