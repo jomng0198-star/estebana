@@ -925,7 +925,9 @@ $("#logout").onclick = () => {
   $("#lPass").value = "";
   $("#lErr").textContent = "";
 };
-if (user) enter(false);
+setTimeout(function() {
+  if (user) enter(false);
+}, 0);
 let cur = "home";
 document.querySelectorAll(".nav[data-v]").forEach((b) => b.onclick = () => render(b.dataset.v));
 $("#sBtn").onclick = () => {
