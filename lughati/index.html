@@ -368,6 +368,17 @@ body{position:fixed;inset:0;width:100%}
   .printable,.printable *{visibility:visible}
   .printable{position:absolute;inset:0;background:#fff;color:#000}
 }
+
+@media (max-width:760px){
+  body::before{display:none}
+  body{background:#cfe9fb}
+  .card,.card-head,.pill,.tab,.back,.login-card{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+  .card{background:rgba(40,64,90,.82)}
+  .card-head{background:rgba(24,34,46,.85)}
+  .main{-webkit-overflow-scrolling:touch}
+  .window::after{display:none}
+}
+.sec,.unit,.lesson,.nav,.chip,.opt,.tab,.lt,.tile,.fish,.lvl,.role{cursor:pointer;-webkit-tap-highlight-color:rgba(255,216,77,.3);touch-action:manipulation}
 </style>
 </head>
 <body>
@@ -428,762 +439,1153 @@ body{position:fixed;inset:0;width:100%}
 
 <div class="toast" id="toast"></div>
 
-<script>
-/* =========================================================
-   الإعدادات — ضعي رابط Google Apps Script هنا بعد النشر
-   (أو الصقيه من لوحة المعلمة داخل المنصة)
-   ========================================================= */
+<script>var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
+window.onerror = function(m) {
+  try {
+    var t = document.getElementById("toast");
+    t.textContent = "⚠️ " + m;
+    t.classList.add("show");
+  } catch (e) {
+  }
+};
 const CONFIG = {
-  GOOGLE_SCRIPT_URL: "",                 // مثال: https://script.google.com/macros/s/XXXX/exec
+  GOOGLE_SCRIPT_URL: "",
+  // مثال: https://script.google.com/macros/s/XXXX/exec
   TEACHER_EMAIL: "fatimaa700fff@gmail.com",
   TEACHER: "فاطمة شراحيلي",
   PRINCIPAL: "صالحة السهلي",
-  TEACHER_CODE: "2026"                   // رمز دخول المعلمة
+  TEACHER_CODE: "2026"
+  // رمز دخول المعلمة
 };
-
-const S='stroke="#3b3340" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"';
-const HL='fill="#fff" opacity=".75"';
-const ICONS={
- logo:`<path d="M8 40c6-4 14-4 24 0V16C22 12 14 12 8 16z" fill="#8fd6ff" ${S}/><path d="M56 40c-6-4-14-4-24 0V16c10-4 18-4 24 0z" fill="#ffb3cf" ${S}/><path d="M20 13a12 12 0 0 1 24 0" fill="none" stroke="#ffd84d" stroke-width="4" stroke-linecap="round"/><path d="M25 13a7 7 0 0 1 14 0" fill="none" stroke="#a8e07a" stroke-width="3.5" stroke-linecap="round"/><path d="M12 22c4-1 9-1 14 1M12 29c4-1 9-1 14 1M38 23c5-2 10-2 14-1M38 30c5-2 10-2 14-1" ${S} fill="none" stroke-width="1.8"/>`,
- home:`<path d="M10 30 32 12l22 18" fill="none" ${S}/><path d="M16 27v23h32V27" fill="#ffd84d" ${S}/><path d="M27 50V37h10v13" fill="#ff9fc0" ${S}/><path d="M42 14v8l-5-4" fill="#ff9fc0" ${S}/><circle cx="22" cy="34" r="3" ${HL}/>`,
- videos:`<rect x="9" y="22" width="46" height="30" rx="7" fill="#8fd6ff" ${S}/><path d="M9 22l6-11 40 6-1 5" fill="#fff" ${S}/><path d="M20 12l-3 8M31 13l-3 8M42 15l-3 7" ${S}/><path d="M28 31v13l11-6.5z" fill="#ffd84d" ${S}/><circle cx="16" cy="29" r="2.5" ${HL}/>`,
- sheets:`<path d="M14 8h26l10 10v38H14z" fill="#fffaf0" ${S}/><path d="M40 8v10h10" fill="#ffe08a" ${S}/><path d="M21 28h20M21 35h20M21 42h12" ${S}/><path d="M46 30l9-9 4 4-9 9-6 2z" fill="#ff9fc0" ${S}/>`,
- exercises:`<path d="M10 14h14a6 6 0 1 1 10 0h14v14a6 6 0 1 0 0 10v14H34a6 6 0 1 0-10 0H10V38a6 6 0 1 1 0-10z" fill="#a8e07a" ${S}/><circle cx="20" cy="22" r="3" ${HL}/>`,
- quiz:`<path d="M32 8C18 8 9 16 9 27c0 7 4 12 10 15l-3 10 11-7c2 0 3 1 5 1 14 0 23-8 23-19S46 8 32 8z" fill="#c7b3ff" ${S}/><path d="M26 22a6 6 0 1 1 9 5c-2 1-3 3-3 5" fill="none" ${S} stroke-width="3"/><circle cx="32" cy="39" r="2" fill="#3b3340"/>`,
- letters:`<rect x="8" y="24" width="24" height="24" rx="5" fill="#ffd84d" ${S}/><rect x="32" y="16" width="24" height="24" rx="5" fill="#ff9fc0" ${S}/><text x="20" y="43" text-anchor="middle" font-size="17" font-weight="800" font-family="Tajawal" fill="#3b3340">ب</text><text x="44" y="34" text-anchor="middle" font-size="16" font-weight="800" font-family="Tajawal" fill="#3b3340">أ</text><path d="M50 50l2 4 4 1-4 1-2 4-1-4-4-1 4-1z" fill="#fff" ${S} stroke-width="1.5"/>`,
- game:`<path d="M32 8 52 19v24L32 54 12 43V19z" fill="#8fd6ff" ${S}/><path d="M12 19l20 11 20-11M32 30v24" fill="none" ${S}/><path d="M12 19 32 8l20 11-20 11z" fill="#ffd84d" ${S}/><circle cx="22" cy="38" r="2.5" fill="#3b3340"/><circle cx="42" cy="38" r="2.5" fill="#3b3340"/><circle cx="32" cy="19" r="2.5" fill="#3b3340"/>`,
- cert:`<path d="M20 10h24v12a12 12 0 0 1-24 0z" fill="#ffd84d" ${S}/><path d="M20 14h-7a7 7 0 0 0 9 9M44 14h7a7 7 0 0 1-9 9" fill="none" ${S}/><path d="M32 34v8M23 52h18l-3-10H26z" fill="#ff9fc0" ${S}/><path d="M32 14l2 4 4 .5-3 3 1 4-4-2-4 2 1-4-3-3 4-.5z" fill="#fff" ${S} stroke-width="1.5"/>`,
- teacher:`<rect x="10" y="10" width="44" height="44" rx="10" fill="#fffaf0" ${S}/><rect x="18" y="32" width="7" height="14" rx="2" fill="#a8e07a" ${S} stroke-width="2"/><rect x="29" y="22" width="7" height="24" rx="2" fill="#ff9fc0" ${S} stroke-width="2"/><rect x="40" y="27" width="7" height="19" rx="2" fill="#8fd6ff" ${S} stroke-width="2"/>`,
- logout:`<path d="M14 8h24v48H14z" fill="#ffb98a" ${S}/><path d="M38 12l12 4v40l-12-4" fill="#ffd8b8" ${S}/><circle cx="33" cy="33" r="2" fill="#3b3340"/><path d="M48 32h10m-4-4 4 4-4 4" fill="none" ${S}/>`,
- stats:`<path d="M10 52h44" ${S}/><path d="M12 42l12-12 10 8 18-20" fill="none" stroke="#ff7fae" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="52" cy="18" r="4" fill="#ffd84d" ${S} stroke-width="2"/>`,
- sparkle:`<path d="M32 6l6 18 18 6-18 6-6 18-6-18-18-6 18-6z" fill="#ffd84d" ${S}/>`,
- impact:`<path d="M32 56V30" ${S}/><path d="M32 34c-12 0-18-8-18-18 10 0 18 6 18 18z" fill="#a8e07a" ${S}/><path d="M32 30c0-12 8-18 18-18 0 10-6 18-18 18z" fill="#a8e07a" ${S}/><path d="M20 56h24" ${S}/>`,
- heart:`<path d="M32 54S8 40 8 24a12 12 0 0 1 24-4 12 12 0 0 1 24 4c0 16-24 30-24 30z" fill="#ff9fc0" ${S}/><circle cx="20" cy="22" r="3" ${HL}/>`,
- chat:`<rect x="8" y="12" width="42" height="30" rx="10" fill="#8fd6ff" ${S}/><path d="M18 42l-2 10 10-10" fill="#8fd6ff" ${S}/><circle cx="20" cy="27" r="2.5" fill="#3b3340"/><circle cx="29" cy="27" r="2.5" fill="#3b3340"/><circle cx="38" cy="27" r="2.5" fill="#3b3340"/>`,
- link:`<path d="M27 37l10-10" ${S}/><path d="M24 30l-6 6a7 7 0 0 0 10 10l6-6M40 34l6-6a7 7 0 0 0-10-10l-6 6" fill="none" ${S} stroke-width="4" stroke="#c7b3ff"/><path d="M24 30l-6 6a7 7 0 0 0 10 10l6-6M40 34l6-6a7 7 0 0 0-10-10l-6 6" fill="none" ${S}/>`,
- student:`<path d="M16 24h32v26a6 6 0 0 1-6 6H22a6 6 0 0 1-6-6z" fill="#ff9fc0" ${S}/><path d="M24 24v-6a8 8 0 0 1 16 0v6" fill="none" ${S}/><rect x="22" y="34" width="20" height="10" rx="3" fill="#ffd84d" ${S} stroke-width="2"/>`,
- visitor:`<circle cx="32" cy="32" r="7" fill="#ffd84d" ${S}/><g fill="#ff9fc0" ${S}><circle cx="32" cy="15" r="9"/><circle cx="49" cy="28" r="9"/><circle cx="43" cy="48" r="9"/><circle cx="21" cy="48" r="9"/><circle cx="15" cy="28" r="9"/></g><circle cx="32" cy="32" r="7" fill="#ffd84d" ${S}/>`,
- teach:`<circle cx="32" cy="20" r="10" fill="#ffd8b8" ${S}/><path d="M14 56c0-12 8-20 18-20s18 8 18 20z" fill="#8fd6ff" ${S}/><path d="M22 18c2-8 18-8 20 0-4-3-16-3-20 0z" fill="#3b3340"/><rect x="38" y="44" width="14" height="10" rx="2" fill="#ffd84d" ${S} stroke-width="2"/>`,
- school:`<path d="M10 28 32 14l22 14" fill="none" ${S}/><path d="M14 26v28h36V26" fill="#ffd84d" ${S}/><path d="M28 54V42h8v12" fill="#8fd6ff" ${S}/><path d="M32 14V6l8 3-8 3" fill="#ff9fc0" ${S}/><circle cx="32" cy="32" r="4" fill="#fff" ${S} stroke-width="2"/>`
+const S = 'stroke="#3b3340" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"';
+const HL = 'fill="#fff" opacity=".75"';
+const ICONS = {
+  logo: '<path d="M8 40c6-4 14-4 24 0V16C22 12 14 12 8 16z" fill="#8fd6ff" '.concat(S, '/><path d="M56 40c-6-4-14-4-24 0V16c10-4 18-4 24 0z" fill="#ffb3cf" ').concat(S, '/><path d="M20 13a12 12 0 0 1 24 0" fill="none" stroke="#ffd84d" stroke-width="4" stroke-linecap="round"/><path d="M25 13a7 7 0 0 1 14 0" fill="none" stroke="#a8e07a" stroke-width="3.5" stroke-linecap="round"/><path d="M12 22c4-1 9-1 14 1M12 29c4-1 9-1 14 1M38 23c5-2 10-2 14-1M38 30c5-2 10-2 14-1" ').concat(S, ' fill="none" stroke-width="1.8"/>'),
+  home: '<path d="M10 30 32 12l22 18" fill="none" '.concat(S, '/><path d="M16 27v23h32V27" fill="#ffd84d" ').concat(S, '/><path d="M27 50V37h10v13" fill="#ff9fc0" ').concat(S, '/><path d="M42 14v8l-5-4" fill="#ff9fc0" ').concat(S, '/><circle cx="22" cy="34" r="3" ').concat(HL, "/>"),
+  videos: '<rect x="9" y="22" width="46" height="30" rx="7" fill="#8fd6ff" '.concat(S, '/><path d="M9 22l6-11 40 6-1 5" fill="#fff" ').concat(S, '/><path d="M20 12l-3 8M31 13l-3 8M42 15l-3 7" ').concat(S, '/><path d="M28 31v13l11-6.5z" fill="#ffd84d" ').concat(S, '/><circle cx="16" cy="29" r="2.5" ').concat(HL, "/>"),
+  sheets: '<path d="M14 8h26l10 10v38H14z" fill="#fffaf0" '.concat(S, '/><path d="M40 8v10h10" fill="#ffe08a" ').concat(S, '/><path d="M21 28h20M21 35h20M21 42h12" ').concat(S, '/><path d="M46 30l9-9 4 4-9 9-6 2z" fill="#ff9fc0" ').concat(S, "/>"),
+  exercises: '<path d="M10 14h14a6 6 0 1 1 10 0h14v14a6 6 0 1 0 0 10v14H34a6 6 0 1 0-10 0H10V38a6 6 0 1 1 0-10z" fill="#a8e07a" '.concat(S, '/><circle cx="20" cy="22" r="3" ').concat(HL, "/>"),
+  quiz: '<path d="M32 8C18 8 9 16 9 27c0 7 4 12 10 15l-3 10 11-7c2 0 3 1 5 1 14 0 23-8 23-19S46 8 32 8z" fill="#c7b3ff" '.concat(S, '/><path d="M26 22a6 6 0 1 1 9 5c-2 1-3 3-3 5" fill="none" ').concat(S, ' stroke-width="3"/><circle cx="32" cy="39" r="2" fill="#3b3340"/>'),
+  letters: '<rect x="8" y="24" width="24" height="24" rx="5" fill="#ffd84d" '.concat(S, '/><rect x="32" y="16" width="24" height="24" rx="5" fill="#ff9fc0" ').concat(S, '/><text x="20" y="43" text-anchor="middle" font-size="17" font-weight="800" font-family="Tajawal" fill="#3b3340">ب</text><text x="44" y="34" text-anchor="middle" font-size="16" font-weight="800" font-family="Tajawal" fill="#3b3340">أ</text><path d="M50 50l2 4 4 1-4 1-2 4-1-4-4-1 4-1z" fill="#fff" ').concat(S, ' stroke-width="1.5"/>'),
+  game: '<path d="M32 8 52 19v24L32 54 12 43V19z" fill="#8fd6ff" '.concat(S, '/><path d="M12 19l20 11 20-11M32 30v24" fill="none" ').concat(S, '/><path d="M12 19 32 8l20 11-20 11z" fill="#ffd84d" ').concat(S, '/><circle cx="22" cy="38" r="2.5" fill="#3b3340"/><circle cx="42" cy="38" r="2.5" fill="#3b3340"/><circle cx="32" cy="19" r="2.5" fill="#3b3340"/>'),
+  cert: '<path d="M20 10h24v12a12 12 0 0 1-24 0z" fill="#ffd84d" '.concat(S, '/><path d="M20 14h-7a7 7 0 0 0 9 9M44 14h7a7 7 0 0 1-9 9" fill="none" ').concat(S, '/><path d="M32 34v8M23 52h18l-3-10H26z" fill="#ff9fc0" ').concat(S, '/><path d="M32 14l2 4 4 .5-3 3 1 4-4-2-4 2 1-4-3-3 4-.5z" fill="#fff" ').concat(S, ' stroke-width="1.5"/>'),
+  teacher: '<rect x="10" y="10" width="44" height="44" rx="10" fill="#fffaf0" '.concat(S, '/><rect x="18" y="32" width="7" height="14" rx="2" fill="#a8e07a" ').concat(S, ' stroke-width="2"/><rect x="29" y="22" width="7" height="24" rx="2" fill="#ff9fc0" ').concat(S, ' stroke-width="2"/><rect x="40" y="27" width="7" height="19" rx="2" fill="#8fd6ff" ').concat(S, ' stroke-width="2"/>'),
+  logout: '<path d="M14 8h24v48H14z" fill="#ffb98a" '.concat(S, '/><path d="M38 12l12 4v40l-12-4" fill="#ffd8b8" ').concat(S, '/><circle cx="33" cy="33" r="2" fill="#3b3340"/><path d="M48 32h10m-4-4 4 4-4 4" fill="none" ').concat(S, "/>"),
+  stats: '<path d="M10 52h44" '.concat(S, '/><path d="M12 42l12-12 10 8 18-20" fill="none" stroke="#ff7fae" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="52" cy="18" r="4" fill="#ffd84d" ').concat(S, ' stroke-width="2"/>'),
+  sparkle: '<path d="M32 6l6 18 18 6-18 6-6 18-6-18-18-6 18-6z" fill="#ffd84d" '.concat(S, "/>"),
+  impact: '<path d="M32 56V30" '.concat(S, '/><path d="M32 34c-12 0-18-8-18-18 10 0 18 6 18 18z" fill="#a8e07a" ').concat(S, '/><path d="M32 30c0-12 8-18 18-18 0 10-6 18-18 18z" fill="#a8e07a" ').concat(S, '/><path d="M20 56h24" ').concat(S, "/>"),
+  heart: '<path d="M32 54S8 40 8 24a12 12 0 0 1 24-4 12 12 0 0 1 24 4c0 16-24 30-24 30z" fill="#ff9fc0" '.concat(S, '/><circle cx="20" cy="22" r="3" ').concat(HL, "/>"),
+  chat: '<rect x="8" y="12" width="42" height="30" rx="10" fill="#8fd6ff" '.concat(S, '/><path d="M18 42l-2 10 10-10" fill="#8fd6ff" ').concat(S, '/><circle cx="20" cy="27" r="2.5" fill="#3b3340"/><circle cx="29" cy="27" r="2.5" fill="#3b3340"/><circle cx="38" cy="27" r="2.5" fill="#3b3340"/>'),
+  link: '<path d="M27 37l10-10" '.concat(S, '/><path d="M24 30l-6 6a7 7 0 0 0 10 10l6-6M40 34l6-6a7 7 0 0 0-10-10l-6 6" fill="none" ').concat(S, ' stroke-width="4" stroke="#c7b3ff"/><path d="M24 30l-6 6a7 7 0 0 0 10 10l6-6M40 34l6-6a7 7 0 0 0-10-10l-6 6" fill="none" ').concat(S, "/>"),
+  student: '<path d="M16 24h32v26a6 6 0 0 1-6 6H22a6 6 0 0 1-6-6z" fill="#ff9fc0" '.concat(S, '/><path d="M24 24v-6a8 8 0 0 1 16 0v6" fill="none" ').concat(S, '/><rect x="22" y="34" width="20" height="10" rx="3" fill="#ffd84d" ').concat(S, ' stroke-width="2"/>'),
+  visitor: '<circle cx="32" cy="32" r="7" fill="#ffd84d" '.concat(S, '/><g fill="#ff9fc0" ').concat(S, '><circle cx="32" cy="15" r="9"/><circle cx="49" cy="28" r="9"/><circle cx="43" cy="48" r="9"/><circle cx="21" cy="48" r="9"/><circle cx="15" cy="28" r="9"/></g><circle cx="32" cy="32" r="7" fill="#ffd84d" ').concat(S, "/>"),
+  teach: '<circle cx="32" cy="20" r="10" fill="#ffd8b8" '.concat(S, '/><path d="M14 56c0-12 8-20 18-20s18 8 18 20z" fill="#8fd6ff" ').concat(S, '/><path d="M22 18c2-8 18-8 20 0-4-3-16-3-20 0z" fill="#3b3340"/><rect x="38" y="44" width="14" height="10" rx="2" fill="#ffd84d" ').concat(S, ' stroke-width="2"/>'),
+  school: '<path d="M10 28 32 14l22 14" fill="none" '.concat(S, '/><path d="M14 26v28h36V26" fill="#ffd84d" ').concat(S, '/><path d="M28 54V42h8v12" fill="#8fd6ff" ').concat(S, '/><path d="M32 14V6l8 3-8 3" fill="#ff9fc0" ').concat(S, '/><circle cx="32" cy="32" r="4" fill="#fff" ').concat(S, ' stroke-width="2"/>')
 };
-function ic(n,s=26){return `<svg class="ico" viewBox="0 0 64 64" width="${s}" height="${s}" aria-hidden="true">${ICONS[n]||''}</svg>`}
-ICONS.units=`<rect x="10" y="10" width="18" height="18" rx="5" fill="#ff9fc0" ${S}/><rect x="36" y="10" width="18" height="18" rx="5" fill="#8fd6ff" ${S}/><rect x="10" y="36" width="18" height="18" rx="5" fill="#a8e07a" ${S}/><rect x="36" y="36" width="18" height="18" rx="5" fill="#ffd84d" ${S}/><circle cx="16" cy="16" r="2.5" ${HL}/>`;
-
-function hydrateIcons(root=document){root.querySelectorAll('i[data-ic]').forEach(i=>{i.outerHTML=ic(i.dataset.ic,+i.dataset.s||26)})}
-hydrateIcons();
-/* ============ التخزين المحلي ============ */
-const DB = {
-  get(k,d){try{return JSON.parse(localStorage.getItem('lughati_'+k))??d}catch(e){return d}},
-  set(k,v){try{localStorage.setItem('lughati_'+k,JSON.stringify(v))}catch(e){}}
-};
-const scriptURL = () => DB.get('scriptUrl','') || CONFIG.GOOGLE_SCRIPT_URL;
-let user = DB.get('user',null);
-let points = DB.get('points',0);
-let remote = null; // إحصائيات من Google
-
-/* إرسال البيانات إلى Google (Sheet + البريد) مع حفظ نسخة محلية */
-function send(type,data={}){
-  const rec = {type, name:user?.name||'', role:user?.role||'', time:new Date().toLocaleString('ar-SA'), ...data};
-  const log = DB.get('log',[]); log.unshift(rec); DB.set('log',log.slice(0,500));
-  const url = scriptURL();
-  if(url){
-    fetch(url,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(rec)}).catch(()=>{});
-  }
+function ic(n, s = 26) {
+  return '<svg class="ico" viewBox="0 0 64 64" width="'.concat(s, '" height="').concat(s, '" aria-hidden="true">').concat(ICONS[n] || "", "</svg>");
 }
-async function loadRemote(){
-  const url = scriptURL(); if(!url) return;
-  try{ const r = await fetch(url+'?action=stats'); remote = await r.json(); if(cur==='home') render('home'); }catch(e){}
-}
-
-/* ============ أدوات ============ */
-const $ = s => document.querySelector(s);
-const view = $('#view');
-function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('show');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('show'),2200)}
-function addPoints(n){points+=n;DB.set('points',points);$('#who').textContent=`⭐ ${points} نقطة · ${user?.name||''}`}
-function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='ar-SA';u.rate=1.0;u.pitch=1.15;speechSynthesis.speak(u)}catch(e){}}
-let actx;
-function beep(ok=true){
-  try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();
-    const notes = ok?[523,659,784,1046]:[300,220];
-    notes.forEach((f,i)=>{const o=actx.createOscillator(),g=actx.createGain();o.type=ok?'triangle':'sawtooth';o.frequency.value=f;
-      g.gain.setValueAtTime(.12,actx.currentTime+i*.09);g.gain.exponentialRampToValueAtTime(.001,actx.currentTime+i*.09+.25);
-      o.connect(g).connect(actx.destination);o.start(actx.currentTime+i*.09);o.stop(actx.currentTime+i*.09+.3)})}catch(e){}
-}
-function confetti(n=60){
-  const cs=['#ff8fb8','#ffd84d','#7ddc72','#5fc3ff','#b69cff','#ffad5c'];
-  for(let i=0;i<n;i++){const c=document.createElement('div');c.className='confetti';c.style.left=Math.random()*100+'vw';
-    c.style.background=cs[i%cs.length];c.style.animationDuration=(1.6+Math.random()*1.8)+'s';c.style.borderRadius=Math.random()>.5?'50%':'3px';
-    document.body.appendChild(c);setTimeout(()=>c.remove(),3600)}
-}
-const praise=['أحسنتِ! 🌟','رائعة! 🎉','ممتازة! 💛','بطلة لغتي! 🏆','واو! مبدعة ✨','استمري يا نجمة ⭐'];
-const rnd=a=>a[Math.floor(Math.random()*a.length)];
-const shuffle=a=>a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(v=>v[1]);
-function countUp(el,to){let s=0;const st=Math.max(1,Math.ceil(to/40));const t=setInterval(()=>{s+=st;if(s>=to){s=to;clearInterval(t)}el.textContent=s.toLocaleString('en')},30)}
-
-/* ============ المحتوى التعليمي ============ */
-/* ================= منهج لغتي — الصف الثاني ابتدائي — الفصل الدراسي الأول ================= */
-const UNITS = [
- {id:1,t:'أقاربي',em:'👨‍👩‍👧',color:'#ff9fc0',anthem:'جدتي',
-  intro:'نتعرّف في هذه الوحدة على أقاربنا، وكيف نصلهم ونحترمهم ونعتذر لهم إذا أخطأنا.',
-  warm:['من أقرب الناس إليكِ بعد والديكِ؟','متى زرتِ جدتكِ آخر مرة؟','اذكري ثلاثة من أقاربكِ.'],
-  project:'شجرة عائلتي: ارسمي شجرة وضعي على أغصانها صور أقاربكِ وأسماءهم.',
-  listening:'في يوم الجمعة اجتمعت العائلة في بيت الجد. جلس الأحفاد حول جدتهم، فحكت لهم حكاية جميلة، ثم تناولوا الغداء معاً وهم سعداء.',
-  listenQ:[{q:'أين اجتمعت العائلة؟',o:['في بيت الجد','في المدرسة','في السوق'],a:0},{q:'ماذا فعلت الجدة؟',o:['حكت حكاية','نامت','سافرت'],a:0}],
-  dictation:['جدّي','جدّتي','عمّي','خالتي'],
-  lessons:[
-   {id:'u1l1',t:'صلة الرحم',em:'🤲',
-    ready:'هل تزورين أقاربكِ؟ ماذا تقولين لهم عند الزيارة؟',
-    vocab:[['صلة الرحم','زيارة الأقارب والإحسان إليهم'],['الأرحام','الأقارب'],['يزور','يذهب لرؤية أحد'],['يسأل عن','يطمئن على حاله']],
-    value:'صلة الرحم تزيد المحبة بين الأقارب.',
-    story:'في يوم الجمعة زارت سارة جدّتها وعمّتها. قبّلت يدَ جدّتها وقالت: أحبّكِ يا جدّتي. ففرحت الجدّة ودعت لها.',
-    scenes:[['👧🏠','زارت سارة جدّتها وعمّتها'],['👵💕','قبّلت يد جدّتها فدعت لها']],
-    dict:['زارت','جدّتها','عمّتها','أحبّكِ'],
-    sheet:[['زيارة الأقارب تسمّى','صلة الرحم','الصداقة'],['قبّلت سارة يدَ','جدّتها','صديقتها'],['صلة الرحم تزيد','المحبة','الخصام']],
-    check:[['زارت سارة جدّتها يوم الجمعة',true],['غضبت الجدّة من سارة',false],['الأرحام هم الأقارب',true]],
-    quiz:[{q:'معنى (صلة الرحم):',o:['زيارة الأقارب والإحسان إليهم','اللعب مع الأصدقاء','الذهاب إلى السوق'],a:0},{q:'من زارت سارة؟',o:['جدّتها وعمّتها','معلمتها','جارتها'],a:0},{q:'ماذا قالت سارة لجدّتها؟',o:['أحبّكِ يا جدّتي','مع السلامة','أنا جائعة'],a:0},{q:'صلة الرحم تزيد:',o:['المحبة','الحزن','التعب'],a:0}],
-    fish:{target:'رحم',words:['رحم','جدّة','عمّة','زيارة','خالة','أقارب']},
-    strategy:{n:'لوحة الجيوب',steps:['تعلّق المعلمة لوحة جيوب فيها بطاقات كلمات الدرس.','تقرأ المعلمة الكلمة وتطلب من طالبة سحبها.','تضع الطالبة البطاقة في جملة مفيدة وتقرؤها.']}},
-   {id:'u1l2',t:'عذراً يا جدي',em:'👴',
-    ready:'ماذا تقولين إذا أخطأتِ في حق أحد؟',
-    vocab:[['عذراً','أعتذر وأطلب السماح'],['دون قصد','من غير أن أريد'],['ابتسم','ضحك ضحكة خفيفة'],['شجاعة','قوّة وجرأة']],
-    value:'الاعتذار عند الخطأ خُلق جميل وشجاعة.',
-    story:'كسر خالدٌ نظّارة جدّه دون قصد، فخاف، ثم قال: عذراً يا جدّي. ابتسم الجدّ وقال: الصدق شجاعة يا بُنيّ.',
-    scenes:[['👦👓','كسر خالد نظّارة جدّه دون قصد'],['👴😊','قال: عذراً يا جدّي، فابتسم الجد']],
-    dict:['عذراً','نظّارة','جدّي','ابتسم'],
-    sheet:[['ماذا كسر خالد؟','نظّارة جدّه','كوب الماء'],['قال خالد لجدّه','عذراً يا جدّي','لا أعرف'],['الصدق','شجاعة','خوف']],
-    check:[['كسر خالد النظّارة متعمّداً',false],['اعتذر خالد لجدّه',true],['غضب الجدّ وصرخ',false]],
-    quiz:[{q:'معنى (دون قصد):',o:['من غير أن أريد','بسرعة','بفرح'],a:0},{q:'ماذا قال خالد؟',o:['عذراً يا جدّي','شكراً يا أبي','صباح الخير'],a:0},{q:'كيف كان ردّ الجدّ؟',o:['ابتسم','غضب','بكى'],a:0},{q:'نتعلّم من القصة:',o:['الاعتذار عند الخطأ','الكذب','الهروب'],a:0}],
-    fish:{target:'عذراً',words:['عذراً','نظّارة','جدّي','شجاعة','صدق','ابتسم']},
-    strategy:{n:'الكرسي الساخن',steps:['تجلس طالبة على الكرسي وتمثّل دور خالد.','تسألها زميلاتها: لماذا اعتذرتِ؟ كيف شعرتِ؟','تختم المعلمة بقيمة الاعتذار والصدق.']}}
-  ]},
- {id:2,t:'أصدقائي وجيراني',em:'🤝',color:'#8fd6ff',anthem:'الجار والصديق',
-  intro:'نتعلّم في هذه الوحدة كيف نختار الصديق، ونحسن إلى الجار، ونتعاون معهم.',
-  warm:['من صديقتكِ المقرّبة؟','ماذا تفعلين لجيرانكِ؟','كيف تساعدين صديقتكِ؟'],
-  project:'بطاقة شكر: صمّمي بطاقة جميلة واكتبي فيها شكراً لجارتكِ أو صديقتكِ.',
-  listening:'رأت منى جارتها العجوز تحمل أكياساً ثقيلة، فأسرعت إليها وحملت عنها الأكياس حتى باب بيتها. شكرتها الجارة ودعت لها بالخير.',
-  listenQ:[{q:'ماذا كانت تحمل الجارة؟',o:['أكياساً ثقيلة','كتباً','زهوراً'],a:0},{q:'ماذا فعلت منى؟',o:['حملت عنها الأكياس','ضحكت','ذهبت بعيداً'],a:0}],
-  dictation:['صديقي','جاري','بيتنا','شكراً'],
-  lessons:[
-   {id:'u2l1',t:'الصديقان',em:'👭',
-    ready:'ما الصفات التي تحبينها في صديقتكِ؟',
-    vocab:[['الصديق','من نحبّه ويحبّنا ويساعدنا'],['أعطت','قدّمت'],['نسيت','لم تتذكّر'],['الضيق','الشدّة والحاجة']],
-    value:'الصديق الحقيقي يساعد صديقه وقت الحاجة.',
-    story:'نسيت هندٌ قلمها في البيت، فحزنت. أعطتها ريم قلمها وقالت: الصديق وقتَ الضيق. فابتسمت هند وشكرتها.',
-    scenes:[['👧✏️','نسيت هند قلمها فحزنت'],['👭💛','أعطتها ريم قلمها: الصديق وقت الضيق']],
-    dict:['صديقة','قلمها','أعطتها','شكرتها'],
-    sheet:[['ماذا نسيت هند؟','قلمها','حقيبتها'],['من ساعدت هنداً؟','ريم','المعلمة'],['الصديق وقتَ','الضيق','النوم']],
-    check:[['نسيت هند قلمها',true],['رفضت ريم مساعدة هند',false],['شكرت هند صديقتها',true]],
-    quiz:[{q:'من نسيت القلم؟',o:['هند','ريم','سارة'],a:0},{q:'معنى (الضيق):',o:['الشدّة والحاجة','الفرح','اللعب'],a:0},{q:'ماذا قالت ريم؟',o:['الصديق وقت الضيق','أنا مشغولة','اذهبي'],a:0},{q:'الصديق الحقيقي:',o:['يساعد صديقه','يسخر منه','يتركه'],a:0}],
-    fish:{target:'صديق',words:['صديق','قلم','ريم','هند','ضيق','شكراً']},
-    strategy:{n:'فكّر - زاوج - شارك',steps:['تفكّر كل طالبة: كيف أساعد صديقتي؟','تتناقش مع زميلتها المجاورة.','تشارك الثنائيات أفكارهما مع الصف.']}},
-   {id:'u2l2',t:'الجار الصغير',em:'🏡',
-    ready:'من جيرانكِ؟ وكيف تعاملينهم؟',
-    vocab:[['الجار','من يسكن قريباً من بيتنا'],['مريض','متعب يحتاج إلى علاج'],['هدية','شيء نقدّمه لمن نحبّ'],['زاره','ذهب لرؤيته']],
-    value:'زيارة الجار المريض تُدخل السرور على قلبه.',
-    story:'علم فيصلٌ أن جاره الصغير مريض، فحمل له هديةً وزاره مع أبيه. فرح الجار كثيراً وقال: شكراً يا جاري العزيز.',
-    scenes:[['👦🎁','حمل فيصل هدية لجاره المريض'],['🏡😊','فرح الجار وقال: شكراً يا جاري']],
-    dict:['جاره','مريض','هدية','زاره'],
-    sheet:[['من كان مريضاً؟','الجار الصغير','فيصل'],['ماذا حمل فيصل؟','هدية','كرة'],['زار فيصل جاره مع','أبيه','أخته']],
-    check:[['كان الجار الصغير مريضاً',true],['زار فيصل جاره وحده',false],['فرح الجار بالزيارة',true]],
-    quiz:[{q:'معنى (الجار):',o:['من يسكن قريباً من بيتنا','المعلم','البائع'],a:0},{q:'ماذا قدّم فيصل؟',o:['هدية','طعاماً','كتاباً'],a:0},{q:'مع من زار فيصل جاره؟',o:['مع أبيه','مع معلمه','وحده'],a:0},{q:'نتعلّم من القصة:',o:['زيارة الجار المريض','إزعاج الجيران','النوم مبكراً'],a:0}],
-    fish:{target:'جار',words:['جار','هدية','مريض','فيصل','بيت','زيارة']},
-    strategy:{n:'لعب الأدوار',steps:['توزّع المعلمة الأدوار: فيصل، الأب، الجار.','تمثّل الطالبات مشهد الزيارة أمام الصف.','تناقش المعلمة آداب زيارة المريض.']}}
-  ]},
- {id:3,t:'وطني السعودية',em:'🇸🇦',color:'#a8e07a',anthem:'وطني السعودية',
-  intro:'نتعرّف في هذه الوحدة على وطننا المملكة العربية السعودية، ومدنها المقدسة، وعلمها.',
-  warm:['ما اسم وطنكِ؟','ما لون علم بلادي؟','اذكري مدينة من مدن وطنكِ.'],
-  project:'ألبوم وطني: اجمعي صوراً لمعالم وطنكِ واكتبي اسم كل معلم تحت صورته.',
-  listening:'وطني المملكة العربية السعودية بلد كبير وجميل، فيه الصحراء والجبال والبحار، وفيه مكة المكرمة والمدينة المنورة. نحن نحب وطننا ونحافظ عليه.',
-  listenQ:[{q:'ما اسم وطني؟',o:['المملكة العربية السعودية','مصر','المغرب'],a:0},{q:'ماذا نفعل لوطننا؟',o:['نحبّه ونحافظ عليه','نهمله','نتركه'],a:0}],
-  dictation:['وطني','مكة','علم','بلادي'],
-  lessons:[
-   {id:'u3l1',t:'مدينتان مقدستان',em:'🕋',
-    ready:'هل زرتِ مكة المكرمة أو المدينة المنورة؟',
-    vocab:[['مقدّسة','لها مكانة عظيمة عند المسلمين'],['الكعبة المشرّفة','بيت الله الحرام في مكة'],['المسجد النبوي','مسجد الرسول ﷺ في المدينة'],['الحجّاج','من يذهبون لأداء الحج']],
-    value:'نعتزّ بمكة المكرمة والمدينة المنورة ونحترمهما.',
-    story:'في وطني مدينتان مقدّستان: مكّة المكرّمة فيها الكعبة المشرّفة، والمدينة المنوّرة فيها المسجد النبويّ. يزورهما المسلمون من كل مكان.',
-    scenes:[['🕋','مكة المكرمة فيها الكعبة المشرفة'],['🕌','المدينة المنورة فيها المسجد النبوي']],
-    dict:['مكّة','المدينة','الكعبة','المسجد'],
-    sheet:[['الكعبة المشرّفة في','مكة المكرمة','المدينة المنورة'],['المسجد النبوي في','المدينة المنورة','الرياض'],['يزور المدينتين','المسلمون','الطيور']],
-    check:[['الكعبة المشرّفة في مكة المكرمة',true],['المسجد النبوي في جدة',false],['في وطني مدينتان مقدّستان',true]],
-    quiz:[{q:'أين الكعبة المشرّفة؟',o:['مكة المكرمة','المدينة المنورة','الدمام'],a:0},{q:'أين المسجد النبوي؟',o:['المدينة المنورة','مكة المكرمة','أبها'],a:0},{q:'كم مدينة مقدّسة في الدرس؟',o:['اثنتان','ثلاث','واحدة'],a:0},{q:'معنى (مقدّسة):',o:['لها مكانة عظيمة','صغيرة','بعيدة'],a:0}],
-    fish:{target:'مكة',words:['مكة','المدينة','الكعبة','المسجد','الحرم','وطني']},
-    strategy:{n:'الخريطة الذهنية',steps:['ترسم المعلمة دائرة في الوسط: مدن مقدّسة.','تضيف الطالبات فرعين: مكة المكرمة والمدينة المنورة.','تكتب الطالبات ما يميّز كل مدينة.']}},
-   {id:'u3l2',t:'علم بلادي',em:'🚩',
-    ready:'ما لون علم بلادي؟ وماذا كُتب عليه؟',
-    vocab:[['العَلَم','رمز الوطن'],['الشهادة','لا إله إلا الله محمد رسول الله'],['السيف','رمز القوّة والعدل'],['نرفعه','نجعله عالياً']],
-    value:'نحترم علم بلادنا ونرفعه عالياً.',
-    story:'علمُ بلادي أخضرُ جميل، كُتبت عليه الشهادة: لا إله إلا الله محمد رسول الله، وتحتها سيف. أرفعه عالياً وأحترمه.',
-    scenes:[['🟩','علم بلادي أخضر عليه الشهادة'],['⚔️🙌','تحتها سيف، أرفعه عالياً وأحترمه']],
-    dict:['علم','أخضر','سيف','بلادي'],
-    sheet:[['لون علم بلادي','أخضر','أحمر'],['تحت الشهادة','سيف','نجمة'],['علم بلادي','نحترمه','نرميه']],
-    check:[['علم بلادي لونه أخضر',true],['تحت الشهادة نجمة',false],['نحترم علم بلادنا',true]],
-    quiz:[{q:'لون علم بلادي:',o:['أخضر','أزرق','أصفر'],a:0},{q:'ماذا كُتب على العلم؟',o:['الشهادة','اسم مدينة','رقم'],a:0},{q:'ماذا تحت الشهادة؟',o:['سيف','شجرة','قمر'],a:0},{q:'العلم رمز:',o:['الوطن','المدرسة','البيت'],a:0}],
-    fish:{target:'علم',words:['علم','أخضر','سيف','وطن','شهادة','نرفعه']},
-    strategy:{n:'التعلّم باللون والرسم',steps:['توزّع المعلمة رسمة العلم بلا ألوان.','تلوّن الطالبات العلم وتكتب الشهادة.','تعرض كل طالبة علمها وتقول جملة عن وطنها.']}}
-  ]},
- {id:4,t:'محاصيل من بلادي',em:'🌾',color:'#ffd84d',anthem:'هيا نزرع',
-  intro:'نتعرّف في هذه الوحدة على محاصيل بلادي مثل القمح والتمر، وكيف تنمو وتصل إلينا.',
-  warm:['ماذا نأكل من الأرض؟','هل رأيتِ نخلة؟','من أين يأتي الخبز؟'],
-  project:'مزرعتي الصغيرة: ازرعي حبّات في كوب وراقبي نموّها كل يوم وارسميها.',
-  listening:'خرج الفلاح إلى مزرعته في الصباح الباكر، سقى النخيل والقمح، وقطف الخضار الطازجة، ثم حملها إلى السوق ليبيعها للناس.',
-  listenQ:[{q:'متى خرج الفلاح؟',o:['في الصباح الباكر','في الليل','في المساء'],a:0},{q:'ماذا سقى الفلاح؟',o:['النخيل والقمح','الأزهار فقط','لا شيء'],a:0}],
-  dictation:['قمح','تمر','نخلة','مزرعة'],
-  lessons:[
-   {id:'u4l1',t:'رحلة حبة قمح',em:'🌾',
-    ready:'من أين يأتي الخبز الذي نأكله؟',
-    vocab:[['الفلاح','من يزرع الأرض'],['سنبلة','رأس نبتة القمح فيها الحبوب'],['طُحنت','صارت دقيقاً ناعماً'],['المحصول','ما نجمعه من الزرع']],
-    value:'نشكر الله على النعم ولا نرمي الخبز.',
-    story:'زرع الفلّاحُ حبّةَ قمح، سقاها الماء ودفّأتها الشمس، فصارت سنبلة. ثم طُحنت وصارت خبزاً لذيذاً.',
-    scenes:[['👨‍🌾🌱','زرع الفلاح حبة قمح فصارت سنبلة'],['🌾➡️🍞','طُحنت وصارت خبزاً لذيذاً']],
-    dict:['قمح','سنبلة','خبز','الفلّاح'],
-    sheet:[['من زرع حبة القمح؟','الفلّاح','الطبيب'],['صارت الحبة','سنبلة','وردة'],['من القمح نصنع','الخبز','الحليب']],
-    check:[['زرع الفلاح حبة قمح',true],['صار القمح حليباً',false],['نصنع الخبز من القمح',true]],
-    quiz:[{q:'من يزرع الأرض؟',o:['الفلّاح','الطيّار','المعلم'],a:0},{q:'معنى (سنبلة):',o:['رأس نبتة القمح','نوع من الطيور','بيت صغير'],a:0},{q:'ماذا نصنع من القمح؟',o:['الخبز','العصير','الجبن'],a:0},{q:'ترتيب الرحلة:',o:['حبّة ← سنبلة ← خبز','خبز ← حبّة ← سنبلة','سنبلة ← خبز ← حبّة'],a:0}],
-    fish:{target:'قمح',words:['قمح','سنبلة','خبز','فلاح','ماء','شمس']},
-    strategy:{n:'التسلسل بالبطاقات',steps:['توزّع المعلمة بطاقات مراحل حبة القمح بلا ترتيب.','ترتّب المجموعات البطاقات من الحبّة إلى الخبز.','تحكي كل مجموعة الرحلة بلغتها.']}},
-   {id:'u4l2',t:'من أنا؟',em:'🌴',
-    ready:'خمّني: أنا حلوة وأنمو على النخلة، من أنا؟',
-    vocab:[['ثمرة','ما تحمله الشجرة لنأكله'],['النخلة','شجرة طويلة تحمل التمر'],['حلوة','طعمها لذيذ كالسكر'],['لغز','سؤال نخمّن جوابه']],
-    value:'التمر غذاء مفيد من خيرات بلادي.',
-    story:'أنا ثمرةٌ حلوة، أنمو على النخلة، يحبّني الكبار والصغار، ويُقدّمونني مع القهوة للضيوف. من أنا؟ أنا التمر!',
-    scenes:[['🌴❓','أنا ثمرة حلوة أنمو على النخلة'],['🟤☕','يقدّمونني مع القهوة.. أنا التمر!']],
-    dict:['تمر','نخلة','حلوة','ثمرة'],
-    sheet:[['ينمو التمر على','النخلة','البرتقالة'],['طعم التمر','حلو','مالح'],['نقدّم التمر مع','القهوة','الماء المالح']],
-    check:[['التمر ينمو على النخلة',true],['التمر طعمه مرّ',false],['نقدّم التمر للضيوف',true]],
-    quiz:[{q:'جواب اللغز:',o:['التمر','الموز','العنب'],a:0},{q:'أين ينمو التمر؟',o:['على النخلة','في البحر','تحت الأرض'],a:0},{q:'معنى (لغز):',o:['سؤال نخمّن جوابه','نوع من الطعام','لعبة كرة'],a:0},{q:'مع ماذا نقدّم التمر؟',o:['القهوة','الحساء','الملح'],a:0}],
-    fish:{target:'تمر',words:['تمر','نخلة','حلوة','ثمرة','قهوة','ضيف']},
-    strategy:{n:'الألغاز والتخمين',steps:['تقرأ المعلمة صفات ثمرة دون ذكر اسمها.','تخمّن الطالبات الجواب وترفع بطاقته.','تؤلّف كل طالبة لغزاً عن ثمرة من بلادها.']}}
-  ]}
-];
-const WEEKS = [
- ['الأسبوع الأول','التهيئة والاستعداد · مراجعة مكتسباتي السابقة'],
- ['الأسبوع الثاني','الوحدة الأولى / أقاربي: مدخل الوحدة / نشاطات التهيئة + أنجز مشروعي · نص الاستماع · النشيد: جدتي (حفظ) · تابع النشيد: جدتي · إملاء'],
- ['الأسبوع الثالث','دروس الوحدة / الدرس الأول: صلة الرحم'],
- ['الأسبوع الرابع','الدرس الثاني: عذراً يا جدي'],
- ['الأسبوع الخامس','التقويم التجميعي · إجازة اليوم الوطني من الأربعاء إلى السبت'],
- ['الأسبوع السادس','الوحدة الثانية / أصدقائي وجيراني: مدخل الوحدة / نشاطات التهيئة + أنجز مشروعي · نص الاستماع · النشيد: الجار والصديق (حفظ) · تابع النشيد: الجار والصديق · إملاء'],
- ['الأسبوع السابع','دروس الوحدة / الدرس الأول: الصديقان'],
- ['الأسبوع الثامن','الدرس الثاني: الجار الصغير'],
- ['الأسبوع التاسع','التقويم التجميعي'],
- ['الأسبوع العاشر','الوحدة الثالثة / وطني السعودية: مدخل الوحدة / نشاطات التهيئة + أنجز مشروعي · نص الاستماع · النشيد: وطني السعودية (حفظ) · تابع النشيد: وطني السعودية · إملاء'],
- ['الأسبوع الحادي عشر','دروس الوحدة / الدرس الأول: مدينتان مقدستان'],
- ['الأسبوع الثاني عشر','الدرس الثاني: علم بلادي'],
- ['الأسبوع الثالث عشر','التقويم التجميعي · إجازة الخريف'],
- ['الأسبوع الرابع عشر','الوحدة الرابعة / محاصيل من بلادي: مدخل الوحدة / نشاطات التهيئة + أنجز مشروعي · نص الاستماع · النشيد: هيا نزرع (حفظ) · تابع النشيد: هيا نزرع · إملاء'],
- ['الأسبوع الخامس عشر','دروس الوحدة / الدرس الأول: رحلة حبة قمح'],
- ['الأسبوع السادس عشر','الدرس الثاني: من أنا؟'],
- ['الأسبوع السابع عشر','التقويم التجميعي'],
- ['الأسبوع الثامن عشر','مراجعة عامة'],
- ['الأسبوع التاسع عشر','الاختبارات النهائية للفصل الدراسي الأول · نهاية دوام الفصل الدراسي الأول']
-];
-const ALL_LESSONS = UNITS.flatMap(u=>u.lessons.map(l=>({...l,unit:u})));
-/* محتوى الأقسام العامة مأخوذ من دروس المنهج */
-const VIDEOS = ALL_LESSONS.map(l=>({id:l.id,t:l.t,em:l.em,unit:l.unit.t,story:l.story,scenes:l.scenes.map(s=>({e:s[0],x:s[1]}))}));
-const SHEETS = UNITS.map(u=>({t:`ورقة عمل: ${u.t}`,em:u.em,items:u.lessons.flatMap(l=>l.sheet)}));
-const QUIZ = ALL_LESSONS.flatMap(l=>l.quiz);
-const WORDS = [['جدّة','👵'],['جار','🏡'],['صديقة','👭'],['علم','🚩'],['مكّة','🕋'],['قمح','🌾'],['خبز','🍞'],['تمر','🌴'],['هدية','🎁'],['نظّارة','👓']];
-
-const LETTERS = [
- ['أ','أرنب','🐰','الأرنب أمير يحب الجزر، يقفز فرحاً ويقول: أنا أحب الأصدقاء!'],
- ['ب','بطة','🦆','بطوطة البطة تسبح في البحيرة، وتقول: بَ بُ بِ هيا نلعب!'],
- ['ت','تفاحة','🍎','تفاحة حمراء على الشجرة، قطفتها تالا وتقاسمتها مع أختها.'],
- ['ث','ثعلب','🦊','الثعلب ثامر ذكي، لكنه تعلّم أن الصدق أجمل من الحيلة.'],
- ['ج','جمل','🐫','الجمل جسور يمشي في الصحراء صابراً، يحمل الماء للجميع.'],
- ['ح','حصان','🐴','الحصان حمدان يركض في الحقل، ويحب الحَبَق الأخضر.'],
- ['خ','خروف','🐑','الخروف خالد صوفه أبيض ناعم، يقول: ماااء أنا صديقكم.'],
- ['د','دب','🐻','الدب دبدوب يحب العسل، ويشارك أصدقاءه دائماً.'],
- ['ذ','ذرة','🌽','الذرة الذهبية نبتت في الحقل، فصنعت منها ذكرى فشاراً لذيذاً.'],
- ['ر','ريشة','🪶','رنا وجدت ريشة ملوّنة، فرسمت بها لوحة جميلة.'],
- ['ز','زرافة','🦒','الزرافة زينة رقبتها طويلة، ترى الأشجار العالية بسهولة.'],
- ['س','سمكة','🐟','السمكة سلمى تسبح في البحر، وتحب صديقها السلحفاة.'],
- ['ش','شمس','☀️','الشمس المشرقة تقول صباح الخير، فتضحك الشجرة والأزهار.'],
- ['ص','صقر','🦅','الصقر صقّار يطير عالياً، وعينه قوية ترى البعيد.'],
- ['ض','ضفدع','🐸','الضفدع ضاحي يقفز في البركة ويغني: نق نق!'],
- ['ط','طائرة','✈️','الطائرة تطير فوق الغيوم، وطلال يلوّح لها بيده.'],
- ['ظ','ظرف','✉️','وصل ظرف جميل لظبية، فيه رسالة شكر من معلمتها.'],
- ['ع','عصفور','🐦','العصفور عادل يغرد على الغصن: عِ عِ صباح السعادة!'],
- ['غ','غيمة','☁️','الغيمة غادة أمطرت ماءً، فشربت الأزهار وفرحت.'],
- ['ف','فراشة','🦋','الفراشة فرح ألوانها زاهية، تطير من زهرة إلى زهرة.'],
- ['ق','قطة','🐱','القطة قمر تحب اللبن، وتنام قرب النافذة.'],
- ['ك','كتاب','📘','كتاب لغتي صديقي، أقرأ فيه كل يوم قصة جميلة.'],
- ['ل','ليمون','🍋','ليلى صنعت عصير الليمون اللذيذ في يوم حار.'],
- ['م','موز','🍌','القرد ميمون يحب الموز، ويأكله بعد غسل يديه.'],
- ['ن','نحلة','🐝','النحلة نوال تجمع الرحيق، وتصنع العسل الحلو.'],
- ['هـ','هلال','🌙','ظهر الهلال في السماء، ففرحت هند وقالت: هلّ الشهر الجديد!'],
- ['و','وردة','🌹','وعد سقت الوردة كل صباح، فكبرت وصارت جميلة.'],
- ['ي','يمامة','🕊️','اليمامة يارا تطير بسلام، وتبني عشها على الشجرة.']
-];
-
-/* ============ الدخول ============ */
-let role='طالبة';
-document.querySelectorAll('.role').forEach(b=>b.onclick=()=>{
-  document.querySelectorAll('.role').forEach(x=>x.classList.remove('on'));b.classList.add('on');role=b.dataset.role;
-  $('#lPass').style.display=role==='معلمة'?'block':'none';
-  $('#lName').placeholder = role==='زائرة'?'اسم الزائرة':'اكتبي اسمكِ هنا';
-});
-$('#lGo').onclick=doLogin;
-$('#lName').addEventListener('keydown',e=>e.key==='Enter'&&doLogin());
-$('#lPass').addEventListener('keydown',e=>e.key==='Enter'&&doLogin());
-function doLogin(){
-  const n=$('#lName').value.trim();
-  if(!n){$('#lErr').textContent='اكتبي اسمكِ أولاً 🌸';return}
-  if(role==='معلمة' && $('#lPass').value!==CONFIG.TEACHER_CODE){$('#lErr').textContent='رمز المعلمة غير صحيح';return}
-  user={name:n,role};DB.set('user',user);
-  const visits=DB.get('visits',{طالبة:0,معلمة:0,زائرة:0});visits[role]=(visits[role]||0)+1;DB.set('visits',visits);
-  send('دخول',{detail:'دخول '+role});
-  enter(true);
-}
-function enter(anim){
-  $('#navTeacher').style.display=user.role==='معلمة'?'grid':'none';
-  $('#av').innerHTML=ic(user.role==='معلمة'?'teach':user.role==='زائرة'?'visitor':'student',28);
-  addPoints(0);
-  $('#login').classList.add('hide');
-  if(anim){
-    $('#wText').textContent=`أهلاً بكِ يا ${user.name} في لغتي السعادة.. هيا نتعلّم ونلعب! ✨`;
-    $('#welcome').classList.add('show');
-    setTimeout(()=>{$('#welcome').classList.remove('show');$('#app').classList.add('show');render('home')},1900);
-  } else {$('#app').classList.add('show');render('home')}
-  loadRemote();
-}
-$('#logout').onclick=()=>{user=null;DB.set('user',null);$('#app').classList.remove('show');$('#login').classList.remove('hide');$('#lName').value='';$('#lPass').value='';$('#lErr').textContent=''};
-if(user) enter(false);
-
-/* ============ التنقل والبحث ============ */
-let cur='home';
-document.querySelectorAll('.nav[data-v]').forEach(b=>b.onclick=()=>render(b.dataset.v));
-$('#sBtn').onclick=()=>{const p=$('#search');p.classList.toggle('open');if(p.classList.contains('open'))$('#sIn').focus()};
-$('#sIn').addEventListener('input',e=>{
-  const q=e.target.value.trim(); if(cur!=='home') render('home');
-  document.querySelectorAll('.sec').forEach(s=>s.style.display=!q||s.textContent.includes(q)?'':'none');
-});
-const back=()=>`<span class="back" onclick="render('home')">→ الرئيسية</span>`;
-
-function render(v){
-  cur=v;stopAudio();clearInterval(window._pl);clearTimeout(window._gt);
-  document.querySelectorAll('.nav[data-v]').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
-  $('#main').scrollTop=0;
-  ({home,units,videos,sheets,exercises,quiz,letters,game,cert,teacher})[v]();
-}
-
-/* ============ الرئيسية ============ */
-function home(){
-  const visits=DB.get('visits',{طالبة:0,معلمة:0,زائرة:0});
-  const r=remote||{};
-  const st={stu:r.students??visits['طالبة'],vis:r.visitors??visits['زائرة'],tch:r.teachers??visits['معلمة'],
-    games:r.games??DB.get('games',0),certs:r.certs??DB.get('certs',0),comments:r.comments??DB.get('comments',[]).length,
-    opinions:r.opinions??DB.get('opinions',[]).length};
-  const total=st.stu+st.vis+st.tch;
-  view.innerHTML=`
-  <div class="card hero">
-    <div style="display:flex;justify-content:center">${ic("logo",72)}</div>
-    <h1 class="title-font"><span class="c1">لغتي</span> <span class="c2">السعادة</span></h1>
-    <p>منصة لغتي للصف الثاني ابتدائي — الفصل الدراسي الأول: أقاربي · أصدقائي وجيراني · وطني السعودية · محاصيل من بلادي</p>
-    <div class="people">
-      <div class="person"><div class="ic">${ic("teach",32)}</div><div><small>معلمة المادة</small><b>أ. ${CONFIG.TEACHER}</b></div></div>
-      <div class="person"><div class="ic">${ic("school",32)}</div><div><small>مديرة المدرسة</small><b>أ. ${CONFIG.PRINCIPAL}</b></div></div>
-    </div>
-  </div>
-
-  <div class="card-head"><span class="badge">${ic("stats",22)}</span>إحصائيات المنصة ${remote?'<span class="mini">· مباشرة من Google</span>':''}</div>
-  <div class="card">
-    <span class="chev">⌄</span>
-    <div class="desc">عدّاد تلقائي يُحصي الزيارات والأنشطة لحظة بلحظة.</div>
-    <div class="tags"><span><i>🎒</i>طالبات</span><span><i>🌸</i>زائرات</span><span><i>🎮</i>ألعاب</span><span><i>🏆</i>شهادات</span></div>
-    <div class="row4">
-      <div class="stat"><small>الطالبات</small><b class="cu" data-n="${st.stu}">0</b></div>
-      <div class="stat"><small>الزائرات</small><b class="cu" data-n="${st.vis}">0</b></div>
-      <div class="stat"><small>جولات اللعب</small><b class="cu" data-n="${st.games}">0</b></div>
-      <div class="stat"><small>إجمالي الدخول</small><b class="cu" data-n="${total}">0</b></div>
-    </div>
-  </div>
-
-  <div class="card-head"><span class="badge">${ic("sparkle",22)}</span>أقسام المنصة</div>
-  <div class="card">
-    <div class="grid-sec">
-      ${[['units','📚','منهجي','٤ وحدات · ٨ دروس'],['videos','🎬','قصص الدروس','١٠ ثوانٍ لكل قصة'],['sheets','📝','أوراق عمل','تفاعلية وقابلة للطباعة'],
-         ['exercises','🧩','تمارين تفاعلية','ركّبي وطابقي'],['quiz','❓','أسئلة','من دروس المنهج'],
-         ['letters','🔤','قصص الحروف','٢٨ قصة مسموعة'],['game','🎮','لعبة ثلاثية الأبعاد','٣ مستويات'],
-         ['cert','🏆','شهادتي','اطبعيها وافتخري']]
-        .map(s=>`<div class="sec" onclick="render('${s[0]}')"><span class="em">${ic(s[0],50)}</span><b>${s[2]}</b><small>${s[3]}</small></div>`).join('')}
-      ${user.role==='معلمة'?`<div class="sec" onclick="render('teacher')"><span class="em">${ic("teacher",50)}</span><b>لوحة المعلمة</b><small>البيانات والربط</small></div>`:''}
-    </div>
-  </div>
-
-  <div class="card-head"><span class="badge">${ic("impact",22)}</span>قياس الأثر</div>
-  <div class="card" id="impact">${impactHTML(st)}</div>
-
-  <div class="card-head"><span class="badge">${ic("heart",22)}</span>آراء أولياء الأمور</div>
-  <div class="card">
-    <div id="opList"></div>
-    <div class="rate" id="rate">${[5,4,3,2,1].map(i=>`<span data-r="${i}">⭐</span>`).join('')}</div>
-    <input class="field" id="opName" placeholder="ولي/ولية أمر الطالبة">
-    <textarea class="field" id="opText" placeholder="رأيكِ في المنصة وأثرها على ابنتكِ"></textarea>
-    <button class="btn y" onclick="addOpinion()">إرسال الرأي 💛</button>
-  </div>
-
-  <div class="card-head"><span class="badge">${ic("chat",22)}</span>التعليقات</div>
-  <div class="card">
-    <div id="cmList"></div>
-    <textarea class="field" id="cmText" placeholder="اكتبي تعليقكِ..."></textarea>
-    <button class="btn p" onclick="addComment()">نشر التعليق</button>
-  </div>
-
-  <div class="card-head"><span class="badge">${ic("link",22)}</span>الربط مع Google (نموذج الكود)</div>
-  <div class="card">
-    <div class="desc">كل دخول ورأي وتعليق ونتيجة وشهادة يُحفظ في جدول Google ويصل إلى بريد المعلمة.</div>
-    <div class="code"><button class="copy" onclick="navigator.clipboard.writeText(CONFIG.TEACHER_EMAIL);toast('تم النسخ')">⧉</button><span class="n">1</span><span class="k">fetch</span>(GOOGLE_SCRIPT_URL, {
-<span class="n">2</span>  method: <span class="s">"POST"</span>,
-<span class="n">3</span>  body: JSON.<span class="k">stringify</span>({
-<span class="n">4</span>    type: <span class="s">"دخول طالبة"</span>,
-<span class="n">5</span>    email: <span class="s">"${CONFIG.TEACHER_EMAIL}"</span>
-<span class="n">6</span>  })
-<span class="n">7</span>}) <span class="c">// ← يظهر في البريد والتطبيق</span></div>
-  </div>
-  <p class="mini" style="text-align:center;margin-top:18px;text-shadow:0 1px 4px rgba(0,0,0,.3)">لغتي السعادة © ${new Date().getFullYear()} · إعداد المعلمة ${CONFIG.TEACHER}</p>`;
-  document.querySelectorAll('.cu').forEach(e=>countUp(e,+e.dataset.n));
-  setTimeout(()=>document.querySelectorAll('#impact .bar i').forEach(i=>i.style.width=i.dataset.w),100);
-  drawOpinions();drawComments();
-  let rv=5;const paint=()=>document.querySelectorAll('#rate span').forEach(s=>s.classList.toggle('on',+s.dataset.r<=rv));paint();
-  document.querySelectorAll('#rate span').forEach(s=>s.onclick=()=>{rv=+s.dataset.r;paint();window._rv=rv});window._rv=5;
-}
-function impactHTML(st){
-  const qz=DB.get('quizScores',[]);const avg=qz.length?Math.round(qz.reduce((a,b)=>a+b,0)/qz.length*10):0;
-  const ops=DB.get('opinions',[]);const sat=ops.length?Math.round(ops.reduce((a,b)=>a+b.r,0)/ops.length*20):100;
-  const lv=DB.get('level',1);
-  const rows=[['🎒 تفاعل الطالبات',Math.min(100,st.stu*5)],['❓ متوسط الأسئلة',avg],['🎮 تقدم اللعبة',Math.round(lv/3*100)],['💛 رضا الأسر',sat],['🏆 الشهادات',Math.min(100,st.certs*10)]];
-  return rows.map(r=>`<div class="impact-row"><span>${r[0]}</span><div class="bar" style="flex:1"><i data-w="${r[1]}%" style="width:0"></i></div><b>${r[1]}%</b></div>`).join('')
-   +`<p class="mini" style="margin-top:6px">يُقاس الأثر من دخول الطالبات والزائرات، ونتائج الأسئلة، وتقدم اللعبة، وتقييم أولياء الأمور.</p>`;
-}
-function drawOpinions(){
-  const def=[{n:'أم ريما',t:'ابنتي صارت تقرأ القصص بنفسها وتنتظر لعبة الحروف كل يوم!',r:5},{n:'أم جود',t:'منصة مرتبة وممتعة، شكراً للمعلمة فاطمة.',r:5}];
-  const ops=[...DB.get('opinions',[]),...def];
-  $('#opList').innerHTML=ops.slice(0,6).map(o=>`<div class="op"><span class="stars">${'★'.repeat(o.r)}</span><p>${esc(o.t)}</p><small>— ${esc(o.n)}</small></div>`).join('');
-}
-function addOpinion(){
-  const n=$('#opName').value.trim()||'ولي أمر',t=$('#opText').value.trim();if(!t)return toast('اكتبي رأيكِ أولاً');
-  const ops=DB.get('opinions',[]);ops.unshift({n,t,r:window._rv});DB.set('opinions',ops);
-  send('رأي ولي أمر',{detail:t,rating:window._rv,parent:n});$('#opText').value='';drawOpinions();toast('شكراً لرأيكِ 💛');confetti(30);
-}
-function drawComments(){
-  const cm=DB.get('comments',[]);
-  $('#cmList').innerHTML=cm.length?cm.slice(0,8).map(c=>`<div class="op"><p>${esc(c.t)}</p><small>${esc(c.n)} · ${c.d}</small></div>`).join(''):'<p class="mini" style="margin-bottom:10px">كوني أول من يعلّق 🌸</p>';
-}
-function addComment(){
-  const t=$('#cmText').value.trim();if(!t)return;const cm=DB.get('comments',[]);
-  cm.unshift({n:user.name,t,d:new Date().toLocaleDateString('ar-SA')});DB.set('comments',cm);
-  send('تعليق',{detail:t});$('#cmText').value='';drawComments();toast('تم نشر التعليق ✅');
-}
-function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
-
-/* ============ الصوت: ElevenLabs أولاً ثم صوت المتصفح ============ */
-let curAudio=null;
-function stopAudio(){try{curAudio&&curAudio.pause()}catch(e){}curAudio=null;try{speechSynthesis.cancel()}catch(e){}}
-function playStory(id,text){
-  stopAudio();
-  const a=new Audio(`audio/${id}.mp3`);curAudio=a;let fell=false;
-  const fb=()=>{if(fell||curAudio!==a)return;fell=true;say(text)};
-  a.onerror=fb;a.play().catch(fb);
-}
-
-/* ============ منهجي: الوحدات ============ */
-function units(){
-  view.innerHTML=back()+`
-  <div class="card-head"><span class="badge">${ic("letters",22)}</span>لغتي · الصف الثاني · الفصل الدراسي الأول</div>
-  <div class="card"><div class="desc">أربع وحدات، في كل وحدة: مدخل الوحدة ونشاطات التهيئة وأنجز مشروعي، نص الاستماع، النشيد، الإملاء، درسان، ثم التقويم التجميعي.</div>
-   <div class="units-grid">${UNITS.map((u,i)=>`<div class="unit" onclick="unitPage(${i})" style="--c:${u.color}">
-     <div class="u-em">${u.em}</div><small>الوحدة ${'١٢٣٤'[i]}</small><b>${u.t}</b>
-     <span class="mini">درسان · نشيد: ${u.anthem}</span></div>`).join('')}</div>
-   <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn y" onclick="weeks()">📅 توزيع المنهج على الأسابيع</button><button class="btn ghost" onclick="say(UNITS.map(u=>u.t).join('، '))">🔊 استمعي</button></div>
-  </div>`;
-}
-function weeks(){
-  view.innerHTML=`<span class="back" onclick="units()">→ الوحدات</span>
-  <div class="card-head"><span class="badge">📅</span>توزيع المحتوى الدراسي على أسابيع الفصل الدراسي الأول</div>
-  <div class="card printable"><div class="mini" style="margin-bottom:8px">المادة: لغتي · الصف: الثاني ابتدائي · المرحلة: الابتدائية</div>
-  ${WEEKS.map((w,i)=>`<div class="wk"><span class="wn">${i+1}</span><div><b>${w[0]}</b><p>${w[1]}</p></div></div>`).join('')}
-  <button class="btn ghost" style="margin-top:10px" onclick="window.print()">🖨️ طباعة</button></div>`;
-}
-function unitPage(i){
-  const u=UNITS[i];$('#main').scrollTop=0;
-  view.innerHTML=`<span class="back" onclick="units()">→ الوحدات</span>
-  <div class="card hero" style="padding:20px"><div style="font-size:54px">${u.em}</div><small class="mini">الوحدة ${'١٢٣٤'[i]}</small><h1 class="title-font" style="font-size:32px">${u.t}</h1><p>${u.intro}</p>
-   <button class="btn ghost" style="margin-top:8px" onclick="say('${u.t}. ${u.intro}')">🔊 التعليق الصوتي</button></div>
-
-  <div class="card-head"><span class="badge">🎈</span>مدخل الوحدة / نشاطات التهيئة</div>
-  <div class="card">${u.warm.map(w=>`<div class="op">💭 ${w}</div>`).join('')}</div>
-
-  <div class="card-head"><span class="badge">🛠️</span>أنجز مشروعي</div>
-  <div class="card"><div class="desc">${u.project}</div><label class="chip" style="display:inline-block"><input type="checkbox" ${DB.get('proj'+u.id,false)?'checked':''} onchange="DB.set('proj${u.id}',this.checked);if(this.checked){addPoints(10);confetti(40);send('مشروع',{detail:'${u.t}'})}"> أنجزتُ مشروعي ✅</label></div>
-
-  <div class="card-head"><span class="badge">👂</span>نص الاستماع</div>
-  <div class="card"><button class="btn y" onclick="say('${u.listening}')">🔊 استمعي للنص</button>
-   <details style="margin-top:10px"><summary class="mini" style="cursor:pointer">عرض النص للمعلمة</summary><p class="desc" style="margin-top:6px">${u.listening}</p></details>
-   <div id="lq"></div></div>
-
-  <div class="card-head"><span class="badge">🎵</span>النشيد: ${u.anthem} (حفظ)</div>
-  <div class="card"><div class="desc">افتحي كتابكِ على نشيد «${u.anthem}»، ردّديه مع معلمتكِ ثم احفظيه.</div>
-   <div class="chips">${['استمعتُ للنشيد','ردّدتُه مع المعلمة','حفظتُه'].map((s,k)=>`<label class="chip"><input type="checkbox" ${DB.get('an'+u.id+k,false)?'checked':''} onchange="DB.set('an${u.id}${k}',this.checked);this.checked&&(addPoints(3),beep(true))"> ${s}</label>`).join('')}</div></div>
-
-  <div class="card-head"><span class="badge">✍️</span>إملاء الوحدة</div>
-  <div class="card" id="udict"></div>
-
-  <div class="card-head"><span class="badge">${ic("sheets",22)}</span>دروس الوحدة</div>
-  <div class="card"><div class="lessons">${u.lessons.map((l,k)=>`<div class="lesson" onclick="lessonPage('${l.id}')"><span>${l.em}</span><div><small>الدرس ${k?'الثاني':'الأول'}</small><b>${l.t}</b></div><span class="chev">‹</span></div>`).join('')}</div></div>
-
-  <div class="card-head"><span class="badge">${ic("cert",22)}</span>التقويم التجميعي</div>
-  <div class="card"><div class="desc">اختبار شامل لدرسي الوحدة (${u.lessons.map(l=>l.t).join(' و ')}).</div><button class="btn p" onclick="runQuiz(${JSON.stringify(u.lessons.flatMap(l=>l.quiz)).replace(/"/g,'&quot;')},'التقويم التجميعي: ${u.t}',()=>unitPage(${i}))">ابدئي التقويم</button></div>`;
-  mcq($('#lq'),u.listenQ);dictation($('#udict'),u.dictation,'إملاء '+u.t);
-}
-
-/* ============ صفحة الدرس بتبويبات ============ */
-const TABS=[['ready','استعد'],['explain','الشرح'],['story','القصة'],['dict','الإملاء'],['sheet','أوراق العمل'],['check','تأكد'],['test','الاختبار'],['fish','لعبة الصيد'],['strategy','الاستراتيجية']];
-function lessonPage(id,tab='ready'){
-  const l=ALL_LESSONS.find(x=>x.id===id),ui=UNITS.indexOf(l.unit);stopAudio();clearInterval(window._pl);clearInterval(window._fi);
-  view.innerHTML=`<span class="back" onclick="unitPage(${ui})">→ ${l.unit.t}</span>
-  <div class="card-head"><span class="badge">${l.em}</span>${l.unit.t} · ${l.t}</div>
-  <div class="tabs">${TABS.map(t=>`<button class="tab ${t[0]===tab?'on':''}" onclick="lessonPage('${id}','${t[0]}')">${t[1]}</button>`).join('')}</div>
-  <div class="card" id="tb"></div>`;
-  const tb=$('#tb');
-  if(tab==='ready'){tb.innerHTML=`<div style="font-size:60px;text-align:center">${l.em}</div><div class="q" style="text-align:center">${l.ready}</div><div style="text-align:center"><button class="btn y" onclick="say('${l.ready}')">🔊 استمعي</button></div>`;say(l.ready)}
-  if(tab==='explain'){tb.innerHTML=`<div class="desc"><b>مفردات الدرس</b></div>${l.vocab.map(v=>`<div class="ws-item"><span class="w">${v[0]}</span><span>${v[1]}</span><button class="chip" onclick="say('${v[0]}. ${v[1]}')">🔊</button></div>`).join('')}<div class="op" style="margin-top:12px">💡 <b>القيمة:</b> ${l.value}</div>`}
-  if(tab==='story'){storyPlayer(tb,VIDEOS.find(v=>v.id===id))}
-  if(tab==='dict'){dictation(tb,l.dict,'إملاء '+l.t)}
-  if(tab==='sheet'){sheetBox(tb,l.sheet,'ورقة عمل '+l.t)}
-  if(tab==='check'){tb.innerHTML=`<div class="desc">ضعي ✔️ أمام العبارة الصحيحة و ✖️ أمام الخطأ:</div>`+l.check.map((c,k)=>`<div class="ws-item"><span>${c[0]}</span><div class="chips"><button class="chip" onclick="tf(this,${c[1]===true})">✔️</button><button class="chip" onclick="tf(this,${c[1]===false})">✖️</button></div></div>`).join('')}
-  if(tab==='test'){runQuiz(l.quiz,'اختبار '+l.t,()=>lessonPage(id,'test'),tb)}
-  if(tab==='fish'){fishGame(tb,l)}
-  if(tab==='strategy'){tb.innerHTML=`<div class="op" style="background:linear-gradient(90deg,rgba(255,159,192,.35),rgba(199,179,255,.35))"><small class="mini">استراتيجية الدرس</small><div class="q" style="margin:4px 0 0">${l.strategy.n}</div></div>${l.strategy.steps.map((s,k)=>`<div class="ws-item"><span class="wn">${k+1}</span><span style="flex:1">${s}</span></div>`).join('')}`}
-}
-function tf(b,ok){const row=b.parentElement;if(row.dataset.d)return;if(ok){b.classList.add('ok');row.dataset.d=1;beep(true);addPoints(2)}else{b.classList.add('no');beep(false);setTimeout(()=>b.classList.remove('no'),500)}}
-function mcq(el,qs){el.innerHTML=qs.map((q,i)=>`<div style="margin-top:12px"><div class="desc" style="margin-bottom:6px"><b>${q.q}</b></div><div class="chips">${shuffle(q.o.map((o,k)=>[o,k===q.a])).map(o=>`<button class="chip" onclick="tf(this,${o[1]})">${o[0]}</button>`).join('')}</div></div>`).join('')}
-function dictation(el,words,label){
-  let i=0,ok=0;
-  const draw=()=>{if(i>=words.length){el.innerHTML=`<div class="q" style="text-align:center">أحسنتِ! ${ok} من ${words.length} 🌟</div>`;send('إملاء',{detail:label,score:`${ok}/${words.length}`});ok===words.length&&confetti(50);return}
-    el.innerHTML=`<div class="desc">استمعي للكلمة ثم اكتبيها (${i+1}/${words.length})</div><button class="btn y" id="dl">🔊 استمعي</button>
-    <input class="field" id="dIn" style="margin-top:10px;font-size:22px;text-align:center" autocomplete="off"><button class="btn" id="dOk">تحقّقي</button> <span id="dR"></span>`;
-    $('#dl').onclick=()=>say(words[i]);say(words[i]);
-    const strip=s=>s.replace(/[ً-ْـ]/g,'').trim();
-    $('#dOk').onclick=()=>{const g=strip($('#dIn').value)===strip(words[i]);$('#dR').textContent=g?'✅ صحيحة':'❌ الصحيح: '+words[i];beep(g);if(g){ok++;addPoints(2)}setTimeout(()=>{i++;draw()},1300)};
-  };draw();
-}
-function sheetBox(el,items,label){
-  let n=0;el.innerHTML=`<div class="desc">اختاري الإجابة الصحيحة:</div>`+items.map(it=>`<div class="ws-item"><span class="w" style="font-size:17px">${it[0]}</span><div class="chips">${shuffle([[it[1],1],[it[2],0]]).map(o=>`<button class="chip" data-ok="${o[1]}">${o[0]}</button>`).join('')}</div></div>`).join('')
-   +`<div style="margin-top:10px;display:flex;gap:8px"><span class="pill" id="shS">✅ 0 / ${items.length}</span><button class="btn ghost" onclick="window.print()">🖨️ طباعة</button></div>`;
-  el.classList.add('printable');
-  el.querySelectorAll('.chip[data-ok]').forEach(b=>b.onclick=()=>{const row=b.parentElement;if(row.dataset.d)return;
-    if(b.dataset.ok==='1'){b.classList.add('ok');row.dataset.d=1;n++;beep(true);addPoints(2);$('#shS').textContent=`✅ ${n} / ${items.length}`;if(n===items.length){confetti();toast(rnd(praise));send('ورقة عمل',{detail:label,score:'كاملة'})}}
-    else{b.classList.add('no');beep(false);setTimeout(()=>b.classList.remove('no'),500)}});
-}
-function runQuiz(Q0,label,again,el){
-  const host=el||view;let i=0,score=0;const Q=Q0.map(q=>({q:q.q,o:shuffle(q.o.map((t,k)=>[t,k===q.a]))}));
-  const draw=()=>{
-    if(i>=Q.length){const qs=DB.get('quizScores',[]);qs.push(Math.round(score/Q.length*10));DB.set('quizScores',qs);addPoints(score*2);send('نتيجة الأسئلة',{detail:label,score:`${score}/${Q.length}`});if(score/Q.length>=.7)confetti(90);
-      host.innerHTML=(el?'':back())+`<div class="${el?'':'card '}hero"><div style="font-size:56px">${score===Q.length?'🏆':score/Q.length>=.5?'🌟':'💪'}</div><h1 class="title-font" style="font-size:28px">${score} من ${Q.length}</h1><p>${label}</p><div style="margin-top:12px;display:flex;gap:8px;justify-content:center"><button class="btn y" id="qa">إعادة ↻</button><button class="btn" onclick="render('cert')">شهادتي 🏆</button></div></div>`;
-      host.querySelector('#qa').onclick=again;return}
-    const q=Q[i];
-    host.innerHTML=(el?'':back()+`<div class="card-head"><span class="badge">${ic("quiz",22)}</span>${label}</div><div class="card">`)+`<div class="bar" style="margin-bottom:14px"><i style="width:${i/Q.length*100}%"></i></div><div class="mini">السؤال ${i+1} من ${Q.length}</div>
-      <div class="q">${q.q} <button class="chip" style="padding:3px 9px" id="qs">🔊</button></div><div class="opts">${q.o.map((o,k)=>`<button class="opt" data-k="${k}">${o[0]}</button>`).join('')}</div>`+(el?'':'</div>');
-    host.querySelector('#qs').onclick=()=>say(q.q);
-    host.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const ok=q.o[+b.dataset.k][1];host.querySelectorAll('.opt').forEach(x=>x.onclick=null);
-      if(ok){b.classList.add('ok');score++;beep(true);toast(rnd(praise))}else{b.classList.add('no');beep(false);host.querySelectorAll('.opt').forEach((x,k)=>q.o[k][1]&&x.classList.add('ok'))}
-      setTimeout(()=>{i++;draw()},1100)});
-  };draw();
-}
-function storyPlayer(el,v){
-  el.innerHTML=`<div class="player">${v.scenes.map((s,j)=>`<div class="scene ${j?'':'on'}"><div class="big">${s.e}</div><p>${s.x}</p></div>`).join('')}</div>
-  <div class="pctl"><button class="btn" id="pp">▶</button><div class="bar"><i id="pb" style="width:0;transition:width .2s linear"></i></div><span class="mini" id="pt">0:10</span></div>
-  <p class="desc" style="margin-top:10px">${v.story}</p>`;
-  const sc=[...el.querySelectorAll('.scene')];let t=0,on=false;
-  const q=x=>el.querySelector(x);
-  const tick=()=>{if(!document.body.contains(el)){clearInterval(window._pl);stopAudio();return}t+=.2;const p=Math.min(t/10,1);q('#pb').style.width=p*100+'%';q('#pt').textContent='0:'+String(Math.max(0,Math.ceil(10-t))).padStart(2,'0');
-    const k=Math.min(sc.length-1,Math.floor(p*sc.length));sc.forEach((s,j)=>s.classList.toggle('on',j===k));
-    if(t>=10){clearInterval(window._pl);on=false;q('#pp').textContent='↻';addPoints(5);send('مشاهدة قصة',{detail:v.t});toast('انتهت القصة! +5 نقاط ⭐')}};
-  q('#pp').onclick=()=>{if(on)return;if(t>=10)t=0;on=true;q('#pp').textContent='⏸';playStory(v.id,v.story);clearInterval(window._pl);window._pl=setInterval(tick,200)};
-}
-function fishGame(el,l){
-  let score=0,round=0;const W=l.fish.words;
-  el.innerHTML=`<div class="hud"><span class="pill">🎣 اصطادي السمكة التي فيها كلمة: <b style="color:var(--yellow);margin-right:4px">${l.fish.target}</b></span><span class="pill">⭐ <b id="fS">0</b></span><span class="pill">🎯 <b id="fR">1</b>/5</span></div><div class="sea" id="sea"><div class="boat">🚣</div></div>`;
-  const sea=$('#sea'),cols=['#ff9fc0','#8fd6ff','#ffd84d','#a8e07a','#c7b3ff','#ffb98a'];
-  const spawn=()=>{
-    sea.querySelectorAll('.fish').forEach(f=>f.remove());
-    const words=shuffle([l.fish.target,...shuffle(W.filter(w=>w!==l.fish.target)).slice(0,4)]);
-    words.forEach((w,k)=>{const f=document.createElement('div');f.className='fish';f.style.top=(70+k*44)+'px';f.style.animationDuration=(6+Math.random()*4)+'s';f.style.animationDelay=(-Math.random()*6)+'s';
-      f.innerHTML=`<span class="fbody" style="background:${cols[k%6]}">${w}</span><span class="ftail" style="border-right-color:${cols[k%6]}"></span>`;
-      f.onclick=()=>{if(w===l.fish.target){score+=10;round++;addPoints(10);beep(true);f.classList.add('burst');$('#fS').textContent=score;toast(rnd(praise));
-          if(round>=5){confetti(90);send('لعبة الصيد',{detail:l.t,score});setTimeout(()=>{el.innerHTML=`<div class="hero"><div style="font-size:60px">🐟🏆</div><h1 class="title-font" style="font-size:28px">اصطدتِ ${round} سمكات!</h1><p>جمعتِ ${score} نقطة</p><button class="btn y" style="margin-top:10px" onclick="lessonPage('${l.id}','fish')">العبي مرة أخرى</button></div>`},700)}
-          else{$('#fR').textContent=round+1;setTimeout(spawn,600)}}
-        else{beep(false);f.animate([{transform:'scale(1.2)'},{transform:'scale(1)'}],{duration:300})}};
-      sea.appendChild(f)});
-  };spawn();say('اصطادي السمكة التي فيها كلمة '+l.fish.target);
-}
-
-/* ============ قصص الدروس (10 ثوانٍ) ============ */
-function videos(){
-  view.innerHTML=back()+`<div class="card-head"><span class="badge">${ic("videos",22)}</span>قصص الدروس · 10 ثوانٍ لكل قصة</div>`+VIDEOS.map((v,i)=>`
-    <div class="card"><div class="tags"><span><i>${v.em}</i>${v.unit}</span><span><i>⏱️</i>10 ثوانٍ</span><span><i>🔊</i>بصوت مسموع</span></div>
-      <div class="desc"><b>${v.t}</b></div><div id="sp${i}"><button class="btn y" onclick="openStory(${i})">شاهدي القصة ▶</button></div></div>`).join('');
-}
-function openStory(i){document.querySelectorAll('[id^=sp]').forEach((e,k)=>{if(k!==i&&e.querySelector('.player')){e.innerHTML=`<button class="btn y" onclick="openStory(${k})">شاهدي القصة ▶</button>`}});clearInterval(window._pl);stopAudio();const el=document.getElementById('sp'+i);storyPlayer(el,VIDEOS[i]);el.querySelector('#pp').click()}
-/* ============ أوراق العمل ============ */
-function sheets(){
-  view.innerHTML=back()+SHEETS.map((s,i)=>`<div class="card-head"><span class="badge">${s.em}</span>${s.t}</div><div class="card" id="ws${i}"></div>`).join('');
-  SHEETS.forEach((s,i)=>sheetBox(document.getElementById('ws'+i),s.items,s.t));
-}
-/* ============ التمارين التفاعلية ============ */
-function exercises(){
-  view.innerHTML=back()+`
-  <div class="card-head"><span class="badge">${ic("exercises",22)}</span>تمرين ١: ركّبي الكلمة</div>
-  <div class="card" style="text-align:center"><div style="font-size:56px" id="bEm"></div>
-    <div class="slots" id="slots"></div><div class="tiles" id="tiles"></div>
-    <div style="margin-top:12px;display:flex;gap:8px;justify-content:center"><button class="btn ghost" onclick="buildNew()">كلمة أخرى ↻</button><button class="btn ghost" onclick="say(window._bw)">🔊 اسمعي</button></div></div>
-  <div class="card-head"><span class="badge">🖼️</span>تمرين ٢: طابقي الصورة بالكلمة</div>
-  <div class="card" style="text-align:center"><div style="font-size:64px" id="mEm"></div><div class="chips" style="justify-content:center;margin-top:10px" id="mOpts"></div></div>
-  <div class="card-head"><span class="badge">📚</span>تمرين ٣: من أي وحدة هذه الكلمة؟</div>
-  <div class="card" style="text-align:center"><div style="font-size:34px;font-weight:800;margin-bottom:10px" id="tW"></div><div class="chips" style="justify-content:center" id="tOpts"></div></div>`;
-  buildNew();matchNew();tanNew();
-}
-function buildNew(){
-  const [w,e]=rnd(WORDS);window._bw=w;$('#bEm').textContent=e;
-  const L=[...w.replace(/[ً-ْ]/g,'')];let pos=0;
-  $('#slots').innerHTML=L.map(()=>`<div class="slot"></div>`).join('');
-  $('#tiles').innerHTML=shuffle(L).map(c=>`<button class="tile">${c}</button>`).join('');
-  document.querySelectorAll('.tile').forEach(t=>t.onclick=()=>{
-    if(t.textContent===L[pos]){const s=document.querySelectorAll('.slot')[pos];s.textContent=L[pos];s.classList.add('f');t.disabled=true;pos++;beep(true);
-      if(pos===L.length){addPoints(5);confetti(40);toast(rnd(praise));say(w);send('تمرين',{detail:'تركيب كلمة: '+w});setTimeout(buildNew,1800)}}
-    else{beep(false);t.animate([{transform:'translateX(5px)'},{transform:'translateX(-5px)'},{transform:'none'}],{duration:300})}
+ICONS.units = '<rect x="10" y="10" width="18" height="18" rx="5" fill="#ff9fc0" '.concat(S, '/><rect x="36" y="10" width="18" height="18" rx="5" fill="#8fd6ff" ').concat(S, '/><rect x="10" y="36" width="18" height="18" rx="5" fill="#a8e07a" ').concat(S, '/><rect x="36" y="36" width="18" height="18" rx="5" fill="#ffd84d" ').concat(S, '/><circle cx="16" cy="16" r="2.5" ').concat(HL, "/>");
+function hydrateIcons(root = document) {
+  root.querySelectorAll("i[data-ic]").forEach((i) => {
+    i.outerHTML = ic(i.dataset.ic, +i.dataset.s || 26);
   });
 }
-function matchNew(){
-  const [w,e]=rnd(WORDS);$('#mEm').textContent=e;
-  const opts=shuffle([w,...shuffle(WORDS.filter(x=>x[0]!==w)).slice(0,3).map(x=>x[0])]);
-  $('#mOpts').innerHTML=opts.map(o=>`<button class="chip" style="font-size:18px">${o}</button>`).join('');
-  document.querySelectorAll('#mOpts .chip').forEach(b=>b.onclick=()=>{if(b.textContent===w){b.classList.add('ok');beep(true);addPoints(3);toast(rnd(praise));setTimeout(matchNew,900)}else{b.classList.add('no');beep(false)}});
+hydrateIcons();
+const DB = {
+  get(k, d) {
+    var _a;
+    try {
+      return (_a = JSON.parse(localStorage.getItem("lughati_" + k))) != null ? _a : d;
+    } catch (e) {
+      return d;
+    }
+  },
+  set(k, v) {
+    try {
+      localStorage.setItem("lughati_" + k, JSON.stringify(v));
+    } catch (e) {
+    }
+  }
+};
+const scriptURL = () => DB.get("scriptUrl", "") || CONFIG.GOOGLE_SCRIPT_URL;
+let user = DB.get("user", null);
+let points = DB.get("points", 0);
+let remote = null;
+function send(type, data = {}) {
+  const rec = __spreadValues({ type, name: (user == null ? void 0 : user.name) || "", role: (user == null ? void 0 : user.role) || "", time: (/* @__PURE__ */ new Date()).toLocaleString("ar-SA") }, data);
+  const log = DB.get("log", []);
+  log.unshift(rec);
+  DB.set("log", log.slice(0, 500));
+  const url = scriptURL();
+  if (url) {
+    fetch(url, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(rec) }).catch(() => {
+    });
+  }
 }
-function tanNew(){
-  const l=rnd(ALL_LESSONS),w=rnd(l.vocab)[0];$('#tW').textContent=w;
-  $('#tOpts').innerHTML=UNITS.map((u,i)=>`<button class="chip" data-i="${i}">${u.em} ${u.t}</button>`).join('');
-  document.querySelectorAll('#tOpts .chip').forEach(b=>b.onclick=()=>{if(UNITS[+b.dataset.i]===l.unit){b.classList.add('ok');beep(true);addPoints(3);setTimeout(tanNew,800)}else{b.classList.add('no');beep(false)}});
+async function loadRemote() {
+  const url = scriptURL();
+  if (!url) return;
+  try {
+    const r = await fetch(url + "?action=stats");
+    remote = await r.json();
+    if (cur === "home") render("home");
+  } catch (e) {
+  }
 }
-/* ============ الأسئلة ============ */
-function quiz(){runQuiz(shuffle(QUIZ).slice(0,10),'أسئلة لغتي · الصف الثاني',()=>render('quiz'))}
-
-/* ============ قصص الحروف ============ */
-const LC=['#ffd84d','#ff8fb8','#7ddc72','#5fc3ff','#b69cff','#ffad5c'];
-function letters(){
-  view.innerHTML=back()+`<div class="card-head"><span class="badge">${ic("letters",22)}</span>قصص الحروف — اضغطي على الحرف</div>
-  <div class="card"><div class="letters">${LETTERS.map((l,i)=>`<button class="lt" style="background:${LC[i%6]}" onclick="showLetter(${i})">${l[0]}</button>`).join('')}</div><div id="story"></div></div>`;
+const $ = (s) => document.querySelector(s);
+const view = $("#view");
+function toast(t) {
+  const e = $("#toast");
+  e.textContent = t;
+  e.classList.add("show");
+  clearTimeout(e._t);
+  e._t = setTimeout(() => e.classList.remove("show"), 2200);
 }
-function showLetter(i){
-  const [l,w,e,s]=LETTERS[i];
-  $('#story').innerHTML=`<div class="story"><div class="big">${e}</div><h3>${l} — ${w}</h3><p>${s}</p>
-  <div style="margin-top:10px;display:flex;gap:8px;justify-content:center"><button class="btn y" onclick="say('حرف ${l}. ${w}. ${s}')">🔊 اسمعي القصة</button>
-  ${i<27?`<button class="btn ghost" style="color:#1d2330;border-color:#ccc" onclick="showLetter(${i+1})">الحرف التالي ←</button>`:''}</div></div>`;
-  say(`حرف ${l}. ${w}. ${s}`);addPoints(1);
-  $('#story').scrollIntoView({behavior:'smooth',block:'nearest'});
+function addPoints(n) {
+  points += n;
+  DB.set("points", points);
+  $("#who").textContent = "⭐ ".concat(points, " نقطة · ").concat((user == null ? void 0 : user.name) || "");
 }
-
-/* ============ اللعبة ثلاثية الأبعاد ============ */
-const LEVELS=[
-  {n:'المستوى ١: اصطادي الحرف',em:'🔤',c:'var(--yellow)',make(){const t=rnd(LETTERS);const o=shuffle([t,...shuffle(LETTERS.filter(x=>x!==t)).slice(0,4)]);return{label:`اصطادي حرف: ${t[0]}`,speak:'اصطادي حرف '+t[0],ans:t[0],opts:o.map(x=>x[0])}}},
-  {n:'المستوى ٢: الصورة والكلمة',em:'🖼️',c:'var(--pink)',make(){const t=rnd(WORDS);const o=shuffle([t,...shuffle(WORDS.filter(x=>x!==t)).slice(0,3)]);return{label:`أين كلمة ${t[1]} ؟`,speak:'أين كلمة '+t[0],ans:t[0],opts:o.map(x=>x[0])}}},
-  {n:'المستوى ٣: كلمة من الدرس',em:'📚',c:'var(--blue)',make(){const l=rnd(ALL_LESSONS);const o=shuffle([l,...shuffle(ALL_LESSONS.filter(x=>x!==l)).slice(0,3)]);return{label:`${l.em} ${l.vocab[0][1]}`,speak:l.vocab[0][1],ans:l.vocab[0][0],opts:o.map(x=>x.vocab[0][0])}}}
+function say(t) {
+  try {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(t);
+    u.lang = "ar-SA";
+    u.rate = 1;
+    u.pitch = 1.15;
+    speechSynthesis.speak(u);
+  } catch (e) {
+  }
+}
+let actx;
+function beep(ok = true) {
+  try {
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    const notes = ok ? [523, 659, 784, 1046] : [300, 220];
+    notes.forEach((f, i) => {
+      const o = actx.createOscillator(), g = actx.createGain();
+      o.type = ok ? "triangle" : "sawtooth";
+      o.frequency.value = f;
+      g.gain.setValueAtTime(0.12, actx.currentTime + i * 0.09);
+      g.gain.exponentialRampToValueAtTime(1e-3, actx.currentTime + i * 0.09 + 0.25);
+      o.connect(g).connect(actx.destination);
+      o.start(actx.currentTime + i * 0.09);
+      o.stop(actx.currentTime + i * 0.09 + 0.3);
+    });
+  } catch (e) {
+  }
+}
+function confetti(n = 60) {
+  const cs = ["#ff8fb8", "#ffd84d", "#7ddc72", "#5fc3ff", "#b69cff", "#ffad5c"];
+  for (let i = 0; i < n; i++) {
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.background = cs[i % cs.length];
+    c.style.animationDuration = 1.6 + Math.random() * 1.8 + "s";
+    c.style.borderRadius = Math.random() > 0.5 ? "50%" : "3px";
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 3600);
+  }
+}
+const praise = ["أحسنتِ! 🌟", "رائعة! 🎉", "ممتازة! 💛", "بطلة لغتي! 🏆", "واو! مبدعة ✨", "استمري يا نجمة ⭐"];
+const rnd = (a) => a[Math.floor(Math.random() * a.length)];
+const shuffle = (a) => a.map((v) => [Math.random(), v]).sort((x, y) => x[0] - y[0]).map((v) => v[1]);
+function countUp(el, to) {
+  let s = 0;
+  const st = Math.max(1, Math.ceil(to / 40));
+  const t = setInterval(() => {
+    s += st;
+    if (s >= to) {
+      s = to;
+      clearInterval(t);
+    }
+    el.textContent = s.toLocaleString("en");
+  }, 30);
+}
+const UNITS = [
+  {
+    id: 1,
+    t: "أقاربي",
+    em: "👨‍👩‍👧",
+    color: "#ff9fc0",
+    anthem: "جدتي",
+    intro: "نتعرّف في هذه الوحدة على أقاربنا، وكيف نصلهم ونحترمهم ونعتذر لهم إذا أخطأنا.",
+    warm: ["من أقرب الناس إليكِ بعد والديكِ؟", "متى زرتِ جدتكِ آخر مرة؟", "اذكري ثلاثة من أقاربكِ."],
+    project: "شجرة عائلتي: ارسمي شجرة وضعي على أغصانها صور أقاربكِ وأسماءهم.",
+    listening: "في يوم الجمعة اجتمعت العائلة في بيت الجد. جلس الأحفاد حول جدتهم، فحكت لهم حكاية جميلة، ثم تناولوا الغداء معاً وهم سعداء.",
+    listenQ: [{ q: "أين اجتمعت العائلة؟", o: ["في بيت الجد", "في المدرسة", "في السوق"], a: 0 }, { q: "ماذا فعلت الجدة؟", o: ["حكت حكاية", "نامت", "سافرت"], a: 0 }],
+    dictation: ["جدّي", "جدّتي", "عمّي", "خالتي"],
+    lessons: [
+      {
+        id: "u1l1",
+        t: "صلة الرحم",
+        em: "🤲",
+        ready: "هل تزورين أقاربكِ؟ ماذا تقولين لهم عند الزيارة؟",
+        vocab: [["صلة الرحم", "زيارة الأقارب والإحسان إليهم"], ["الأرحام", "الأقارب"], ["يزور", "يذهب لرؤية أحد"], ["يسأل عن", "يطمئن على حاله"]],
+        value: "صلة الرحم تزيد المحبة بين الأقارب.",
+        story: "في يوم الجمعة زارت سارة جدّتها وعمّتها. قبّلت يدَ جدّتها وقالت: أحبّكِ يا جدّتي. ففرحت الجدّة ودعت لها.",
+        scenes: [["👧🏠", "زارت سارة جدّتها وعمّتها"], ["👵💕", "قبّلت يد جدّتها فدعت لها"]],
+        dict: ["زارت", "جدّتها", "عمّتها", "أحبّكِ"],
+        sheet: [["زيارة الأقارب تسمّى", "صلة الرحم", "الصداقة"], ["قبّلت سارة يدَ", "جدّتها", "صديقتها"], ["صلة الرحم تزيد", "المحبة", "الخصام"]],
+        check: [["زارت سارة جدّتها يوم الجمعة", true], ["غضبت الجدّة من سارة", false], ["الأرحام هم الأقارب", true]],
+        quiz: [{ q: "معنى (صلة الرحم):", o: ["زيارة الأقارب والإحسان إليهم", "اللعب مع الأصدقاء", "الذهاب إلى السوق"], a: 0 }, { q: "من زارت سارة؟", o: ["جدّتها وعمّتها", "معلمتها", "جارتها"], a: 0 }, { q: "ماذا قالت سارة لجدّتها؟", o: ["أحبّكِ يا جدّتي", "مع السلامة", "أنا جائعة"], a: 0 }, { q: "صلة الرحم تزيد:", o: ["المحبة", "الحزن", "التعب"], a: 0 }],
+        fish: { target: "رحم", words: ["رحم", "جدّة", "عمّة", "زيارة", "خالة", "أقارب"] },
+        strategy: { n: "لوحة الجيوب", steps: ["تعلّق المعلمة لوحة جيوب فيها بطاقات كلمات الدرس.", "تقرأ المعلمة الكلمة وتطلب من طالبة سحبها.", "تضع الطالبة البطاقة في جملة مفيدة وتقرؤها."] }
+      },
+      {
+        id: "u1l2",
+        t: "عذراً يا جدي",
+        em: "👴",
+        ready: "ماذا تقولين إذا أخطأتِ في حق أحد؟",
+        vocab: [["عذراً", "أعتذر وأطلب السماح"], ["دون قصد", "من غير أن أريد"], ["ابتسم", "ضحك ضحكة خفيفة"], ["شجاعة", "قوّة وجرأة"]],
+        value: "الاعتذار عند الخطأ خُلق جميل وشجاعة.",
+        story: "كسر خالدٌ نظّارة جدّه دون قصد، فخاف، ثم قال: عذراً يا جدّي. ابتسم الجدّ وقال: الصدق شجاعة يا بُنيّ.",
+        scenes: [["👦👓", "كسر خالد نظّارة جدّه دون قصد"], ["👴😊", "قال: عذراً يا جدّي، فابتسم الجد"]],
+        dict: ["عذراً", "نظّارة", "جدّي", "ابتسم"],
+        sheet: [["ماذا كسر خالد؟", "نظّارة جدّه", "كوب الماء"], ["قال خالد لجدّه", "عذراً يا جدّي", "لا أعرف"], ["الصدق", "شجاعة", "خوف"]],
+        check: [["كسر خالد النظّارة متعمّداً", false], ["اعتذر خالد لجدّه", true], ["غضب الجدّ وصرخ", false]],
+        quiz: [{ q: "معنى (دون قصد):", o: ["من غير أن أريد", "بسرعة", "بفرح"], a: 0 }, { q: "ماذا قال خالد؟", o: ["عذراً يا جدّي", "شكراً يا أبي", "صباح الخير"], a: 0 }, { q: "كيف كان ردّ الجدّ؟", o: ["ابتسم", "غضب", "بكى"], a: 0 }, { q: "نتعلّم من القصة:", o: ["الاعتذار عند الخطأ", "الكذب", "الهروب"], a: 0 }],
+        fish: { target: "عذراً", words: ["عذراً", "نظّارة", "جدّي", "شجاعة", "صدق", "ابتسم"] },
+        strategy: { n: "الكرسي الساخن", steps: ["تجلس طالبة على الكرسي وتمثّل دور خالد.", "تسألها زميلاتها: لماذا اعتذرتِ؟ كيف شعرتِ؟", "تختم المعلمة بقيمة الاعتذار والصدق."] }
+      }
+    ]
+  },
+  {
+    id: 2,
+    t: "أصدقائي وجيراني",
+    em: "🤝",
+    color: "#8fd6ff",
+    anthem: "الجار والصديق",
+    intro: "نتعلّم في هذه الوحدة كيف نختار الصديق، ونحسن إلى الجار، ونتعاون معهم.",
+    warm: ["من صديقتكِ المقرّبة؟", "ماذا تفعلين لجيرانكِ؟", "كيف تساعدين صديقتكِ؟"],
+    project: "بطاقة شكر: صمّمي بطاقة جميلة واكتبي فيها شكراً لجارتكِ أو صديقتكِ.",
+    listening: "رأت منى جارتها العجوز تحمل أكياساً ثقيلة، فأسرعت إليها وحملت عنها الأكياس حتى باب بيتها. شكرتها الجارة ودعت لها بالخير.",
+    listenQ: [{ q: "ماذا كانت تحمل الجارة؟", o: ["أكياساً ثقيلة", "كتباً", "زهوراً"], a: 0 }, { q: "ماذا فعلت منى؟", o: ["حملت عنها الأكياس", "ضحكت", "ذهبت بعيداً"], a: 0 }],
+    dictation: ["صديقي", "جاري", "بيتنا", "شكراً"],
+    lessons: [
+      {
+        id: "u2l1",
+        t: "الصديقان",
+        em: "👭",
+        ready: "ما الصفات التي تحبينها في صديقتكِ؟",
+        vocab: [["الصديق", "من نحبّه ويحبّنا ويساعدنا"], ["أعطت", "قدّمت"], ["نسيت", "لم تتذكّر"], ["الضيق", "الشدّة والحاجة"]],
+        value: "الصديق الحقيقي يساعد صديقه وقت الحاجة.",
+        story: "نسيت هندٌ قلمها في البيت، فحزنت. أعطتها ريم قلمها وقالت: الصديق وقتَ الضيق. فابتسمت هند وشكرتها.",
+        scenes: [["👧✏️", "نسيت هند قلمها فحزنت"], ["👭💛", "أعطتها ريم قلمها: الصديق وقت الضيق"]],
+        dict: ["صديقة", "قلمها", "أعطتها", "شكرتها"],
+        sheet: [["ماذا نسيت هند؟", "قلمها", "حقيبتها"], ["من ساعدت هنداً؟", "ريم", "المعلمة"], ["الصديق وقتَ", "الضيق", "النوم"]],
+        check: [["نسيت هند قلمها", true], ["رفضت ريم مساعدة هند", false], ["شكرت هند صديقتها", true]],
+        quiz: [{ q: "من نسيت القلم؟", o: ["هند", "ريم", "سارة"], a: 0 }, { q: "معنى (الضيق):", o: ["الشدّة والحاجة", "الفرح", "اللعب"], a: 0 }, { q: "ماذا قالت ريم؟", o: ["الصديق وقت الضيق", "أنا مشغولة", "اذهبي"], a: 0 }, { q: "الصديق الحقيقي:", o: ["يساعد صديقه", "يسخر منه", "يتركه"], a: 0 }],
+        fish: { target: "صديق", words: ["صديق", "قلم", "ريم", "هند", "ضيق", "شكراً"] },
+        strategy: { n: "فكّر - زاوج - شارك", steps: ["تفكّر كل طالبة: كيف أساعد صديقتي؟", "تتناقش مع زميلتها المجاورة.", "تشارك الثنائيات أفكارهما مع الصف."] }
+      },
+      {
+        id: "u2l2",
+        t: "الجار الصغير",
+        em: "🏡",
+        ready: "من جيرانكِ؟ وكيف تعاملينهم؟",
+        vocab: [["الجار", "من يسكن قريباً من بيتنا"], ["مريض", "متعب يحتاج إلى علاج"], ["هدية", "شيء نقدّمه لمن نحبّ"], ["زاره", "ذهب لرؤيته"]],
+        value: "زيارة الجار المريض تُدخل السرور على قلبه.",
+        story: "علم فيصلٌ أن جاره الصغير مريض، فحمل له هديةً وزاره مع أبيه. فرح الجار كثيراً وقال: شكراً يا جاري العزيز.",
+        scenes: [["👦🎁", "حمل فيصل هدية لجاره المريض"], ["🏡😊", "فرح الجار وقال: شكراً يا جاري"]],
+        dict: ["جاره", "مريض", "هدية", "زاره"],
+        sheet: [["من كان مريضاً؟", "الجار الصغير", "فيصل"], ["ماذا حمل فيصل؟", "هدية", "كرة"], ["زار فيصل جاره مع", "أبيه", "أخته"]],
+        check: [["كان الجار الصغير مريضاً", true], ["زار فيصل جاره وحده", false], ["فرح الجار بالزيارة", true]],
+        quiz: [{ q: "معنى (الجار):", o: ["من يسكن قريباً من بيتنا", "المعلم", "البائع"], a: 0 }, { q: "ماذا قدّم فيصل؟", o: ["هدية", "طعاماً", "كتاباً"], a: 0 }, { q: "مع من زار فيصل جاره؟", o: ["مع أبيه", "مع معلمه", "وحده"], a: 0 }, { q: "نتعلّم من القصة:", o: ["زيارة الجار المريض", "إزعاج الجيران", "النوم مبكراً"], a: 0 }],
+        fish: { target: "جار", words: ["جار", "هدية", "مريض", "فيصل", "بيت", "زيارة"] },
+        strategy: { n: "لعب الأدوار", steps: ["توزّع المعلمة الأدوار: فيصل، الأب، الجار.", "تمثّل الطالبات مشهد الزيارة أمام الصف.", "تناقش المعلمة آداب زيارة المريض."] }
+      }
+    ]
+  },
+  {
+    id: 3,
+    t: "وطني السعودية",
+    em: "🇸🇦",
+    color: "#a8e07a",
+    anthem: "وطني السعودية",
+    intro: "نتعرّف في هذه الوحدة على وطننا المملكة العربية السعودية، ومدنها المقدسة، وعلمها.",
+    warm: ["ما اسم وطنكِ؟", "ما لون علم بلادي؟", "اذكري مدينة من مدن وطنكِ."],
+    project: "ألبوم وطني: اجمعي صوراً لمعالم وطنكِ واكتبي اسم كل معلم تحت صورته.",
+    listening: "وطني المملكة العربية السعودية بلد كبير وجميل، فيه الصحراء والجبال والبحار، وفيه مكة المكرمة والمدينة المنورة. نحن نحب وطننا ونحافظ عليه.",
+    listenQ: [{ q: "ما اسم وطني؟", o: ["المملكة العربية السعودية", "مصر", "المغرب"], a: 0 }, { q: "ماذا نفعل لوطننا؟", o: ["نحبّه ونحافظ عليه", "نهمله", "نتركه"], a: 0 }],
+    dictation: ["وطني", "مكة", "علم", "بلادي"],
+    lessons: [
+      {
+        id: "u3l1",
+        t: "مدينتان مقدستان",
+        em: "🕋",
+        ready: "هل زرتِ مكة المكرمة أو المدينة المنورة؟",
+        vocab: [["مقدّسة", "لها مكانة عظيمة عند المسلمين"], ["الكعبة المشرّفة", "بيت الله الحرام في مكة"], ["المسجد النبوي", "مسجد الرسول ﷺ في المدينة"], ["الحجّاج", "من يذهبون لأداء الحج"]],
+        value: "نعتزّ بمكة المكرمة والمدينة المنورة ونحترمهما.",
+        story: "في وطني مدينتان مقدّستان: مكّة المكرّمة فيها الكعبة المشرّفة، والمدينة المنوّرة فيها المسجد النبويّ. يزورهما المسلمون من كل مكان.",
+        scenes: [["🕋", "مكة المكرمة فيها الكعبة المشرفة"], ["🕌", "المدينة المنورة فيها المسجد النبوي"]],
+        dict: ["مكّة", "المدينة", "الكعبة", "المسجد"],
+        sheet: [["الكعبة المشرّفة في", "مكة المكرمة", "المدينة المنورة"], ["المسجد النبوي في", "المدينة المنورة", "الرياض"], ["يزور المدينتين", "المسلمون", "الطيور"]],
+        check: [["الكعبة المشرّفة في مكة المكرمة", true], ["المسجد النبوي في جدة", false], ["في وطني مدينتان مقدّستان", true]],
+        quiz: [{ q: "أين الكعبة المشرّفة؟", o: ["مكة المكرمة", "المدينة المنورة", "الدمام"], a: 0 }, { q: "أين المسجد النبوي؟", o: ["المدينة المنورة", "مكة المكرمة", "أبها"], a: 0 }, { q: "كم مدينة مقدّسة في الدرس؟", o: ["اثنتان", "ثلاث", "واحدة"], a: 0 }, { q: "معنى (مقدّسة):", o: ["لها مكانة عظيمة", "صغيرة", "بعيدة"], a: 0 }],
+        fish: { target: "مكة", words: ["مكة", "المدينة", "الكعبة", "المسجد", "الحرم", "وطني"] },
+        strategy: { n: "الخريطة الذهنية", steps: ["ترسم المعلمة دائرة في الوسط: مدن مقدّسة.", "تضيف الطالبات فرعين: مكة المكرمة والمدينة المنورة.", "تكتب الطالبات ما يميّز كل مدينة."] }
+      },
+      {
+        id: "u3l2",
+        t: "علم بلادي",
+        em: "🚩",
+        ready: "ما لون علم بلادي؟ وماذا كُتب عليه؟",
+        vocab: [["العَلَم", "رمز الوطن"], ["الشهادة", "لا إله إلا الله محمد رسول الله"], ["السيف", "رمز القوّة والعدل"], ["نرفعه", "نجعله عالياً"]],
+        value: "نحترم علم بلادنا ونرفعه عالياً.",
+        story: "علمُ بلادي أخضرُ جميل، كُتبت عليه الشهادة: لا إله إلا الله محمد رسول الله، وتحتها سيف. أرفعه عالياً وأحترمه.",
+        scenes: [["🟩", "علم بلادي أخضر عليه الشهادة"], ["⚔️🙌", "تحتها سيف، أرفعه عالياً وأحترمه"]],
+        dict: ["علم", "أخضر", "سيف", "بلادي"],
+        sheet: [["لون علم بلادي", "أخضر", "أحمر"], ["تحت الشهادة", "سيف", "نجمة"], ["علم بلادي", "نحترمه", "نرميه"]],
+        check: [["علم بلادي لونه أخضر", true], ["تحت الشهادة نجمة", false], ["نحترم علم بلادنا", true]],
+        quiz: [{ q: "لون علم بلادي:", o: ["أخضر", "أزرق", "أصفر"], a: 0 }, { q: "ماذا كُتب على العلم؟", o: ["الشهادة", "اسم مدينة", "رقم"], a: 0 }, { q: "ماذا تحت الشهادة؟", o: ["سيف", "شجرة", "قمر"], a: 0 }, { q: "العلم رمز:", o: ["الوطن", "المدرسة", "البيت"], a: 0 }],
+        fish: { target: "علم", words: ["علم", "أخضر", "سيف", "وطن", "شهادة", "نرفعه"] },
+        strategy: { n: "التعلّم باللون والرسم", steps: ["توزّع المعلمة رسمة العلم بلا ألوان.", "تلوّن الطالبات العلم وتكتب الشهادة.", "تعرض كل طالبة علمها وتقول جملة عن وطنها."] }
+      }
+    ]
+  },
+  {
+    id: 4,
+    t: "محاصيل من بلادي",
+    em: "🌾",
+    color: "#ffd84d",
+    anthem: "هيا نزرع",
+    intro: "نتعرّف في هذه الوحدة على محاصيل بلادي مثل القمح والتمر، وكيف تنمو وتصل إلينا.",
+    warm: ["ماذا نأكل من الأرض؟", "هل رأيتِ نخلة؟", "من أين يأتي الخبز؟"],
+    project: "مزرعتي الصغيرة: ازرعي حبّات في كوب وراقبي نموّها كل يوم وارسميها.",
+    listening: "خرج الفلاح إلى مزرعته في الصباح الباكر، سقى النخيل والقمح، وقطف الخضار الطازجة، ثم حملها إلى السوق ليبيعها للناس.",
+    listenQ: [{ q: "متى خرج الفلاح؟", o: ["في الصباح الباكر", "في الليل", "في المساء"], a: 0 }, { q: "ماذا سقى الفلاح؟", o: ["النخيل والقمح", "الأزهار فقط", "لا شيء"], a: 0 }],
+    dictation: ["قمح", "تمر", "نخلة", "مزرعة"],
+    lessons: [
+      {
+        id: "u4l1",
+        t: "رحلة حبة قمح",
+        em: "🌾",
+        ready: "من أين يأتي الخبز الذي نأكله؟",
+        vocab: [["الفلاح", "من يزرع الأرض"], ["سنبلة", "رأس نبتة القمح فيها الحبوب"], ["طُحنت", "صارت دقيقاً ناعماً"], ["المحصول", "ما نجمعه من الزرع"]],
+        value: "نشكر الله على النعم ولا نرمي الخبز.",
+        story: "زرع الفلّاحُ حبّةَ قمح، سقاها الماء ودفّأتها الشمس، فصارت سنبلة. ثم طُحنت وصارت خبزاً لذيذاً.",
+        scenes: [["👨‍🌾🌱", "زرع الفلاح حبة قمح فصارت سنبلة"], ["🌾➡️🍞", "طُحنت وصارت خبزاً لذيذاً"]],
+        dict: ["قمح", "سنبلة", "خبز", "الفلّاح"],
+        sheet: [["من زرع حبة القمح؟", "الفلّاح", "الطبيب"], ["صارت الحبة", "سنبلة", "وردة"], ["من القمح نصنع", "الخبز", "الحليب"]],
+        check: [["زرع الفلاح حبة قمح", true], ["صار القمح حليباً", false], ["نصنع الخبز من القمح", true]],
+        quiz: [{ q: "من يزرع الأرض؟", o: ["الفلّاح", "الطيّار", "المعلم"], a: 0 }, { q: "معنى (سنبلة):", o: ["رأس نبتة القمح", "نوع من الطيور", "بيت صغير"], a: 0 }, { q: "ماذا نصنع من القمح؟", o: ["الخبز", "العصير", "الجبن"], a: 0 }, { q: "ترتيب الرحلة:", o: ["حبّة ← سنبلة ← خبز", "خبز ← حبّة ← سنبلة", "سنبلة ← خبز ← حبّة"], a: 0 }],
+        fish: { target: "قمح", words: ["قمح", "سنبلة", "خبز", "فلاح", "ماء", "شمس"] },
+        strategy: { n: "التسلسل بالبطاقات", steps: ["توزّع المعلمة بطاقات مراحل حبة القمح بلا ترتيب.", "ترتّب المجموعات البطاقات من الحبّة إلى الخبز.", "تحكي كل مجموعة الرحلة بلغتها."] }
+      },
+      {
+        id: "u4l2",
+        t: "من أنا؟",
+        em: "🌴",
+        ready: "خمّني: أنا حلوة وأنمو على النخلة، من أنا؟",
+        vocab: [["ثمرة", "ما تحمله الشجرة لنأكله"], ["النخلة", "شجرة طويلة تحمل التمر"], ["حلوة", "طعمها لذيذ كالسكر"], ["لغز", "سؤال نخمّن جوابه"]],
+        value: "التمر غذاء مفيد من خيرات بلادي.",
+        story: "أنا ثمرةٌ حلوة، أنمو على النخلة، يحبّني الكبار والصغار، ويُقدّمونني مع القهوة للضيوف. من أنا؟ أنا التمر!",
+        scenes: [["🌴❓", "أنا ثمرة حلوة أنمو على النخلة"], ["🟤☕", "يقدّمونني مع القهوة.. أنا التمر!"]],
+        dict: ["تمر", "نخلة", "حلوة", "ثمرة"],
+        sheet: [["ينمو التمر على", "النخلة", "البرتقالة"], ["طعم التمر", "حلو", "مالح"], ["نقدّم التمر مع", "القهوة", "الماء المالح"]],
+        check: [["التمر ينمو على النخلة", true], ["التمر طعمه مرّ", false], ["نقدّم التمر للضيوف", true]],
+        quiz: [{ q: "جواب اللغز:", o: ["التمر", "الموز", "العنب"], a: 0 }, { q: "أين ينمو التمر؟", o: ["على النخلة", "في البحر", "تحت الأرض"], a: 0 }, { q: "معنى (لغز):", o: ["سؤال نخمّن جوابه", "نوع من الطعام", "لعبة كرة"], a: 0 }, { q: "مع ماذا نقدّم التمر؟", o: ["القهوة", "الحساء", "الملح"], a: 0 }],
+        fish: { target: "تمر", words: ["تمر", "نخلة", "حلوة", "ثمرة", "قهوة", "ضيف"] },
+        strategy: { n: "الألغاز والتخمين", steps: ["تقرأ المعلمة صفات ثمرة دون ذكر اسمها.", "تخمّن الطالبات الجواب وترفع بطاقته.", "تؤلّف كل طالبة لغزاً عن ثمرة من بلادها."] }
+      }
+    ]
+  }
 ];
-function game(){
-  const lv=DB.get('level',1);
-  view.innerHTML=back()+`<div class="card-head"><span class="badge">${ic("game",22)}</span>عالم لغتي ثلاثي الأبعاد</div>
-  <div class="card"><div class="desc">اضغطي على المكعّب الدوّار الصحيح! كل إجابة صحيحة = ١٠ نقاط، و٨ إجابات تفتح المستوى التالي 🔓</div>
-  <div class="levels">${LEVELS.map((L,i)=>`<button class="lvl ${i+1>lv?'lock':''}" style="background:${L.c}" onclick="${i+1>lv?"toast('أكملي المستوى السابق أولاً 🔒')":`play(${i})`}"><span class="em">${i+1>lv?'🔒':L.em}</span>${L.n}</button>`).join('')}</div></div>`;
+const WEEKS = [
+  ["الأسبوع الأول", "التهيئة والاستعداد · مراجعة مكتسباتي السابقة"],
+  ["الأسبوع الثاني", "الوحدة الأولى / أقاربي: مدخل الوحدة / نشاطات التهيئة + أنجز مشروعي · نص الاستماع · النشيد: جدتي (حفظ) · تابع النشيد: جدتي · إملاء"],
+  ["الأسبوع الثالث", "دروس الوحدة / الدرس الأول: صلة الرحم"],
+  ["الأسبوع الرابع", "الدرس الثاني: عذراً يا جدي"],
+  ["الأسبوع الخامس", "التقويم التجميعي · إجازة اليوم الوطني من الأربعاء إلى السبت"],
+  ["الأسبوع السادس", "الوحدة الثانية / أصدقائي وجيراني: مدخل الوحدة / نشاطات التهيئة + أنجز مشروعي · نص الاستماع · النشيد: الجار والصديق (حفظ) · تابع النشيد: الجار والصديق · إملاء"],
+  ["الأسبوع السابع", "دروس الوحدة / الدرس الأول: الصديقان"],
+  ["الأسبوع الثامن", "الدرس الثاني: الجار الصغير"],
+  ["الأسبوع التاسع", "التقويم التجميعي"],
+  ["الأسبوع العاشر", "الوحدة الثالثة / وطني السعودية: مدخل الوحدة / نشاطات التهيئة + أنجز مشروعي · نص الاستماع · النشيد: وطني السعودية (حفظ) · تابع النشيد: وطني السعودية · إملاء"],
+  ["الأسبوع الحادي عشر", "دروس الوحدة / الدرس الأول: مدينتان مقدستان"],
+  ["الأسبوع الثاني عشر", "الدرس الثاني: علم بلادي"],
+  ["الأسبوع الثالث عشر", "التقويم التجميعي · إجازة الخريف"],
+  ["الأسبوع الرابع عشر", "الوحدة الرابعة / محاصيل من بلادي: مدخل الوحدة / نشاطات التهيئة + أنجز مشروعي · نص الاستماع · النشيد: هيا نزرع (حفظ) · تابع النشيد: هيا نزرع · إملاء"],
+  ["الأسبوع الخامس عشر", "دروس الوحدة / الدرس الأول: رحلة حبة قمح"],
+  ["الأسبوع السادس عشر", "الدرس الثاني: من أنا؟"],
+  ["الأسبوع السابع عشر", "التقويم التجميعي"],
+  ["الأسبوع الثامن عشر", "مراجعة عامة"],
+  ["الأسبوع التاسع عشر", "الاختبارات النهائية للفصل الدراسي الأول · نهاية دوام الفصل الدراسي الأول"]
+];
+const ALL_LESSONS = UNITS.flatMap((u) => u.lessons.map((l) => __spreadProps(__spreadValues({}, l), { unit: u })));
+const VIDEOS = ALL_LESSONS.map((l) => ({ id: l.id, t: l.t, em: l.em, unit: l.unit.t, story: l.story, scenes: l.scenes.map((s) => ({ e: s[0], x: s[1] })) }));
+const SHEETS = UNITS.map((u) => ({ t: "ورقة عمل: ".concat(u.t), em: u.em, items: u.lessons.flatMap((l) => l.sheet) }));
+const QUIZ = ALL_LESSONS.flatMap((l) => l.quiz);
+const WORDS = [["جدّة", "👵"], ["جار", "🏡"], ["صديقة", "👭"], ["علم", "🚩"], ["مكّة", "🕋"], ["قمح", "🌾"], ["خبز", "🍞"], ["تمر", "🌴"], ["هدية", "🎁"], ["نظّارة", "👓"]];
+const LETTERS = [
+  ["أ", "أرنب", "🐰", "الأرنب أمير يحب الجزر، يقفز فرحاً ويقول: أنا أحب الأصدقاء!"],
+  ["ب", "بطة", "🦆", "بطوطة البطة تسبح في البحيرة، وتقول: بَ بُ بِ هيا نلعب!"],
+  ["ت", "تفاحة", "🍎", "تفاحة حمراء على الشجرة، قطفتها تالا وتقاسمتها مع أختها."],
+  ["ث", "ثعلب", "🦊", "الثعلب ثامر ذكي، لكنه تعلّم أن الصدق أجمل من الحيلة."],
+  ["ج", "جمل", "🐫", "الجمل جسور يمشي في الصحراء صابراً، يحمل الماء للجميع."],
+  ["ح", "حصان", "🐴", "الحصان حمدان يركض في الحقل، ويحب الحَبَق الأخضر."],
+  ["خ", "خروف", "🐑", "الخروف خالد صوفه أبيض ناعم، يقول: ماااء أنا صديقكم."],
+  ["د", "دب", "🐻", "الدب دبدوب يحب العسل، ويشارك أصدقاءه دائماً."],
+  ["ذ", "ذرة", "🌽", "الذرة الذهبية نبتت في الحقل، فصنعت منها ذكرى فشاراً لذيذاً."],
+  ["ر", "ريشة", "🪶", "رنا وجدت ريشة ملوّنة، فرسمت بها لوحة جميلة."],
+  ["ز", "زرافة", "🦒", "الزرافة زينة رقبتها طويلة، ترى الأشجار العالية بسهولة."],
+  ["س", "سمكة", "🐟", "السمكة سلمى تسبح في البحر، وتحب صديقها السلحفاة."],
+  ["ش", "شمس", "☀️", "الشمس المشرقة تقول صباح الخير، فتضحك الشجرة والأزهار."],
+  ["ص", "صقر", "🦅", "الصقر صقّار يطير عالياً، وعينه قوية ترى البعيد."],
+  ["ض", "ضفدع", "🐸", "الضفدع ضاحي يقفز في البركة ويغني: نق نق!"],
+  ["ط", "طائرة", "✈️", "الطائرة تطير فوق الغيوم، وطلال يلوّح لها بيده."],
+  ["ظ", "ظرف", "✉️", "وصل ظرف جميل لظبية، فيه رسالة شكر من معلمتها."],
+  ["ع", "عصفور", "🐦", "العصفور عادل يغرد على الغصن: عِ عِ صباح السعادة!"],
+  ["غ", "غيمة", "☁️", "الغيمة غادة أمطرت ماءً، فشربت الأزهار وفرحت."],
+  ["ف", "فراشة", "🦋", "الفراشة فرح ألوانها زاهية، تطير من زهرة إلى زهرة."],
+  ["ق", "قطة", "🐱", "القطة قمر تحب اللبن، وتنام قرب النافذة."],
+  ["ك", "كتاب", "📘", "كتاب لغتي صديقي، أقرأ فيه كل يوم قصة جميلة."],
+  ["ل", "ليمون", "🍋", "ليلى صنعت عصير الليمون اللذيذ في يوم حار."],
+  ["م", "موز", "🍌", "القرد ميمون يحب الموز، ويأكله بعد غسل يديه."],
+  ["ن", "نحلة", "🐝", "النحلة نوال تجمع الرحيق، وتصنع العسل الحلو."],
+  ["هـ", "هلال", "🌙", "ظهر الهلال في السماء، ففرحت هند وقالت: هلّ الشهر الجديد!"],
+  ["و", "وردة", "🌹", "وعد سقت الوردة كل صباح، فكبرت وصارت جميلة."],
+  ["ي", "يمامة", "🕊️", "اليمامة يارا تطير بسلام، وتبني عشها على الشجرة."]
+];
+let role = "طالبة";
+document.querySelectorAll(".role").forEach((b) => b.onclick = () => {
+  document.querySelectorAll(".role").forEach((x) => x.classList.remove("on"));
+  b.classList.add("on");
+  role = b.dataset.role;
+  $("#lPass").style.display = role === "معلمة" ? "block" : "none";
+  $("#lName").placeholder = role === "زائرة" ? "اسم الزائرة" : "اكتبي اسمكِ هنا";
+});
+$("#lGo").onclick = doLogin;
+$("#lName").addEventListener("keydown", (e) => e.key === "Enter" && doLogin());
+$("#lPass").addEventListener("keydown", (e) => e.key === "Enter" && doLogin());
+function doLogin() {
+  const n = $("#lName").value.trim();
+  if (!n) {
+    $("#lErr").textContent = "اكتبي اسمكِ أولاً 🌸";
+    return;
+  }
+  if (role === "معلمة" && $("#lPass").value !== CONFIG.TEACHER_CODE) {
+    $("#lErr").textContent = "رمز المعلمة غير صحيح";
+    return;
+  }
+  user = { name: n, role };
+  DB.set("user", user);
+  const visits = DB.get("visits", { طالبة: 0, معلمة: 0, زائرة: 0 });
+  visits[role] = (visits[role] || 0) + 1;
+  DB.set("visits", visits);
+  send("دخول", { detail: "دخول " + role });
+  enter(true);
 }
-function play(li){
-  const L=LEVELS[li];let round=0,score=0,streak=0;
-  DB.set('games',DB.get('games',0)+1);
-  view.innerHTML=`<span class="back" onclick="render('game')">→ المستويات</span>
-  <div class="card-head"><span class="badge">${L.em}</span>${L.n}</div>
-  <div class="card"><div class="hud"><span class="pill">⭐ <b id="gS">0</b></span><span class="pill">🔥 <b id="gK">0</b></span><span class="pill">🎯 <b id="gR">1</b>/8</span><button class="pill" style="cursor:pointer;color:#fff" onclick="say(window._sp)">🔊</button></div>
-  <div class="stage" id="stage"><div class="target" id="tg"></div><div class="cheer" id="ch"></div></div></div>`;
-  const next=()=>{
-    if(round>=8){finish();return}
-    const r=L.make();window._sp=r.speak;$('#tg').textContent=r.label;$('#gR').textContent=round+1;say(r.speak);
-    document.querySelectorAll('.cube-wrap').forEach(c=>c.remove());
-    const st=$('#stage'),W=st.clientWidth,H=st.clientHeight,n=r.opts.length;
-    r.opts.forEach((o,k)=>{
-      const w=document.createElement('div');w.className='cube-wrap floaty';
-      const sz=W<500?64:76;const gap=(W-40)/n;
-      w.style.left=(20+gap*k+gap/2-sz/2)+'px';w.style.top=(90+((k%2)*70)+Math.random()*30)+'px';w.style.animationDelay=(k*.4)+'s';
-      const col=LC[(k+round)%6];
-      w.innerHTML=`<div class="cube" style="animation-duration:${6+k}s">${[1,2,3,4,5,6].map(f=>`<div class="face f${f}" style="background:${col};font-size:${o.length>3?'15px':''}">${f<5?o:''}</div>`).join('')}</div>`;
-      w.onclick=()=>{
-        if(w._d)return;
-        if(o===r.ans){w._d=1;w.classList.add('burst');score+=10;streak++;addPoints(10);beep(true);
-          const ch=$('#ch');ch.textContent=streak>=3?`🔥 ${streak} متتالية!`:rnd(praise);ch.classList.remove('go');void ch.offsetWidth;ch.classList.add('go');
-          if(streak%3===0)confetti(35);round++;$('#gS').textContent=score;$('#gK').textContent=streak;window._gt=setTimeout(next,900)}
-        else{streak=0;$('#gK').textContent=0;beep(false);w.animate([{transform:'translateX(8px)'},{transform:'translateX(-8px)'},{transform:'none'}],{duration:350})}
+function enter(anim) {
+  $("#navTeacher").style.display = user.role === "معلمة" ? "grid" : "none";
+  $("#av").innerHTML = ic(user.role === "معلمة" ? "teach" : user.role === "زائرة" ? "visitor" : "student", 28);
+  addPoints(0);
+  $("#login").classList.add("hide");
+  if (anim) {
+    $("#wText").textContent = "أهلاً بكِ يا ".concat(user.name, " في لغتي السعادة.. هيا نتعلّم ونلعب! ✨");
+    $("#welcome").classList.add("show");
+    setTimeout(() => {
+      $("#welcome").classList.remove("show");
+      $("#app").classList.add("show");
+      render("home");
+    }, 1900);
+  } else {
+    $("#app").classList.add("show");
+    render("home");
+  }
+  loadRemote();
+}
+$("#logout").onclick = () => {
+  user = null;
+  DB.set("user", null);
+  $("#app").classList.remove("show");
+  $("#login").classList.remove("hide");
+  $("#lName").value = "";
+  $("#lPass").value = "";
+  $("#lErr").textContent = "";
+};
+if (user) enter(false);
+let cur = "home";
+document.querySelectorAll(".nav[data-v]").forEach((b) => b.onclick = () => render(b.dataset.v));
+$("#sBtn").onclick = () => {
+  const p = $("#search");
+  p.classList.toggle("open");
+  if (p.classList.contains("open")) $("#sIn").focus();
+};
+$("#sIn").addEventListener("input", (e) => {
+  const q = e.target.value.trim();
+  if (cur !== "home") render("home");
+  document.querySelectorAll(".sec").forEach((s) => s.style.display = !q || s.textContent.includes(q) ? "" : "none");
+});
+const back = () => '<span class="back" onclick="render(\'home\')">→ الرئيسية</span>';
+function render(v) {
+  cur = v;
+  stopAudio();
+  clearInterval(window._pl);
+  clearTimeout(window._gt);
+  document.querySelectorAll(".nav[data-v]").forEach((b) => b.classList.toggle("on", b.dataset.v === v));
+  $("#main").scrollTop = 0;
+  ({ home, units, videos, sheets, exercises, quiz, letters, game, cert, teacher })[v]();
+}
+function home() {
+  var _a, _b, _c, _d, _e, _f, _g;
+  const visits = DB.get("visits", { طالبة: 0, معلمة: 0, زائرة: 0 });
+  const r = remote || {};
+  const st = {
+    stu: (_a = r.students) != null ? _a : visits["طالبة"],
+    vis: (_b = r.visitors) != null ? _b : visits["زائرة"],
+    tch: (_c = r.teachers) != null ? _c : visits["معلمة"],
+    games: (_d = r.games) != null ? _d : DB.get("games", 0),
+    certs: (_e = r.certs) != null ? _e : DB.get("certs", 0),
+    comments: (_f = r.comments) != null ? _f : DB.get("comments", []).length,
+    opinions: (_g = r.opinions) != null ? _g : DB.get("opinions", []).length
+  };
+  const total = st.stu + st.vis + st.tch;
+  view.innerHTML = '\n  <div class="card hero">\n    <div style="display:flex;justify-content:center">'.concat(ic("logo", 72), '</div>\n    <h1 class="title-font"><span class="c1">لغتي</span> <span class="c2">السعادة</span></h1>\n    <p>منصة لغتي للصف الثاني ابتدائي — الفصل الدراسي الأول: أقاربي · أصدقائي وجيراني · وطني السعودية · محاصيل من بلادي</p>\n    <div class="people">\n      <div class="person"><div class="ic">').concat(ic("teach", 32), "</div><div><small>معلمة المادة</small><b>أ. ").concat(CONFIG.TEACHER, '</b></div></div>\n      <div class="person"><div class="ic">').concat(ic("school", 32), "</div><div><small>مديرة المدرسة</small><b>أ. ").concat(CONFIG.PRINCIPAL, '</b></div></div>\n    </div>\n  </div>\n\n  <div class="card-head"><span class="badge">').concat(ic("stats", 22), "</span>إحصائيات المنصة ").concat(remote ? '<span class="mini">· مباشرة من Google</span>' : "", '</div>\n  <div class="card">\n    <span class="chev">⌄</span>\n    <div class="desc">عدّاد تلقائي يُحصي الزيارات والأنشطة لحظة بلحظة.</div>\n    <div class="tags"><span><i>🎒</i>طالبات</span><span><i>🌸</i>زائرات</span><span><i>🎮</i>ألعاب</span><span><i>🏆</i>شهادات</span></div>\n    <div class="row4">\n      <div class="stat"><small>الطالبات</small><b class="cu" data-n="').concat(st.stu, '">0</b></div>\n      <div class="stat"><small>الزائرات</small><b class="cu" data-n="').concat(st.vis, '">0</b></div>\n      <div class="stat"><small>جولات اللعب</small><b class="cu" data-n="').concat(st.games, '">0</b></div>\n      <div class="stat"><small>إجمالي الدخول</small><b class="cu" data-n="').concat(total, '">0</b></div>\n    </div>\n  </div>\n\n  <div class="card-head"><span class="badge">').concat(ic("sparkle", 22), '</span>أقسام المنصة</div>\n  <div class="card">\n    <div class="grid-sec">\n      ').concat([
+    ["units", "📚", "منهجي", "٤ وحدات · ٨ دروس"],
+    ["videos", "🎬", "قصص الدروس", "١٠ ثوانٍ لكل قصة"],
+    ["sheets", "📝", "أوراق عمل", "تفاعلية وقابلة للطباعة"],
+    ["exercises", "🧩", "تمارين تفاعلية", "ركّبي وطابقي"],
+    ["quiz", "❓", "أسئلة", "من دروس المنهج"],
+    ["letters", "🔤", "قصص الحروف", "٢٨ قصة مسموعة"],
+    ["game", "🎮", "لعبة ثلاثية الأبعاد", "٣ مستويات"],
+    ["cert", "🏆", "شهادتي", "اطبعيها وافتخري"]
+  ].map((s) => '<div class="sec" onclick="render(\''.concat(s[0], '\')"><span class="em">').concat(ic(s[0], 50), "</span><b>").concat(s[2], "</b><small>").concat(s[3], "</small></div>")).join(""), "\n      ").concat(user.role === "معلمة" ? '<div class="sec" onclick="render(\'teacher\')"><span class="em">'.concat(ic("teacher", 50), "</span><b>لوحة المعلمة</b><small>البيانات والربط</small></div>") : "", '\n    </div>\n  </div>\n\n  <div class="card-head"><span class="badge">').concat(ic("impact", 22), '</span>قياس الأثر</div>\n  <div class="card" id="impact">').concat(impactHTML(st), '</div>\n\n  <div class="card-head"><span class="badge">').concat(ic("heart", 22), '</span>آراء أولياء الأمور</div>\n  <div class="card">\n    <div id="opList"></div>\n    <div class="rate" id="rate">').concat([5, 4, 3, 2, 1].map((i) => '<span data-r="'.concat(i, '">⭐</span>')).join(""), '</div>\n    <input class="field" id="opName" placeholder="ولي/ولية أمر الطالبة">\n    <textarea class="field" id="opText" placeholder="رأيكِ في المنصة وأثرها على ابنتكِ"></textarea>\n    <button class="btn y" onclick="addOpinion()">إرسال الرأي 💛</button>\n  </div>\n\n  <div class="card-head"><span class="badge">').concat(ic("chat", 22), '</span>التعليقات</div>\n  <div class="card">\n    <div id="cmList"></div>\n    <textarea class="field" id="cmText" placeholder="اكتبي تعليقكِ..."></textarea>\n    <button class="btn p" onclick="addComment()">نشر التعليق</button>\n  </div>\n\n  <div class="card-head"><span class="badge">').concat(ic("link", 22), '</span>الربط مع Google (نموذج الكود)</div>\n  <div class="card">\n    <div class="desc">كل دخول ورأي وتعليق ونتيجة وشهادة يُحفظ في جدول Google ويصل إلى بريد المعلمة.</div>\n    <div class="code"><button class="copy" onclick="navigator.clipboard.writeText(CONFIG.TEACHER_EMAIL);toast(\'تم النسخ\')">⧉</button><span class="n">1</span><span class="k">fetch</span>(GOOGLE_SCRIPT_URL, {\n<span class="n">2</span>  method: <span class="s">"POST"</span>,\n<span class="n">3</span>  body: JSON.<span class="k">stringify</span>({\n<span class="n">4</span>    type: <span class="s">"دخول طالبة"</span>,\n<span class="n">5</span>    email: <span class="s">"').concat(CONFIG.TEACHER_EMAIL, '"</span>\n<span class="n">6</span>  })\n<span class="n">7</span>}) <span class="c">// ← يظهر في البريد والتطبيق</span></div>\n  </div>\n  <p class="mini" style="text-align:center;margin-top:18px;text-shadow:0 1px 4px rgba(0,0,0,.3)">لغتي السعادة © ').concat((/* @__PURE__ */ new Date()).getFullYear(), " · إعداد المعلمة ").concat(CONFIG.TEACHER, "</p>");
+  document.querySelectorAll(".cu").forEach((e) => countUp(e, +e.dataset.n));
+  setTimeout(() => document.querySelectorAll("#impact .bar i").forEach((i) => i.style.width = i.dataset.w), 100);
+  drawOpinions();
+  drawComments();
+  let rv = 5;
+  const paint = () => document.querySelectorAll("#rate span").forEach((s) => s.classList.toggle("on", +s.dataset.r <= rv));
+  paint();
+  document.querySelectorAll("#rate span").forEach((s) => s.onclick = () => {
+    rv = +s.dataset.r;
+    paint();
+    window._rv = rv;
+  });
+  window._rv = 5;
+}
+function impactHTML(st) {
+  const qz = DB.get("quizScores", []);
+  const avg = qz.length ? Math.round(qz.reduce((a, b) => a + b, 0) / qz.length * 10) : 0;
+  const ops = DB.get("opinions", []);
+  const sat = ops.length ? Math.round(ops.reduce((a, b) => a + b.r, 0) / ops.length * 20) : 100;
+  const lv = DB.get("level", 1);
+  const rows = [["🎒 تفاعل الطالبات", Math.min(100, st.stu * 5)], ["❓ متوسط الأسئلة", avg], ["🎮 تقدم اللعبة", Math.round(lv / 3 * 100)], ["💛 رضا الأسر", sat], ["🏆 الشهادات", Math.min(100, st.certs * 10)]];
+  return rows.map((r) => '<div class="impact-row"><span>'.concat(r[0], '</span><div class="bar" style="flex:1"><i data-w="').concat(r[1], '%" style="width:0"></i></div><b>').concat(r[1], "%</b></div>")).join("") + '<p class="mini" style="margin-top:6px">يُقاس الأثر من دخول الطالبات والزائرات، ونتائج الأسئلة، وتقدم اللعبة، وتقييم أولياء الأمور.</p>';
+}
+function drawOpinions() {
+  const def = [{ n: "أم ريما", t: "ابنتي صارت تقرأ القصص بنفسها وتنتظر لعبة الحروف كل يوم!", r: 5 }, { n: "أم جود", t: "منصة مرتبة وممتعة، شكراً للمعلمة فاطمة.", r: 5 }];
+  const ops = [...DB.get("opinions", []), ...def];
+  $("#opList").innerHTML = ops.slice(0, 6).map((o) => '<div class="op"><span class="stars">'.concat("★".repeat(o.r), "</span><p>").concat(esc(o.t), "</p><small>— ").concat(esc(o.n), "</small></div>")).join("");
+}
+function addOpinion() {
+  const n = $("#opName").value.trim() || "ولي أمر", t = $("#opText").value.trim();
+  if (!t) return toast("اكتبي رأيكِ أولاً");
+  const ops = DB.get("opinions", []);
+  ops.unshift({ n, t, r: window._rv });
+  DB.set("opinions", ops);
+  send("رأي ولي أمر", { detail: t, rating: window._rv, parent: n });
+  $("#opText").value = "";
+  drawOpinions();
+  toast("شكراً لرأيكِ 💛");
+  confetti(30);
+}
+function drawComments() {
+  const cm = DB.get("comments", []);
+  $("#cmList").innerHTML = cm.length ? cm.slice(0, 8).map((c) => '<div class="op"><p>'.concat(esc(c.t), "</p><small>").concat(esc(c.n), " · ").concat(c.d, "</small></div>")).join("") : '<p class="mini" style="margin-bottom:10px">كوني أول من يعلّق 🌸</p>';
+}
+function addComment() {
+  const t = $("#cmText").value.trim();
+  if (!t) return;
+  const cm = DB.get("comments", []);
+  cm.unshift({ n: user.name, t, d: (/* @__PURE__ */ new Date()).toLocaleDateString("ar-SA") });
+  DB.set("comments", cm);
+  send("تعليق", { detail: t });
+  $("#cmText").value = "";
+  drawComments();
+  toast("تم نشر التعليق ✅");
+}
+function esc(s) {
+  return String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+}
+let curAudio = null;
+function stopAudio() {
+  try {
+    curAudio && curAudio.pause();
+  } catch (e) {
+  }
+  curAudio = null;
+  try {
+    speechSynthesis.cancel();
+  } catch (e) {
+  }
+}
+function playStory(id, text) {
+  stopAudio();
+  const a = new Audio("audio/".concat(id, ".mp3"));
+  curAudio = a;
+  let fell = false;
+  const fb = () => {
+    if (fell || curAudio !== a) return;
+    fell = true;
+    say(text);
+  };
+  a.onerror = fb;
+  a.play().catch(fb);
+}
+function units() {
+  view.innerHTML = back() + '\n  <div class="card-head"><span class="badge">'.concat(ic("letters", 22), '</span>لغتي · الصف الثاني · الفصل الدراسي الأول</div>\n  <div class="card"><div class="desc">أربع وحدات، في كل وحدة: مدخل الوحدة ونشاطات التهيئة وأنجز مشروعي، نص الاستماع، النشيد، الإملاء، درسان، ثم التقويم التجميعي.</div>\n   <div class="units-grid">').concat(UNITS.map((u, i) => '<div class="unit" onclick="unitPage('.concat(i, ')" style="--c:').concat(u.color, '">\n     <div class="u-em">').concat(u.em, "</div><small>الوحدة ").concat("١٢٣٤"[i], "</small><b>").concat(u.t, '</b>\n     <span class="mini">درسان · نشيد: ').concat(u.anthem, "</span></div>")).join(""), '</div>\n   <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn y" onclick="weeks()">📅 توزيع المنهج على الأسابيع</button><button class="btn ghost" onclick="say(UNITS.map(u=>u.t).join(\'، \'))">🔊 استمعي</button></div>\n  </div>');
+}
+function weeks() {
+  view.innerHTML = '<span class="back" onclick="units()">→ الوحدات</span>\n  <div class="card-head"><span class="badge">📅</span>توزيع المحتوى الدراسي على أسابيع الفصل الدراسي الأول</div>\n  <div class="card printable"><div class="mini" style="margin-bottom:8px">المادة: لغتي · الصف: الثاني ابتدائي · المرحلة: الابتدائية</div>\n  '.concat(WEEKS.map((w, i) => '<div class="wk"><span class="wn">'.concat(i + 1, "</span><div><b>").concat(w[0], "</b><p>").concat(w[1], "</p></div></div>")).join(""), '\n  <button class="btn ghost" style="margin-top:10px" onclick="window.print()">🖨️ طباعة</button></div>');
+}
+function unitPage(i) {
+  const u = UNITS[i];
+  $("#main").scrollTop = 0;
+  view.innerHTML = '<span class="back" onclick="units()">→ الوحدات</span>\n  <div class="card hero" style="padding:20px"><div style="font-size:54px">'.concat(u.em, '</div><small class="mini">الوحدة ').concat("١٢٣٤"[i], '</small><h1 class="title-font" style="font-size:32px">').concat(u.t, "</h1><p>").concat(u.intro, '</p>\n   <button class="btn ghost" style="margin-top:8px" onclick="say(\'').concat(u.t, ". ").concat(u.intro, '\')">🔊 التعليق الصوتي</button></div>\n\n  <div class="card-head"><span class="badge">🎈</span>مدخل الوحدة / نشاطات التهيئة</div>\n  <div class="card">').concat(u.warm.map((w) => '<div class="op">💭 '.concat(w, "</div>")).join(""), '</div>\n\n  <div class="card-head"><span class="badge">🛠️</span>أنجز مشروعي</div>\n  <div class="card"><div class="desc">').concat(u.project, '</div><label class="chip" style="display:inline-block"><input type="checkbox" ').concat(DB.get("proj" + u.id, false) ? "checked" : "", " onchange=\"DB.set('proj").concat(u.id, "',this.checked);if(this.checked){addPoints(10);confetti(40);send('مشروع',{detail:'").concat(u.t, '\'})}"> أنجزتُ مشروعي ✅</label></div>\n\n  <div class="card-head"><span class="badge">👂</span>نص الاستماع</div>\n  <div class="card"><button class="btn y" onclick="say(\'').concat(u.listening, '\')">🔊 استمعي للنص</button>\n   <details style="margin-top:10px"><summary class="mini" style="cursor:pointer">عرض النص للمعلمة</summary><p class="desc" style="margin-top:6px">').concat(u.listening, '</p></details>\n   <div id="lq"></div></div>\n\n  <div class="card-head"><span class="badge">🎵</span>النشيد: ').concat(u.anthem, ' (حفظ)</div>\n  <div class="card"><div class="desc">افتحي كتابكِ على نشيد «').concat(u.anthem, '»، ردّديه مع معلمتكِ ثم احفظيه.</div>\n   <div class="chips">').concat(["استمعتُ للنشيد", "ردّدتُه مع المعلمة", "حفظتُه"].map((s, k) => '<label class="chip"><input type="checkbox" '.concat(DB.get("an" + u.id + k, false) ? "checked" : "", " onchange=\"DB.set('an").concat(u.id).concat(k, "',this.checked);this.checked&&(addPoints(3),beep(true))\"> ").concat(s, "</label>")).join(""), '</div></div>\n\n  <div class="card-head"><span class="badge">✍️</span>إملاء الوحدة</div>\n  <div class="card" id="udict"></div>\n\n  <div class="card-head"><span class="badge">').concat(ic("sheets", 22), '</span>دروس الوحدة</div>\n  <div class="card"><div class="lessons">').concat(u.lessons.map((l, k) => '<div class="lesson" onclick="lessonPage(\''.concat(l.id, "')\"><span>").concat(l.em, "</span><div><small>الدرس ").concat(k ? "الثاني" : "الأول", "</small><b>").concat(l.t, '</b></div><span class="chev">‹</span></div>')).join(""), '</div></div>\n\n  <div class="card-head"><span class="badge">').concat(ic("cert", 22), '</span>التقويم التجميعي</div>\n  <div class="card"><div class="desc">اختبار شامل لدرسي الوحدة (').concat(u.lessons.map((l) => l.t).join(" و "), ').</div><button class="btn p" onclick="runQuiz(').concat(JSON.stringify(u.lessons.flatMap((l) => l.quiz)).replace(/"/g, "&quot;"), ",'التقويم التجميعي: ").concat(u.t, "',()=>unitPage(").concat(i, '))">ابدئي التقويم</button></div>');
+  mcq($("#lq"), u.listenQ);
+  dictation($("#udict"), u.dictation, "إملاء " + u.t);
+}
+const TABS = [["ready", "استعد"], ["explain", "الشرح"], ["story", "القصة"], ["dict", "الإملاء"], ["sheet", "أوراق العمل"], ["check", "تأكد"], ["test", "الاختبار"], ["fish", "لعبة الصيد"], ["strategy", "الاستراتيجية"]];
+function lessonPage(id, tab = "ready") {
+  const l = ALL_LESSONS.find((x) => x.id === id), ui = UNITS.indexOf(l.unit);
+  stopAudio();
+  clearInterval(window._pl);
+  clearInterval(window._fi);
+  view.innerHTML = '<span class="back" onclick="unitPage('.concat(ui, ')">→ ').concat(l.unit.t, '</span>\n  <div class="card-head"><span class="badge">').concat(l.em, "</span>").concat(l.unit.t, " · ").concat(l.t, '</div>\n  <div class="tabs">').concat(TABS.map((t) => '<button class="tab '.concat(t[0] === tab ? "on" : "", '" onclick="lessonPage(\'').concat(id, "','").concat(t[0], "')\">").concat(t[1], "</button>")).join(""), '</div>\n  <div class="card" id="tb"></div>');
+  const tb = $("#tb");
+  if (tab === "ready") {
+    tb.innerHTML = '<div style="font-size:60px;text-align:center">'.concat(l.em, '</div><div class="q" style="text-align:center">').concat(l.ready, '</div><div style="text-align:center"><button class="btn y" onclick="say(\'').concat(l.ready, "')\">🔊 استمعي</button></div>");
+    say(l.ready);
+  }
+  if (tab === "explain") {
+    tb.innerHTML = '<div class="desc"><b>مفردات الدرس</b></div>'.concat(l.vocab.map((v) => '<div class="ws-item"><span class="w">'.concat(v[0], "</span><span>").concat(v[1], '</span><button class="chip" onclick="say(\'').concat(v[0], ". ").concat(v[1], "')\">🔊</button></div>")).join(""), '<div class="op" style="margin-top:12px">💡 <b>القيمة:</b> ').concat(l.value, "</div>");
+  }
+  if (tab === "story") {
+    storyPlayer(tb, VIDEOS.find((v) => v.id === id));
+  }
+  if (tab === "dict") {
+    dictation(tb, l.dict, "إملاء " + l.t);
+  }
+  if (tab === "sheet") {
+    sheetBox(tb, l.sheet, "ورقة عمل " + l.t);
+  }
+  if (tab === "check") {
+    tb.innerHTML = '<div class="desc">ضعي ✔️ أمام العبارة الصحيحة و ✖️ أمام الخطأ:</div>' + l.check.map((c, k) => '<div class="ws-item"><span>'.concat(c[0], '</span><div class="chips"><button class="chip" onclick="tf(this,').concat(c[1] === true, ')">✔️</button><button class="chip" onclick="tf(this,').concat(c[1] === false, ')">✖️</button></div></div>')).join("");
+  }
+  if (tab === "test") {
+    runQuiz(l.quiz, "اختبار " + l.t, () => lessonPage(id, "test"), tb);
+  }
+  if (tab === "fish") {
+    fishGame(tb, l);
+  }
+  if (tab === "strategy") {
+    tb.innerHTML = '<div class="op" style="background:linear-gradient(90deg,rgba(255,159,192,.35),rgba(199,179,255,.35))"><small class="mini">استراتيجية الدرس</small><div class="q" style="margin:4px 0 0">'.concat(l.strategy.n, "</div></div>").concat(l.strategy.steps.map((s, k) => '<div class="ws-item"><span class="wn">'.concat(k + 1, '</span><span style="flex:1">').concat(s, "</span></div>")).join(""));
+  }
+}
+function tf(b, ok) {
+  const row = b.parentElement;
+  if (row.dataset.d) return;
+  if (ok) {
+    b.classList.add("ok");
+    row.dataset.d = 1;
+    beep(true);
+    addPoints(2);
+  } else {
+    b.classList.add("no");
+    beep(false);
+    setTimeout(() => b.classList.remove("no"), 500);
+  }
+}
+function mcq(el, qs) {
+  el.innerHTML = qs.map((q, i) => '<div style="margin-top:12px"><div class="desc" style="margin-bottom:6px"><b>'.concat(q.q, '</b></div><div class="chips">').concat(shuffle(q.o.map((o, k) => [o, k === q.a])).map((o) => '<button class="chip" onclick="tf(this,'.concat(o[1], ')">').concat(o[0], "</button>")).join(""), "</div></div>")).join("");
+}
+function dictation(el, words, label) {
+  let i = 0, ok = 0;
+  const draw = () => {
+    if (i >= words.length) {
+      el.innerHTML = '<div class="q" style="text-align:center">أحسنتِ! '.concat(ok, " من ").concat(words.length, " 🌟</div>");
+      send("إملاء", { detail: label, score: "".concat(ok, "/").concat(words.length) });
+      ok === words.length && confetti(50);
+      return;
+    }
+    el.innerHTML = '<div class="desc">استمعي للكلمة ثم اكتبيها ('.concat(i + 1, "/").concat(words.length, ')</div><button class="btn y" id="dl">🔊 استمعي</button>\n    <input class="field" id="dIn" style="margin-top:10px;font-size:22px;text-align:center" autocomplete="off"><button class="btn" id="dOk">تحقّقي</button> <span id="dR"></span>');
+    $("#dl").onclick = () => say(words[i]);
+    say(words[i]);
+    const strip = (s) => s.replace(/[ً-ْـ]/g, "").trim();
+    $("#dOk").onclick = () => {
+      const g = strip($("#dIn").value) === strip(words[i]);
+      $("#dR").textContent = g ? "✅ صحيحة" : "❌ الصحيح: " + words[i];
+      beep(g);
+      if (g) {
+        ok++;
+        addPoints(2);
+      }
+      setTimeout(() => {
+        i++;
+        draw();
+      }, 1300);
+    };
+  };
+  draw();
+}
+function sheetBox(el, items, label) {
+  let n = 0;
+  el.innerHTML = '<div class="desc">اختاري الإجابة الصحيحة:</div>' + items.map((it) => '<div class="ws-item"><span class="w" style="font-size:17px">'.concat(it[0], '</span><div class="chips">').concat(shuffle([[it[1], 1], [it[2], 0]]).map((o) => '<button class="chip" data-ok="'.concat(o[1], '">').concat(o[0], "</button>")).join(""), "</div></div>")).join("") + '<div style="margin-top:10px;display:flex;gap:8px"><span class="pill" id="shS">✅ 0 / '.concat(items.length, '</span><button class="btn ghost" onclick="window.print()">🖨️ طباعة</button></div>');
+  el.classList.add("printable");
+  el.querySelectorAll(".chip[data-ok]").forEach((b) => b.onclick = () => {
+    const row = b.parentElement;
+    if (row.dataset.d) return;
+    if (b.dataset.ok === "1") {
+      b.classList.add("ok");
+      row.dataset.d = 1;
+      n++;
+      beep(true);
+      addPoints(2);
+      $("#shS").textContent = "✅ ".concat(n, " / ").concat(items.length);
+      if (n === items.length) {
+        confetti();
+        toast(rnd(praise));
+        send("ورقة عمل", { detail: label, score: "كاملة" });
+      }
+    } else {
+      b.classList.add("no");
+      beep(false);
+      setTimeout(() => b.classList.remove("no"), 500);
+    }
+  });
+}
+function runQuiz(Q0, label, again, el) {
+  const host = el || view;
+  let i = 0, score = 0;
+  const Q = Q0.map((q) => ({ q: q.q, o: shuffle(q.o.map((t, k) => [t, k === q.a])) }));
+  const draw = () => {
+    if (i >= Q.length) {
+      const qs = DB.get("quizScores", []);
+      qs.push(Math.round(score / Q.length * 10));
+      DB.set("quizScores", qs);
+      addPoints(score * 2);
+      send("نتيجة الأسئلة", { detail: label, score: "".concat(score, "/").concat(Q.length) });
+      if (score / Q.length >= 0.7) confetti(90);
+      host.innerHTML = (el ? "" : back()) + '<div class="'.concat(el ? "" : "card ", 'hero"><div style="font-size:56px">').concat(score === Q.length ? "🏆" : score / Q.length >= 0.5 ? "🌟" : "💪", '</div><h1 class="title-font" style="font-size:28px">').concat(score, " من ").concat(Q.length, "</h1><p>").concat(label, '</p><div style="margin-top:12px;display:flex;gap:8px;justify-content:center"><button class="btn y" id="qa">إعادة ↻</button><button class="btn" onclick="render(\'cert\')">شهادتي 🏆</button></div></div>');
+      host.querySelector("#qa").onclick = again;
+      return;
+    }
+    const q = Q[i];
+    host.innerHTML = (el ? "" : back() + '<div class="card-head"><span class="badge">'.concat(ic("quiz", 22), "</span>").concat(label, '</div><div class="card">')) + '<div class="bar" style="margin-bottom:14px"><i style="width:'.concat(i / Q.length * 100, '%"></i></div><div class="mini">السؤال ').concat(i + 1, " من ").concat(Q.length, '</div>\n      <div class="q">').concat(q.q, ' <button class="chip" style="padding:3px 9px" id="qs">🔊</button></div><div class="opts">').concat(q.o.map((o, k) => '<button class="opt" data-k="'.concat(k, '">').concat(o[0], "</button>")).join(""), "</div>") + (el ? "" : "</div>");
+    host.querySelector("#qs").onclick = () => say(q.q);
+    host.querySelectorAll(".opt").forEach((b) => b.onclick = () => {
+      const ok = q.o[+b.dataset.k][1];
+      host.querySelectorAll(".opt").forEach((x) => x.onclick = null);
+      if (ok) {
+        b.classList.add("ok");
+        score++;
+        beep(true);
+        toast(rnd(praise));
+      } else {
+        b.classList.add("no");
+        beep(false);
+        host.querySelectorAll(".opt").forEach((x, k) => q.o[k][1] && x.classList.add("ok"));
+      }
+      setTimeout(() => {
+        i++;
+        draw();
+      }, 1100);
+    });
+  };
+  draw();
+}
+function storyPlayer(el, v) {
+  el.innerHTML = '<div class="player">'.concat(v.scenes.map((s, j) => '<div class="scene '.concat(j ? "" : "on", '"><div class="big">').concat(s.e, "</div><p>").concat(s.x, "</p></div>")).join(""), '</div>\n  <div class="pctl"><button class="btn" id="pp">▶</button><div class="bar"><i id="pb" style="width:0;transition:width .2s linear"></i></div><span class="mini" id="pt">0:10</span></div>\n  <p class="desc" style="margin-top:10px">').concat(v.story, "</p>");
+  const sc = [...el.querySelectorAll(".scene")];
+  let t = 0, on = false;
+  const q = (x) => el.querySelector(x);
+  const tick = () => {
+    if (!document.body.contains(el)) {
+      clearInterval(window._pl);
+      stopAudio();
+      return;
+    }
+    t += 0.2;
+    const p = Math.min(t / 10, 1);
+    q("#pb").style.width = p * 100 + "%";
+    q("#pt").textContent = "0:" + String(Math.max(0, Math.ceil(10 - t))).padStart(2, "0");
+    const k = Math.min(sc.length - 1, Math.floor(p * sc.length));
+    sc.forEach((s, j) => s.classList.toggle("on", j === k));
+    if (t >= 10) {
+      clearInterval(window._pl);
+      on = false;
+      q("#pp").textContent = "↻";
+      addPoints(5);
+      send("مشاهدة قصة", { detail: v.t });
+      toast("انتهت القصة! +5 نقاط ⭐");
+    }
+  };
+  q("#pp").onclick = () => {
+    if (on) return;
+    if (t >= 10) t = 0;
+    on = true;
+    q("#pp").textContent = "⏸";
+    playStory(v.id, v.story);
+    clearInterval(window._pl);
+    window._pl = setInterval(tick, 200);
+  };
+}
+function fishGame(el, l) {
+  let score = 0, round = 0;
+  const W = l.fish.words;
+  el.innerHTML = '<div class="hud"><span class="pill">🎣 اصطادي السمكة التي فيها كلمة: <b style="color:var(--yellow);margin-right:4px">'.concat(l.fish.target, '</b></span><span class="pill">⭐ <b id="fS">0</b></span><span class="pill">🎯 <b id="fR">1</b>/5</span></div><div class="sea" id="sea"><div class="boat">🚣</div></div>');
+  const sea = $("#sea"), cols = ["#ff9fc0", "#8fd6ff", "#ffd84d", "#a8e07a", "#c7b3ff", "#ffb98a"];
+  const spawn = () => {
+    sea.querySelectorAll(".fish").forEach((f) => f.remove());
+    const words = shuffle([l.fish.target, ...shuffle(W.filter((w) => w !== l.fish.target)).slice(0, 4)]);
+    words.forEach((w, k) => {
+      const f = document.createElement("div");
+      f.className = "fish";
+      f.style.top = 70 + k * 44 + "px";
+      f.style.animationDuration = 6 + Math.random() * 4 + "s";
+      f.style.animationDelay = -Math.random() * 6 + "s";
+      f.innerHTML = '<span class="fbody" style="background:'.concat(cols[k % 6], '">').concat(w, '</span><span class="ftail" style="border-right-color:').concat(cols[k % 6], '"></span>');
+      f.onclick = () => {
+        if (w === l.fish.target) {
+          score += 10;
+          round++;
+          addPoints(10);
+          beep(true);
+          f.classList.add("burst");
+          $("#fS").textContent = score;
+          toast(rnd(praise));
+          if (round >= 5) {
+            confetti(90);
+            send("لعبة الصيد", { detail: l.t, score });
+            setTimeout(() => {
+              el.innerHTML = '<div class="hero"><div style="font-size:60px">🐟🏆</div><h1 class="title-font" style="font-size:28px">اصطدتِ '.concat(round, " سمكات!</h1><p>جمعتِ ").concat(score, ' نقطة</p><button class="btn y" style="margin-top:10px" onclick="lessonPage(\'').concat(l.id, "','fish')\">العبي مرة أخرى</button></div>");
+            }, 700);
+          } else {
+            $("#fR").textContent = round + 1;
+            setTimeout(spawn, 600);
+          }
+        } else {
+          beep(false);
+          f.animate([{ transform: "scale(1.2)" }, { transform: "scale(1)" }], { duration: 300 });
+        }
+      };
+      sea.appendChild(f);
+    });
+  };
+  spawn();
+  say("اصطادي السمكة التي فيها كلمة " + l.fish.target);
+}
+function videos() {
+  view.innerHTML = back() + '<div class="card-head"><span class="badge">'.concat(ic("videos", 22), "</span>قصص الدروس · 10 ثوانٍ لكل قصة</div>") + VIDEOS.map((v, i) => '\n    <div class="card"><div class="tags"><span><i>'.concat(v.em, "</i>").concat(v.unit, '</span><span><i>⏱️</i>10 ثوانٍ</span><span><i>🔊</i>بصوت مسموع</span></div>\n      <div class="desc"><b>').concat(v.t, '</b></div><div id="sp').concat(i, '"><button class="btn y" onclick="openStory(').concat(i, ')">شاهدي القصة ▶</button></div></div>')).join("");
+}
+function openStory(i) {
+  document.querySelectorAll("[id^=sp]").forEach((e, k) => {
+    if (k !== i && e.querySelector(".player")) {
+      e.innerHTML = '<button class="btn y" onclick="openStory('.concat(k, ')">شاهدي القصة ▶</button>');
+    }
+  });
+  clearInterval(window._pl);
+  stopAudio();
+  const el = document.getElementById("sp" + i);
+  storyPlayer(el, VIDEOS[i]);
+  el.querySelector("#pp").click();
+}
+function sheets() {
+  view.innerHTML = back() + SHEETS.map((s, i) => '<div class="card-head"><span class="badge">'.concat(s.em, "</span>").concat(s.t, '</div><div class="card" id="ws').concat(i, '"></div>')).join("");
+  SHEETS.forEach((s, i) => sheetBox(document.getElementById("ws" + i), s.items, s.t));
+}
+function exercises() {
+  view.innerHTML = back() + '\n  <div class="card-head"><span class="badge">'.concat(ic("exercises", 22), '</span>تمرين ١: ركّبي الكلمة</div>\n  <div class="card" style="text-align:center"><div style="font-size:56px" id="bEm"></div>\n    <div class="slots" id="slots"></div><div class="tiles" id="tiles"></div>\n    <div style="margin-top:12px;display:flex;gap:8px;justify-content:center"><button class="btn ghost" onclick="buildNew()">كلمة أخرى ↻</button><button class="btn ghost" onclick="say(window._bw)">🔊 اسمعي</button></div></div>\n  <div class="card-head"><span class="badge">🖼️</span>تمرين ٢: طابقي الصورة بالكلمة</div>\n  <div class="card" style="text-align:center"><div style="font-size:64px" id="mEm"></div><div class="chips" style="justify-content:center;margin-top:10px" id="mOpts"></div></div>\n  <div class="card-head"><span class="badge">📚</span>تمرين ٣: من أي وحدة هذه الكلمة؟</div>\n  <div class="card" style="text-align:center"><div style="font-size:34px;font-weight:800;margin-bottom:10px" id="tW"></div><div class="chips" style="justify-content:center" id="tOpts"></div></div>');
+  buildNew();
+  matchNew();
+  tanNew();
+}
+function buildNew() {
+  const [w, e] = rnd(WORDS);
+  window._bw = w;
+  $("#bEm").textContent = e;
+  const L = [...w.replace(/[ً-ْ]/g, "")];
+  let pos = 0;
+  $("#slots").innerHTML = L.map(() => '<div class="slot"></div>').join("");
+  $("#tiles").innerHTML = shuffle(L).map((c) => '<button class="tile">'.concat(c, "</button>")).join("");
+  document.querySelectorAll(".tile").forEach((t) => t.onclick = () => {
+    if (t.textContent === L[pos]) {
+      const s = document.querySelectorAll(".slot")[pos];
+      s.textContent = L[pos];
+      s.classList.add("f");
+      t.disabled = true;
+      pos++;
+      beep(true);
+      if (pos === L.length) {
+        addPoints(5);
+        confetti(40);
+        toast(rnd(praise));
+        say(w);
+        send("تمرين", { detail: "تركيب كلمة: " + w });
+        setTimeout(buildNew, 1800);
+      }
+    } else {
+      beep(false);
+      t.animate([{ transform: "translateX(5px)" }, { transform: "translateX(-5px)" }, { transform: "none" }], { duration: 300 });
+    }
+  });
+}
+function matchNew() {
+  const [w, e] = rnd(WORDS);
+  $("#mEm").textContent = e;
+  const opts = shuffle([w, ...shuffle(WORDS.filter((x) => x[0] !== w)).slice(0, 3).map((x) => x[0])]);
+  $("#mOpts").innerHTML = opts.map((o) => '<button class="chip" style="font-size:18px">'.concat(o, "</button>")).join("");
+  document.querySelectorAll("#mOpts .chip").forEach((b) => b.onclick = () => {
+    if (b.textContent === w) {
+      b.classList.add("ok");
+      beep(true);
+      addPoints(3);
+      toast(rnd(praise));
+      setTimeout(matchNew, 900);
+    } else {
+      b.classList.add("no");
+      beep(false);
+    }
+  });
+}
+function tanNew() {
+  const l = rnd(ALL_LESSONS), w = rnd(l.vocab)[0];
+  $("#tW").textContent = w;
+  $("#tOpts").innerHTML = UNITS.map((u, i) => '<button class="chip" data-i="'.concat(i, '">').concat(u.em, " ").concat(u.t, "</button>")).join("");
+  document.querySelectorAll("#tOpts .chip").forEach((b) => b.onclick = () => {
+    if (UNITS[+b.dataset.i] === l.unit) {
+      b.classList.add("ok");
+      beep(true);
+      addPoints(3);
+      setTimeout(tanNew, 800);
+    } else {
+      b.classList.add("no");
+      beep(false);
+    }
+  });
+}
+function quiz() {
+  runQuiz(shuffle(QUIZ).slice(0, 10), "أسئلة لغتي · الصف الثاني", () => render("quiz"));
+}
+const LC = ["#ffd84d", "#ff8fb8", "#7ddc72", "#5fc3ff", "#b69cff", "#ffad5c"];
+function letters() {
+  view.innerHTML = back() + '<div class="card-head"><span class="badge">'.concat(ic("letters", 22), '</span>قصص الحروف — اضغطي على الحرف</div>\n  <div class="card"><div class="letters">').concat(LETTERS.map((l, i) => '<button class="lt" style="background:'.concat(LC[i % 6], '" onclick="showLetter(').concat(i, ')">').concat(l[0], "</button>")).join(""), '</div><div id="story"></div></div>');
+}
+function showLetter(i) {
+  const [l, w, e, s] = LETTERS[i];
+  $("#story").innerHTML = '<div class="story"><div class="big">'.concat(e, "</div><h3>").concat(l, " — ").concat(w, "</h3><p>").concat(s, '</p>\n  <div style="margin-top:10px;display:flex;gap:8px;justify-content:center"><button class="btn y" onclick="say(\'حرف ').concat(l, ". ").concat(w, ". ").concat(s, "')\">🔊 اسمعي القصة</button>\n  ").concat(i < 27 ? '<button class="btn ghost" style="color:#1d2330;border-color:#ccc" onclick="showLetter('.concat(i + 1, ')">الحرف التالي ←</button>') : "", "</div></div>");
+  say("حرف ".concat(l, ". ").concat(w, ". ").concat(s));
+  addPoints(1);
+  $("#story").scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+const LEVELS = [
+  { n: "المستوى ١: اصطادي الحرف", em: "🔤", c: "var(--yellow)", make() {
+    const t = rnd(LETTERS);
+    const o = shuffle([t, ...shuffle(LETTERS.filter((x) => x !== t)).slice(0, 4)]);
+    return { label: "اصطادي حرف: ".concat(t[0]), speak: "اصطادي حرف " + t[0], ans: t[0], opts: o.map((x) => x[0]) };
+  } },
+  { n: "المستوى ٢: الصورة والكلمة", em: "🖼️", c: "var(--pink)", make() {
+    const t = rnd(WORDS);
+    const o = shuffle([t, ...shuffle(WORDS.filter((x) => x !== t)).slice(0, 3)]);
+    return { label: "أين كلمة ".concat(t[1], " ؟"), speak: "أين كلمة " + t[0], ans: t[0], opts: o.map((x) => x[0]) };
+  } },
+  { n: "المستوى ٣: كلمة من الدرس", em: "📚", c: "var(--blue)", make() {
+    const l = rnd(ALL_LESSONS);
+    const o = shuffle([l, ...shuffle(ALL_LESSONS.filter((x) => x !== l)).slice(0, 3)]);
+    return { label: "".concat(l.em, " ").concat(l.vocab[0][1]), speak: l.vocab[0][1], ans: l.vocab[0][0], opts: o.map((x) => x.vocab[0][0]) };
+  } }
+];
+function game() {
+  const lv = DB.get("level", 1);
+  view.innerHTML = back() + '<div class="card-head"><span class="badge">'.concat(ic("game", 22), '</span>عالم لغتي ثلاثي الأبعاد</div>\n  <div class="card"><div class="desc">اضغطي على المكعّب الدوّار الصحيح! كل إجابة صحيحة = ١٠ نقاط، و٨ إجابات تفتح المستوى التالي 🔓</div>\n  <div class="levels">').concat(LEVELS.map((L, i) => '<button class="lvl '.concat(i + 1 > lv ? "lock" : "", '" style="background:').concat(L.c, '" onclick="').concat(i + 1 > lv ? "toast('أكملي المستوى السابق أولاً 🔒')" : "play(".concat(i, ")"), '"><span class="em">').concat(i + 1 > lv ? "🔒" : L.em, "</span>").concat(L.n, "</button>")).join(""), "</div></div>");
+}
+function play(li) {
+  const L = LEVELS[li];
+  let round = 0, score = 0, streak = 0;
+  DB.set("games", DB.get("games", 0) + 1);
+  view.innerHTML = '<span class="back" onclick="render(\'game\')">→ المستويات</span>\n  <div class="card-head"><span class="badge">'.concat(L.em, "</span>").concat(L.n, '</div>\n  <div class="card"><div class="hud"><span class="pill">⭐ <b id="gS">0</b></span><span class="pill">🔥 <b id="gK">0</b></span><span class="pill">🎯 <b id="gR">1</b>/8</span><button class="pill" style="cursor:pointer;color:#fff" onclick="say(window._sp)">🔊</button></div>\n  <div class="stage" id="stage"><div class="target" id="tg"></div><div class="cheer" id="ch"></div></div></div>');
+  const next = () => {
+    if (round >= 8) {
+      finish();
+      return;
+    }
+    const r = L.make();
+    window._sp = r.speak;
+    $("#tg").textContent = r.label;
+    $("#gR").textContent = round + 1;
+    say(r.speak);
+    document.querySelectorAll(".cube-wrap").forEach((c) => c.remove());
+    const st = $("#stage"), W = st.clientWidth, H = st.clientHeight, n = r.opts.length;
+    r.opts.forEach((o, k) => {
+      const w = document.createElement("div");
+      w.className = "cube-wrap floaty";
+      const sz = W < 500 ? 64 : 76;
+      const gap = (W - 40) / n;
+      w.style.left = 20 + gap * k + gap / 2 - sz / 2 + "px";
+      w.style.top = 90 + k % 2 * 70 + Math.random() * 30 + "px";
+      w.style.animationDelay = k * 0.4 + "s";
+      const col = LC[(k + round) % 6];
+      w.innerHTML = '<div class="cube" style="animation-duration:'.concat(6 + k, 's">').concat([1, 2, 3, 4, 5, 6].map((f) => '<div class="face f'.concat(f, '" style="background:').concat(col, ";font-size:").concat(o.length > 3 ? "15px" : "", '">').concat(f < 5 ? o : "", "</div>")).join(""), "</div>");
+      w.onclick = () => {
+        if (w._d) return;
+        if (o === r.ans) {
+          w._d = 1;
+          w.classList.add("burst");
+          score += 10;
+          streak++;
+          addPoints(10);
+          beep(true);
+          const ch = $("#ch");
+          ch.textContent = streak >= 3 ? "🔥 ".concat(streak, " متتالية!") : rnd(praise);
+          ch.classList.remove("go");
+          void ch.offsetWidth;
+          ch.classList.add("go");
+          if (streak % 3 === 0) confetti(35);
+          round++;
+          $("#gS").textContent = score;
+          $("#gK").textContent = streak;
+          window._gt = setTimeout(next, 900);
+        } else {
+          streak = 0;
+          $("#gK").textContent = 0;
+          beep(false);
+          w.animate([{ transform: "translateX(8px)" }, { transform: "translateX(-8px)" }, { transform: "none" }], { duration: 350 });
+        }
       };
       st.appendChild(w);
     });
   };
-  const finish=()=>{
-    const lv=DB.get('level',1);if(li+1>=lv&&li<2)DB.set('level',li+2);
-    confetti(120);beep(true);send('لعبة',{detail:L.n,score});
-    view.innerHTML=`<div class="card hero"><div style="font-size:64px">🏆</div><h1 class="title-font">أنهيتِ ${L.n}!</h1><p>جمعتِ ${score} نقطة ${li<2?'وفتحتِ المستوى التالي 🔓':'— أنتِ بطلة لغتي السعادة 👑'}</p>
-    <div style="margin-top:14px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><button class="btn y" onclick="render('game')">المستويات</button><button class="btn" onclick="render('cert')">شهادتي 🏆</button></div></div>`;
+  const finish = () => {
+    const lv = DB.get("level", 1);
+    if (li + 1 >= lv && li < 2) DB.set("level", li + 2);
+    confetti(120);
+    beep(true);
+    send("لعبة", { detail: L.n, score });
+    view.innerHTML = '<div class="card hero"><div style="font-size:64px">🏆</div><h1 class="title-font">أنهيتِ '.concat(L.n, "!</h1><p>جمعتِ ").concat(score, " نقطة ").concat(li < 2 ? "وفتحتِ المستوى التالي 🔓" : "— أنتِ بطلة لغتي السعادة 👑", '</p>\n    <div style="margin-top:14px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><button class="btn y" onclick="render(\'game\')">المستويات</button><button class="btn" onclick="render(\'cert\')">شهادتي 🏆</button></div></div>');
   };
-  setTimeout(next,300);
+  setTimeout(next, 300);
 }
-
-/* ============ الشهادة ============ */
-function cert(){
-  view.innerHTML=back()+`<div class="card-head"><span class="badge">${ic("cert",22)}</span>شهادة تميّز</div>
-  <div class="card"><input class="field" id="cName" value="${esc(user.name)}" placeholder="اسم الطالبة">
-  <canvas id="cert" width="1100" height="780"></canvas>
-  <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"><button class="btn y" onclick="dlCert()">⬇️ تحميل الشهادة</button><button class="btn ghost" onclick="printCert()">🖨️ طباعة</button></div></div>`;
-  drawCert();document.fonts&&document.fonts.ready.then(()=>$('#cert')&&drawCert());$('#cName').oninput=drawCert;
+function cert() {
+  view.innerHTML = back() + '<div class="card-head"><span class="badge">'.concat(ic("cert", 22), '</span>شهادة تميّز</div>\n  <div class="card"><input class="field" id="cName" value="').concat(esc(user.name), '" placeholder="اسم الطالبة">\n  <canvas id="cert" width="1100" height="780"></canvas>\n  <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"><button class="btn y" onclick="dlCert()">⬇️ تحميل الشهادة</button><button class="btn ghost" onclick="printCert()">🖨️ طباعة</button></div></div>');
+  drawCert();
+  document.fonts && document.fonts.ready.then(() => $("#cert") && drawCert());
+  $("#cName").oninput = drawCert;
 }
-function drawCert(){
-  const c=$('#cert'),x=c.getContext('2d'),W=c.width,H=c.height,n=$('#cName').value||'الطالبة';
-  const g=x.createLinearGradient(0,0,W,H);g.addColorStop(0,'#e6f6ff');g.addColorStop(1,'#fff6d6');x.fillStyle=g;x.fillRect(0,0,W,H);
-  x.lineWidth=14;x.strokeStyle='#ffd84d';x.strokeRect(22,22,W-44,H-44);x.lineWidth=4;x.strokeStyle='#ff8fb8';x.strokeRect(44,44,W-88,H-88);
-  x.font='60px serif';['🌈','☀️','🦋','🌸','⭐','🐝'].forEach((e,i)=>x.fillText(e,[70,W-130,70,W-130,W/2-30,120][i],[130,130,H-80,H-80,140,H/2]));
-  x.textAlign='center';x.direction='rtl';x.fillStyle='#2a4d6e';
-  x.font='800 66px Tajawal';x.fillText('شهادة تميّز',W/2,215);
-  x.font='700 28px Tajawal';x.fillStyle='#5a6b7d';x.fillText('منصة لغتي السعادة — الصف الثاني ابتدائي',W/2,265);
-  x.font='500 30px Tajawal';x.fillStyle='#333';x.fillText('تُمنح هذه الشهادة للطالبة المتميزة',W/2,340);
-  x.font='800 62px Tajawal';x.fillStyle='#e0558c';x.fillText(n,W/2,425);
-  x.font='500 28px Tajawal';x.fillStyle='#333';x.fillText(`تقديراً لتفوقها في مادة لغتي وجمعها ${points} نقطة ⭐`,W/2,490);
-  x.fillText('متمنين لها دوام التميز والنجاح',W/2,535);
-  x.font='700 24px Tajawal';x.fillStyle='#2a4d6e';
-  x.fillText('معلمة المادة',W-260,620);x.fillText('مديرة المدرسة',260,620);
-  x.font='800 28px Tajawal';x.fillStyle='#e0558c';x.fillText('أ. '+CONFIG.TEACHER,W-260,662);x.fillText('أ. '+CONFIG.PRINCIPAL,260,662);
-  x.font='500 20px Tajawal';x.fillStyle='#7a8794';x.fillText(new Date().toLocaleDateString('ar-SA'),W/2,700);
+function drawCert() {
+  const c = $("#cert"), x = c.getContext("2d"), W = c.width, H = c.height, n = $("#cName").value || "الطالبة";
+  const g = x.createLinearGradient(0, 0, W, H);
+  g.addColorStop(0, "#e6f6ff");
+  g.addColorStop(1, "#fff6d6");
+  x.fillStyle = g;
+  x.fillRect(0, 0, W, H);
+  x.lineWidth = 14;
+  x.strokeStyle = "#ffd84d";
+  x.strokeRect(22, 22, W - 44, H - 44);
+  x.lineWidth = 4;
+  x.strokeStyle = "#ff8fb8";
+  x.strokeRect(44, 44, W - 88, H - 88);
+  x.font = "60px serif";
+  ["🌈", "☀️", "🦋", "🌸", "⭐", "🐝"].forEach((e, i) => x.fillText(e, [70, W - 130, 70, W - 130, W / 2 - 30, 120][i], [130, 130, H - 80, H - 80, 140, H / 2]));
+  x.textAlign = "center";
+  x.direction = "rtl";
+  x.fillStyle = "#2a4d6e";
+  x.font = "800 66px Tajawal";
+  x.fillText("شهادة تميّز", W / 2, 215);
+  x.font = "700 28px Tajawal";
+  x.fillStyle = "#5a6b7d";
+  x.fillText("منصة لغتي السعادة — الصف الثاني ابتدائي", W / 2, 265);
+  x.font = "500 30px Tajawal";
+  x.fillStyle = "#333";
+  x.fillText("تُمنح هذه الشهادة للطالبة المتميزة", W / 2, 340);
+  x.font = "800 62px Tajawal";
+  x.fillStyle = "#e0558c";
+  x.fillText(n, W / 2, 425);
+  x.font = "500 28px Tajawal";
+  x.fillStyle = "#333";
+  x.fillText("تقديراً لتفوقها في مادة لغتي وجمعها ".concat(points, " نقطة ⭐"), W / 2, 490);
+  x.fillText("متمنين لها دوام التميز والنجاح", W / 2, 535);
+  x.font = "700 24px Tajawal";
+  x.fillStyle = "#2a4d6e";
+  x.fillText("معلمة المادة", W - 260, 620);
+  x.fillText("مديرة المدرسة", 260, 620);
+  x.font = "800 28px Tajawal";
+  x.fillStyle = "#e0558c";
+  x.fillText("أ. " + CONFIG.TEACHER, W - 260, 662);
+  x.fillText("أ. " + CONFIG.PRINCIPAL, 260, 662);
+  x.font = "500 20px Tajawal";
+  x.fillStyle = "#7a8794";
+  x.fillText((/* @__PURE__ */ new Date()).toLocaleDateString("ar-SA"), W / 2, 700);
 }
-function certDone(){DB.set('certs',DB.get('certs',0)+1);send('شهادة',{detail:'شهادة للطالبة '+($('#cName').value||''),score:points});confetti(100)}
-function dlCert(){const a=document.createElement('a');a.download='شهادة-لغتي-السعادة.png';a.href=$('#cert').toDataURL('image/png');a.click();certDone();toast('مبروك الشهادة 🎉')}
-function printCert(){const w=window.open('');w.document.write(`<img src="${$('#cert').toDataURL()}" style="width:100%" onload="print()">`);certDone()}
-
-/* ============ لوحة المعلمة ============ */
-function teacher(){
-  if(user.role!=='معلمة')return render('home');
-  const log=DB.get('log',[]);
-  view.innerHTML=back()+`<div class="card-head"><span class="badge">${ic("link",22)}</span>ربط المنصة مع Google</div>
-  <div class="card"><div class="desc">الصقي رابط Google Apps Script بعد نشره، لتصل البيانات إلى <b>${CONFIG.TEACHER_EMAIL}</b> وتُحفظ في جدول Google.</div>
-  <input class="field" id="su" dir="ltr" placeholder="https://script.google.com/macros/s/.../exec" value="${esc(scriptURL())}">
-  <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn y" onclick="saveUrl()">حفظ الرابط</button><button class="btn ghost" onclick="send('اختبار',{detail:'رسالة تجربة من لوحة المعلمة'});toast('تم إرسال رسالة تجربة 📩')">إرسال تجربة</button></div>
-  <p class="mini" style="margin-top:8px">الحالة: ${scriptURL()?'✅ مربوطة':'⚠️ غير مربوطة بعد — البيانات محفوظة على هذا الجهاز فقط'}</p></div>
-
-  <div class="card-head"><span class="badge">${ic("videos",22)}</span>إضافة فيديو يوتيوب للشروحات</div>
-  <div class="card"><input class="field" id="yt" dir="ltr" placeholder="رابط يوتيوب"><button class="btn p" onclick="addYt()">إضافة</button></div>
-
-  <div class="card-head"><span class="badge">${ic("teacher",22)}</span>سجل النشاط (${log.length})</div>
-  <div class="card" style="overflow-x:auto"><table><tr><th>النوع</th><th>الاسم</th><th>الفئة</th><th>التفاصيل</th><th>الوقت</th></tr>
-  ${log.slice(0,60).map(r=>`<tr><td>${esc(r.type)}</td><td>${esc(r.name)}</td><td>${esc(r.role)}</td><td>${esc(r.detail||r.score||'')}</td><td>${esc(r.time)}</td></tr>`).join('')||'<tr><td colspan="5">لا يوجد نشاط بعد</td></tr>'}</table>
-  <button class="btn ghost" style="margin-top:10px" onclick="csv()">⬇️ تصدير CSV</button></div>`;
+function certDone() {
+  DB.set("certs", DB.get("certs", 0) + 1);
+  send("شهادة", { detail: "شهادة للطالبة " + ($("#cName").value || ""), score: points });
+  confetti(100);
 }
-function saveUrl(){DB.set('scriptUrl',$('#su').value.trim());toast('تم حفظ الرابط ✅');loadRemote();render('teacher')}
-function addYt(){const u=$('#yt').value.trim();if(!u)return;const l=DB.get('ytLinks',[]);l.push(u);DB.set('ytLinks',l);$('#yt').value='';toast('أُضيف الفيديو إلى الشروحات 🎬')}
-function csv(){const log=DB.get('log',[]);const rows=[['النوع','الاسم','الفئة','التفاصيل','الوقت'],...log.map(r=>[r.type,r.name,r.role,r.detail||r.score||'',r.time])];
-  const b=new Blob(['﻿'+rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n')],{type:'text/csv'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='سجل-لغتي-السعادة.csv';a.click()}
+function dlCert() {
+  const a = document.createElement("a");
+  a.download = "شهادة-لغتي-السعادة.png";
+  a.href = $("#cert").toDataURL("image/png");
+  a.click();
+  certDone();
+  toast("مبروك الشهادة 🎉");
+}
+function printCert() {
+  const w = window.open("");
+  w.document.write('<img src="'.concat($("#cert").toDataURL(), '" style="width:100%" onload="print()">'));
+  certDone();
+}
+function teacher() {
+  if (user.role !== "معلمة") return render("home");
+  const log = DB.get("log", []);
+  view.innerHTML = back() + '<div class="card-head"><span class="badge">'.concat(ic("link", 22), '</span>ربط المنصة مع Google</div>\n  <div class="card"><div class="desc">الصقي رابط Google Apps Script بعد نشره، لتصل البيانات إلى <b>').concat(CONFIG.TEACHER_EMAIL, '</b> وتُحفظ في جدول Google.</div>\n  <input class="field" id="su" dir="ltr" placeholder="https://script.google.com/macros/s/.../exec" value="').concat(esc(scriptURL()), '">\n  <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn y" onclick="saveUrl()">حفظ الرابط</button><button class="btn ghost" onclick="send(\'اختبار\',{detail:\'رسالة تجربة من لوحة المعلمة\'});toast(\'تم إرسال رسالة تجربة 📩\')">إرسال تجربة</button></div>\n  <p class="mini" style="margin-top:8px">الحالة: ').concat(scriptURL() ? "✅ مربوطة" : "⚠️ غير مربوطة بعد — البيانات محفوظة على هذا الجهاز فقط", '</p></div>\n\n  <div class="card-head"><span class="badge">').concat(ic("videos", 22), '</span>إضافة فيديو يوتيوب للشروحات</div>\n  <div class="card"><input class="field" id="yt" dir="ltr" placeholder="رابط يوتيوب"><button class="btn p" onclick="addYt()">إضافة</button></div>\n\n  <div class="card-head"><span class="badge">').concat(ic("teacher", 22), "</span>سجل النشاط (").concat(log.length, ')</div>\n  <div class="card" style="overflow-x:auto"><table><tr><th>النوع</th><th>الاسم</th><th>الفئة</th><th>التفاصيل</th><th>الوقت</th></tr>\n  ').concat(log.slice(0, 60).map((r) => "<tr><td>".concat(esc(r.type), "</td><td>").concat(esc(r.name), "</td><td>").concat(esc(r.role), "</td><td>").concat(esc(r.detail || r.score || ""), "</td><td>").concat(esc(r.time), "</td></tr>")).join("") || '<tr><td colspan="5">لا يوجد نشاط بعد</td></tr>', '</table>\n  <button class="btn ghost" style="margin-top:10px" onclick="csv()">⬇️ تصدير CSV</button></div>');
+}
+function saveUrl() {
+  DB.set("scriptUrl", $("#su").value.trim());
+  toast("تم حفظ الرابط ✅");
+  loadRemote();
+  render("teacher");
+}
+function addYt() {
+  const u = $("#yt").value.trim();
+  if (!u) return;
+  const l = DB.get("ytLinks", []);
+  l.push(u);
+  DB.set("ytLinks", l);
+  $("#yt").value = "";
+  toast("أُضيف الفيديو إلى الشروحات 🎬");
+}
+function csv() {
+  const log = DB.get("log", []);
+  const rows = [["النوع", "الاسم", "الفئة", "التفاصيل", "الوقت"], ...log.map((r) => [r.type, r.name, r.role, r.detail || r.score || "", r.time])];
+  const b = new Blob(["\uFEFF" + rows.map((r) => r.map((c) => '"'.concat(String(c).replace(/"/g, '""'), '"')).join(",")).join("\n")], { type: "text/csv" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(b);
+  a.download = "سجل-لغتي-السعادة.csv";
+  a.click();
+}
 </script>
 </body>
 </html>
