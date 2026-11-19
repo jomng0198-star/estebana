@@ -44,3 +44,8 @@ function doGet(e) {
   return json_({rows: rows.slice(-500)});
 }
 function json_(o){ return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }
+
+function تجربة() {
+  sheet_();
+  MailApp.sendEmail(TEACHER_EMAIL, 'لغتي السعادة | تم الربط ✅', 'تم ربط منصة لغتي السعادة بالبريد والجدول بنجاح.');
+}
