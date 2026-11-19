@@ -305,6 +305,21 @@ th{color:var(--yellow)}
 .impact-row span{width:110px;flex-shrink:0}
 .impact-row b{width:40px;text-align:left}
 
+/* الأيقونات المرسومة بأسلوب الخلفية */
+.ico{display:block;filter:drop-shadow(0 2px 0 rgba(59,51,64,.18))}
+.nav{background:#fff8ec;width:44px;height:44px;border-radius:14px;margin:2px 0}
+.nav:hover{background:#fff;transform:translateY(-2px) rotate(-4deg)}
+.nav.on{background:#fff;box-shadow:0 0 0 3px var(--yellow)}
+.nav.on::before{display:none}
+.sidebar .s-logo{background:#fff;width:44px;height:44px;border-radius:14px}
+.sidebar{background:#0b0c10;gap:5px}
+.badge{width:30px;height:30px;border-radius:9px;background:#fff8ec}
+.sec .em{display:flex;justify-content:center}
+.role span{display:flex;justify-content:center}
+.role.on{background:#fff8ec}
+.person .ic{background:#fff8ec!important}
+.logo{background:#fff8ec}
+.avatar{background:#fff8ec;width:40px;height:40px;border:3px solid var(--yellow)}
 /* ===================== الجوال ===================== */
 @media (max-width:760px){
   .window{width:100vw;height:100vh;height:100dvh;margin:0;border-radius:0;border:0}
@@ -335,13 +350,13 @@ th{color:var(--yellow)}
   <!-- ============ شاشة الدخول ============ -->
   <section id="login">
     <div class="login-card">
-      <div class="logo">📖</div>
+      <div class="logo"><i data-ic="logo" data-s="40"></i></div>
       <h1 class="title-font">مرحباً بكِ في لغتي السعادة</h1>
       <p class="sub">منصة لغتي للصف الثاني ابتدائي<br>تعلّم ممتع.. قصص، ألعاب، وتمارين تفاعلية</p>
       <div class="roles">
-        <button class="role on" data-role="طالبة"><span>🎒</span>دخول طالبة</button>
-        <button class="role" data-role="معلمة"><span>👩‍🏫</span>دخول معلمة</button>
-        <button class="role" data-role="زائرة"><span>🌸</span>دخول زائرة</button>
+        <button class="role on" data-role="طالبة"><span><i data-ic="student" data-s="30"></i></span>دخول طالبة</button>
+        <button class="role" data-role="معلمة"><span><i data-ic="teach" data-s="30"></i></span>دخول معلمة</button>
+        <button class="role" data-role="زائرة"><span><i data-ic="visitor" data-s="30"></i></span>دخول زائرة</button>
       </div>
       <div class="or">أو</div>
       <input class="field" id="lName" placeholder="اكتبي اسمكِ هنا" autocomplete="off">
@@ -358,19 +373,19 @@ th{color:var(--yellow)}
   <!-- ============ التطبيق ============ -->
   <section id="app">
     <aside class="sidebar">
-      <div class="s-logo">📖</div>
-      <button class="nav on" data-v="home">🏠<span class="tip">الرئيسية</span></button>
-      <button class="nav" data-v="videos">🎬<span class="tip">شروحات قصصية</span></button>
-      <button class="nav" data-v="sheets">📝<span class="tip">أوراق عمل</span></button>
-      <button class="nav" data-v="exercises">🧩<span class="tip">تمارين تفاعلية</span></button>
-      <button class="nav" data-v="quiz">❓<span class="tip">أسئلة</span></button>
-      <button class="nav" data-v="letters">🔤<span class="tip">قصص الحروف</span></button>
-      <button class="nav" data-v="game">🎮<span class="tip">لعبة ثلاثية الأبعاد</span></button>
-      <button class="nav" data-v="cert">🏆<span class="tip">الشهادة</span></button>
+      <div class="s-logo"><i data-ic="logo" data-s="32"></i></div>
+      <button class="nav on" data-v="home"><i data-ic="home" data-s="28"></i><span class="tip">الرئيسية</span></button>
+      <button class="nav" data-v="videos"><i data-ic="videos" data-s="28"></i><span class="tip">شروحات قصصية</span></button>
+      <button class="nav" data-v="sheets"><i data-ic="sheets" data-s="28"></i><span class="tip">أوراق عمل</span></button>
+      <button class="nav" data-v="exercises"><i data-ic="exercises" data-s="28"></i><span class="tip">تمارين تفاعلية</span></button>
+      <button class="nav" data-v="quiz"><i data-ic="quiz" data-s="28"></i><span class="tip">أسئلة</span></button>
+      <button class="nav" data-v="letters"><i data-ic="letters" data-s="28"></i><span class="tip">قصص الحروف</span></button>
+      <button class="nav" data-v="game"><i data-ic="game" data-s="28"></i><span class="tip">لعبة ثلاثية الأبعاد</span></button>
+      <button class="nav" data-v="cert"><i data-ic="cert" data-s="28"></i><span class="tip">الشهادة</span></button>
       <div class="spacer"></div>
-      <button class="nav" data-v="teacher" id="navTeacher" style="display:none">📊<span class="tip">لوحة المعلمة</span></button>
-      <button class="nav" id="logout">🚪<span class="tip">خروج</span></button>
-      <div class="avatar" id="av">🙂</div>
+      <button class="nav" data-v="teacher" id="navTeacher" style="display:none"><i data-ic="teacher" data-s="28"></i><span class="tip">لوحة المعلمة</span></button>
+      <button class="nav" id="logout"><i data-ic="logout" data-s="28"></i><span class="tip">خروج</span></button>
+      <div class="avatar" id="av"></div>
     </aside>
 
     <main class="main" id="main">
@@ -398,6 +413,35 @@ const CONFIG = {
   TEACHER_CODE: "2026"                   // رمز دخول المعلمة
 };
 
+const S='stroke="#3b3340" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"';
+const HL='fill="#fff" opacity=".75"';
+const ICONS={
+ logo:`<path d="M8 40c6-4 14-4 24 0V16C22 12 14 12 8 16z" fill="#8fd6ff" ${S}/><path d="M56 40c-6-4-14-4-24 0V16c10-4 18-4 24 0z" fill="#ffb3cf" ${S}/><path d="M20 13a12 12 0 0 1 24 0" fill="none" stroke="#ffd84d" stroke-width="4" stroke-linecap="round"/><path d="M25 13a7 7 0 0 1 14 0" fill="none" stroke="#a8e07a" stroke-width="3.5" stroke-linecap="round"/><path d="M12 22c4-1 9-1 14 1M12 29c4-1 9-1 14 1M38 23c5-2 10-2 14-1M38 30c5-2 10-2 14-1" ${S} fill="none" stroke-width="1.8"/>`,
+ home:`<path d="M10 30 32 12l22 18" fill="none" ${S}/><path d="M16 27v23h32V27" fill="#ffd84d" ${S}/><path d="M27 50V37h10v13" fill="#ff9fc0" ${S}/><path d="M42 14v8l-5-4" fill="#ff9fc0" ${S}/><circle cx="22" cy="34" r="3" ${HL}/>`,
+ videos:`<rect x="9" y="22" width="46" height="30" rx="7" fill="#8fd6ff" ${S}/><path d="M9 22l6-11 40 6-1 5" fill="#fff" ${S}/><path d="M20 12l-3 8M31 13l-3 8M42 15l-3 7" ${S}/><path d="M28 31v13l11-6.5z" fill="#ffd84d" ${S}/><circle cx="16" cy="29" r="2.5" ${HL}/>`,
+ sheets:`<path d="M14 8h26l10 10v38H14z" fill="#fffaf0" ${S}/><path d="M40 8v10h10" fill="#ffe08a" ${S}/><path d="M21 28h20M21 35h20M21 42h12" ${S}/><path d="M46 30l9-9 4 4-9 9-6 2z" fill="#ff9fc0" ${S}/>`,
+ exercises:`<path d="M10 14h14a6 6 0 1 1 10 0h14v14a6 6 0 1 0 0 10v14H34a6 6 0 1 0-10 0H10V38a6 6 0 1 1 0-10z" fill="#a8e07a" ${S}/><circle cx="20" cy="22" r="3" ${HL}/>`,
+ quiz:`<path d="M32 8C18 8 9 16 9 27c0 7 4 12 10 15l-3 10 11-7c2 0 3 1 5 1 14 0 23-8 23-19S46 8 32 8z" fill="#c7b3ff" ${S}/><path d="M26 22a6 6 0 1 1 9 5c-2 1-3 3-3 5" fill="none" ${S} stroke-width="3"/><circle cx="32" cy="39" r="2" fill="#3b3340"/>`,
+ letters:`<rect x="8" y="24" width="24" height="24" rx="5" fill="#ffd84d" ${S}/><rect x="32" y="16" width="24" height="24" rx="5" fill="#ff9fc0" ${S}/><text x="20" y="43" text-anchor="middle" font-size="17" font-weight="800" font-family="Tajawal" fill="#3b3340">ب</text><text x="44" y="34" text-anchor="middle" font-size="16" font-weight="800" font-family="Tajawal" fill="#3b3340">أ</text><path d="M50 50l2 4 4 1-4 1-2 4-1-4-4-1 4-1z" fill="#fff" ${S} stroke-width="1.5"/>`,
+ game:`<path d="M32 8 52 19v24L32 54 12 43V19z" fill="#8fd6ff" ${S}/><path d="M12 19l20 11 20-11M32 30v24" fill="none" ${S}/><path d="M12 19 32 8l20 11-20 11z" fill="#ffd84d" ${S}/><circle cx="22" cy="38" r="2.5" fill="#3b3340"/><circle cx="42" cy="38" r="2.5" fill="#3b3340"/><circle cx="32" cy="19" r="2.5" fill="#3b3340"/>`,
+ cert:`<path d="M20 10h24v12a12 12 0 0 1-24 0z" fill="#ffd84d" ${S}/><path d="M20 14h-7a7 7 0 0 0 9 9M44 14h7a7 7 0 0 1-9 9" fill="none" ${S}/><path d="M32 34v8M23 52h18l-3-10H26z" fill="#ff9fc0" ${S}/><path d="M32 14l2 4 4 .5-3 3 1 4-4-2-4 2 1-4-3-3 4-.5z" fill="#fff" ${S} stroke-width="1.5"/>`,
+ teacher:`<rect x="10" y="10" width="44" height="44" rx="10" fill="#fffaf0" ${S}/><rect x="18" y="32" width="7" height="14" rx="2" fill="#a8e07a" ${S} stroke-width="2"/><rect x="29" y="22" width="7" height="24" rx="2" fill="#ff9fc0" ${S} stroke-width="2"/><rect x="40" y="27" width="7" height="19" rx="2" fill="#8fd6ff" ${S} stroke-width="2"/>`,
+ logout:`<path d="M14 8h24v48H14z" fill="#ffb98a" ${S}/><path d="M38 12l12 4v40l-12-4" fill="#ffd8b8" ${S}/><circle cx="33" cy="33" r="2" fill="#3b3340"/><path d="M48 32h10m-4-4 4 4-4 4" fill="none" ${S}/>`,
+ stats:`<path d="M10 52h44" ${S}/><path d="M12 42l12-12 10 8 18-20" fill="none" stroke="#ff7fae" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="52" cy="18" r="4" fill="#ffd84d" ${S} stroke-width="2"/>`,
+ sparkle:`<path d="M32 6l6 18 18 6-18 6-6 18-6-18-18-6 18-6z" fill="#ffd84d" ${S}/>`,
+ impact:`<path d="M32 56V30" ${S}/><path d="M32 34c-12 0-18-8-18-18 10 0 18 6 18 18z" fill="#a8e07a" ${S}/><path d="M32 30c0-12 8-18 18-18 0 10-6 18-18 18z" fill="#a8e07a" ${S}/><path d="M20 56h24" ${S}/>`,
+ heart:`<path d="M32 54S8 40 8 24a12 12 0 0 1 24-4 12 12 0 0 1 24 4c0 16-24 30-24 30z" fill="#ff9fc0" ${S}/><circle cx="20" cy="22" r="3" ${HL}/>`,
+ chat:`<rect x="8" y="12" width="42" height="30" rx="10" fill="#8fd6ff" ${S}/><path d="M18 42l-2 10 10-10" fill="#8fd6ff" ${S}/><circle cx="20" cy="27" r="2.5" fill="#3b3340"/><circle cx="29" cy="27" r="2.5" fill="#3b3340"/><circle cx="38" cy="27" r="2.5" fill="#3b3340"/>`,
+ link:`<path d="M27 37l10-10" ${S}/><path d="M24 30l-6 6a7 7 0 0 0 10 10l6-6M40 34l6-6a7 7 0 0 0-10-10l-6 6" fill="none" ${S} stroke-width="4" stroke="#c7b3ff"/><path d="M24 30l-6 6a7 7 0 0 0 10 10l6-6M40 34l6-6a7 7 0 0 0-10-10l-6 6" fill="none" ${S}/>`,
+ student:`<path d="M16 24h32v26a6 6 0 0 1-6 6H22a6 6 0 0 1-6-6z" fill="#ff9fc0" ${S}/><path d="M24 24v-6a8 8 0 0 1 16 0v6" fill="none" ${S}/><rect x="22" y="34" width="20" height="10" rx="3" fill="#ffd84d" ${S} stroke-width="2"/>`,
+ visitor:`<circle cx="32" cy="32" r="7" fill="#ffd84d" ${S}/><g fill="#ff9fc0" ${S}><circle cx="32" cy="15" r="9"/><circle cx="49" cy="28" r="9"/><circle cx="43" cy="48" r="9"/><circle cx="21" cy="48" r="9"/><circle cx="15" cy="28" r="9"/></g><circle cx="32" cy="32" r="7" fill="#ffd84d" ${S}/>`,
+ teach:`<circle cx="32" cy="20" r="10" fill="#ffd8b8" ${S}/><path d="M14 56c0-12 8-20 18-20s18 8 18 20z" fill="#8fd6ff" ${S}/><path d="M22 18c2-8 18-8 20 0-4-3-16-3-20 0z" fill="#3b3340"/><rect x="38" y="44" width="14" height="10" rx="2" fill="#ffd84d" ${S} stroke-width="2"/>`,
+ school:`<path d="M10 28 32 14l22 14" fill="none" ${S}/><path d="M14 26v28h36V26" fill="#ffd84d" ${S}/><path d="M28 54V42h8v12" fill="#8fd6ff" ${S}/><path d="M32 14V6l8 3-8 3" fill="#ff9fc0" ${S}/><circle cx="32" cy="32" r="4" fill="#fff" ${S} stroke-width="2"/>`
+};
+function ic(n,s=26){return `<svg class="ico" viewBox="0 0 64 64" width="${s}" height="${s}" aria-hidden="true">${ICONS[n]||''}</svg>`}
+
+function hydrateIcons(root=document){root.querySelectorAll('i[data-ic]').forEach(i=>{i.outerHTML=ic(i.dataset.ic,+i.dataset.s||26)})}
+hydrateIcons();
 /* ============ التخزين المحلي ============ */
 const DB = {
   get(k,d){try{return JSON.parse(localStorage.getItem('lughati_'+k))??d}catch(e){return d}},
@@ -427,7 +471,7 @@ const $ = s => document.querySelector(s);
 const view = $('#view');
 function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('show');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('show'),2200)}
 function addPoints(n){points+=n;DB.set('points',points);$('#who').textContent=`⭐ ${points} نقطة · ${user?.name||''}`}
-function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='ar-SA';u.rate=.85;u.pitch=1.15;speechSynthesis.speak(u)}catch(e){}}
+function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='ar-SA';u.rate=1.05;u.pitch=1.15;speechSynthesis.speak(u)}catch(e){}}
 let actx;
 function beep(ok=true){
   try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();
@@ -449,12 +493,12 @@ function countUp(el,to){let s=0;const st=Math.max(1,Math.ceil(to/40));const t=se
 
 /* ============ المحتوى التعليمي ============ */
 const VIDEOS = [
-  {t:'اللام الشمسية واللام القمرية',em:'☀️',tags:['قصة','دقيقة واحدة'],scenes:[
+  {t:'اللام الشمسية واللام القمرية',em:'☀️',tags:['قصة'],scenes:[
     {e:'☀️🌙',x:'في السماء صديقان: <mark>الشمس</mark> و<mark>القمر</mark>'},
     {e:'☀️',x:'مع الشمس اللام <mark>تختفي</mark> ولا ننطقها: الشَّمس، النَّجمة'},
     {e:'🌙',x:'مع القمر اللام <mark>تظهر</mark> وننطقها: القَمر، الكِتاب'},
     {e:'⭐',x:'تذكّري: الشمسية تُكتب ولا تُنطق، والقمرية تُكتب وتُنطق!'}]},
-  {t:'التاء المربوطة والتاء المفتوحة',em:'🎀',tags:['قصة','دقيقة واحدة'],scenes:[
+  {t:'التاء المربوطة والتاء المفتوحة',em:'🎀',tags:['قصة'],scenes:[
     {e:'🎀',x:'التاء <mark>المربوطة</mark> لها شريطة: ة مثل: شجرة، مدرسة'},
     {e:'📦',x:'التاء <mark>المفتوحة</mark> مفتوحة دائماً: ت مثل: بيت، بنت'},
     {e:'🗣️',x:'إذا وقفنا على المربوطة نطقناها <mark>هاء</mark>: شجرهْ'},
@@ -464,12 +508,12 @@ const VIDEOS = [
     {e:'🍎',x:'تنوين الفتح: تفاحةً 🎶 تنوين الضم: تفاحةٌ'},
     {e:'🐱',x:'تنوين الكسر: مع قطةٍ صغيرةٍ'},
     {e:'👏',x:'ٌ  ً  ٍ  ثلاثة إخوة يغنّون: نْ نْ نْ'}]},
-  {t:'المد بالألف والواو والياء',em:'🚂',tags:['قصة','دقيقة واحدة'],scenes:[
+  {t:'المد بالألف والواو والياء',em:'🚂',tags:['قصة'],scenes:[
     {e:'🚂',x:'قطار المد له ثلاث عربات: <mark>ا و ي</mark>'},
     {e:'🅰️',x:'المد بالألف: بـا ، نـار ، بـاب'},
     {e:'🌹',x:'المد بالواو: نـور ، تـوت ، فـول'},
     {e:'🦶',x:'المد بالياء: فيـل ، تيـن ، عيـد'}]},
-  {t:'الشدّة الصغيرة',em:'💪',tags:['قصة','دقيقة واحدة'],scenes:[
+  {t:'الشدّة الصغيرة',em:'💪',tags:['قصة'],scenes:[
     {e:'💪',x:'الشدّة علامة قوية تشبه حرف <mark>ّ</mark>'},
     {e:'🔁',x:'الحرف المشدد = حرفان: الأول ساكن والثاني متحرك'},
     {e:'🐓',x:'مثل: دَجَاجَة لا.. لكن: <mark>مدرّسة</mark>، <mark>سكّر</mark>، <mark>قطّة</mark>'},
@@ -545,7 +589,7 @@ function doLogin(){
 }
 function enter(anim){
   $('#navTeacher').style.display=user.role==='معلمة'?'grid':'none';
-  $('#av').textContent=user.role==='معلمة'?'👩‍🏫':user.role==='زائرة'?'🌸':'🎒';
+  $('#av').innerHTML=ic(user.role==='معلمة'?'teach':user.role==='زائرة'?'visitor':'student',28);
   addPoints(0);
   $('#login').classList.add('hide');
   if(anim){
@@ -585,16 +629,16 @@ function home(){
   const total=st.stu+st.vis+st.tch;
   view.innerHTML=`
   <div class="card hero">
-    <div style="font-size:46px">📖🌈</div>
+    <div style="display:flex;justify-content:center">${ic("logo",72)}</div>
     <h1 class="title-font"><span class="c1">لغتي</span> <span class="c2">السعادة</span></h1>
     <p>منصة لغتي للصف الثاني ابتدائي — نتعلّم بالقصة واللعب والتحدي</p>
     <div class="people">
-      <div class="person"><div class="ic" style="background:var(--pink)">👩‍🏫</div><div><small>معلمة المادة</small><b>أ. ${CONFIG.TEACHER}</b></div></div>
-      <div class="person"><div class="ic" style="background:var(--yellow)">🏫</div><div><small>مديرة المدرسة</small><b>أ. ${CONFIG.PRINCIPAL}</b></div></div>
+      <div class="person"><div class="ic">${ic("teach",32)}</div><div><small>معلمة المادة</small><b>أ. ${CONFIG.TEACHER}</b></div></div>
+      <div class="person"><div class="ic">${ic("school",32)}</div><div><small>مديرة المدرسة</small><b>أ. ${CONFIG.PRINCIPAL}</b></div></div>
     </div>
   </div>
 
-  <div class="card-head"><span class="badge">📊</span>إحصائيات المنصة ${remote?'<span class="mini">· مباشرة من Google</span>':''}</div>
+  <div class="card-head"><span class="badge">${ic("stats",22)}</span>إحصائيات المنصة ${remote?'<span class="mini">· مباشرة من Google</span>':''}</div>
   <div class="card">
     <span class="chev">⌄</span>
     <div class="desc">عدّاد تلقائي يُحصي الزيارات والأنشطة لحظة بلحظة.</div>
@@ -607,22 +651,22 @@ function home(){
     </div>
   </div>
 
-  <div class="card-head"><span class="badge">✨</span>أقسام المنصة</div>
+  <div class="card-head"><span class="badge">${ic("sparkle",22)}</span>أقسام المنصة</div>
   <div class="card">
     <div class="grid-sec">
       ${[['videos','🎬','شروحات قصصية','فيديو قصير جداً'],['sheets','📝','أوراق عمل','تفاعلية وقابلة للطباعة'],
          ['exercises','🧩','تمارين تفاعلية','ركّبي وطابقي'],['quiz','❓','أسئلة','١٠ أسئلة ممتعة'],
          ['letters','🔤','قصص الحروف','٢٨ قصة مسموعة'],['game','🎮','لعبة ثلاثية الأبعاد','٣ مستويات'],
          ['cert','🏆','شهادتي','اطبعيها وافتخري']]
-        .map(s=>`<div class="sec" onclick="render('${s[0]}')"><span class="em">${s[1]}</span><b>${s[2]}</b><small>${s[3]}</small></div>`).join('')}
-      ${user.role==='معلمة'?`<div class="sec" onclick="render('teacher')"><span class="em">📊</span><b>لوحة المعلمة</b><small>البيانات والربط</small></div>`:''}
+        .map(s=>`<div class="sec" onclick="render('${s[0]}')"><span class="em">${ic(s[0],50)}</span><b>${s[2]}</b><small>${s[3]}</small></div>`).join('')}
+      ${user.role==='معلمة'?`<div class="sec" onclick="render('teacher')"><span class="em">${ic("teacher",50)}</span><b>لوحة المعلمة</b><small>البيانات والربط</small></div>`:''}
     </div>
   </div>
 
-  <div class="card-head"><span class="badge">📈</span>قياس الأثر</div>
+  <div class="card-head"><span class="badge">${ic("impact",22)}</span>قياس الأثر</div>
   <div class="card" id="impact">${impactHTML(st)}</div>
 
-  <div class="card-head"><span class="badge">💬</span>آراء أولياء الأمور</div>
+  <div class="card-head"><span class="badge">${ic("heart",22)}</span>آراء أولياء الأمور</div>
   <div class="card">
     <div id="opList"></div>
     <div class="rate" id="rate">${[5,4,3,2,1].map(i=>`<span data-r="${i}">⭐</span>`).join('')}</div>
@@ -631,14 +675,14 @@ function home(){
     <button class="btn y" onclick="addOpinion()">إرسال الرأي 💛</button>
   </div>
 
-  <div class="card-head"><span class="badge">🗨️</span>التعليقات</div>
+  <div class="card-head"><span class="badge">${ic("chat",22)}</span>التعليقات</div>
   <div class="card">
     <div id="cmList"></div>
     <textarea class="field" id="cmText" placeholder="اكتبي تعليقكِ..."></textarea>
     <button class="btn p" onclick="addComment()">نشر التعليق</button>
   </div>
 
-  <div class="card-head"><span class="badge">🔗</span>الربط مع Google (نموذج الكود)</div>
+  <div class="card-head"><span class="badge">${ic("link",22)}</span>الربط مع Google (نموذج الكود)</div>
   <div class="card">
     <div class="desc">كل دخول ورأي وتعليق ونتيجة وشهادة يُحفظ في جدول Google ويصل إلى بريد المعلمة.</div>
     <div class="code"><button class="copy" onclick="navigator.clipboard.writeText(CONFIG.TEACHER_EMAIL);toast('تم النسخ')">⧉</button><span class="n">1</span><span class="k">fetch</span>(GOOGLE_SCRIPT_URL, {
@@ -691,7 +735,7 @@ function videos(){
   view.innerHTML=back()+VIDEOS.map((v,i)=>`
     <div class="card-head"><span class="badge">${v.em}</span>${v.t}</div>
     <div class="card"><span class="chev">▶</span>
-      <div class="tags">${v.tags.map(t=>`<span><i>🎬</i>${t}</span>`).join('')}<span><i>🔊</i>بصوت مسموع</span></div>
+      <div class="tags">${v.tags.map(t=>`<span><i>🎬</i>${t}</span>`).join('')}<span><i>⏱️</i>10 ثوانٍ</span><span><i>🔊</i>بصوت مسموع</span></div>
       <button class="btn y" onclick="playVid(${i})">شاهدي القصة ▶</button>
     </div>`).join('')
     +(custom.length?`<div class="card-head"><span class="badge">📺</span>فيديوهات أضافتها المعلمة</div>`+custom.map(u=>`<div class="card"><iframe style="width:100%;aspect-ratio:16/9;border:0;border-radius:12px" src="${ytEmbed(u)}" allowfullscreen></iframe></div>`).join(''):'');
@@ -704,16 +748,17 @@ function playVid(i){
   <div class="card"><div class="player">${v.scenes.map((s,j)=>`<div class="scene ${j?'':'on'}"><div class="big">${s.e}</div><p>${s.x}</p></div>`).join('')}</div>
   <div class="pctl"><button class="btn" id="pp">⏸</button><div class="bar"><i id="pb" style="width:0"></i></div><span class="mini" id="pn">1/${v.scenes.length}</span></div></div>`;
   let k=0,playing=true;const sc=[...document.querySelectorAll('.scene')];
+  const dur=Math.round(10000/sc.length);
   const show=()=>{sc.forEach((s,j)=>s.classList.toggle('on',j===k));$('#pb').style.width=((k+1)/sc.length*100)+'%';$('#pn').textContent=`${k+1}/${sc.length}`;say(v.scenes[k].x.replace(/<[^>]+>/g,''))};
   show();
-  window._pl=setInterval(()=>{if(!playing)return;k++;if(k>=sc.length){clearInterval(window._pl);addPoints(5);send('مشاهدة شرح',{detail:v.t});toast('انتهت القصة! +5 نقاط ⭐');return}show()},5200);
+  window._pl=setInterval(()=>{if(!playing)return;k++;if(k>=sc.length){clearInterval(window._pl);addPoints(5);send('مشاهدة شرح',{detail:v.t});toast('انتهت القصة! +5 نقاط ⭐');return}show()},dur);
   $('#pp').onclick=()=>{playing=!playing;$('#pp').textContent=playing?'⏸':'▶';if(!playing)speechSynthesis.cancel()};
 }
 
 /* ============ أوراق العمل ============ */
 function sheets(){
   view.innerHTML=back()+SHEETS.map((s,i)=>`
-   <div class="card-head"><span class="badge">📝</span>${s.t}</div>
+   <div class="card-head"><span class="badge">${ic("sheets",22)}</span>${s.t}</div>
    <div class="card printable" id="ws${i}">
      <div class="desc">${s.em} اختاري الإجابة الصحيحة لكل كلمة:</div>
      ${s.items.map((it,j)=>`<div class="ws-item"><span class="w">${it[0]}</span><div class="chips">${s.opts.map((o,k)=>`<button class="chip" onclick="wsPick(this,${i},${j},${k})">${o}</button>`).join('')}</div></div>`).join('')}
@@ -732,7 +777,7 @@ function wsPick(b,i,j,k){
 /* ============ التمارين التفاعلية ============ */
 function exercises(){
   view.innerHTML=back()+`
-  <div class="card-head"><span class="badge">🧩</span>تمرين ١: ركّبي الكلمة</div>
+  <div class="card-head"><span class="badge">${ic("exercises",22)}</span>تمرين ١: ركّبي الكلمة</div>
   <div class="card" style="text-align:center"><div style="font-size:56px" id="bEm"></div>
     <div class="slots" id="slots"></div><div class="tiles" id="tiles"></div>
     <div style="margin-top:12px;display:flex;gap:8px;justify-content:center"><button class="btn ghost" onclick="buildNew()">كلمة أخرى ↻</button><button class="btn ghost" onclick="say(window._bw)">🔊 اسمعي</button></div></div>
@@ -776,7 +821,7 @@ function quiz(){
       view.innerHTML=back()+`<div class="card hero"><div style="font-size:60px">${score>=8?'🏆':score>=5?'🌟':'💪'}</div><h1 class="title-font">نتيجتكِ ${score} من ${Q.length}</h1><p>${score>=8?'ممتازة! أنتِ بطلة لغتي':score>=5?'جيد جداً، استمري':'حاولي مرة أخرى، أنتِ قادرة!'}</p>
       <div style="margin-top:14px;display:flex;gap:8px;justify-content:center"><button class="btn y" onclick="render('quiz')">إعادة ↻</button><button class="btn" onclick="render('cert')">شهادتي 🏆</button></div></div>`;return}
     const q=Q[i];
-    view.innerHTML=back()+`<div class="card-head"><span class="badge">❓</span>السؤال ${i+1} من ${Q.length}</div>
+    view.innerHTML=back()+`<div class="card-head"><span class="badge">${ic("quiz",22)}</span>السؤال ${i+1} من ${Q.length}</div>
     <div class="card"><div class="bar" style="margin-bottom:14px"><i style="width:${i/Q.length*100}%"></i></div>
     <div class="q">${q.q} <button class="chip" style="padding:3px 9px" onclick="say('${q.q}')">🔊</button></div>
     <div class="opts">${q.o.map((o,k)=>`<button class="opt" data-k="${k}">${o[0]}</button>`).join('')}</div></div>`;
@@ -791,7 +836,7 @@ function quiz(){
 /* ============ قصص الحروف ============ */
 const LC=['#ffd84d','#ff8fb8','#7ddc72','#5fc3ff','#b69cff','#ffad5c'];
 function letters(){
-  view.innerHTML=back()+`<div class="card-head"><span class="badge">🔤</span>قصص الحروف — اضغطي على الحرف</div>
+  view.innerHTML=back()+`<div class="card-head"><span class="badge">${ic("letters",22)}</span>قصص الحروف — اضغطي على الحرف</div>
   <div class="card"><div class="letters">${LETTERS.map((l,i)=>`<button class="lt" style="background:${LC[i%6]}" onclick="showLetter(${i})">${l[0]}</button>`).join('')}</div><div id="story"></div></div>`;
 }
 function showLetter(i){
@@ -811,7 +856,7 @@ const LEVELS=[
 ];
 function game(){
   const lv=DB.get('level',1);
-  view.innerHTML=back()+`<div class="card-head"><span class="badge">🎮</span>عالم لغتي ثلاثي الأبعاد</div>
+  view.innerHTML=back()+`<div class="card-head"><span class="badge">${ic("game",22)}</span>عالم لغتي ثلاثي الأبعاد</div>
   <div class="card"><div class="desc">اضغطي على المكعّب الدوّار الصحيح! كل إجابة صحيحة = ١٠ نقاط، و٨ إجابات تفتح المستوى التالي 🔓</div>
   <div class="levels">${LEVELS.map((L,i)=>`<button class="lvl ${i+1>lv?'lock':''}" style="background:${L.c}" onclick="${i+1>lv?"toast('أكملي المستوى السابق أولاً 🔒')":`play(${i})`}"><span class="em">${i+1>lv?'🔒':L.em}</span>${L.n}</button>`).join('')}</div></div>`;
 }
@@ -854,7 +899,7 @@ function play(li){
 
 /* ============ الشهادة ============ */
 function cert(){
-  view.innerHTML=back()+`<div class="card-head"><span class="badge">🏆</span>شهادة تميّز</div>
+  view.innerHTML=back()+`<div class="card-head"><span class="badge">${ic("cert",22)}</span>شهادة تميّز</div>
   <div class="card"><input class="field" id="cName" value="${esc(user.name)}" placeholder="اسم الطالبة">
   <canvas id="cert" width="1100" height="780"></canvas>
   <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"><button class="btn y" onclick="dlCert()">⬇️ تحميل الشهادة</button><button class="btn ghost" onclick="printCert()">🖨️ طباعة</button></div></div>`;
@@ -885,16 +930,16 @@ function printCert(){const w=window.open('');w.document.write(`<img src="${$('#c
 function teacher(){
   if(user.role!=='معلمة')return render('home');
   const log=DB.get('log',[]);
-  view.innerHTML=back()+`<div class="card-head"><span class="badge">🔗</span>ربط المنصة مع Google</div>
+  view.innerHTML=back()+`<div class="card-head"><span class="badge">${ic("link",22)}</span>ربط المنصة مع Google</div>
   <div class="card"><div class="desc">الصقي رابط Google Apps Script بعد نشره، لتصل البيانات إلى <b>${CONFIG.TEACHER_EMAIL}</b> وتُحفظ في جدول Google.</div>
   <input class="field" id="su" dir="ltr" placeholder="https://script.google.com/macros/s/.../exec" value="${esc(scriptURL())}">
   <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn y" onclick="saveUrl()">حفظ الرابط</button><button class="btn ghost" onclick="send('اختبار',{detail:'رسالة تجربة من لوحة المعلمة'});toast('تم إرسال رسالة تجربة 📩')">إرسال تجربة</button></div>
   <p class="mini" style="margin-top:8px">الحالة: ${scriptURL()?'✅ مربوطة':'⚠️ غير مربوطة بعد — البيانات محفوظة على هذا الجهاز فقط'}</p></div>
 
-  <div class="card-head"><span class="badge">📺</span>إضافة فيديو يوتيوب للشروحات</div>
+  <div class="card-head"><span class="badge">${ic("videos",22)}</span>إضافة فيديو يوتيوب للشروحات</div>
   <div class="card"><input class="field" id="yt" dir="ltr" placeholder="رابط يوتيوب"><button class="btn p" onclick="addYt()">إضافة</button></div>
 
-  <div class="card-head"><span class="badge">📋</span>سجل النشاط (${log.length})</div>
+  <div class="card-head"><span class="badge">${ic("teacher",22)}</span>سجل النشاط (${log.length})</div>
   <div class="card" style="overflow-x:auto"><table><tr><th>النوع</th><th>الاسم</th><th>الفئة</th><th>التفاصيل</th><th>الوقت</th></tr>
   ${log.slice(0,60).map(r=>`<tr><td>${esc(r.type)}</td><td>${esc(r.name)}</td><td>${esc(r.role)}</td><td>${esc(r.detail||r.score||'')}</td><td>${esc(r.time)}</td></tr>`).join('')||'<tr><td colspan="5">لا يوجد نشاط بعد</td></tr>'}</table>
   <button class="btn ghost" style="margin-top:10px" onclick="csv()">⬇️ تصدير CSV</button></div>`;
