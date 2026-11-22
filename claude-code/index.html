@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>مجمع كلود كود | التسجيل — مع المدربة هيله فهد</title>
+<meta name="description" content="سجّلي في دورة مجمع كلود كود مع المدربة هيله فهد — من الصفر وتطبيق عملي. السعر ٥٠ ريال بعد الخصم.">
+<meta name="theme-color" content="#F1EBE0">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F1EBE0;--paper:#F8F4EC;--flower:#D9472B;--stem:#5E6B4E;--line:#FFD3C2;--ink:#1E1B18;--core:#1E1B18;
+  --sage:#9AA08A;--taupe:#6B625C;--rule:rgba(30,27,24,.14);
+  --safe-t:env(safe-area-inset-top,0px);--safe-b:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{font-family:"IBM Plex Sans Arabic",system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.7;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
+.mono{font-family:"DM Mono",ui-monospace,monospace;letter-spacing:.04em}
+.serif{font-family:"Amiri",serif}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+
+/* ---------- header ---------- */
+header{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:calc(14px + var(--safe-t)) 22px 14px;pointer-events:none}
+header>*{pointer-events:auto}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand img{width:46px;height:46px;border-radius:50%;box-shadow:0 0 0 1px var(--rule)}
+.brand span{font-size:14px;color:var(--taupe)}
+.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--ink);background:var(--ink);color:var(--bg);border-radius:999px;padding:10px 20px;font-weight:600;font-size:15px;text-decoration:none;transition:transform .15s}
+.pill:hover{transform:translateY(-1px)}
+.pill.ghost{background:transparent;color:var(--ink)}
+
+/* ---------- hero ---------- */
+#hero{position:relative;height:100svh;min-height:560px;overflow:hidden;cursor:text;user-select:none;-webkit-user-select:none}
+#garden{position:absolute;inset:0;width:100%;height:100%;display:block}
+#typer{position:absolute;top:0;left:0;width:1px;height:1px;opacity:0;font-size:16px;caret-color:transparent;pointer-events:none;border:0}
+.hero-top{position:absolute;top:calc(92px + var(--safe-t));left:0;right:0;text-align:center;pointer-events:none}
+.kicker{display:inline-block;font-size:15px;color:var(--taupe);border:1px solid var(--rule);border-radius:999px;padding:4px 16px;background:rgba(248,244,236,.7)}
+.hero-bottom{position:absolute;left:22px;right:22px;bottom:calc(30px + var(--safe-b));display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;pointer-events:none}
+.hero-bottom>*{pointer-events:auto}
+.hints{display:flex;gap:22px;flex-wrap:wrap;font-size:12px;color:var(--taupe);opacity:.9}
+.price-cta{display:flex;align-items:center;gap:14px}
+.price{display:flex;flex-direction:column;align-items:flex-start;line-height:1.1}
+.price b{font-family:"Amiri",serif;font-size:40px;font-weight:700}
+.price small{font-size:13px;color:var(--taupe)}
+
+/* ---------- sections ---------- */
+section.block{padding:90px 22px;max-width:1080px;margin:0 auto}
+.eyebrow{font-size:12px;color:var(--taupe);text-transform:uppercase}
+h2{font-family:"Amiri",serif;font-size:clamp(34px,5vw,54px);line-height:1.25;margin:6px 0 18px}
+h2 em{font-style:normal;color:var(--flower)}
+.lead{font-size:18px;color:#3a352f;max-width:680px}
+.grid{display:grid;gap:14px}
+.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:repeat(2,1fr)}
+.card{background:var(--paper);border:1px solid var(--rule);border-radius:20px;padding:22px}
+.card h3{font-size:19px;margin-bottom:4px}
+.card p{color:#4a443d;font-size:15px}
+.card .ic{width:40px;height:40px;margin-bottom:12px}
+.facts{margin-top:34px;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.facts div{padding:18px 4px;border-inline-start:1px solid var(--rule)}
+.facts div:first-child{border-inline-start:0}
+.facts small{display:block;font-size:12px;color:var(--taupe)}
+.facts b{font-size:20px}
+.facts s{color:var(--taupe);font-weight:400;font-size:14px}
+
+/* trainer */
+.trainer{display:grid;grid-template-columns:280px 1fr;gap:40px;align-items:center}
+.trainer .logo{width:100%;max-width:280px;border-radius:50%;box-shadow:0 30px 60px -30px rgba(30,27,24,.35)}
+.badges{display:grid;gap:12px;margin-top:22px}
+.badge{display:flex;gap:14px;align-items:flex-start;background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:14px 16px}
+.badge .dot{flex:none;width:12px;height:12px;border-radius:50%;background:var(--flower);margin-top:9px}
+.badge b{display:block}
+.badge span{font-size:14px;color:#4a443d}
+.license{margin-top:16px;display:flex;gap:14px;align-items:center;background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:12px}
+.license img{width:150px;border-radius:10px;border:1px solid var(--rule);cursor:zoom-in}
+.license small{color:var(--taupe);font-size:13px}
+
+/* register */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:26px 0 30px}
+.step{display:flex;gap:12px;align-items:flex-start}
+.step i{flex:none;font-style:normal;width:34px;height:34px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-weight:700}
+.pay{display:grid;grid-template-columns:1.3fr 1fr;gap:14px;margin-bottom:26px}
+.bank{background:var(--ink);color:var(--bg);border-radius:22px;padding:24px;position:relative;overflow:hidden}
+.bank h3{font-size:18px;display:flex;align-items:center;gap:10px}
+.bank .row{margin-top:14px}
+.bank small{display:block;font-size:12px;opacity:.65}
+.bank .val{display:flex;align-items:center;justify-content:space-between;gap:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:10px 12px;margin-top:4px;direction:ltr}
+.bank .val code{font-family:"DM Mono",monospace;font-size:clamp(13px,3.6vw,17px);letter-spacing:.06em;word-break:break-all}
+.copy{flex:none;background:var(--bg);color:var(--ink);border:0;border-radius:999px;padding:6px 14px;font-size:13px;font-weight:600}
+.apple{border:1px dashed var(--rule);border-radius:22px;padding:24px;display:flex;flex-direction:column;justify-content:center;gap:8px;background:var(--paper)}
+.apple .ap{display:inline-flex;align-items:center;gap:8px;background:#000;color:#fff;border-radius:10px;padding:10px 18px;font-weight:600;opacity:.35;align-self:flex-start;direction:ltr}
+.apple small{color:var(--taupe)}
+form{background:var(--paper);border:1px solid var(--rule);border-radius:26px;padding:28px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.f{display:flex;flex-direction:column;gap:6px}
+.f.full{grid-column:1/-1}
+label{font-size:14px;font-weight:600}
+label .req{color:var(--flower)}
+input[type=text],input[type=email],input[type=tel],textarea,select{font:inherit;font-size:16px;background:#fff;border:1px solid var(--rule);border-radius:12px;padding:12px 14px;color:var(--ink);width:100%}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--stem);outline-offset:1px}
+textarea{min-height:90px;resize:vertical}
+.radios{display:flex;gap:10px;flex-wrap:wrap}
+.radios label{display:flex;align-items:center;gap:8px;border:1px solid var(--rule);background:#fff;border-radius:12px;padding:10px 14px;font-weight:500;cursor:pointer}
+.radios label.dis{opacity:.45;cursor:not-allowed}
+.drop{border:1.5px dashed var(--sage);border-radius:14px;padding:18px;text-align:center;background:#fff;cursor:pointer;color:var(--taupe)}
+.drop.has{border-style:solid;border-color:var(--stem);color:var(--ink)}
+.drop input{display:none}
+.agree{display:flex;gap:10px;align-items:flex-start;font-weight:500}
+.agree input{margin-top:6px;width:18px;height:18px;accent-color:var(--flower)}
+.submit{margin-top:22px;width:100%;justify-content:center;font-size:18px;padding:16px;background:var(--flower);border-color:var(--flower);color:#fff}
+.err{color:var(--flower);font-size:13px;min-height:1em}
+.policy details{border-bottom:1px solid var(--rule);padding:16px 0}
+.policy summary{cursor:pointer;font-weight:600;font-size:17px;list-style:none;display:flex;justify-content:space-between}
+.policy summary::after{content:"+";font-family:"DM Mono";color:var(--taupe)}
+.policy details[open] summary::after{content:"−"}
+.policy ul{margin:10px 22px 0;color:#4a443d}
+footer{text-align:center;padding:40px 22px calc(40px + var(--safe-b));color:var(--taupe);font-size:13px;border-top:1px solid var(--rule)}
+footer img{width:56px;border-radius:50%;margin-bottom:8px}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:50;background:rgba(30,27,24,.55);display:none;align-items:center;justify-content:center;padding:22px}
+.modal.on{display:flex}
+.modal .box{background:var(--bg);border-radius:26px;padding:30px;max-width:460px;text-align:center}
+.modal img.lic{max-width:100%;border-radius:12px}
+.modal h3{font-family:"Amiri",serif;font-size:34px}
+.toast{opacity:0;position:fixed;bottom:calc(24px + var(--safe-b));left:50%;transform:translateX(-50%) translateY(120px);background:var(--ink);color:var(--bg);padding:10px 20px;border-radius:999px;font-size:14px;transition:transform .3s;z-index:60}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media (max-width:820px){
+  .g4{grid-template-columns:repeat(2,1fr)}.g3,.steps,.pay,.trainer{grid-template-columns:1fr}
+  .facts{grid-template-columns:repeat(2,1fr)}.facts div:nth-child(3){border-inline-start:0}
+  .facts div:nth-child(n+3){border-top:1px solid var(--rule)}
+  .trainer .logo{max-width:200px;margin:0 auto}
+  .fields{grid-template-columns:1fr}
+}
+@media (max-width:600px){
+  header{padding:calc(10px + var(--safe-t)) 14px 10px}
+  .brand img{width:40px;height:40px}.brand span{display:none}
+  .pill{padding:9px 16px;font-size:14px}
+  .hints{gap:12px;font-size:11px}
+  .hero-bottom{left:14px;right:14px;bottom:calc(18px + var(--safe-b))}
+  .price b{font-size:32px}
+  section.block{padding:64px 16px}
+  form{padding:20px 16px}
+  .card{padding:18px}
+}
+@media (max-height:460px){.hints{display:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.pill,.toast{transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="brand" href="#hero" aria-label="helah_projects"><img src="logo.png" alt="شعار helah_projects"><span class="mono">helah_projects</span></a>
+  <a class="pill" href="#register">سجّلي الآن</a>
+</header>
+
+<!-- ================= HERO (Letterbloom) ================= -->
+<section id="hero" aria-label="مجمع كلود كود">
+  <canvas id="garden"></canvas>
+  <input id="typer" type="text" aria-label="اكتبي لتنمو الحديقة" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" tabindex="-1">
+  <div class="hero-top"><span class="kicker">دورة تدريبية · مع المدربة هيله فهد</span></div>
+  <div class="hero-bottom">
+    <div class="hints mono" id="hints"><span>اكتبي وشوفي الزهور</span><span>مسافة تقطع</span><span>حذف يذبّل</span><span>Enter يمسح</span></div>
+    <div class="price-cta">
+      <div class="price"><b>٥٠ ريال</b><small>بعد الخصم · المقاعد محدودة</small></div>
+      <a class="pill" href="#register">سجّلي الآن ←</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="block" id="about">
+  <div class="eyebrow mono">عن الدورة</div>
+  <h2>ابني أدواتك ومشاريعك <em>بالذكاء الاصطناعي</em>… بدون خبرة برمجية</h2>
+  <p class="lead">في «مجمع كلود كود» تتعلمين كيف تكتبين طلبك بالعربي، وكلود كود ينفّذه: صفحات، أدوات، ونماذج جاهزة تختصر وقتك في الشغل والمدرسة والمشاريع.</p>
+  <div class="grid g4" style="margin-top:30px">
+    <div class="card"><svg class="ic" viewBox="0 0 40 40"><circle cx="20" cy="20" r="17" fill="none" stroke="#5E6B4E" stroke-width="2.5"/><path d="M14 22 l5 5 9-12" fill="none" stroke="#D9472B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>من الصفر</h3><p>ما تحتاجين أي خبرة برمجية سابقة.</p></div>
+    <div class="card"><svg class="ic" viewBox="0 0 40 40"><rect x="5" y="8" width="30" height="22" rx="4" fill="none" stroke="#5E6B4E" stroke-width="2.5"/><path d="M12 16 l4 3-4 3M19 22h8" fill="none" stroke="#D9472B" stroke-width="2.5" stroke-linecap="round"/></svg><h3>تطبيق عملي</h3><p>نطبّق خطوة بخطوة على جهازك.</p></div>
+    <div class="card"><svg class="ic" viewBox="0 0 40 40"><path d="M20 5 l4 10 10 1-8 7 3 11-9-6-9 6 3-11-8-7 10-1z" fill="none" stroke="#5E6B4E" stroke-width="2.5" stroke-linejoin="round"/><circle cx="20" cy="20" r="3.5" fill="#D9472B"/></svg><h3>مشاريع حقيقية</h3><p>تطلعين بمشروع جاهز تستخدمينه.</p></div>
+    <div class="card"><svg class="ic" viewBox="0 0 40 40"><circle cx="20" cy="21" r="14" fill="none" stroke="#5E6B4E" stroke-width="2.5"/><path d="M20 13v8l6 4" fill="none" stroke="#D9472B" stroke-width="3" stroke-linecap="round"/></svg><h3>تختصر وقتك</h3><p>أدوات تخلّص المهام المتكررة في دقائق.</p></div>
+  </div>
+  <div class="facts">
+    <div><small>السعر</small><b>٥٠ ريال</b> <span style="color:var(--taupe);font-size:14px">بعد الخصم</span></div>
+    <div><small>الموعد</small><b>يُحدد قريباً</b></div>
+    <div><small>الوقت</small><b>مرن ومفتوح</b></div>
+    <div><small>المقاعد</small><b>محدودة</b></div>
+  </div>
+</section>
+
+<!-- ================= TRAINER ================= -->
+<section class="block" id="trainer">
+  <div class="trainer">
+    <img class="logo" src="logo.png" alt="شعار helah_projects — تصميم، إبداع، جودة">
+    <div>
+      <div class="eyebrow mono">المدربة</div>
+      <h2>هيله فهد</h2>
+      <p class="lead">مصممة ومدربة، صاحبة <span class="mono">helah_projects</span> — تصميم • إبداع • جودة.</p>
+      <div class="badges">
+        <div class="badge"><span class="dot"></span><div><b>مدربة معتمدة — تدريب المدربين TOT</b><span>دورة ٢٥ ساعة من معهد الخوارزمي للتدريب، معتمدة من المؤسسة العامة للتدريب التقني والمهني.</span></div></div>
+        <div class="badge"><span class="dot" style="background:var(--stem)"></span><div><b>رخصة «إعلامي» — مصمم جرافيك</b><span>صادرة من الهيئة العامة لتنظيم الإعلام.</span></div></div>
+        <div class="badge"><span class="dot" style="background:var(--sage)"></span><div><b>خبرة ٥ سنوات</b><span>في التصميم والتدريب.</span></div></div>
+      </div>
+      <div class="license"><img src="license.jpg" alt="رخصة إعلامي – مصمم جرافيك" id="licThumb"><small>رخصة مصمم جرافيك — الهيئة العامة لتنظيم الإعلام<br>اضغطي للتكبير</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REGISTER ================= -->
+<section class="block" id="register">
+  <div class="eyebrow mono">التسجيل</div>
+  <h2>سجّلي الحين بـ <em>٥٠ ريال</em> فقط</h2>
+  <div class="steps">
+    <div class="step"><i>١</i><div><b>حوّلي ٥٠ ريال</b><br><span style="color:#4a443d;font-size:15px">على حساب الراجحي تحت.</span></div></div>
+    <div class="step"><i>٢</i><div><b>عبّي النموذج</b><br><span style="color:#4a443d;font-size:15px">وارفقي صورة إيصال التحويل.</span></div></div>
+    <div class="step"><i>٣</i><div><b>يوصلك التأكيد</b><br><span style="color:#4a443d;font-size:15px">مع تفاصيل الموعد أول ما يتحدد.</span></div></div>
+  </div>
+
+  <div class="pay">
+    <div class="bank">
+      <h3><svg width="22" height="22" viewBox="0 0 24 24"><path d="M3 10 12 4l9 6M5 10v8M9 10v8M15 10v8M19 10v8M3 20h18" fill="none" stroke="#F1EBE0" stroke-width="1.8" stroke-linecap="round"/></svg> تحويل بنكي — مصرف الراجحي</h3>
+      <div class="row"><small>اسم المستفيد</small><div class="val" style="direction:rtl"><span>هيله فهد محمد النغيمشي</span></div></div>
+      <div class="row"><small>رقم الآيبان (IBAN)</small><div class="val"><code id="iban">SA20 8000 0697 6080 1648 7512</code><button type="button" class="copy" data-copy="SA2080000697608016487512">نسخ</button></div></div>
+      <div class="row"><small>المبلغ</small><div class="val" style="direction:rtl"><span>٥٠ ريال سعودي</span></div></div>
+    </div>
+    <div class="apple">
+      <span class="ap"><svg width="16" height="19" viewBox="0 0 16 19"><path fill="#fff" d="M13.2 10.1c0-2.4 2-3.5 2-3.6-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.8-.9-3-.9C3.7 4.7 2.2 5.6 1.4 7c-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.3.9-1.3 1.3-2.6 1.3-2.6s-2.4-1-2.4-3.6zM10.9 3.1C11.5 2.3 12 1.2 11.8 0c-1 0-2.2.7-2.9 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.3-.6 3-1.3z"/></svg>Pay</span>
+      <b>الدفع بـ Apple Pay</b>
+      <small>قريباً — نفعّله خلال الأيام الجاية. حالياً التسجيل بالتحويل البنكي.</small>
+    </div>
+  </div>
+
+  <form id="regForm" action="https://formsubmit.co/jomng0198@gmail.com" method="POST" enctype="multipart/form-data" novalidate>
+    <input type="hidden" name="_subject" value="تسجيل جديد — مجمع كلود كود">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_next" id="nextUrl" value="">
+    <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+    <input type="hidden" name="الدورة" value="مجمع كلود كود — ٥٠ ريال">
+    <div class="fields">
+      <div class="f"><label for="nm">الاسم الكامل <span class="req">*</span></label><input id="nm" type="text" name="الاسم" required autocomplete="name"></div>
+      <div class="f"><label for="ph">رقم الجوال <span class="req">*</span></label><input id="ph" type="tel" name="الجوال" required inputmode="tel" placeholder="05xxxxxxxx" dir="ltr" autocomplete="tel"></div>
+      <div class="f"><label for="em">البريد الإلكتروني <span class="req">*</span></label><input id="em" type="email" name="email" required dir="ltr" autocomplete="email"></div>
+      <div class="f"><label for="ct">المدينة</label><input id="ct" type="text" name="المدينة" autocomplete="address-level2"></div>
+      <div class="f full"><label for="jb">الوظيفة أو الجهة</label><input id="jb" type="text" name="الوظيفة" placeholder="مثال: معلمة، إدارية، طالبة…"></div>
+      <div class="f full"><label>طريقة الدفع <span class="req">*</span></label>
+        <div class="radios">
+          <label><input type="radio" name="طريقة الدفع" value="تحويل بنكي — الراجحي" checked> تحويل بنكي — الراجحي</label>
+          <label class="dis"><input type="radio" name="طريقة الدفع" value="Apple Pay" disabled> Apple Pay (قريباً)</label>
+        </div></div>
+      <div class="f full"><label>إيصال التحويل <span class="req">*</span></label>
+        <label class="drop" id="drop"><input type="file" name="attachment" id="rcpt" accept="image/*,application/pdf" required><span id="dropTxt">اضغطي لإرفاق صورة الإيصال (صورة أو PDF، أقل من ٥ ميجا)</span></label></div>
+      <div class="f full"><label for="nt">ملاحظات</label><textarea id="nt" name="ملاحظات" placeholder="أي سؤال أو ملاحظة…"></textarea></div>
+      <div class="f full"><label class="agree"><input type="checkbox" id="ag" required> <span>قرأت <a href="#policy">شروط التسجيل وسياسة الاسترجاع</a> وأوافق عليها.</span></label></div>
+    </div>
+    <p class="err" id="err"></p>
+    <button class="pill submit" type="submit" id="sendBtn">إرسال التسجيل</button>
+  </form>
+</section>
+
+<!-- ================= POLICY ================= -->
+<section class="block policy" id="policy">
+  <div class="eyebrow mono">الشروط والتواصل</div>
+  <h2>قبل ما تسجّلين</h2>
+  <details open><summary>شروط التسجيل</summary><ul>
+    <li>يُعتمد التسجيل بعد التحقق من وصول مبلغ ٥٠ ريال وإرفاق الإيصال.</li>
+    <li>يوصلك تأكيد التسجيل وتفاصيل الموعد والرابط على بريدك الإلكتروني أو جوالك.</li>
+    <li>المقاعد محدودة، والأولوية لمن يكمل التحويل والنموذج أولاً.</li>
+  </ul></details>
+  <details><summary>سياسة الاسترجاع</summary><ul>
+    <li>يحق لك استرداد المبلغ كاملاً إذا طلبتي الإلغاء قبل موعد الدورة بـ ٤٨ ساعة على الأقل.</li>
+    <li>إذا تأجلت الدورة أو أُلغيت من طرفنا، يُسترد المبلغ كاملاً أو يُنقل تسجيلك للموعد الجديد حسب رغبتك.</li>
+    <li>يتم الاسترداد بنفس طريقة الدفع خلال ٧ أيام عمل.</li>
+  </ul></details>
+  <details><summary>التواصل</summary><ul>
+    <li>البريد الإلكتروني: <a href="mailto:jomng0198@gmail.com" dir="ltr">jomng0198@gmail.com</a></li>
+    <li>تيك توك: <span dir="ltr">@student_services184</span></li>
+  </ul></details>
+</section>
+
+<footer>
+  <img src="logo.png" alt=""><br>
+  <span class="mono">helah_projects</span> · تصميم • إبداع • جودة<br>
+  © ٢٠٢٦ المدربة هيله فهد
+</footer>
+
+<div class="modal" id="licModal"><div class="box"><img class="lic" src="license.jpg" alt="رخصة إعلامي – مصمم جرافيك"><p style="margin-top:10px"><button class="pill ghost" type="button" data-close>إغلاق</button></p></div></div>
+<div class="modal" id="thanks"><div class="box"><img src="logo.png" alt="" style="width:90px;border-radius:50%"><h3>وصل تسجيلك 🌷</h3><p>شكراً لك! بنتحقق من التحويل ويوصلك التأكيد وتفاصيل الموعد قريباً.</p><p style="margin-top:16px"><button class="pill" type="button" data-close>تمام</button></p></div></div>
+<div class="toast" id="toast">تم النسخ ✓</div>
+
+<script>
+/* ===================== Page UI ===================== */
+(function(){
+  const $=s=>document.querySelector(s);
+  const toast=msg=>{const t=$('#toast');t.textContent=msg;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),1600)};
+  document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',()=>{
+    const v=b.dataset.copy;
+    (navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).then(()=>toast('تم نسخ الآيبان ✓')).catch(()=>{
+      const r=document.createRange();r.selectNodeContents($('#iban'));const s=getSelection();s.removeAllRanges();s.addRange(r);toast('حدّدته لك، انسخيه')});
+  }));
+  $('#licThumb').addEventListener('click',()=>$('#licModal').classList.add('on'));
+  document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m||e.target.hasAttribute('data-close'))m.classList.remove('on')}));
+  const rc=$('#rcpt');rc.addEventListener('change',()=>{const f=rc.files[0];$('#drop').classList.toggle('has',!!f);
+    $('#dropTxt').textContent=f?('✓ '+f.name):'اضغطي لإرفاق صورة الإيصال (صورة أو PDF، أقل من ٥ ميجا)'});
+  const base=location.href.split('#')[0].split('?')[0];
+  $('#nextUrl').value=base+'?done=1#register';
+  if(/[?&]done=1/.test(location.search)){$('#thanks').classList.add('on');history.replaceState(null,'',base+'#register')}
+  $('#regForm').addEventListener('submit',e=>{
+    const err=$('#err');err.textContent='';
+    const need=[['#nm','اكتبي اسمك الكامل'],['#ph','اكتبي رقم جوالك'],['#em','اكتبي بريدك الإلكتروني']];
+    for(const [s,m] of need){if(!$(s).value.trim()){e.preventDefault();err.textContent=m;$(s).focus();return}}
+    if(!/^\S+@\S+\.\S+$/.test($('#em').value.trim())){e.preventDefault();err.textContent='تأكدي من البريد الإلكتروني';$('#em').focus();return}
+    if(!/^[0-9+\s٠-٩]{9,15}$/.test($('#ph').value.trim())){e.preventDefault();err.textContent='تأكدي من رقم الجوال';$('#ph').focus();return}
+    const f=rc.files[0];
+    if(!f){e.preventDefault();err.textContent='ارفقي صورة إيصال التحويل';return}
+    if(f.size>5*1024*1024){e.preventDefault();err.textContent='حجم الإيصال أكبر من ٥ ميجا، صوّريه بحجم أصغر';return}
+    if(!$('#ag').checked){e.preventDefault();err.textContent='لازم توافقين على الشروط';return}
+    $('#sendBtn').textContent='جاري الإرسال…';$('#sendBtn').disabled=true;
+  });
+})();
+
+/* ===================== Letterbloom garden ===================== */
+(function(){
+const P={bg:'#F1EBE0',flower:'#D9472B',stem:'#5E6B4E',line:'#FFD3C2',type:'#1E1B18',core:'#1E1B18'};
+const FONT='"Amiri", serif';
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const hero=document.getElementById('hero'),cv=document.getElementById('garden'),ctx=cv.getContext('2d'),inp=document.getElementById('typer');
+const coarse=matchMedia('(pointer: coarse)').matches;
+if(coarse){const h=document.getElementById('hints').children;h[0].textContent='المسي واكتبي';h[3].textContent='سطر جديد يمسح'}
+let W=0,H=0,DPR=1;
+function resize(){DPR=Math.min(2,devicePixelRatio||1);W=hero.clientWidth;H=hero.clientHeight;cv.width=W*DPR;cv.height=H*DPR;layout(true)}
+// rng
+function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const R=(r,a,b)=>a+(b-a)*r();
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const eoc=x=>1-Math.pow(1-clamp(x),3);
+const spring=(t,a=7,b=15)=>t<=0?0:1-Math.exp(-a*t)*Math.cos(b*t);
+function hash(a,b){let h=Math.imul(a^0x9e3779b9,0x85ebca6b)^Math.imul(b+0x632be5ab,0xc2b2ae35);h^=h>>>13;h=Math.imul(h,0x27d4eb2d);return((h^h>>>15)>>>0)/4294967296}
+// ---------- state ----------
+let letters=[];let uid=1;let wordSeed=Math.random()*1e9|0;let wordIdx=0;
+let S=100,Sd=100,rightT=0,rightD=0,baseY=0,lastKey=0;
+const pointer={x:-9999,y:-9999,on:false};
+const butterflies=[];
+function text(){return letters.filter(l=>!l.removed).map(l=>l.ch).join('')}
+function measure(s){ctx.font=`700 100px ${FONT}`;ctx.direction='rtl';return ctx.measureText(s).width/100}
+function layout(snap){
+  const live=letters.filter(l=>!l.removed);const T=live.map(l=>l.ch).join('');
+  const maxW=W*(W<600?.86:.78),S0=H*(W<600?.17:.26);
+  const tw=Math.max(.01,measure(T||' '));
+  // words → lines
+  const words=[];let cur=[];live.forEach(l=>{cur.push(l);if(l.space){words.push(cur);cur=[]}});if(cur.length)words.push(cur);
+  let lines=[live];S=Math.min(S0,maxW/tw);
+  if(words.length>1&&S<H*(W<600?.1:.09)){
+    // greedy wrap, then pick largest size that fits
+    let best=null;
+    for(let s=S0;s>H*.03;s*=.96){const ls=[];let ln=[];let lw=0;
+      for(const w of words){const ww=measure(w.map(l=>l.ch).join('').trimEnd())*s;
+        if(ln.length&&lw+ww>maxW){ls.push(ln);ln=[];lw=0}ln=ln.concat(w);lw=measure(ln.map(l=>l.ch).join('').trimEnd())*s}
+      if(ln.length)ls.push(ln);
+      const ok=ls.every(l=>measure(l.map(x=>x.ch).join('').trimEnd())*s<=maxW)&&ls.length*1.9*s<=H*.62;
+      if(ok){best={s,ls};break}}
+    if(best){S=best.s;lines=best.ls}}
+  const n=lines.length,lh=1.9*S;
+  LINES=[];
+  lines.forEach((ln,k)=>{const LT=ln.map(l=>l.ch).join('');const lw=measure(LT.trimEnd());const right=W/2+lw*S/2;const by=H*.52+(k-(n-1)/2)*lh+.28*S;
+    let acc=0;ln.forEach((l,i)=>{const pre=measure(LT.slice(0,i+1));const prev=acc;acc=pre;
+      l.tx=right-(prev+pre)/2*S;l.tw=Math.max(.15,pre-prev);l.ty=by;l.line=k;
+      if(snap||l.x===undefined){l.x=l.tx;l.y=l.ty}});
+    LINES.push(ln)});
+  baseY=H*.52+.28*S;
+  if(snap){Sd=S}
+}
+let LINES=[];
+// ---------- garden generation ----------
+function vinePts(r,bx,by,dir,len,curv,curl){
+  const pts=[[bx,by]];const amp=R(r,.35,.8)*curv,waves=R(r,1,2.6),bend=R(r,-.6,.6),ph=R(r,0,6.28);
+  let x=bx,y=by,step=len/40;
+  for(let i=1;i<=40;i++){const u=i/40;const a=dir+bend*u+amp*Math.sin(u*Math.PI*waves+ph)*Math.min(1,3*u);x+=Math.cos(a)*step;y+=Math.sin(a)*step;pts.push([x,y])}
+  if(curl){const n=pts.length,a0=Math.atan2(pts[n-1][1]-pts[n-2][1],pts[n-1][0]-pts[n-2][0]);const side=r()<.5?1:-1;const r0=R(r,.05,.1);
+    let cx=x+Math.cos(a0+side*Math.PI/2)*r0,cy=y+Math.sin(a0+side*Math.PI/2)*r0;let ang=a0-side*Math.PI/2;
+    for(let i=1;i<=14;i++){const u=i/14,rr=r0*(1-.5*u);const aa=ang+side*u*1.6*Math.PI*2;pts.push([cx+Math.cos(aa)*rr,cy+Math.sin(aa)*rr])}}
+  return pts}
+function segs(r){const cuts=[];const n=1+(r()*3|0);for(let i=0;i<n;i++)cuts.push(R(r,.15,.85));cuts.sort();let layer=r()<.5?0:1;const out=[];let from=0;
+  cuts.forEach(c=>{out.push({a:from,b:c,l:layer});const gap=r()<.3?R(r,.02,.05):0;from=c+gap;layer=1-layer});out.push({a:from,b:1,l:layer});return out}
+function layerAt(sg,u){for(const s of sg)if(u>=s.a&&u<=s.b)return s.l;return sg[sg.length-1].l}
+function mkStem(L,r,o){
+  const pts=o.pts||vinePts(r,o.bx,o.by,o.dir,o.len,L.wp.curv,o.tip==='curl');
+  const sg=o.seg||segs(r);const len=o.len;
+  const st={id:uid++,pts,sg,delay:o.delay,dur:Math.max(320,len*620),w:o.branch?.82:1,leaves:[],hairs:[],tip:null,branch:o.branch};
+  const nl=Math.floor(r()*2.8*L.wp.leaf);for(let i=0;i<nl;i++)st.leaves.push({id:uid++,u:R(r,.25,.85),side:i%2?1:-1,ang:R(r,.55,1.05),len:R(r,.14,.34)*(o.branch?.8:1)});
+  const nh=r()*3|0;for(let i=0;i<nh;i++)st.hairs.push({u:R(r,.2,.9),side:r()<.5?1:-1});
+  let tip=o.tip;if(!tip){if(r()<L.wp.poppy)tip='poppy';else{const q=r();tip=q<.45?'pod':q<.6?'leaf':'curl'}}
+  const n=pts.length,ta=Math.atan2(pts[n-1][1]-pts[n-2][1],pts[n-1][0]-pts[n-2][0]);
+  if(tip==='poppy'){const Rr=R(r,.17,.33)*L.wp.bloom*(o.branch?.75:1);const [px,py]=pts[n-1];
+    const over=py>-.78&&py<.05&&Math.abs(px)<L.tw/2;const lay=over?(r()<.92?0:1):(r()<.5?1:0);
+    st.tip={k:'poppy',id:uid++,R:Rr,rot:R(r,-.5,.5),p1:R(r,0,6),p2:R(r,0,6),l:lay};
+    if(r()<.1)st.twin={id:uid++,R:Rr*R(r,.6,.9),dx:R(r,-.5,.5),dy:R(r,-.4,0),rot:R(r,-.5,.5),p1:R(r,0,6),p2:R(r,0,6),l:lay}}
+  else if(tip==='pod')st.tip={k:'pod',id:uid++,len:R(r,.11,.16),a:ta};
+  else if(tip==='leaf')st.tip={k:'leaf',id:uid++,len:R(r,.16,.32),a:ta};
+  L.stems.push(st);
+  if(!o.branch&&!o.noBranch&&r()<.3){const u=R(r,.35,.7);const k=Math.floor(u*(pts.length-1));const a=Math.atan2(pts[k+1][1]-pts[k][1],pts[k+1][0]-pts[k][0])+(r()<.5?.7:-.7);
+    mkStem(L,r,{bx:pts[k][0],by:pts[k][1],dir:a,len:len*R(r,.35,.55),delay:o.delay+st.dur*u,branch:true,seg:[{a:0,b:1,l:layerAt(sg,u)}]})}
+  return st}
+function grow(L){
+  const r=mulberry(L.seed);L.stems=[];const w=L.tw;
+  const up=-Math.PI/2;
+  mkStem(L,r,{bx:R(r,-.35,.35)*w,by:R(r,-.3,0),dir:up+L.wp.lean/2+R(r,-.35,.35),len:R(r,.6,1.1),delay:40,tip:L.first?'poppy':null});
+  if(r()<.45)mkStem(L,r,{bx:R(r,-.35,.35)*w,by:R(r,-.3,0),dir:up+L.wp.lean/2+R(r,-.35,.35),len:R(r,.6,1.1),delay:170});
+  if(r()<.4)mkStem(L,r,{bx:R(r,-.3,.3)*w,by:R(r,-.45,-.1),dir:Math.PI/2+R(r,-.4,.4),len:R(r,.35,.7),delay:160,noBranch:true});
+  if(L.first)mkStem(L,r,{bx:.3*w,by:R(r,-.4,-.1),dir:-.3+R(r,-.3,.2),len:R(r,.45,.75),delay:120,tip:'curl',noBranch:true});
+  // bridge to previous letter (RTL: previous letter sits to the right)
+  if(L.prev&&r()<L.wp.bridge){const P0=[R(r,-.2,.2)*w,R(r,-.6,-.05)];const dx=(L.prev.tx-L.tx)/S;const P3=[dx+R(r,-.2,.2)*L.prev.tw,R(r,-.6,-.05)];
+    const bulge=(r()<.5?-1:1)*R(r,.4,.8);const c1=[P0[0]+(P3[0]-P0[0])*.3,P0[1]+bulge],c2=[P0[0]+(P3[0]-P0[0])*.7,P3[1]+bulge];
+    const cut=r()<.45?R(r,.7,.9):1;const pts=[];for(let i=0;i<=40;i++){const t=i/40*cut,mt=1-t;pts.push([mt*mt*mt*P0[0]+3*mt*mt*t*c1[0]+3*mt*t*t*c2[0]+t*t*t*P3[0],mt*mt*mt*P0[1]+3*mt*mt*t*c1[1]+3*mt*t*t*c2[1]+t*t*t*P3[1]])}
+    const q=r();mkStem(L,r,{pts,len:Math.hypot(P3[0]-P0[0],P3[1]-P0[1])*1.2,delay:90,tip:q<.5?'curl':q<.75?'leaf':'poppy',noBranch:true})}
+  // tendril (shown only while last of word)
+  const side=r()<.5?1:-1;L.tendril={id:uid++,pts:vinePts(r,-.25*w,R(r,-.4,-.1),up+side*.7,R(r,.45,.7),L.wp.curv,true)};
+}
+function cutWord(L,now){
+  if(!L||L.cut)return;L.cut=now;const r=mulberry(L.seed^0x51);const n=1+(r()*3|0);
+  for(let i=0;i<n;i++){const st=mkStem(L,r,{bx:R(r,-.3,.3)*L.tw,by:R(r,-.4,-.1),dir:-Math.PI/2-.55+i*.45+R(r,-.15,.15),len:R(r,.4,.85),delay:now-L.born,tip:i===0||r()<.5?'poppy':'pod',noBranch:true});st.cutStem=true}
+}
+function newWordParams(seed){const r=mulberry(seed);return{poppy:R(r,.24,.46),leaf:R(r,.6,1.4),lean:R(r,-.3,.3),bloom:R(r,.85,1.3),curv:R(r,.8,1.4),bridge:Math.min(.95,R(r,.45,.8))}}
+let curWP=newWordParams(wordSeed);
+function addChar(ch,now){
+  if(ch===' '||ch===' '){const live=letters.filter(l=>!l.dead&&!l.removed);const last=live[live.length-1];
+    if(!last||last.ch===' ')return;cutWord(last,now);letters.push({ch:' ',space:true,born:now,id:uid++});wordSeed=(wordSeed*1103515245+12345)>>>0;curWP=newWordParams(wordSeed);wordIdx=0;layout();return}
+  const live=letters.filter(l=>!l.dead&&!l.removed);const prev=live[live.length-1];
+  const L={ch,born:now,id:uid++,seed:(wordSeed+wordIdx*7919)>>>0,wp:curWP,first:!prev||prev.space,prev:prev&&!prev.space?prev:null,lean:{x:0,y:0},sway:letters.length%2?1:-1};
+  wordIdx++;letters.push(L);layout();grow(L);
+  if(L.prev&&L.prev.cut){L.prev.stems=L.prev.stems.filter(s=>!s.cutStem);L.prev.cut=0}
+}
+function wither(now){const live=letters.filter(l=>!l.dead&&!l.removed);const L=live[live.length-1];if(!L)return;L.dead=now;
+  setTimeout(()=>{L.removed=true;letters=letters.filter(l=>!l.removed);layout()},300);
+  if(L.space){wordIdx=0}else{const p=L.prev;if(p&&p.cut){p.stems=p.stems.filter(s=>!s.cutStem);p.cut=0}}}
+function clearAll(){letters.forEach(l=>{if(!l.dead)l.dead=performance.now()});setTimeout(()=>{letters=letters.filter(l=>!l.dead);layout()},310);wordSeed=Math.random()*1e9|0;curWP=newWordParams(wordSeed);wordIdx=0}
+// ---------- drawing helpers ----------
+function smoothClosed(p){const n=p.length;ctx.beginPath();const m=(a,b)=>[(a[0]+b[0])/2,(a[1]+b[1])/2];let s=m(p[n-1],p[0]);ctx.moveTo(s[0],s[1]);
+  for(let i=0;i<n;i++){const q=m(p[i],p[(i+1)%n]);ctx.quadraticCurveTo(p[i][0],p[i][1],q[0],q[1])}ctx.closePath()}
+function strokeLine(p,w,col){if(p.length<2)return;ctx.beginPath();ctx.moveTo(p[0][0],p[0][1]);for(let i=1;i<p.length-1;i++){const mx=(p[i][0]+p[i+1][0])/2,my=(p[i][1]+p[i+1][1])/2;ctx.quadraticCurveTo(p[i][0],p[i][1],mx,my)}
+  ctx.lineTo(p[p.length-1][0],p[p.length-1][1]);ctx.strokeStyle=col;ctx.lineWidth=w;ctx.lineCap='round';ctx.lineJoin='round';ctx.stroke()}
+let NOW=0;
+function boil(id){if(RM)return[0,0,0];const f=Math.floor(NOW/120);const a=Math.max(.8,.01*Sd);return[(hash(id,f)-.5)*2*a,(hash(id+7,f)-.5)*2*a,(hash(id+13,f)-.5)*.07]}
+// map garden point (S units) → screen with sway/lean/wither
+function mapper(L){const age=(NOW-L.born)/1000;const k=L.dead?1-eoc((NOW-L.dead)/260):1;
+  const sw=RM?0:Math.exp(-3.2*age)*(age<2.5?1:0);
+  return(x,y)=>{const h=clamp(-y,0,2.5);let X=x*k,Y=y*k;
+    let dx=0,dy=0;
+    if(sw>0){dx+=.07*h*sw*Math.sin(11*age)*L.sway;dy+=.035*h*sw*Math.sin(11*age+1.2)}
+    const f=.5*h*h+.5*h;dx+=L.lean.x*.1*f;dy+=L.lean.y*.05*f;
+    return[L.x+(X+dx)*Sd,L.y+(Y+dy)*Sd]}}
+function drawStem(L,st,layer,M,tt){
+  const p=eoc((tt-st.delay)/st.dur);if(p<=0)return;const n=st.pts.length;const upto=p*(n-1);
+  const b=boil(st.id);const pts=[];for(let i=0;i<=Math.floor(upto);i++){const q=M(st.pts[i][0],st.pts[i][1]);pts.push([q[0]+b[0],q[1]+b[1]])}
+  const fr=upto%1;if(fr>0&&Math.ceil(upto)<n){const a=st.pts[Math.floor(upto)],c=st.pts[Math.ceil(upto)];const q=M(a[0]+(c[0]-a[0])*fr,a[1]+(c[1]-a[1])*fr);pts.push([q[0]+b[0],q[1]+b[1]])}
+  const W0=.017*Sd*st.w;
+  // segments by layer
+  st.sg.forEach(sg=>{if(sg.l!==layer)return;const i0=Math.floor(sg.a*(n-1)),i1=Math.min(pts.length-1,Math.ceil(sg.b*(n-1)));if(i1<=i0)return;strokeLine(pts.slice(i0,i1+1),W0,P.stem)});
+  // hairs
+  st.hairs.forEach(hr=>{if(p<hr.u||layerAt(st.sg,hr.u)!==layer)return;const i=Math.floor(hr.u*(n-1));const a=st.pts[i],c=st.pts[Math.min(n-1,i+1)];const ang=Math.atan2(c[1]-a[1],c[0]-a[0])+hr.side*2.5;
+    const q=M(a[0],a[1]);strokeLine([[q[0]+b[0],q[1]+b[1]],[q[0]+b[0]+Math.cos(ang)*.035*Sd,q[1]+b[1]+Math.sin(ang)*.035*Sd]],.012*Sd,P.stem)});
+  // leaves
+  st.leaves.forEach(lf=>{if(p<lf.u||layerAt(st.sg,lf.u)!==layer)return;const i=Math.floor(lf.u*(n-1));const a=st.pts[i],c=st.pts[Math.min(n-1,i+1)];
+    const ang=Math.atan2(c[1]-a[1],c[0]-a[0])+lf.side*lf.ang;const tl=(tt-st.delay-st.dur*Math.log(1/(1-lf.u+.001))/3)/1000;
+    const s=RM?1:spring(Math.max(0,(tt-(st.delay+st.dur*(1-Math.cbrt(1-lf.u))))/1000));const q=M(a[0],a[1]);drawLeaf(q[0]+b[0],q[1]+b[1],ang,lf.len*Sd*s,lf.id)});
+  // tip
+  if(st.tip){const tAppear=st.delay+st.dur*.8;const tl=tt-tAppear;if(tl>0&&(st.tip.l===undefined?layerAt(st.sg,1)===layer:st.tip.l===layer)){
+    const e=st.pts[n-1];const q=M(e[0],e[1]);const x=q[0]+b[0],y=q[1]+b[1];
+    if(st.tip.k==='poppy'){drawPoppy(x,y,st.tip.R*Sd*(L.dead?1-eoc((NOW-L.dead)/260):1),st.tip,tl,L);
+      if(st.twin&&tl>120){const tw=st.twin;drawPoppy(x+tw.dx*st.tip.R*Sd*2,y+tw.dy*st.tip.R*Sd*2,tw.R*Sd,tw,tl-120,L)}}
+    else if(st.tip.k==='pod'){const s=RM?1:spring(tl/1000);drawPod(x,y,st.tip.a,st.tip.len*Sd*s)}
+    else if(st.tip.k==='leaf'){const s=RM?1:spring(tl/1000);drawLeaf(x,y,st.tip.a,st.tip.len*Sd*s,st.tip.id)}}}
+}
+function drawLeaf(x,y,ang,L,id){if(L<1)return;const b=boil(id);ctx.save();ctx.translate(x,y);ctx.rotate(ang+b[2]);
+  const bend=(hash(id,3)-.5)*.6*.15*L;const left=[],right=[];
+  for(let i=0;i<=44;i++){const u=i/44;const cx=u*L,cy=bend*Math.sin(u*Math.PI);
+    const tooth=k=>{const v=(u*5.5+k)%1;return v<.7?v/.7:1-(v-.7)/.3};
+    const hw=.3*L*Math.sin(Math.PI*Math.pow(u,.8));
+    left.push([cx,cy-hw*(.28+.72*tooth(0))]);right.push([cx,cy+hw*(.28+.72*tooth(.09))])}
+  smoothClosed(left.concat(right.reverse()));ctx.fillStyle=P.stem;ctx.fill();
+  strokeLine([[.05*L,bend*Math.sin(.05*Math.PI)],[.45*L,bend],[.85*L,bend*Math.sin(.85*Math.PI)]],Math.max(.7,.022*L),P.bg);ctx.restore()}
+function drawPod(x,y,a,L){if(L<1)return;ctx.save();ctx.translate(x,y);ctx.rotate(a);ctx.fillStyle=P.stem;
+  ctx.beginPath();ctx.ellipse(.55*L,0,.55*L,.44*L,0,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.ellipse(1.12*L,0,.1*L,.36*L,0,0,Math.PI*2);ctx.fill();
+  for(let i=-2;i<=2;i++){strokeLine([[1.06*L,i*.07*L],[1.24*L,i*.16*L]],Math.max(.8,.05*L),P.stem)}
+  [-.18,0,.18].forEach(o=>strokeLine([[.15*L,o*L*.9],[.55*L,o*L*1.4],[.97*L,o*L*.9]],Math.max(.7,.045*L),P.bg));ctx.restore()}
+const PET=[[-.42,-.24,.6,.56,-.4,0],[.44,-.22,.6,.56,.4,0],[-.38,.24,.6,.5,.3,.12],[.4,.26,.6,.5,-.3,.12]];
+function drawPoppy(x,y,Rp,tp,tl,L){if(Rp<1)return;const b=boil(tp.id);
+  // face toward pointer
+  let fx=0,fy=0;if(pointer.on){const dx=pointer.x-x,dy=pointer.y-y,d=Math.hypot(dx,dy);if(d<300){const s=(1-d/300);const sm=s*s*(3-2*s)*Math.min(1,d/40);fx=dx/d*sm;fy=dy/d*sm}}
+  tp.fx=(tp.fx||0)+(fx-(tp.fx||0))*.09;tp.fy=(tp.fy||0)+(fy-(tp.fy||0))*.09;
+  ctx.save();ctx.translate(x+b[0],y+b[1]);ctx.rotate(tp.rot+b[2]+.22*tp.fx);
+  PET.forEach((pt,i)=>{const t=(tl-i*85)/1000;const s=RM?1:clamp(spring(t,8,14),0,1.25);if(s<=0)return;
+    ctx.save();const lift=pt[5];ctx.translate(tp.fx*lift*Rp,tp.fy*lift*Rp);
+    ctx.translate(0,.45*Rp);ctx.scale(s,s);ctx.rotate((1-Math.min(1,s))*.5*(pt[0]<0?-1:1));ctx.translate(0,-.45*Rp);
+    const pts=[];for(let k=0;k<34;k++){const th=k/34*Math.PI*2;const cr=1+.045*Math.sin(5*th+tp.p1+i)+.03*Math.sin(9*th+tp.p2)+.012*Math.sin(15*th+2*i);
+      const ex=Math.cos(th)*pt[2]*Rp*cr,ey=Math.sin(th)*pt[3]*Rp*cr;const c=Math.cos(pt[4]),sn=Math.sin(pt[4]);pts.push([pt[0]*Rp+ex*c-ey*sn,pt[1]*Rp+ex*sn+ey*c])}
+    smoothClosed(pts);ctx.fillStyle=P.flower;ctx.fill();
+    if(Rp>=10&&s>.4){const lp=clamp((s-.4)/.5);const cang=Math.atan2(pt[1],pt[0]);const reach=Math.hypot(pt[0],pt[1])*Rp+.6*pt[2]*Rp;
+      [[-.32,.75],[.05,.9],[.36,.75]].forEach(([o,wm])=>{const a=cang+o;const r0=.32*reach,r1=r0+(reach-r0)*lp;const mid=(r0+r1)/2;
+        strokeLine([[Math.cos(a)*r0,Math.sin(a)*r0],[Math.cos(a+.06)*mid,Math.sin(a+.06)*mid],[Math.cos(a)*r1,Math.sin(a)*r1]],.032*Rp*wm,P.line)})}
+    ctx.restore()});
+  const cp=RM?1:eoc((tl-(3*85+80))/520);
+  if(cp>0){ctx.save();ctx.translate(tp.fx*.3*Rp,tp.fy*.3*Rp);ctx.fillStyle=P.core;ctx.beginPath();ctx.ellipse(0,-.02*Rp,.24*Rp*cp,.24*.86*Rp*cp,0,0,Math.PI*2);ctx.fill();
+    if(Rp>=9){for(let i=0;i<11;i++){const ap=clamp((tl-(3*85+80)-i*40)/120);if(ap<=0)continue;const a=i/11*Math.PI*2;ctx.beginPath();ctx.arc(Math.cos(a)*.33*Rp,Math.sin(a)*.33*Rp-.02*Rp,.045*Rp*ap,0,Math.PI*2);ctx.fill()}}
+    ctx.translate(tp.fx*.06*Rp,tp.fy*.06*Rp);ctx.fillStyle=P.stem;ctx.beginPath();ctx.ellipse(0,-.02*Rp,.085*Rp*cp,.075*Rp*cp,0,0,Math.PI*2);ctx.fill();ctx.restore()}
+  ctx.restore();
+  tp.sx=x;tp.sy=y;tp.sR=Rp;tp.open=tl>700}
+// butterflies
+function spawnButterfly(cx,cy){if(butterflies.length>=6)butterflies.shift();const left=cx<W/2;
+  butterflies.push({x:left?-30:W+30,y:H*(.2+Math.random()*.5),vx:0,vy:0,t0:NOW,seed:Math.random()*10,home:[cx,cy],target:null,state:'fly'})}
+function openPoppies(){const out=[];letters.forEach(L=>{if(L.dead||!L.stems)return;L.stems.forEach(s=>{if(s.tip&&s.tip.k==='poppy'&&s.tip.open&&s.tip.sx!==undefined)out.push(s.tip)})});return out}
+function drawButterfly(bf,dt){const t=(NOW-bf.t0)/1000;const s=Math.max(14,.15*Sd);
+  if(!bf.target||!bf.target.open||bf.target.sx===undefined){const ps=openPoppies().filter(p=>!butterflies.some(o=>o!==bf&&o.target===p));
+    if(ps.length){ps.sort((a,b)=>Math.hypot(a.sx-bf.x,a.sy-bf.y)-Math.hypot(b.sx-bf.x,b.sy-bf.y));bf.target=ps[0];bf.state='fly'}else{bf.target=null}}
+  let tx,ty;if(bf.target){tx=bf.target.sx;ty=bf.target.sy-.55*bf.target.sR}else{if(t>3.5){tx=bf.x+300;ty=-200}else{tx=bf.home[0]+Math.sin(t*1.7)*90;ty=bf.home[1]-60+Math.cos(t*1.3)*50}}
+  const dx=tx-bf.x,dy=ty-bf.y,d=Math.hypot(dx,dy);let open;
+  if(bf.target&&d<4){bf.state='perch';bf.x=tx;bf.y=ty;bf.vx=bf.vy=0;open=Math.sin(.9*t+bf.seed)>.75?Math.abs(Math.cos(t*17)):.25+.15*Math.sin(t*2)}
+  else{const sp=Math.min(.34,.06+.0016*d);const k=1-Math.pow(1-.06,dt/16);bf.vx+=((dx/d||0)*sp-bf.vx)*k;bf.vy+=((dy/d||0)*sp-bf.vy)*k;
+    bf.x+=bf.vx*dt+Math.sin(7*t)*.12*dt*.1;bf.y+=bf.vy*dt+Math.cos(4.3*t)*.1*dt*.1+Math.sin(13*t)*.6;open=Math.abs(Math.cos(17*t))}
+  ctx.save();ctx.translate(bf.x,bf.y);ctx.rotate(clamp(bf.vx*1.5,-.5,.5));
+  [1,-1].forEach(sd=>{ctx.save();ctx.scale(sd*(.12+.88*open),1);ctx.fillStyle='#FFFFFF';ctx.strokeStyle=P.type;ctx.lineWidth=1;
+    ctx.beginPath();ctx.ellipse(.46*s,.28*s,.36*s,.3*s,.5,0,Math.PI*2);ctx.fill();ctx.stroke();
+    ctx.beginPath();ctx.ellipse(.55*s,-.32*s,.55*s,.36*s,-.55,0,Math.PI*2);ctx.fill();ctx.stroke();
+    if(open>.3){ctx.fillStyle=P.flower;ctx.beginPath();ctx.arc(.85*s,-.5*s,.09*s,0,Math.PI*2);ctx.fill()}ctx.restore()});
+  ctx.fillStyle=P.stem;ctx.beginPath();ctx.ellipse(0,0,.07*s,.46*s,0,0,Math.PI*2);ctx.fill();
+  strokeLine([[0,-.4*s],[.15*s,-.75*s],[.25*s,-.85*s]],1.2,P.stem);strokeLine([[0,-.4*s],[-.15*s,-.75*s],[-.25*s,-.85*s]],1.2,P.stem);ctx.restore()}
+// ---------- frame ----------
+let last=performance.now(),caretT=performance.now();
+function frame(now){const dt=Math.min(64,now-last);last=now;NOW=RM?now+1e6:now;const tNow=now;
+  const k=1-Math.exp(-dt/80);Sd+=(S-Sd)*k;letters.forEach(l=>{if(l.tx!==undefined){l.x+=(l.tx-l.x)*k;l.y+=(l.ty-l.y)*k}});
+  // pointer lean
+  letters.forEach(L=>{if(!L.lean)return;let tx=0,ty=0;if(pointer.on){const ax=L.x,ay=L.y-.6*Sd;const dx=pointer.x-ax,dy=pointer.y-ay,d=Math.hypot(dx,dy),reach=Math.max(260,3.2*Sd);
+    if(d<reach&&d>0){const s=1-d/reach,sm=s*s*(3-2*s);tx=dx/d*sm;ty=dy/d*sm}}L.lean.x+=(tx-L.lean.x)*.07;L.lean.y+=(ty-L.lean.y)*.07});
+  ctx.setTransform(DPR,0,0,DPR,0,0);ctx.fillStyle=P.bg;ctx.fillRect(0,0,W,H);
+  const live=letters.filter(l=>!l.space&&l.stems);
+  const lastOfWord=new Set();letters.forEach((l,i)=>{if(!l.space&&!l.dead&&(i===letters.length-1||letters[i+1].space||letters[i+1].dead))lastOfWord.add(l)});
+  const pass=layer=>live.forEach(L=>{const M=mapper(L);const tt=(RM?1e6:tNow-L.born);L.stems.forEach(st=>drawStem(L,st,layer,M,tt));
+    if(layer===1&&lastOfWord.has(L)&&!L.cut&&L.tendril){const g=RM?1:eoc((tt-150)/450);if(g>0){const n=Math.max(2,Math.floor(L.tendril.pts.length*g));const b=boil(L.tendril.id);
+      strokeLine(L.tendril.pts.slice(0,n).map(p=>{const q=M(p[0],p[1]);return[q[0]+b[0],q[1]+b[1]]}),.014*Sd,P.stem)}}});
+  pass(0);
+  // text (one fillText per line keeps Arabic joining intact)
+  ctx.font=`700 ${Sd}px ${FONT}`;ctx.direction='rtl';ctx.textAlign='right';ctx.textBaseline='alphabetic';ctx.fillStyle=P.type;
+  LINES.forEach(ln=>{const v=ln.filter(l=>!l.removed&&l.x!==undefined);if(!v.length)return;const T=v.map(l=>l.ch).join('');if(!T.trim())return;
+    const f=v[0];ctx.fillText(T,f.x+f.tw*Sd/2,f.y)});
+  pass(1);
+  butterflies.forEach(bf=>drawButterfly(bf,dt));
+  for(let i=butterflies.length-1;i>=0;i--){const b=butterflies[i];if(b.y<-150||b.x<-200||b.x>W+200&&!b.target)butterflies.splice(i,1)}
+  // caret (RTL: at left edge of last letter)
+  const lv=letters.filter(l=>!l.removed&&!l.dead&&l.x!==undefined);const lastL=lv[lv.length-1];
+  const cx=lastL?lastL.x-lastL.tw*Sd/2-.13*Sd:W/2;const cy=(lastL?lastL.y:baseY)-.33*Sd;
+  const ch=.8*Sd*(RM?1:eoc((now-caretT)/600));const blinkOn=now-lastKey<500||Math.floor(now/530)%2===0;
+  if(blinkOn&&ch>0){ctx.fillStyle=P.type;ctx.fillRect(cx-Math.max(2,.03*Sd)/2,cy-ch/2,Math.max(2,.03*Sd),ch)}
+  requestAnimationFrame(frame)}
+// ---------- input ----------
+const SENT='​';inp.value=SENT;let handled=false;
+function focusInp(){try{inp.focus({preventScroll:true})}catch(e){}}
+function key(e){if(e.ctrlKey||e.metaKey||e.altKey)return;demoStop();const now=performance.now();lastKey=now;
+  if(e.key==='Backspace'){e.preventDefault();wither(now);handled=true}
+  else if(e.key==='Enter'){e.preventDefault();clearAll();handled=true}
+  else if(e.key===' '){e.preventDefault();addChar(' ',now);handled=true}
+  else if(e.key&&e.key.length===1){e.preventDefault();addChar(e.key,now);handled=true}
+  if(handled)setTimeout(()=>{handled=false;inp.value=SENT},0)}
+inp.addEventListener('keydown',key);
+inp.addEventListener('input',()=>{if(handled){inp.value=SENT;return}demoStop();const v=inp.value;const now=performance.now();lastKey=now;
+  if(!v.includes(SENT)){wither(now)}const add=v.replace(SENT,'');for(const c of add){if(c==='\n')clearAll();else addChar(c,now)}inp.value=SENT});
+inp.addEventListener('compositionend',()=>{const v=inp.value.replace(SENT,'');const now=performance.now();for(const c of v)addChar(c,now);inp.value=SENT;handled=true;setTimeout(()=>handled=false,0)});
+let lastTap=0,lastTapXY=[0,0];
+hero.addEventListener('pointerdown',e=>{if(e.target.closest('a,button'))return;focusInp();const r=hero.getBoundingClientRect();const x=e.clientX-r.left,y=e.clientY-r.top;
+  pointer.x=x;pointer.y=y;pointer.on=true;spawnButterfly(x,y)});
+hero.addEventListener('pointermove',e=>{const r=hero.getBoundingClientRect();pointer.x=e.clientX-r.left;pointer.y=e.clientY-r.top;pointer.on=true});
+hero.addEventListener('pointerleave',()=>pointer.on=false);
+hero.addEventListener('pointerup',e=>{if(e.pointerType==='touch')pointer.on=false});
+// type anywhere on desktop while hero is in view (not inside form fields)
+document.addEventListener('keydown',e=>{if(e.target!==document.body)return;const r=hero.getBoundingClientRect();if(r.bottom<100)return;
+  if(e.key&&(e.key.length===1||e.key==='Backspace'||e.key==='Enter')){focusInp();key(e)}});
+// ---------- demo ----------
+const DEMO='مجمع كلود كود';let demoTimer=null,demoOn=true;
+function demoStop(){if(demoOn){demoOn=false;clearTimeout(demoTimer)}}
+function runDemo(i=0){if(!demoOn)return;if(i<DEMO.length){addChar(DEMO[i],performance.now());lastKey=performance.now();demoTimer=setTimeout(()=>runDemo(i+1),DEMO[i]===' '?420:170)}
+  else{demoOn=false;const L=letters.filter(l=>!l.space).pop();cutWord(L,performance.now())}}
+window.addEventListener('resize',resize);
+resize();requestAnimationFrame(frame);
+(document.fonts&&document.fonts.load?document.fonts.load('700 100px Amiri'):Promise.resolve()).catch(()=>{}).then(()=>{layout(true);demoTimer=setTimeout(()=>runDemo(0),RM?0:500)});
+if(!coarse)setTimeout(focusInp,50);
+})();
+</script>
+</body>
+</html>
