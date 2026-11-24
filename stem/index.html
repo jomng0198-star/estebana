@@ -631,6 +631,183 @@ th{background:rgba(0,0,0,.18);color:rgba(255,255,255,.6)}
 .ws-btns{display:flex;gap:8px;flex-wrap:wrap}
 .ws-res{font-weight:600}
 @media (max-width:620px){.wsopts{grid-template-columns:1fr}.ws{padding:16px}}
+
+/* =========================================================
+   ⚛️ عالم الفيزياء — نفس شكل التصور: بطاقات بيضاء وشارات خضراء وبطاقات ملوّنة
+   ========================================================= */
+.side .nav-label{font-size:11.5px;color:rgba(255,255,255,.45);padding:14px 10px 4px;letter-spacing:.3px}
+.side.mini .nav-label{display:none}
+.pw{background:#fbfbfc;color:#1f2433;border-radius:26px;padding:clamp(18px,3vw,34px);max-width:980px;margin:8px auto 0;box-shadow:0 30px 80px -40px rgba(0,0,0,.6)}
+.pw a{color:inherit}
+.pw-head{text-align:start;margin-bottom:18px;position:relative}
+.pw-head h1{font-size:clamp(28px,4vw,40px);font-weight:700;display:flex;align-items:center;gap:10px}
+.pw-head .atom{display:inline-grid;place-items:center;width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,#a855f7,#6366f1);font-size:26px}
+.pw-head p{font-size:17px;color:#374151;margin-top:6px}
+.muted2{color:#6b7280!important;font-size:15px!important}
+.pw-me{position:absolute;top:0;left:0;background:#25213f;color:#fff;border-radius:16px;padding:10px 16px;text-align:center}
+.pw-me span{display:block;font-size:12px;color:#c7c3e6}.pw-me b{font-size:26px;display:block;line-height:1.1}.pw-me small{font-size:11px;color:#c7c3e6}
+.pw-strip{display:inline-block;background:#e5e7eb;padding:6px 18px;border-radius:6px;font-size:clamp(20px,2.6vw,26px);font-weight:700;margin:6px 0 14px}
+.psec{background:#fff;border:1px solid #e6e8ee;border-radius:22px;padding:22px;margin-top:14px}
+.psec h2{font-size:22px;font-weight:700;margin:8px 0 10px}
+.psec-row{display:grid;grid-template-columns:1fr 280px;gap:18px;align-items:center}
+.psec ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+.psec li{font-size:16px;color:#1f2937;padding-inline-start:20px;position:relative}
+.psec li::before{content:"";position:absolute;inset-inline-start:2px;top:.72em;width:7px;height:7px;border-radius:50%;background:#1f2433}
+.psec-note{color:#374151;margin:-2px 0 10px}
+.psec-art svg{width:100%;height:auto;border-radius:18px;display:block}
+.psec-art.wide{max-width:420px;margin:0 auto 16px}
+.psec .pbtn{margin-top:16px}
+.pbadge{display:inline-block;background:#dcf3e4;color:#15803d;font-weight:600;font-size:14px;padding:4px 14px;border-radius:999px}
+.pw-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px}
+.pback{font-size:14px;color:#4b5563!important;padding:6px 12px;border-radius:999px;background:#f1f2f5}
+.pback:hover{background:#e5e7eb}
+.ptitle{font-size:clamp(24px,3.4vw,32px);font-weight:700;margin:6px 0 16px}
+.pbtn{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:#25213f;color:#fff!important;border-radius:999px;padding:10px 20px;font-weight:600;font-size:14.5px;transition:transform .15s,box-shadow .2s;cursor:pointer;border:0;text-decoration:none}
+.pbtn:hover{box-shadow:0 0 0 4px rgba(37,33,63,.15)}.pbtn:active{transform:scale(.97)}
+.pbtn.sm{padding:7px 14px;font-size:13px}
+.pbtn.ghost{background:#f1f2f5;color:#1f2433!important}
+.pbtn.light{background:rgba(255,255,255,.14);color:#fff!important;border:1px solid rgba(255,255,255,.25)}
+.pbtn.danger{background:#fee2e2;color:#b91c1c!important}
+.pbtn:disabled{opacity:.5;cursor:default}
+.pbtns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.ccards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:12px}
+.ccard{display:block;text-align:start;background:#fff;border:1px solid #e6e8ee;border-radius:20px;padding:10px 10px 14px;transition:transform .2s,box-shadow .2s;width:100%;color:#1f2433}
+.ccard:hover{transform:translateY(-3px);box-shadow:0 14px 30px -18px rgba(0,0,0,.35)}
+.ccard.on{border-color:#25213f;box-shadow:0 0 0 2px #25213f}
+.ccart svg{width:100%;height:auto;border-radius:16px;display:block}
+.ccard h3{font-size:22px;font-weight:700;margin:10px 6px 0}
+.ccard p{font-size:15px;color:#4b5563;margin:0 6px 8px}
+.ccard small{font-size:12px;color:#6b7280;margin:0 6px}
+.pbar{height:7px;border-radius:7px;background:#eef0f4;overflow:hidden;margin:4px 6px}
+.pbar i{display:block;height:100%;border-radius:7px;background:linear-gradient(90deg,#22c55e,#16a34a)}
+.lhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:26px 0 10px;flex-wrap:wrap}
+.lhead h2{font-size:20px;font-weight:700}
+.llist{display:flex;flex-direction:column;gap:8px}
+.lrow{display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:16px;background:#fff;border:1px solid #e6e8ee;transition:.15s}
+.lrow:hover{border-color:#25213f}
+.lnum{width:34px;height:34px;border-radius:10px;background:#25213f;color:#fff;display:grid;place-items:center;font-weight:700;flex:none}
+.lt{flex:1;min-width:0}.lt b{display:block;font-size:16px}.lt small{color:#6b7280;font-size:12.5px}
+.lprog{font-size:13px;color:#6b7280}.chev2{font-size:20px;color:#9ca3af}
+.okc{color:#15803d;font-weight:600}.badc{color:#be123c;font-weight:600}
+.pempty{padding:24px;text-align:center;color:#6b7280;border:1px dashed #d1d5db;border-radius:16px}
+.pgoal{margin-top:14px;background:#f1f2f5;border-radius:16px;padding:14px;text-align:center;font-weight:700;font-size:17px}
+/* صفحة الدرس */
+.lcard{background:#fff;border:1px solid #e6e8ee;border-radius:24px;padding:16px}
+.lbanner{background:#25213f;color:#fff;border-radius:18px;padding:20px 22px;position:relative}
+.lbanner h1{font-size:clamp(24px,3.4vw,32px);font-weight:700}
+.lbanner p{color:#c7c3e6;font-size:14px;margin-top:2px}
+.lbanner .pbtn{position:absolute;top:16px;left:16px}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
+.tile{position:relative;min-height:112px;border-radius:18px;padding:16px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;text-align:start;border:2px solid transparent;transition:transform .15s,border-color .15s;color:#1f2433}
+.tile svg{align-self:flex-end}
+.tile b{font-size:20px;font-weight:700}
+.tile:hover{transform:translateY(-2px)}
+.tile.on{border-color:#25213f}
+.tdone{position:absolute;top:12px;right:12px;width:24px;height:24px;border-radius:50%;background:#16a34a;color:#fff;display:grid;place-items:center;font-size:13px;font-weight:700}
+.tpanel{background:#fff;border:1px solid #e6e8ee;border-radius:22px;padding:20px;margin-top:14px;animation:viewIn .35s}
+.tpanel h2{display:flex;align-items:center;gap:8px;font-size:20px;font-weight:700;margin-bottom:10px}
+.tpanel h3{font-size:16px;font-weight:700;margin:16px 0 8px}
+.psum{font-size:16.5px;line-height:2;color:#1f2937}
+.laws{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.laws span{background:#eef2ff;color:#25213f;border-radius:10px;padding:7px 12px;font-family:Consolas,"IBM Plex Mono",monospace;font-size:14.5px}
+.pmedia{position:relative;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#000;margin-bottom:8px}
+.pmedia iframe,.pmedia video{position:absolute;inset:0;width:100%;height:100%;border:0}
+.pimg{width:100%;border-radius:16px}.pcap{font-size:13px;color:#6b7280;margin:-2px 0 10px}
+.psim{position:relative;height:min(560px,70vh);border-radius:16px;overflow:hidden;border:1px solid #e6e8ee;background:#f8fafc}
+.psim iframe{width:100%;height:100%;border:0}
+.plink{display:inline-block;margin:8px 0;color:#4f46e5!important;font-weight:600;font-size:14px}
+.pnote{color:#4b5563;font-size:14px;margin:6px 0 10px}
+.plabel{display:flex;flex-direction:column;gap:6px;font-size:14px;color:#374151;margin:12px 0 8px}
+.pw .pin{width:100%;background:#fff;border:1px solid #d1d5db;border-radius:12px;padding:10px 12px;color:#1f2433;font-size:14.5px}
+.pw .pin:focus{outline:none;border-color:#25213f;box-shadow:0 0 0 3px rgba(37,33,63,.12)}
+.pw select.pin{appearance:auto}
+.pexample{background:#f5f0ff;border-radius:16px;padding:16px;font-size:16px}
+.psol{margin:10px 0;padding:12px;border-radius:12px;background:#fff;border:1px dashed #9333ea}
+.pexample .pbtn{margin-top:10px}
+.lnav{display:flex;justify-content:space-between;margin-top:14px}
+/* الأسئلة */
+.qcard2{background:#fff;border:1px solid #e6e8ee;border-radius:18px;padding:16px;margin:10px 0}
+.qmeta{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px;align-items:center}
+.qmeta span{font-size:11.5px;padding:2px 10px;border-radius:999px;background:#f1f2f5;color:#4b5563}
+.qt-mcq{background:#e6effc!important;color:#1d4ed8!important}.qt-tf{background:#e3f4ea!important;color:#15803d!important}.qt-explain{background:#fbefe3!important;color:#c2410c!important}
+.qt-calc{background:#f1e8fb!important;color:#7e22ce!important}.qt-crit{background:#fbe6ef!important;color:#be185d!important}.qt-tah{background:#e1f3f6!important;color:#0e7490!important}
+.ql1{color:#15803d!important}.ql2{color:#b45309!important}.ql3{color:#be123c!important}
+.qdel{margin-inline-start:auto;font-size:12px;color:#9ca3af;padding:2px 8px;border-radius:8px}.qdel:hover{color:#be123c;background:#fee2e2}
+.qtext{font-size:16px;font-weight:600;margin-bottom:10px;line-height:1.8}
+.popts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.popts.tf{grid-template-columns:1fr 1fr;max-width:360px}
+.popt{padding:11px 12px;border-radius:12px;background:#f8f9fb;border:1.5px solid #e5e7eb;text-align:start;font-size:14.5px;color:#1f2433;transition:.15s}
+.popt:hover:not(:disabled){border-color:#25213f}
+.popt.sel{border-color:#25213f;background:#eef0ff}
+.popt.right{border-color:#16a34a;background:#dcfce7}.popt.wrong{border-color:#e11d48;background:#ffe4e6}
+.pcalc{display:flex;gap:8px;align-items:center;max-width:420px}.pcalc .unit{font-weight:700;color:#4b5563}
+.pin.right{border-color:#16a34a!important;background:#dcfce7}.pin.wrong{border-color:#e11d48!important;background:#ffe4e6}
+.qfb{margin-top:8px;font-size:14px}
+.model{margin-top:8px;padding:10px 12px;border-radius:12px;background:#f1f5f9}
+.qresult{margin-top:12px;padding:14px;border-radius:14px;background:#25213f;color:#fff;font-size:17px;text-align:center}
+.qresult b{font-size:26px}.qresult.big{display:flex;flex-direction:column;gap:12px;align-items:center}
+.qresult .pbtn{background:#fff;color:#25213f!important}
+/* تبويبات وفلاتر */
+.ptabs{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 14px}
+.ptabs button{padding:8px 14px;border-radius:999px;background:#f1f2f5;color:#374151;font-size:14px;font-weight:500}
+.ptabs button[aria-pressed="true"]{background:#25213f;color:#fff}
+.ptabs.sm{margin:0}.ptabs.sm button{padding:6px 12px;font-size:13px}
+.pfilters{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:10px}.pfilters select{max-width:220px}
+.pbar-row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:8px 0;flex-wrap:wrap;color:#4b5563}
+.padd{background:#f8f9fb;border:1px dashed #c7cbd6;border-radius:16px;padding:10px 14px;margin:10px 0}
+.padd summary{cursor:pointer;font-weight:700;color:#25213f}
+.peditor{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+.peditor label{display:flex;flex-direction:column;gap:5px;font-size:13.5px;color:#374151;flex:1}
+.peditor h3{font-size:18px}
+.prow{display:flex;gap:10px;flex-wrap:wrap}.prow > label{min-width:180px}
+.pcheck{flex-direction:row!important;align-items:center;gap:8px!important}
+#lessonEditor .peditor{background:#f8f9fb;border:1px solid #e6e8ee;border-radius:18px;padding:16px;margin:12px 0}
+/* الفيديو */
+.vgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.vcard2{background:#fff;border:1px solid #e6e8ee;border-radius:18px;overflow:hidden}
+.vth{position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,#25213f,#4f46e5);display:grid;place-items:center}
+.vth img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vth iframe,.vth video{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+.vplay{position:relative;width:52px;height:52px;border-radius:50%;background:#fff;color:#25213f;font-size:18px;box-shadow:0 6px 16px rgba(0,0,0,.3)}
+.vb{padding:12px 14px;display:flex;flex-direction:column;gap:2px}.vb b{font-size:15px}.vb small{font-size:12.5px;color:#6b7280}
+/* المختبر */
+.simgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:12px 0}
+.simcard{background:#fff;border:1px solid #e6e8ee;border-radius:18px;padding:16px;text-align:start;display:flex;flex-direction:column;gap:4px;color:#1f2433;transition:.15s}
+.simcard:hover{border-color:#ea7a1a;transform:translateY(-2px)}.simcard.done{background:#f0fdf4}
+.simico{width:40px;height:40px;border-radius:12px;background:#fbefe3;display:grid;place-items:center;font-size:20px}
+.simcard b{font-size:16px}.simcard small{color:#6b7280;font-size:12.5px}
+.labbox{background:#fff;border:2px solid #ea7a1a;border-radius:22px;padding:16px;margin-bottom:16px}
+.lbhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}.lbhead h2{font-size:20px}.lbhead span{color:#6b7280;font-size:13px;flex:1}
+/* المكتبة */
+.rgrid{display:flex;flex-direction:column;gap:8px}
+.rcard{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e6e8ee;border-radius:16px;padding:12px 14px}
+.rcard > div{flex:1;min-width:0}.rcard b{display:block}.rcard small{color:#6b7280;font-size:12.5px}
+.rico{width:42px;height:42px;border-radius:12px;background:#f5f3ff;display:grid;place-items:center;font-size:21px;flex:none}
+/* الإنجاز */
+.agrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.acard{background:#fff;border:1px solid #e6e8ee;border-radius:22px;padding:18px}
+.acard h2{font-size:19px;font-weight:700;margin-bottom:10px}
+.acard.me .psec-art{margin-bottom:12px}
+.mepts{text-align:center}.mepts .lvl{display:inline-block;background:#fef3c7;color:#92400e;border-radius:999px;padding:3px 12px;font-size:13px;font-weight:600}
+.mepts b{display:block;font-size:42px;line-height:1.1;margin-top:4px}.mepts small{color:#6b7280;font-size:12.5px}
+.lboard{list-style:none;display:flex;flex-direction:column;gap:6px}
+.lboard li{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:12px;background:#f8f9fb}
+.lboard li.mine{background:#eef0ff;outline:2px solid #25213f}
+.lboard .rk{width:30px;text-align:center;font-weight:700}.lboard .nm{flex:1}.lboard .nm small{display:block;color:#6b7280;font-size:11.5px}
+.gbar{display:grid;grid-template-columns:130px 1fr 60px;gap:8px;align-items:center;margin:8px 0;font-size:14px}.gbar small{color:#6b7280}.gbar .pbar{margin:0}
+.comp{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f1f2f5}.comp > div{flex:1}.comp b{display:block}.comp small{color:#6b7280;font-size:12.5px}.comp .lock{font-size:20px}
+.acard .pbtn.ghost{margin-top:10px}
+.comp-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px;position:sticky;top:0;background:#fbfbfc;padding:8px 0;z-index:2}
+.comp-head h1{font-size:24px}.timer{background:#25213f;color:#fff;border-radius:999px;padding:6px 16px;font-weight:700;font-size:18px}
+@media (max-width:760px){
+  .psec-row,.ccards,.agrid{grid-template-columns:1fr}.psec-art{max-width:360px}
+  .vgrid,.simgrid{grid-template-columns:1fr 1fr}
+  .pw-me{position:static;display:inline-block;margin-top:10px}
+  .popts{grid-template-columns:1fr}
+  .tile b{font-size:17px}.tile{min-height:96px}
+  .gbar{grid-template-columns:100px 1fr 48px}
+}
+@media (max-width:480px){.vgrid,.simgrid{grid-template-columns:1fr}.pw{border-radius:18px;padding:14px}}
 </style>
 </head>
 <body>
@@ -891,6 +1068,11 @@ const I = {
   teacher: ic('<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>'),
   logout: ic('<path d="M9 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h4"/><path d="m14 17 5-5-5-5M19 12H9"/>'),
   tahsili: ic('<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/>'),
+  atom: ic('<circle cx="12" cy="12" r="1.6"/><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/>'),
+  book: ic('<path d="M3 5a2 2 0 0 1 2-2h5v17H5a2 2 0 0 0-2 2z"/><path d="M21 5a2 2 0 0 0-2-2h-5v17h5a2 2 0 0 1 2 2z"/>'),
+  flask: ic('<path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/><path d="M7 15h10"/>'),
+  folder: ic('<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>'),
+  trophy: ic('<path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4"/>'),
   menu: ic('<path d="M4 6h16M4 12h16M4 18h16"/>')
 };
 const LOGO = `<svg viewBox="0 0 24 24" fill="none"><path d="M5 16a7 7 0 0 1 14 0" fill="#ffb24f"/><path d="M2 16h20" stroke="#0b1430" stroke-width="2" stroke-linecap="round"/><path d="M4 19h16M7 22h10" stroke="#0b1430" stroke-width="1.6" stroke-linecap="round" opacity=".55"/><ellipse cx="12" cy="13" rx="10" ry="4.2" stroke="#0b1430" stroke-width="1.4" opacity=".7"/><circle cx="20.5" cy="9" r="1.4" fill="#0b1430"/></svg>`;
@@ -1015,6 +1197,8 @@ const store = {
   plans:    S.get('plans', null) || DEFAULT_PLANS,
   videos:   S.get('videos', []),
   worksheets: S.get('worksheets', []),
+  content:  S.get('content', []),
+  activity: S.get('activity', []),
 };
 let remote = null;
 let session = S.get('session', null);
@@ -1024,7 +1208,7 @@ function send(type, data) {
   if (!CONFIG.gasUrl) return;
   try {
     fetch(CONFIG.gasUrl, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify({ ...data, type, ts: new Date().toISOString() }) }).catch(() => {});
+      body: JSON.stringify({ ...data, type, ts: new Date().toISOString(), ...(session && session.role === 'teacher' ? { pin: CONFIG.teacherPin } : {}) }) }).catch(() => {});
   } catch (e) {}
 }
 async function loadRemote() {
@@ -1200,16 +1384,18 @@ function logout() {
 const NAV = [
   ['dashboard', 'الرئيسية', 'home'], ['plans', 'الخطط السنوية', 'plans'], ['videos', 'شروحات الفيديو', 'videos'],
   ['tahsili', 'قادرون — التحصيلي', 'tahsili'], ['game', 'لعبة ثلاثية الأبعاد', 'game'], ['quizzes', 'النماذج العشرة', 'quizzes'],
-  ['impact', 'قياس الأثر', 'impact'], ['community', 'الآراء والتعليقات', 'community']
+  ['impact', 'قياس الأثر', 'impact'], ['community', 'الآراء والتعليقات', 'community'],
+  ['label', '⚛️ عالم الفيزياء'], ['physics', 'عالم الفيزياء', 'atom'], ['courses', 'المقررات والدروس', 'book'], ['vlib', 'مكتبة الفيديوهات', 'videos'],
+  ['bank', 'بنك الأسئلة', 'quizzes'], ['lab', 'المختبر الافتراضي', 'flask'], ['tlib', 'مكتبة المعلمة', 'folder'], ['achieve', 'الإنجاز والتنافس', 'trophy']
 ];
-const VIEWS = ['dashboard', 'plans', 'videos', 'tahsili', 'worksheet', 'game', 'quizzes', 'certificate', 'impact', 'community', 'teacher'];
+const VIEWS = ['dashboard', 'plans', 'videos', 'tahsili', 'worksheet', 'game', 'quizzes', 'certificate', 'impact', 'community', 'teacher', 'physics', 'courses', 'lesson', 'vlib', 'bank', 'lab', 'tlib', 'achieve'];
 function showApp() {
   $('#landing').hidden = true; $('#appShell').hidden = false; document.body.classList.add('in-app');
   const nav = NAV.concat(session.role === 'teacher' ? [['teacher', 'لوحة المعلمة', 'teacher']] : []);
-  $('#sideNav').innerHTML = nav.map(n => `<a href="#${n[0]}" data-nav="${n[0]}" title="${n[1]}">${I[n[2]]}<span class="lbl">${n[1]}</span></a>`).join('');
+  $('#sideNav').innerHTML = nav.map(n => n[0] === 'label' ? `<div class="nav-label lbl">${n[1]}</div>` : `<a href="#${n[0]}" data-nav="${n[0]}" title="${n[1]}">${I[n[2]]}<span class="lbl">${n[1]}</span></a>`).join('');
   $('#meName').textContent = session.name;
   $('#meRole').textContent = ROLE_AR[session.role] + (session.grade ? ' · ' + session.grade : session.kind ? ' · ' + session.kind : '');
-  $('#mePts').textContent = AR(getProg().game.points);
+  $('#mePts').textContent = AR(myPoints());
   if (S.get('mini', false)) $('#side').classList.add('mini');
   $('#views').innerHTML = VIEWS.map(v => `<section class="view" data-view="${v}" hidden></section>`).join('');
   scrollTo(0, 0);
@@ -1219,11 +1405,12 @@ function route() {
   let v = location.hash.slice(1);
   if (!VIEWS.includes(v) || (v === 'teacher' && session.role !== 'teacher')) v = 'dashboard';
   if (v !== 'game') stopGame();
-  $$('#sideNav a').forEach(a => a.classList.toggle('active', a.dataset.nav === (v === 'worksheet' ? 'tahsili' : v)));
+  if (v !== 'achieve' && typeof compRun !== 'undefined' && compRun) { clearInterval(compRun.iv); compRun = null; }
+  $$('#sideNav a').forEach(a => a.classList.toggle('active', a.dataset.nav === ({ worksheet: 'tahsili', lesson: 'courses' }[v] || v)));
   $$('#views > .view').forEach(s => { s.hidden = s.dataset.view !== v; });
   const el = $(`#views > [data-view="${v}"]`); RENDER[v](el);
   el.style.animation = 'none'; el.offsetHeight; el.style.animation = '';
-  $('#mePts').textContent = AR(getProg().game.points);
+  $('#mePts').textContent = AR(myPoints());
   closeMenu(); $('#main').scrollTop = 0;
 }
 addEventListener('hashchange', route);
@@ -1239,7 +1426,7 @@ function openPalette() {
   if (!session) return; $('#palette').hidden = false; const inp = $('#palInput'); inp.value = ''; paintPal(''); inp.focus();
 }
 function paintPal(q) {
-  const items = NAV.map(n => [n[1], '#' + n[0], '']).concat([['الشهادة', '#certificate', '']], session && session.role === 'teacher' ? [['لوحة المعلمة', '#teacher', '']] : [],
+  const items = NAV.filter(n => n[0] !== 'label').map(n => [n[1], '#' + n[0], '']).concat([['الشهادة', '#certificate', '']], session && session.role === 'teacher' ? [['لوحة المعلمة', '#teacher', '']] : [],
     QUIZ.map((m, i) => [`النموذج ${AR(i + 1)}: ${m.title}`, '#quizzes', i]), LEVELS.map((L, i) => [`اللعبة: ${L.name}`, '#game', 'L' + i]));
   const f = items.filter(it => !q || it[0].includes(q)).slice(0, 9);
   $('#palList').innerHTML = f.map((it, i) => `<button class="pal-item" data-href="${it[1]}" data-x="${it[2]}">${esc(it[0])}<span>↵</span></button>`).join('') || '<div class="pal-empty">لا نتائج</div>';
@@ -1282,6 +1469,10 @@ RENDER.dashboard = el => {
     <div class="burst"><div class="halo"></div><svg class="rays" viewBox="0 0 200 200">${Array.from({ length: 36 }, (_, i) => { const a = i / 36 * Math.PI * 2, r1 = 30, r2 = i % 2 ? 70 : 95; return `<line x1="${100 + r1 * Math.cos(a)}" y1="${100 + r1 * Math.sin(a)}" x2="${100 + r2 * Math.cos(a)}" y2="${100 + r2 * Math.sin(a)}" stroke="#fff" stroke-opacity="${i % 2 ? .25 : .5}" stroke-width="1"/>`; }).join('')}</svg><span class="mark">${LOGO}</span></div>
   </div></div>
   <div class="cards">
+    <div class="mcard-title"><span class="mini">⚛</span>عالم الفيزياء</div>
+    <a class="mcard glass" href="#physics"><span class="chev">⌄</span><p>ستة أقسام: المقررات والدروس، مكتبة الفيديوهات، بنك الأسئلة، المختبر الافتراضي، مكتبة المعلمة، والإنجاز والتنافس.</p>
+      <div class="tags"><span>٤ مقررات</span><span>محاكاة PhET</span><span>مسابقات</span></div>
+      <div class="mstats">${COURSES.map(c => { const s = courseStats(c); return `<div><small>${c.name}</small><b class="num">${AR(s.d)}/${AR(s.n)}</b></div>`; }).join('')}</div></a>
     <div class="mcard-title"><span class="mini">ق</span>خطة قادرون — الاختبار التحصيلي</div>
     <a class="mcard glass" href="#tahsili"><span class="chev">⌄</span><p>مجالات الفيزياء والكيمياء والأحياء أسبوعًا بأسبوع — سؤال سهل لكل مجال مع فيديو وورقة عمل واختبار قصير.</p>
       <div class="tags"><span>فيزياء</span><span>كيمياء</span><span>أحياء</span></div>
@@ -1405,7 +1596,7 @@ function renderQuiz(el) {
       <p class="muted" style="margin-top:8px">${M.title} — ${AR(pct)}٪ ${CONFIG.gasUrl ? '· أُرسلت النتيجة للمعلمة' : ''}</p>
       <div style="display:flex;gap:8px;justify-content:center;margin-top:18px;flex-wrap:wrap"><button class="btn btn-white" data-again>إعادة النموذج</button><button class="btn btn-ghost" data-back>كل النماذج</button>${certEligible() ? '<a class="btn btn-sun" href="#certificate">🏅 شهادتي</a>' : ''}</div></div></div>`;
     $('[data-again]', el).onclick = () => { quizState = { ...s, i: 0, score: 0, answered: false, qs: shuffle(s.qs).map(q => ({ ...q, opts: shuffle(q.opts) })) }; renderQuiz(el); };
-    $('[data-back]', el).onclick = () => { const c = s.custom; quizState = null; if (c) location.hash = 'tahsili'; else RENDER.quizzes(el); };
+    $('[data-back]', el).onclick = () => { const c = s.custom; quizState = null; if (c) location.hash = c.back || 'tahsili'; else RENDER.quizzes(el); };
     return;
   }
   const q = s.qs[s.i];
@@ -1429,17 +1620,17 @@ function renderQuiz(el) {
     if (s.i >= s.qs.length) {
       const pct = Math.round(s.score / s.qs.length * 100), p = getProg(); if (!s.custom) { p.quizzes[s.m] = Math.max(p.quizzes[s.m] || 0, pct); setProg(p); }
       const rec = { id: uid(), name: session.name, role: session.role, grade: session.grade || '', model: s.custom ? 'قصير' : s.m + 1, title: s.custom ? s.custom.label + ': ' + M.title : M.title, score: s.score, total: s.qs.length, pct, date: today(), ts: Date.now() };
-      pushItem('results', rec); send('result', rec); if (pct >= 80) { confetti(); sfx('win'); }
+      pushItem('results', rec); send('result', rec); logAct(s.custom ? (s.custom.back === 'bank' ? 'بنك الأسئلة' : 'قادرون — التحصيلي') : 'النماذج العشرة', (s.custom ? s.custom.label + ': ' : '') + M.title, s.score * 5, `الدرجة ${s.score}/${s.qs.length} (${pct}%)`, null, true); if (pct >= 80) { confetti(); sfx('win'); }
     }
     renderQuiz(el);
   };
-  $('[data-exit]', el).onclick = () => { const c = s.custom; quizState = null; if (c) location.hash = 'tahsili'; else RENDER.quizzes(el); };
+  $('[data-exit]', el).onclick = () => { const c = s.custom; quizState = null; if (c) location.hash = c.back || 'tahsili'; else RENDER.quizzes(el); };
 }
 
 /* ---------- الشهادة ---------- */
 function certEligible() {
   if (!session) return false; if (session.role !== 'student') return true;
-  const p = getProg(); return Object.values(p.quizzes).some(v => v >= 60) || Object.keys(p.game.best).length > 0 || Object.values(p.ws || {}).some(v => v >= 3) || tahsiliDone(p).length > 0;
+  const p = getProg(); return Object.values(p.quizzes).some(v => v >= 60) || Object.keys(p.game.best).length > 0 || Object.values(p.ws || {}).some(v => v >= 3) || tahsiliDone(p).length > 0 || COURSES.some(c => { const s = courseStats(c); return s.n && s.d === s.n; }) || (p.phyPts || 0) >= 50;
 }
 function tahsiliDone(p) { const t = p.tahsili || {}; return Object.keys(TAHSILI).filter(k => TAHSILI[k].domains.every((d, i) => !d || t[k + i] != null)); }
 function tahsiliStats(p) { const t = p.tahsili || {}, ws = p.ws || {}; const vals = Object.values(ws); return { answered: Object.keys(t).length, right: Object.values(t).filter(Boolean).length, wsN: vals.length, wsAvg: vals.length ? Math.round(vals.reduce((a, b) => a + b, 0) / vals.length / 5 * 100) : 0, subjects: tahsiliDone(p).map(k => TAHSILI[k].name) };
@@ -1447,7 +1638,7 @@ function tahsiliStats(p) { const t = p.tahsili || {}, ws = p.ws || {}; const val
 RENDER.certificate = el => {
   const p = getProg(), isS = session.role === 'student';
   if (!certEligible()) {
-    el.innerHTML = `<div class="page-head"><h1>شهادة التميّز</h1></div><div class="glass lock-box" style="max-width:520px;margin:0 auto"><div class="big">🔒</div><h2 style="font-size:20px;margin:8px 0 4px">شهادتكِ بانتظارك!</h2><p class="muted">أكملي نموذجًا بدرجة ٦٠٪ فأكثر، أو ورقة عمل بدرجة ٣ من ٥، أو أنهي مستوى في اللعبة، أو كل مجالات مادة في قادرون — لتُفتح شهادتكِ.</p><div style="display:flex;gap:8px;justify-content:center;margin-top:16px;flex-wrap:wrap"><a class="btn btn-sun" href="#tahsili">قادرون — التحصيلي</a><a class="btn btn-white" href="#quizzes">النماذج</a><a class="btn btn-ghost" href="#game">اللعبة</a></div></div>`; return;
+    el.innerHTML = `<div class="page-head"><h1>شهادة التميّز</h1></div><div class="glass lock-box" style="max-width:520px;margin:0 auto"><div class="big">🔒</div><h2 style="font-size:20px;margin:8px 0 4px">شهادتكِ بانتظارك!</h2><p class="muted">أكملي نموذجًا بدرجة ٦٠٪ فأكثر، أو ورقة عمل بدرجة ٣ من ٥، أو أنهي مستوى في اللعبة، أو كل مجالات مادة في قادرون، أو كل دروس مقرر في عالم الفيزياء، أو اجمعي ٥٠ نقطة — لتُفتح شهادتكِ.</p><div style="display:flex;gap:8px;justify-content:center;margin-top:16px;flex-wrap:wrap"><a class="btn btn-sun" href="#tahsili">قادرون — التحصيلي</a><a class="btn btn-white" href="#quizzes">النماذج</a><a class="btn btn-ghost" href="#game">اللعبة</a></div></div>`; return;
   }
   const qDone = Object.keys(p.quizzes).length, avg = qDone ? Math.round(Object.values(p.quizzes).reduce((a, b) => a + b, 0) / qDone) : 0;
   const T = tahsiliStats(p);
@@ -1457,7 +1648,7 @@ RENDER.certificate = el => {
     <div class="glass panel"><form class="form-grid" id="certForm">
       <label class="field">الاسم على الشهادة<input class="input" name="name" value="${esc(session.name)}" ${isS ? 'readonly' : ''}></label>
       <label class="field">نوع الشهادة<select class="input" name="type">
-        <option value="excellence" ${defType === 'excellence' ? 'selected' : ''}>شهادة تميّز</option>${!isS || T.subjects.length ? `<option value="tahsili" ${defType === 'tahsili' ? 'selected' : ''}>شهادة إتمام خطة قادرون (التحصيلي)</option>` : ''}${isS ? '' : `<option value="complete">شهادة إتمام</option><option value="thanks" ${defType === 'thanks' ? 'selected' : ''}>شهادة شكر وتقدير</option>`}</select></label>
+        <option value="excellence" ${defType === 'excellence' ? 'selected' : ''}>شهادة تميّز</option>${COURSES.filter(c => { const s = courseStats(c); return !isS || (s.n && s.d === s.n); }).map(c => `<option value="course:${c.id}">شهادة إتمام مقرر ${c.name}</option>`).join('')}${!isS || T.subjects.length ? `<option value="tahsili" ${defType === 'tahsili' ? 'selected' : ''}>شهادة إتمام خطة قادرون (التحصيلي)</option>` : ''}${isS ? '' : `<option value="complete">شهادة إتمام</option><option value="thanks" ${defType === 'thanks' ? 'selected' : ''}>شهادة شكر وتقدير</option>`}</select></label>
       ${isS ? `<div class="item" style="font-size:13px"><span class="muted">النماذج المنجزة:</span> ${AR(qDone)} · <span class="muted">المتوسط:</span> ${AR(avg)}٪ · <span class="muted">النقاط:</span> ${AR(p.game.points)}<br><span class="muted">مجالات قادرون:</span> ${AR(T.answered)} · <span class="muted">أوراق العمل:</span> ${AR(T.wsN)} (${AR(T.wsAvg)}٪)${T.subjects.length ? '<br><span class="muted">أتمّت:</span> ' + T.subjects.join('، ') : ''}</div>` : ''}
       <button class="btn btn-sun" type="button" data-dl>⬇ تحميل الشهادة</button>
       <button class="btn btn-ghost" type="button" data-print>🖨 طباعة</button>
@@ -1487,20 +1678,21 @@ function drawCert(c, d) {
   x.strokeStyle = '#ffd98a'; x.lineWidth = 6; x.strokeRect(50, 50, W - 100, H - 100); x.lineWidth = 2; x.strokeStyle = 'rgba(255,217,138,.6)'; x.strokeRect(72, 72, W - 144, H - 144);
   [[50, 50], [W - 50, 50], [50, H - 50], [W - 50, H - 50]].forEach(([a, b]) => { x.fillStyle = '#ffb24f'; x.beginPath(); x.arc(a, b, 16, 0, 7); x.fill(); });
   x.direction = 'rtl'; x.textAlign = 'center'; x.textBaseline = 'alphabetic';
-  x.fillStyle = 'rgba(238,244,255,.85)'; x.font = `500 40px ${F}`; x.fillText(d.type === 'tahsili' ? 'أفق STEM  |  خطة قادرون — الاختبار التحصيلي' : 'أفق STEM  |  منصة العلوم والابتكار', W / 2, 170);
+  x.fillStyle = 'rgba(238,244,255,.85)'; x.font = `500 40px ${F}`; x.fillText(String(d.type).startsWith('course:') ? 'أفق STEM  |  عالم الفيزياء' : d.type === 'tahsili' ? 'أفق STEM  |  خطة قادرون — الاختبار التحصيلي' : 'أفق STEM  |  منصة العلوم والابتكار', W / 2, 170);
   x.fillStyle = 'rgba(238,244,255,.55)'; x.font = `400 30px ${F}`; x.fillText(CONFIG.schoolName, W / 2, 218);
-  const title = { excellence: 'شهادة تميّز', complete: 'شهادة إتمام', thanks: 'شهادة شكر وتقدير', tahsili: 'شهادة إتمام' }[d.type];
+  const crs = String(d.type).startsWith('course:') ? COURSES.find(c => c.id === d.type.slice(7)) : null;
+  const title = crs ? 'شهادة إتمام مقرر' : { excellence: 'شهادة تميّز', complete: 'شهادة إتمام', thanks: 'شهادة شكر وتقدير', tahsili: 'شهادة إتمام' }[d.type];
   const tg = x.createLinearGradient(0, 260, 0, 380); tg.addColorStop(0, '#ffe6ad'); tg.addColorStop(1, '#ffad45'); x.fillStyle = tg; x.font = `700 132px ${F}`; x.fillText(title, W / 2, 380);
   x.fillStyle = '#c9d6ec'; x.font = `400 42px ${F}`; x.fillText(d.type === 'thanks' ? 'تتقدّم منصة أفق STEM بخالص الشكر والتقدير إلى' : 'تتشرّف منصة أفق STEM بمنح هذه الشهادة إلى', W / 2, 480);
   x.fillStyle = '#ffffff'; x.font = `700 96px ${F}`; x.fillText(d.name, W / 2, 610);
   x.strokeStyle = 'rgba(255,217,138,.6)'; x.lineWidth = 2; x.beginPath(); x.moveTo(W / 2 - 420, 645); x.lineTo(W / 2 + 420, 645); x.stroke();
   x.fillStyle = '#d6e1f3'; x.font = `400 40px ${F}`;
   const subjTxt = d.T && d.T.subjects.length ? d.T.subjects.join(' و') : 'الفيزياء والكيمياء والأحياء';
-  const reason = d.type === 'tahsili' ? `لإتمامها مجالات خطة قادرون للاختبار التحصيلي في ${subjTxt} بتميّز` : d.type === 'thanks' ? 'لزيارتها المنصة ومشاركتها الفاعلة في دعم مسيرة العلوم والابتكار'
+  const reason = crs ? `لإتمامها جميع دروس مقرر ${crs.name} (${crs.sub}) في عالم الفيزياء بتميّز` : d.type === 'tahsili' ? `لإتمامها مجالات خطة قادرون للاختبار التحصيلي في ${subjTxt} بتميّز` : d.type === 'thanks' ? 'لزيارتها المنصة ومشاركتها الفاعلة في دعم مسيرة العلوم والابتكار'
     : d.type === 'complete' ? 'لإتمامها متطلبات منصة أفق STEM في العلوم والفيزياء والكيمياء والأحياء'
     : 'لتميّزها وتفوّقها في منصة أفق STEM للعلوم والابتكار، متمنّين لها مستقبلًا علميًا مشرقًا';
   x.fillText(reason, W / 2, 720);
-  if (session.role === 'student' && d.type !== 'thanks') { x.fillStyle = '#ffd98a'; x.font = `500 34px ${F}`; x.fillText(d.type === 'tahsili' && d.T ? `مجالات قادرون: ${AR(d.T.answered)}  ·  الإجابات الصحيحة: ${AR(d.T.right)}  ·  أوراق العمل: ${AR(d.T.wsN)} (${AR(d.T.wsAvg)}٪)` : `النماذج المنجزة: ${AR(d.qDone)}  ·  متوسط الدرجات: ${AR(d.avg)}٪  ·  نقاط اللعبة: ${AR(d.points)}`, W / 2, 785); }
+  if (session.role === 'student' && d.type !== 'thanks') { x.fillStyle = '#ffd98a'; x.font = `500 34px ${F}`; x.fillText(crs ? `دروس المقرر: ${AR(courseStats(crs).n)}  ·  نقاط عالم الفيزياء: ${AR(myPoints())}` : d.type === 'tahsili' && d.T ? `مجالات قادرون: ${AR(d.T.answered)}  ·  الإجابات الصحيحة: ${AR(d.T.right)}  ·  أوراق العمل: ${AR(d.T.wsN)} (${AR(d.T.wsAvg)}٪)` : `النماذج المنجزة: ${AR(d.qDone)}  ·  متوسط الدرجات: ${AR(d.avg)}٪  ·  نقاط اللعبة: ${AR(d.points)}`, W / 2, 785); }
   // التواقيع
   x.font = `400 32px ${F}`; x.fillStyle = 'rgba(238,244,255,.7)';
   x.fillText('معلمة الفيزياء', W - 420, 1000); x.fillText('مديرة المدرسة', 420, 1000);
@@ -1609,6 +1801,7 @@ RENDER.community = el => {
 /* ---------- لوحة المعلمة ---------- */
 RENDER.teacher = el => {
   const res = list('results');
+  setTimeout(() => { const box = $('#actBox', el); if (!box) return; const acts = list('activity'); box.innerHTML = acts.length ? acts.slice(0, 200).map(a => `<tr><td>${esc(a.name)}<br><small class="dim">${esc(a.grade || '')}${a.group ? ' · ' + esc(a.group) : ''}</small></td><td>${esc(a.section)}</td><td style="max-width:260px">${esc(a.ref)}${a.details ? `<br><small class="muted" style="white-space:pre-wrap">${esc(a.details)}</small>` : ''}</td><td class="num">${a.points ? '+' + AR(a.points) : '—'}</td><td class="muted">${fmtDate(a.ts)}</td></tr>`).join('') : '<tr><td colspan="5"><div class="empty"><b>لا يوجد نشاط بعد</b>يظهر هنا كل ما تفعله الطالبات في عالم الفيزياء.</div></td></tr>'; }, 0);
   el.innerHTML = `<div class="page-head"><h1>لوحة المعلمة</h1><p>أضيفي دروس الخطة والشروحات، وتابعي نتائج الطالبات.</p></div>
   <div class="grid-2">
     <div class="panel glass"><h3>🗓️ إضافة درس للخطة</h3><p class="lead">يظهر مباشرةً في صفحة الخطط السنوية.</p>
@@ -1625,6 +1818,8 @@ RENDER.teacher = el => {
         <button class="btn btn-white">إضافة الشرح</button></form>
       ${list('videos').length ? `<div class="list" style="max-height:180px">${list('videos').map(v => `<div class="item" style="display:flex;align-items:center;gap:8px;padding:10px 12px"><span style="flex:1">${esc(v.title)}</span><button class="del" data-delvid="${esc(v.id)}">حذف</button></div>`).join('')}</div>` : ''}</div>
   </div>
+  <div class="panel glass" style="margin-top:14px"><h3>⚛️ نشاط الطالبات في عالم الفيزياء</h3><p class="lead">ملاحظات المختبر، إجابات الأسئلة المفتوحة، الاختبارات، المسابقات — ويصلكِ ملخصها على البريد كل ساعة. لإضافة المحتوى: افتحي أي قسم في <a href="#physics" style="color:var(--sun-2)">عالم الفيزياء</a> وستجدين أزرار الإضافة والتعديل.</p>
+    <div class="table-wrap" style="max-height:420px"><table><thead><tr><th>الطالبة</th><th>القسم</th><th>العنصر والتفاصيل</th><th>النقاط</th><th>الوقت</th></tr></thead><tbody id="actBox"></tbody></table></div></div>
   <div class="panel glass" style="margin-top:14px"><h3>📄 أوراق العمل التفاعلية</h3><p class="lead">إجابات الطالبات المكتوبة ودرجاتهن.</p>
     <div class="table-wrap" style="max-height:380px"><table><thead><tr><th>الطالبة</th><th>المادة · المجال</th><th>الدرجة</th><th>الشرح</th><th>الإثراء</th></tr></thead><tbody>${list('worksheets').length ? list('worksheets').slice(0, 200).map(w => `<tr><td>${esc(w.name)}<br><small class="dim">${esc(w.grade || '')}</small></td><td>${esc(w.subject)} · ${esc(w.domain)}</td><td><b class="num">${AR(w.score)}/٥</b></td><td style="max-width:240px;white-space:pre-wrap">${esc(w.explain || '—')}</td><td style="max-width:200px;white-space:pre-wrap" class="muted">${esc(w.enrich || '—')}</td></tr>`).join('') : '<tr><td colspan="5"><div class="empty"><b>لا توجد أوراق عمل مسلّمة بعد</b>تظهر هنا فور تسليمها.</div></td></tr>'}</tbody></table></div></div>
   <div class="panel glass" style="margin-top:14px">
@@ -1762,7 +1957,7 @@ RENDER.tahsili = el => {
       $$('.topt', card).forEach(x => { x.disabled = true; if (x.dataset.o === d[2][0]) x.classList.add('right'); });
       if (!ok) b.classList.add('wrong');
       $('.tah-fb', card).innerHTML = ok ? '<span style="color:var(--good)">إجابة صحيحة 🌟</span>' : '<span style="color:var(--bad)">الإجابة الصحيحة: ' + esc(d[2][0]) + ' — شاهدي الفيديو الإثرائي 💡</span>';
-      sfx(ok ? 'good' : 'bad');
+      sfx(ok ? 'good' : 'bad'); if (ok) logAct('قادرون — التحصيلي', S0.name + ' · ' + d[0], 5, '', 'tah:' + tahSubj + i);
       const pr = getProg(); pr.tahsili = pr.tahsili || {}; const first = pr.tahsili[tahKey(tahSubj, i)] == null;
       pr.tahsili[tahKey(tahSubj, i)] = ok; setProg(pr);
       const all = S0.domains.map((x, j) => [x, j]).filter(x => x[0]);
@@ -1876,11 +2071,692 @@ RENDER.worksheet = el => {
     const p = getProg(); p.ws = p.ws || {}; const key = st.subj + st.i; p.ws[key] = Math.max(p.ws[key] || 0, score);
     p.tahsili = p.tahsili || {}; if (p.tahsili[key] == null) p.tahsili[key] = st.mc[0].pick === st.mc[0].right; setProg(p);
     const rec = { id: uid(), name: session.name, role: session.role, grade: session.grade || '', subject: S0.name, domain: d[0], score, total: 5, explain: st.explain.trim(), enrich: st.enrich.trim(), ts: Date.now() };
-    pushItem('worksheets', rec); send('worksheet', rec);
+    pushItem('worksheets', rec); send('worksheet', rec); logAct('أوراق العمل', S0.name + ' · ' + d[0], Math.round(score * 4), '', null, true);
     if (score >= 4) { confetti(); sfx('win'); } else sfx(score >= 3 ? 'good' : 'bad');
     RENDER.worksheet(el); $('#main').scrollTop = 0;
   };
 };
+
+/* =========================================================
+   ⚛️ عالم الفيزياء — المحتوى المدمج (تعدّله المعلمة من لوحتها)
+   الخيار الأول في كل سؤال اختيار هو الصحيح، ويُخلط عند العرض
+   ========================================================= */
+const PHET = id => `https://phet.colorado.edu/sims/html/${id}/latest/${id}_all.html?locale=ar`;
+const SIMS = {
+  'density': 'الكثافة والقياس', 'forces-and-motion-basics': 'القوى والحركة', 'vector-addition': 'جمع المتجهات',
+  'projectile-motion': 'حركة المقذوفات', 'gravity-and-orbits': 'الجاذبية والمدارات', 'balancing-act': 'العزم والاتزان',
+  'collision-lab': 'مختبر التصادمات', 'energy-skate-park-basics': 'حفظ الطاقة', 'under-pressure': 'ضغط الموائع',
+  'wave-on-a-string': 'الموجة على وتر', 'waves-intro': 'الموجات والصوت', 'color-vision': 'الضوء والألوان',
+  'geometric-optics': 'المرايا والعدسات', 'bending-light': 'انكسار الضوء', 'coulombs-law': 'قانون كولوم',
+  'charges-and-fields': 'الشحنات والمجالات', 'ohms-law': 'قانون أوم', 'circuit-construction-kit-dc': 'بناء الدوائر الكهربائية',
+  'faradays-electromagnetic-lab': 'مختبر فاراداي الكهرومغناطيسي', 'faradays-law': 'قانون فاراداي', 'build-an-atom': 'بناء الذرة',
+  'pendulum-lab': 'مختبر البندول'
+};
+const L = (id, t, sum, laws, sim, ex, quiz, vids) => ({ id, t, sum, laws, sim, ex, quiz, vids: vids || [] });
+const COURSES = [
+  { id: 'c1', name: 'فيزياء ١', sub: 'الحركة والقوى وقوانين نيوتن', art: 'forces', lessons: [
+    L('c1l1', 'مدخل إلى علم الفيزياء', 'الفيزياء علم يدرس المادة والطاقة والعلاقة بينهما. نستخدم الطريقة العلمية للبحث، والنظام الدولي للوحدات (SI) للقياس، ونهتم بدقة القياس وضبطه.',
+      ['الطول: المتر (m) · الكتلة: الكيلوجرام (kg) · الزمن: الثانية (s)', 'كيلو = 10³ · ملي = 10⁻³ · ميكرو = 10⁻⁶', 'الدقة: مدى قرب القياس من القيمة الحقيقية'], 'density',
+      ['حوّلي ٢٫٥ km إلى المتر.', 'كيلو تعني 1000، إذن 2.5 × 1000 = 2500 m'],
+      [['وحدة الكتلة في النظام الدولي:', ['الكيلوجرام', 'النيوتن', 'الجرام', 'الباوند']], ['البادئة «كيلو» تعني:', ['10³', '10⁻³', '10⁶', '10²']], ['أيّ مما يلي كمية أساسية؟', ['الزمن', 'السرعة', 'القوة', 'الشغل']]]),
+    L('c1l2', 'تمثيل الحركة', 'نمثّل حركة الجسم بمخطط الحركة وبالرسم البياني (الموقع – الزمن). الإزاحة كمية متجهة تمثّل التغيّر في الموقع، والسرعة المتجهة المتوسطة = الإزاحة ÷ الزمن، وتساوي ميل منحنى الموقع – الزمن.',
+      ['v̄ = Δd ÷ Δt', 'Δd = d_f − d_i'], 'forces-and-motion-basics',
+      ['سيارة قطعت 120 m في 6 s. احسبي سرعتها المتوسطة.', 'v = Δd ÷ Δt = 120 ÷ 6 = 20 m/s'],
+      [['ميل منحنى (الموقع – الزمن) يمثّل:', ['السرعة المتجهة', 'التسارع', 'الإزاحة', 'الكتلة']], ['الإزاحة كمية:', ['متجهة', 'قياسية', 'ثابتة دائمًا', 'بلا وحدة']], ['جسم قطع 50 m في 10 s، سرعته المتوسطة:', ['5 m/s', '500 m/s', '0.2 m/s', '60 m/s']]]),
+    L('c1l3', 'الحركة المتسارعة', 'التسارع هو المعدل الزمني لتغيّر السرعة المتجهة. في السقوط الحر تتسارع الأجسام جميعها بتسارع الجاذبية الأرضية g ≈ 9.8 m/s² بإهمال مقاومة الهواء.',
+      ['a = Δv ÷ Δt', 'v_f = v_i + a t', 'd = v_i t + ½ a t²', 'v_f² = v_i² + 2 a d'], 'forces-and-motion-basics',
+      ['سيارة بدأت من السكون ووصلت سرعتها إلى 20 m/s خلال 5 s. احسبي تسارعها.', 'a = (20 − 0) ÷ 5 = 4 m/s²'],
+      [['وحدة التسارع:', ['m/s²', 'm/s', 'N', 'J']], ['تسارع السقوط الحر تقريبًا:', ['9.8 m/s²', '1 m/s²', '98 m/s²', '0.98 m/s²']], ['جسم يتحرك بسرعة ثابتة، تسارعه:', ['صفر', 'ثابت لا يساوي صفرًا', 'متزايد', 'سالب دائمًا']]]),
+    L('c1l4', 'القوى في بُعد واحد', 'القوة دفع أو سحب. قانون نيوتن الأول: يبقى الجسم على حالته ما لم تؤثر فيه قوة محصلة (القصور الذاتي). الثاني: القوة المحصلة = الكتلة × التسارع. الثالث: لكل فعل ردّ فعل مساوٍ له مقدارًا ومعاكس له اتجاهًا.',
+      ['F_net = m a', 'W = m g', 'F_فعل = − F_رد فعل'], 'forces-and-motion-basics',
+      ['قوة محصلة مقدارها 20 N تؤثر في جسم كتلته 4 kg. احسبي تسارعه.', 'a = F ÷ m = 20 ÷ 4 = 5 m/s²'],
+      [['وحدة القوة:', ['النيوتن', 'الجول', 'الواط', 'الباسكال']], ['ميل الجسم لمقاومة تغيير حالته الحركية:', ['القصور الذاتي', 'الاحتكاك', 'الجاذبية', 'الدفع']], ['وزن جسم كتلته 10 kg (g = 10 m/s²):', ['100 N', '10 N', '1 N', '1000 N']]]),
+    L('c1l5', 'القوى في بُعدين', 'نجمع المتجهات بتحليلها إلى مركبتين متعامدتين. الاحتكاك قوة تعاكس الحركة وتعتمد على القوة العمودية ونوع السطحين. على المستوى المائل تتحلل قوة الوزن إلى مركبة موازية للسطح وأخرى عمودية عليه.',
+      ['R = √(A² + B²)', 'F_f = μ F_N', 'مركبة الوزن الموازية = m g sinθ'], 'vector-addition',
+      ['قوتان متعامدتان 3 N و 4 N. احسبي محصلتهما.', 'R = √(3² + 4²) = √25 = 5 N'],
+      [['محصلة قوتين متعامدتين 6 N و 8 N:', ['10 N', '14 N', '2 N', '48 N']], ['تعتمد قوة الاحتكاك على:', ['القوة العمودية ونوع السطحين', 'لون الجسم', 'حجم الجسم فقط', 'سرعة الضوء']], ['معامل الاحتكاك:', ['ليس له وحدة', 'وحدته النيوتن', 'وحدته المتر', 'وحدته الجول']]])
+  ]},
+  { id: 'c2', name: 'فيزياء ٢', sub: 'الجاذبية والحركة الدورانية والزخم', art: 'orbits', lessons: [
+    L('c2l1', 'الحركة في بُعدين', 'المقذوف يتحرك أفقيًا بسرعة ثابتة ورأسيًا بتسارع الجاذبية، فيرسم مسارًا على شكل قطع مكافئ. في الحركة الدائرية المنتظمة يتجه التسارع دائمًا نحو مركز الدائرة.',
+      ['a_c = v² ÷ r', 'F_c = m v² ÷ r', 'زاوية 45° تعطي أكبر مدى أفقي'], 'projectile-motion',
+      ['جسم كتلته 2 kg يدور بسرعة 4 m/s في دائرة نصف قطرها 2 m. احسبي القوة المركزية.', 'F = m v² ÷ r = 2 × 16 ÷ 2 = 16 N'],
+      [['المركبة الأفقية لسرعة المقذوف (بإهمال الهواء):', ['ثابتة', 'متزايدة', 'متناقصة', 'صفر']], ['يتجه التسارع المركزي:', ['نحو مركز الدائرة', 'بعيدًا عن المركز', 'مماسًا للمسار', 'للأعلى دائمًا']], ['الزاوية التي تعطي أكبر مدى أفقي:', ['45°', '30°', '60°', '90°']]]),
+    L('c2l2', 'الجاذبية', 'قانون الجذب العام لنيوتن: يتجاذب أي جسمين بقوة تتناسب طرديًا مع حاصل ضرب كتلتيهما وعكسيًا مع مربع المسافة بينهما. قوانين كبلر تصف حركة الكواكب حول الشمس في مدارات إهليجية.',
+      ['F = G m₁ m₂ ÷ r²', 'G = 6.67 × 10⁻¹¹ N·m²/kg²', 'T² ∝ r³ (قانون كبلر الثالث)'], 'gravity-and-orbits',
+      ['إذا تضاعفت المسافة بين جسمين، كيف تتغير قوة الجذب بينهما؟', 'القوة تتناسب مع 1 ÷ r²، فإذا تضاعفت r تصبح القوة 1 ÷ 4 أي تقل إلى الربع.'],
+      [['إذا تضاعفت المسافة بين جسمين فإن قوة الجذب:', ['تقل إلى الربع', 'تتضاعف', 'تقل إلى النصف', 'لا تتغير']], ['مدارات الكواكب حسب كبلر:', ['إهليجية', 'مربعة', 'مستقيمة', 'حلزونية']], ['يُرمز لثابت الجذب العام بالرمز:', ['G', 'g', 'k', 'c']]]),
+    L('c2l3', 'الحركة الدورانية', 'تُقاس الإزاحة الزاوية بالراديان. العزم = القوة × ذراع القوة، وهو ما يسبب الدوران. يكون الجسم متزنًا عندما تكون محصلة القوى ومحصلة العزوم المؤثرة فيه صفرًا.',
+      ['τ = F r sinθ', 'ω = Δθ ÷ Δt', 'π rad = 180°'], 'balancing-act',
+      ['قوة 10 N تؤثر عموديًا في نهاية مفتاح ربط طوله 0.3 m. احسبي العزم.', 'τ = F r = 10 × 0.3 = 3 N·m'],
+      [['وحدة العزم:', ['N·m', 'N/m', 'J/s', 'kg·m']], ['لزيادة العزم بالقوة نفسها:', ['نزيد ذراع القوة', 'نقلل ذراع القوة', 'نؤثر عند المحور', 'نقلل القوة']], ['الدورة الكاملة تساوي بالراديان:', ['2π', 'π', 'π/2', '360']]]),
+    L('c2l4', 'الزخم وحفظه', 'الزخم = الكتلة × السرعة. الدفع = القوة × زمن تأثيرها = التغيّر في الزخم. في النظام المعزول يبقى الزخم الكلي محفوظًا، كما في التصادمات وارتداد البندقية.',
+      ['p = m v', 'I = F Δt = Δp', 'p_قبل = p_بعد'], 'collision-lab',
+      ['كرة كتلتها 0.5 kg تتحرك بسرعة 6 m/s. احسبي زخمها.', 'p = m v = 0.5 × 6 = 3 kg·m/s'],
+      [['وحدة الزخم:', ['kg·m/s', 'N', 'J', 'kg/m']], ['الدفع يساوي:', ['التغيّر في الزخم', 'الكتلة × التسارع', 'الشغل ÷ الزمن', 'القوة × المسافة']], ['ارتداد البندقية عند الإطلاق مثال على:', ['حفظ الزخم', 'حفظ الشحنة', 'الانكسار', 'الحث']]]),
+    L('c2l5', 'الطاقة والشغل والآلات', 'الشغل = القوة × الإزاحة في اتجاهها، والقدرة معدل بذل الشغل. للجسم طاقة حركية وطاقة وضع، وتبقى الطاقة الميكانيكية محفوظة في غياب الاحتكاك. الآلات البسيطة تسهّل الشغل.',
+      ['W = F d cosθ', 'P = W ÷ t', 'KE = ½ m v²', 'PE = m g h'], 'energy-skate-park-basics',
+      ['رُفع جسم كتلته 5 kg إلى ارتفاع 2 m (g = 10 m/s²). احسبي طاقة وضعه.', 'PE = m g h = 5 × 10 × 2 = 100 J'],
+      [['وحدة الشغل:', ['الجول', 'الواط', 'النيوتن', 'الباسكال']], ['القدرة هي:', ['معدل بذل الشغل', 'القوة × الزمن', 'الكتلة × السرعة', 'الطاقة × الزمن']], ['الطاقة الحركية لجسم كتلته 2 kg وسرعته 3 m/s:', ['9 J', '6 J', '18 J', '3 J']]])
+  ]},
+  { id: 'c3', name: 'فيزياء ٣-١', sub: 'الموائع والموجات والصوت والضوء', art: 'waves', lessons: [
+    L('c3l1', 'حالات المادة والموائع', 'الضغط = القوة ÷ المساحة. مبدأ باسكال: الضغط المؤثر في مائع محصور ينتقل بالتساوي. مبدأ أرخميدس: قوة الطفو تساوي وزن المائع المزاح. مبدأ برنولي: كلما زادت سرعة المائع قلّ ضغطه.',
+      ['P = F ÷ A', 'P = ρ g h', 'F_طفو = ρ V g'], 'under-pressure',
+      ['قوة 200 N تؤثر عموديًا على مساحة 0.5 m². احسبي الضغط.', 'P = F ÷ A = 200 ÷ 0.5 = 400 Pa'],
+      [['وحدة الضغط:', ['الباسكال', 'النيوتن', 'الجول', 'الواط']], ['قوة الطفو تساوي:', ['وزن المائع المزاح', 'كتلة الجسم', 'حجم الجسم', 'ضغط الهواء']], ['يعمل المكبس الهيدروليكي وفق مبدأ:', ['باسكال', 'برنولي', 'أرخميدس', 'نيوتن الثالث']]]),
+    L('c3l2', 'الاهتزازات والموجات', 'البندول والنابض أمثلة على الحركة التوافقية البسيطة. الموجة اضطراب ينقل الطاقة دون أن ينقل المادة، وقد تكون مستعرضة أو طولية. سرعة الموجة = الطول الموجي × التردد.',
+      ['v = λ f', 'T = 1 ÷ f', 'T_بندول = 2π √(L ÷ g)'], 'wave-on-a-string',
+      ['موجة ترددها 5 Hz وطولها الموجي 2 m. احسبي سرعتها.', 'v = λ f = 2 × 5 = 10 m/s'],
+      [['سرعة الموجة تساوي:', ['الطول الموجي × التردد', 'التردد ÷ الطول الموجي', 'السعة × الزمن', 'الكتلة × التسارع']], ['موجات الصوت في الهواء:', ['طولية', 'مستعرضة', 'كهرومغناطيسية', 'لا تحتاج وسطًا']], ['وحدة التردد:', ['الهيرتز', 'المتر', 'الثانية', 'الديسيبل']]]),
+    L('c3l3', 'الصوت', 'الصوت موجة طولية تحتاج وسطًا ماديًا. تعتمد الحدّة على التردد، والعلوّ على السعة. تأثير دوبلر: يتغيّر التردد الذي نسمعه عند اقتراب المصدر أو ابتعاده. الرنين في الأعمدة الهوائية.',
+      ['v_هواء ≈ 343 m/s عند 20°س', 'λ = v ÷ f', 'يزداد التردد الظاهري عند اقتراب المصدر'], 'waves-intro',
+      ['صوت تردده 343 Hz ينتشر في الهواء (v = 343 m/s). احسبي طوله الموجي.', 'λ = v ÷ f = 343 ÷ 343 = 1 m'],
+      [['يعتمد علوّ الصوت على:', ['السعة', 'التردد', 'الطول الموجي فقط', 'لون المصدر']], ['يزداد التردد الظاهري لصفارة الإسعاف عندما:', ['تقترب منا', 'تبتعد عنا', 'تتوقف', 'تطفئ محركها']], ['لا ينتقل الصوت في:', ['الفراغ', 'الماء', 'الهواء', 'الحديد']]], ['p4v1', 'p4v2']),
+    L('c3l4', 'أساسيات الضوء', 'الضوء موجة كهرومغناطيسية سرعتها في الفراغ 3 × 10⁸ m/s. تقل الاستضاءة بزيادة البعد عن المصدر (تتناسب عكسيًا مع مربع البعد). الضوء الأبيض مزيج من ألوان الطيف.',
+      ['c = λ f', 'c = 3 × 10⁸ m/s', 'E ∝ 1 ÷ r²'], 'color-vision',
+      ['ضوء طوله الموجي 600 nm. احسبي تردده.', 'f = c ÷ λ = 3×10⁸ ÷ 6×10⁻⁷ = 5×10¹⁴ Hz'],
+      [['سرعة الضوء في الفراغ:', ['3 × 10⁸ m/s', '343 m/s', '3 × 10⁵ m/s', '9.8 m/s']], ['الضوء الأبيض يتكون من:', ['ألوان الطيف', 'لون واحد', 'الأحمر فقط', 'الأسود والأبيض']], ['عند مضاعفة البعد عن المصدر تقل الاستضاءة إلى:', ['الربع', 'النصف', 'الضعف', 'لا تتغير']]], ['p4i1']),
+    L('c3l5', 'الانعكاس والمرايا', 'قانون الانعكاس: زاوية السقوط = زاوية الانعكاس. المرآة المستوية تكوّن خيالًا تقديريًا معتدلًا مساويًا للجسم. المرايا المقعرة تجمع الأشعة والمحدبة تفرّقها، وتحكمهما معادلة المرايا.',
+      ['θ_i = θ_r', '1/f = 1/d_o + 1/d_i', 'm = − d_i ÷ d_o'], 'geometric-optics',
+      ['جسم على بعد 30 cm من مرآة مقعرة بعدها البؤري 10 cm. أين يتكوّن الخيال؟', '1/d_i = 1/10 − 1/30 = 2/30 ⇒ d_i = 15 cm (خيال حقيقي)'],
+      [['في الانعكاس، زاوية السقوط:', ['تساوي زاوية الانعكاس', 'أكبر من زاوية الانعكاس', 'أصغر منها', 'لا علاقة بينهما']], ['خيال المرآة المستوية:', ['تقديري معتدل', 'حقيقي مقلوب', 'مكبّر دائمًا', 'مصغّر دائمًا']], ['المرآة المستخدمة في المرايا الجانبية للسيارات:', ['المحدبة', 'المقعرة', 'المستوية', 'لا شيء مما سبق']]]),
+    L('c3l6', 'الانكسار والعدسات', 'الانكسار انحراف الضوء عند انتقاله بين وسطين مختلفين، ويصفه قانون سنل. الانعكاس الكلي الداخلي أساس الألياف البصرية. العدسة المحدبة تجمع الأشعة والمقعرة تفرّقها.',
+      ['n₁ sinθ₁ = n₂ sinθ₂', 'n = c ÷ v', '1/f = 1/d_o + 1/d_i'], 'bending-light',
+      ['معامل انكسار الزجاج 1.5. احسبي سرعة الضوء فيه.', 'v = c ÷ n = 3×10⁸ ÷ 1.5 = 2×10⁸ m/s'],
+      [['قانون سنل يصف:', ['الانكسار', 'الانعكاس', 'الحيود', 'الاستقطاب']], ['العدسة المحدبة:', ['تجمع الأشعة', 'تفرّق الأشعة', 'لا تؤثر فيها', 'تعكس الأشعة']], ['تعتمد الألياف البصرية على:', ['الانعكاس الكلي الداخلي', 'الحيود', 'الاستقطاب', 'التداخل']]], ['p4i1'])
+  ]},
+  { id: 'c4', name: 'فيزياء ٣-٢', sub: 'الكهرباء والمغناطيسية والفيزياء الحديثة', art: 'em', lessons: [
+    L('c4l1', 'الكهرباء الساكنة', 'الشحنات نوعان: المتشابهة تتنافر والمختلفة تتجاذب. يحدد قانون كولوم القوة بين شحنتين نقطيتين. يشحن الجسم بالدلك أو التوصيل أو الحث.',
+      ['F = k q₁ q₂ ÷ r²', 'k = 9 × 10⁹ N·m²/C²', 'e = 1.6 × 10⁻¹⁹ C'], 'coulombs-law',
+      ['إذا تضاعفت إحدى الشحنتين وبقيت المسافة ثابتة، كيف تتغير القوة؟', 'القوة تتناسب طرديًا مع حاصل ضرب الشحنتين، إذن تتضاعف القوة.'],
+      [['الشحنات المتشابهة:', ['تتنافر', 'تتجاذب', 'لا تتأثر', 'تتعادل']], ['وحدة الشحنة الكهربائية:', ['الكولوم', 'الأمبير', 'الفولت', 'الأوم']], ['شحنة الإلكترون:', ['سالبة', 'موجبة', 'متعادلة', 'متغيرة']]]),
+    L('c4l2', 'المجالات الكهربائية', 'شدة المجال الكهربائي = القوة المؤثرة في شحنة اختبار ÷ مقدارها. فرق الجهد = الشغل المبذول لكل وحدة شحنة. المكثف يخزّن الشحنة والطاقة.',
+      ['E = F ÷ q', 'ΔV = E d', 'C = q ÷ ΔV'], 'charges-and-fields',
+      ['قوة 0.02 N تؤثر في شحنة 4 × 10⁻⁶ C. احسبي شدة المجال.', 'E = F ÷ q = 0.02 ÷ 4×10⁻⁶ = 5000 N/C'],
+      [['وحدة شدة المجال الكهربائي:', ['N/C', 'C/N', 'J', 'W']], ['وحدة السعة الكهربائية:', ['الفاراد', 'الهنري', 'التسلا', 'الأوم']], ['تتجه خطوط المجال الكهربائي من الشحنة:', ['الموجبة إلى السالبة', 'السالبة إلى الموجبة', 'في دوائر مغلقة', 'لا تتجه']]]),
+    L('c4l3', 'الكهرباء التيارية', 'التيار الكهربائي معدل تدفق الشحنة. قانون أوم: الجهد = التيار × المقاومة. القدرة الكهربائية = التيار × الجهد، وتُقاس الطاقة المستهلكة بالكيلوواط·ساعة.',
+      ['I = q ÷ t', 'V = I R', 'P = I V = I² R'], 'ohms-law',
+      ['مقاومة 10 Ω يمر بها تيار 2 A. احسبي الجهد والقدرة.', 'V = I R = 2 × 10 = 20 V ، P = I V = 2 × 20 = 40 W'],
+      [['قانون أوم:', ['V = I R', 'P = I V', 'F = m a', 'E = m c²']], ['وحدة المقاومة:', ['الأوم', 'الأمبير', 'الفولت', 'الواط']], ['مصباح قدرته 60 W يعمل على 120 V، التيار المار فيه:', ['0.5 A', '2 A', '7200 A', '60 A']]]),
+    L('c4l4', 'دوائر التوالي والتوازي', 'في التوالي: التيار واحد والمقاومات تُجمع. في التوازي: الجهد واحد ومقلوب المقاومة المكافئة = مجموع المقلوبات. المنصهر وقاطع الدائرة يحميان الدائرة من التيار الزائد.',
+      ['R_توالي = R₁ + R₂ + …', '1/R_توازي = 1/R₁ + 1/R₂ + …', 'في التوازي: الجهد متساوٍ'], 'circuit-construction-kit-dc',
+      ['مقاومتان 6 Ω و 3 Ω موصولتان على التوازي. احسبي المقاومة المكافئة.', '1/R = 1/6 + 1/3 = 1/2 ⇒ R = 2 Ω'],
+      [['في دائرة التوالي يكون متساويًا في جميع المقاومات:', ['التيار', 'الجهد', 'القدرة', 'المقاومة']], ['مقاومتان 4 Ω و 4 Ω على التوالي، المكافئة:', ['8 Ω', '2 Ω', '4 Ω', '16 Ω']], ['توصَّل أجهزة المنزل على:', ['التوازي', 'التوالي', 'لا هذا ولا ذاك', 'بالتناوب']]]),
+    L('c4l5', 'المجالات المغناطيسية', 'للمغناطيس قطبان شمالي وجنوبي. يولّد التيار الكهربائي مجالًا مغناطيسيًا حوله (قاعدة اليد اليمنى). يتأثر السلك الذي يحمل تيارًا في مجال مغناطيسي بقوة، وهذا مبدأ عمل المحرك الكهربائي.',
+      ['F = I L B', 'F = q v B', 'قاعدة اليد اليمنى لتحديد الاتجاه'], 'faradays-electromagnetic-lab',
+      ['سلك طوله 0.5 m يحمل تيارًا 4 A عموديًا على مجال 0.2 T. احسبي القوة.', 'F = I L B = 4 × 0.5 × 0.2 = 0.4 N'],
+      [['وحدة المجال المغناطيسي:', ['التسلا', 'الويبر', 'الفاراد', 'الهنري']], ['يحوّل المحرك الكهربائي الطاقة:', ['الكهربائية إلى حركية', 'الحركية إلى كهربائية', 'الضوئية إلى حرارية', 'الكيميائية إلى ضوئية']], ['الأقطاب المغناطيسية المختلفة:', ['تتجاذب', 'تتنافر', 'لا تتأثر', 'تتعادل']]]),
+    L('c4l6', 'الحث الكهرومغناطيسي', 'تغيّر المجال المغناطيسي خلال ملف يولّد فيه قوة دافعة كهربائية حثية (قانون فاراداي)، ويحدد قانون لنز اتجاه التيار الحثي. على هذا المبدأ يعمل المولّد الكهربائي والمحوّل.',
+      ['EMF = B L v', 'V_s ÷ V_p = N_s ÷ N_p', 'قانون لنز: التيار الحثي يقاوم التغيّر المسبب له'], 'faradays-law',
+      ['محوّل عدد لفات ملفه الابتدائي 100 والثانوي 500، وجهده الابتدائي 20 V. احسبي الجهد الثانوي.', 'V_s = V_p × N_s ÷ N_p = 20 × 500 ÷ 100 = 100 V'],
+      [['يعمل المحوّل الكهربائي على التيار:', ['المتردد', 'المستمر', 'الساكن', 'الصفري']], ['يحوّل المولّد الكهربائي الطاقة:', ['الحركية إلى كهربائية', 'الكهربائية إلى حركية', 'الحرارية إلى ضوئية', 'النووية إلى كيميائية']], ['في المحوّل الرافع يكون عدد لفات الثانوي:', ['أكبر من الابتدائي', 'أقل من الابتدائي', 'مساويًا له', 'صفرًا']]], ['p4v4']),
+    L('c4l7', 'الفيزياء الحديثة', 'للضوء سلوك جسيمي: يتكوّن من فوتونات طاقة كل منها E = h f، ويفسّر ذلك التأثير الكهروضوئي. نموذج بور للذرة. في النواة يحدث الانشطار النووي (محطات الطاقة) والاندماج النووي (الشمس).',
+      ['E = h f', 'h = 6.63 × 10⁻³⁴ J·s', 'E = m c²'], 'build-an-atom',
+      ['فوتون تردده 5 × 10¹⁴ Hz. احسبي طاقته.', 'E = h f = 6.63×10⁻³⁴ × 5×10¹⁴ ≈ 3.3×10⁻¹⁹ J'],
+      [['تتناسب طاقة الفوتون طرديًا مع:', ['التردد', 'الطول الموجي', 'السعة', 'الكتلة']], ['انقسام نواة ثقيلة إلى نواتين أخف:', ['الانشطار', 'الاندماج', 'التأين', 'الانعكاس']], ['تُسمّى كمّات الضوء:', ['الفوتونات', 'الإلكترونات', 'البروتونات', 'النيوترونات']]], ['p4v3', 'p4v5'])
+  ]}
+];
+
+/* بنك الأسئلة (إضافة إلى أسئلة الدروس والتحصيلي) — lv: 1 سهل، 2 متوسط، 3 متقدم */
+const BANK_TF = [
+  ['الكتلة كمية متجهة.', false, 'c1', 1], ['التسارع هو المعدل الزمني لتغيّر السرعة المتجهة.', true, 'c1', 1],
+  ['قوتا الفعل وردّ الفعل تؤثران في الجسم نفسه.', false, 'c1', 2], ['تزداد قوة الجذب بين جسمين بزيادة المسافة بينهما.', false, 'c2', 1],
+  ['الزخم كمية قياسية.', false, 'c2', 2], ['ينتقل الصوت في الفراغ.', false, 'c3', 1],
+  ['سرعة الضوء في الماء أقل منها في الفراغ.', true, 'c3', 2], ['في دائرة التوازي يتساوى الجهد على جميع الفروع.', true, 'c4', 1],
+  ['يعمل المحوّل الكهربائي بالتيار المتردد.', true, 'c4', 2], ['تزداد طاقة الفوتون بزيادة تردده.', true, 'c4', 2],
+  ['في السقوط الحر تسقط الأجسام الثقيلة أسرع من الخفيفة بإهمال الهواء.', false, 'c1', 3], ['قوة الطفو تساوي وزن المائع المزاح.', true, 'c3', 1]
+];
+const BANK_EXPLAIN = [
+  ['علّلي: يندفع الركاب إلى الأمام عند توقف الحافلة فجأة.', 'بسبب القصور الذاتي؛ فأجسامهم تميل إلى الاستمرار في حالتها الحركية.', 'c1', 1],
+  ['علّلي: نرى البرق قبل أن نسمع الرعد.', 'لأن سرعة الضوء أكبر بكثير من سرعة الصوت.', 'c3', 1],
+  ['علّلي: تُصنع المرايا الجانبية للسيارات محدبة.', 'لأنها تعطي مجال رؤية أوسع وخيالًا معتدلًا مصغّرًا.', 'c3', 2],
+  ['علّلي: توصَّل الأجهزة المنزلية على التوازي.', 'ليحصل كل جهاز على الجهد نفسه ويعمل باستقلال عن غيره.', 'c4', 1],
+  ['علّلي: تطفو السفن الحديدية الضخمة على سطح الماء.', 'لأن شكلها المجوّف يزيح حجمًا كبيرًا من الماء فتصبح قوة الطفو مساوية لوزنها.', 'c3', 2],
+  ['علّلي: يدور المتزلج على الجليد أسرع عندما يضمّ ذراعيه.', 'لحفظ الزخم الزاوي؛ يقل عزم القصور الذاتي فتزداد السرعة الزاوية.', 'c2', 3]
+];
+const BANK_CALC = [
+  ['سيارة قطعت 300 m في 15 s. احسبي سرعتها المتوسطة.', 20, 'm/s', 'c1', 1], ['قوة محصلة 30 N تؤثر في جسم كتلته 6 kg. احسبي تسارعه.', 5, 'm/s²', 'c1', 1],
+  ['جسم كتلته 4 kg يتحرك بسرعة 5 m/s. احسبي طاقته الحركية.', 50, 'J', 'c2', 2], ['جسم كتلته 2 kg رُفع إلى ارتفاع 5 m (g = 9.8 m/s²). احسبي طاقة وضعه.', 98, 'J', 'c2', 2],
+  ['كرة كتلتها 0.2 kg تتحرك بسرعة 15 m/s اصطدمت بجدار وارتدّت بالسرعة نفسها. احسبي مقدار التغير في زخمها.', 6, 'kg·m/s', 'c2', 3],
+  ['موجة ترددها 50 Hz وطولها الموجي 0.4 m. احسبي سرعتها.', 20, 'm/s', 'c3', 1], ['قوة 600 N تؤثر على مساحة 3 m². احسبي الضغط.', 200, 'Pa', 'c3', 1],
+  ['مقاومة 12 Ω يمر بها تيار 0.5 A. احسبي فرق الجهد.', 6, 'V', 'c4', 1], ['مقاومتان 10 Ω و 15 Ω على التوالي. احسبي المقاومة المكافئة.', 25, 'Ω', 'c4', 1],
+  ['مقاومتان 12 Ω و 6 Ω على التوازي. احسبي المقاومة المكافئة.', 4, 'Ω', 'c4', 2],
+  ['محوّل جهده الابتدائي 220 V، وعدد لفات ابتدائيه 1000 وثانويه 50. احسبي جهد الثانوي.', 11, 'V', 'c4', 3]
+];
+const BANK_CRIT = [
+  ['لو اختفت قوة الاحتكاك فجأة من حياتنا، صفي ثلاثة أشياء ستتغير.', 'لن نستطيع المشي أو الإمساك بالأشياء، ولن تتوقف السيارات بسهولة، ولن تبقى المسامير والعقد في أماكنها.', 'c1', 2],
+  ['رائدة فضاء على سطح القمر أسقطت ريشة ومطرقة معًا من الارتفاع نفسه. أيهما يصل أولًا؟ فسّري.', 'يصلان معًا؛ لعدم وجود هواء، فكلاهما يسقط بتسارع الجاذبية نفسه.', 'c1', 3],
+  ['اقترحي طريقة لتقليل استهلاك الكهرباء في منزلك مستخدمة مفهوم القدرة الكهربائية.', 'استخدام مصابيح LED أقل قدرة وإطفاء الأجهزة غير المستخدمة؛ لأن الطاقة = القدرة × الزمن.', 'c4', 2],
+  ['لماذا تُترك فواصل صغيرة بين أجزاء الجسور وقضبان القطارات؟', 'لأن المواد تتمدد بالحرارة وتنكمش بالبرودة، والفواصل تمنع التشقق والتقوّس.', 'c3', 2]
+];
+const QTYPES = { mcq: 'اختيار من متعدد', tf: 'صح وخطأ', explain: 'تفسير وتعليل', calc: 'مسائل حسابية', crit: 'تفكير ناقد', tah: 'أسئلة تحصيلية' };
+const LEVELS_AR = { 1: 'سهل', 2: 'متوسط', 3: 'متقدم' };
+const GROUPS = ['نيوتن', 'ابن الهيثم', 'أينشتاين', 'ماري كوري', 'فاراداي', 'جاليليو'];
+const VCATS = { lessons: 'شرح الدروس', clips: 'ظواهر فيزيائية قصيرة', exp: 'تجارب علمية مصورة', life: 'الفيزياء في الحياة اليومية', sci: 'العلماء والاكتشافات' };
+const BUILTIN_VIDS = [
+  { id: 'bv1', cat: 'clips', title: 'لماذا تقلّ سرعة الصوت في البرد؟', ref: 'p4v1' }, { id: 'bv2', cat: 'clips', title: 'كيف يُصدر الإنسان الصوت؟', ref: 'p4v2' },
+  { id: 'bv3', cat: 'life', title: 'الانشطار النووي في محطات الطاقة', ref: 'p4v3' }, { id: 'bv4', cat: 'life', title: 'الطهي بالحث الكهرومغناطيسي', ref: 'p4v4' },
+  { id: 'bv5', cat: 'clips', title: 'جولة على سطح المريخ', ref: 'p4v5' }, { id: 'bv6', cat: 'lessons', title: 'شرح فيزياء ٤ على يوتيوب', yt: '87BhpKz5Trc' },
+  { id: 'bv7', cat: 'exp', title: 'تجربة تحليل الضوء بالمنشور', q: 'تجربة تحليل الضوء الأبيض بالمنشور' }, { id: 'bv8', cat: 'exp', title: 'تجربة البيضة والقصور الذاتي', q: 'تجربة القصور الذاتي البيضة والكأس' },
+  { id: 'bv9', cat: 'exp', title: 'تجربة الدائرة الكهربائية البسيطة', q: 'تجربة دائرة كهربائية بسيطة توالي وتوازي' }, { id: 'bv10', cat: 'life', title: 'فيزياء ركوب الدراجة', q: 'فيزياء الدراجة الهوائية الاتزان' },
+  { id: 'bv11', cat: 'sci', title: 'ابن الهيثم مؤسس علم البصريات', q: 'ابن الهيثم علم البصريات وثائقي' }, { id: 'bv12', cat: 'sci', title: 'إسحاق نيوتن وقوانين الحركة', q: 'قصة إسحاق نيوتن قوانين الحركة' },
+  { id: 'bv13', cat: 'sci', title: 'ماري كوري والنشاط الإشعاعي', q: 'ماري كوري النشاط الإشعاعي قصة' }, { id: 'bv14', cat: 'sci', title: 'مايكل فاراداي والحث الكهرومغناطيسي', q: 'مايكل فاراداي الحث الكهرومغناطيسي قصة' }
+];
+const TLIB_CATS = { slides: 'عروض بوربوينت', plans: 'تحاضير الدروس', ws: 'أوراق عمل', maps: 'خرائط مفاهيم', laws: 'ملخصات القوانين', sol: 'حلول المسائل خطوة بخطوة', enrich: 'أنشطة إثرائية وعلاجية', eval: 'نماذج تقويم وشواهد' };
+const TLIB_PRIVATE = { plans: true, eval: true };
+
+/* =========================================================
+   ⚛️ عالم الفيزياء — الواجهات
+   ========================================================= */
+const phyState = (() => { try { return JSON.parse(sessionStorage.getItem('ufuq_phy') || '{}'); } catch (e) { return {}; } })();
+const savePhyState = () => { try { sessionStorage.setItem('ufuq_phy', JSON.stringify(phyState)); } catch (e) {} };
+const isTeacher = () => session && session.role === 'teacher';
+
+/* ---------- المحتوى الذي تضيفه المعلمة ---------- */
+function contentAll() { return (remote && Array.isArray(remote.content)) ? remote.content : store.content; }
+function cms(kind) { return contentAll().filter(c => c.kind === kind && c.data && !c.data.deleted); }
+function saveContent(id, kind, data) {
+  const item = { id, kind, data, ts: Date.now() };
+  const up = arr => { const i = arr.findIndex(c => c.id === id); if (i > -1) arr[i] = item; else arr.push(item); };
+  up(store.content); save('content');
+  if (remote && Array.isArray(remote.content) && remote.content !== store.content) up(remote.content);
+  send('content_upsert', { id, kind, data });
+}
+function deleteContent(id) {
+  store.content = store.content.filter(c => c.id !== id); save('content');
+  if (remote && Array.isArray(remote.content)) remote.content = remote.content.filter(c => c.id !== id);
+  send('content_delete', { id });
+}
+async function uploadToDrive(file) {
+  if (!CONFIG.gasUrl) throw new Error('اربطي المنصة بـ Google أولًا');
+  if (file.size > 25 * 1024 * 1024) throw new Error('حجم الملف أكبر من ٢٥ ميجابايت — ارفعيه على Drive والصقي رابطه');
+  const b64 = await new Promise((res, rej) => { const fr = new FileReader(); fr.onload = () => res(String(fr.result).split(',')[1]); fr.onerror = rej; fr.readAsDataURL(file); });
+  const r = await fetch(CONFIG.gasUrl, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ type: 'upload', pin: CONFIG.teacherPin, name: file.name, mime: file.type, data: b64 }) });
+  const j = await r.json(); if (!j.ok) throw new Error(j.error || 'تعذّر الرفع'); return j.url;
+}
+function mediaEmbed(url, title) {
+  const u = String(url || ''); const yt = ytId(u);
+  if (yt) return `<iframe src="https://www.youtube-nocookie.com/embed/${yt}?rel=0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen title="${esc(title || 'فيديو')}"></iframe>`;
+  const dr = u.match(/drive\.google\.com\/file\/d\/([\w-]+)/); if (dr) return `<iframe src="https://drive.google.com/file/d/${dr[1]}/preview" allow="autoplay" allowfullscreen title="${esc(title || 'ملف')}"></iframe>`;
+  if (/\.(mp4|webm|mov)(\?|$)/i.test(u) || u.startsWith('media/')) return `<video src="${esc(u)}" controls playsinline></video>`;
+  return `<a class="pbtn" href="${esc(u)}" target="_blank" rel="noopener">فتح الرابط ↗</a>`;
+}
+
+/* ---------- الدروس (المدمجة + تعديلات المعلمة + دروسها الجديدة) ---------- */
+function courseLessons(c) {
+  const edits = cms('lesson');
+  const base = c.lessons.map(l => { const e = edits.find(x => x.data.base === l.id); return e ? Object.assign({}, l, e.data, { id: l.id, cmsId: e.id }) : l; }).filter(l => !l.hidden);
+  const added = edits.filter(x => x.data.course === c.id && !x.data.base && !x.data.hidden).map(x => Object.assign({ laws: [], quiz: [], vids: [], ex: ['', ''] }, x.data, { id: x.id, cmsId: x.id }));
+  return base.concat(added);
+}
+function lessonById(id) { for (const c of COURSES) { const ls = courseLessons(c); const i = ls.findIndex(l => l.id === id); if (i > -1) return { c, l: ls[i], i, ls }; } return null; }
+
+/* ---------- التقدّم والنقاط والنشاط ---------- */
+function phyProg(p) { p = p || getProg(); p.phy = Object.assign({ lessons: {}, once: {}, group: '', compete: {} }, p.phy || {}); return p; }
+function myPoints(p) { p = p || getProg(); return p.phyPts || 0; }
+function logAct(section, ref, points, details, onceKey, quiet) {
+  if (!session) return;
+  const p = phyProg();
+  if (onceKey) { if (p.phy.once[onceKey]) points = 0; p.phy.once[onceKey] = 1; }
+  p.phyPts = (p.phyPts || 0) + (points || 0); setProg(p);
+  const rec = { id: uid(), name: session.name, role: session.role, grade: session.grade || '', group: p.phy.group || '', section, ref, points: points || 0, details: details || '', ts: Date.now(), quiet: quiet ? 1 : '' };
+  store.activity.unshift(rec); if (store.activity.length > 500) store.activity.length = 500; save('activity');
+  if (remote && Array.isArray(remote.activity) && remote.activity !== store.activity) remote.activity.unshift(rec);
+  if (!onceKey || points || details) send('activity', rec);
+  if (points) { const m = $('#mePts'); if (m) m.textContent = AR(myPoints()); }
+}
+function lessonDone(lid) { const s = phyProg().phy.lessons[lid]; return !!(s && s.quiz != null); }
+function courseStats(c) { const ls = courseLessons(c); const d = ls.filter(l => lessonDone(l.id)).length; return { n: ls.length, d, pct: ls.length ? Math.round(d / ls.length * 100) : 0 }; }
+function levelOf(pts) { return pts >= 600 ? ['🌟', 'نجمة الفيزياء'] : pts >= 300 ? ['🔭', 'عالِمة'] : pts >= 150 ? ['🔬', 'باحثة'] : pts >= 50 ? ['🧭', 'مستكشفة'] : ['🌱', 'مبتدئة']; }
+
+/* ---------- الرسومات ---------- */
+const ART = {
+  forces: `<svg viewBox="0 0 320 190" aria-hidden="true"><rect width="320" height="190" rx="20" fill="#fff4dc"/><rect x="0" y="150" width="320" height="40" fill="#f1d9a6"/><rect x="120" y="96" width="80" height="54" rx="8" fill="#5b8def"/><text x="160" y="130" text-anchor="middle" font-size="18" font-weight="700" fill="#fff" font-family="sans-serif">m</text><path d="M40 123h70" stroke="#e8553d" stroke-width="7" stroke-linecap="round"/><path d="M100 110l16 13-16 13" fill="none" stroke="#e8553d" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><text x="62" y="108" font-size="20" font-weight="700" fill="#e8553d" font-family="sans-serif">F</text><path d="M280 123h-62" stroke="#2fa36b" stroke-width="5" stroke-dasharray="8 6"/><text x="236" y="112" font-size="14" font-weight="700" fill="#2fa36b" font-family="sans-serif">f</text><circle cx="262" cy="46" r="17" fill="#e8553d"/><path d="M262 29c3-9 10-11 15-9" stroke="#2fa36b" stroke-width="4" fill="none"/><path d="M262 70v24" stroke="#6b7394" stroke-width="3" stroke-dasharray="4 5"/><path d="M255 88l7 10 7-10" fill="none" stroke="#6b7394" stroke-width="3"/><text x="50" y="52" font-size="22" font-weight="800" fill="#1f2433" font-family="sans-serif">F = m a</text></svg>`,
+  orbits: `<svg viewBox="0 0 320 190" aria-hidden="true"><rect width="320" height="190" rx="20" fill="#0d1b3d"/><g fill="#dfe9ff" opacity=".8"><circle cx="30" cy="30" r="1.5"/><circle cx="290" cy="40" r="1.5"/><circle cx="60" cy="160" r="1.2"/><circle cx="250" cy="165" r="1.5"/><circle cx="150" cy="20" r="1"/></g><g fill="none" stroke="#8fb6e0" stroke-opacity=".55"><ellipse cx="160" cy="95" rx="60" ry="24"/><ellipse cx="160" cy="95" rx="100" ry="42"/><ellipse cx="160" cy="95" rx="140" ry="62"/></g><circle cx="160" cy="95" r="24" fill="#ffb24f"/><circle cx="160" cy="95" r="34" fill="#ffb24f" opacity=".2"/><circle cx="218" cy="88" r="7" fill="#5fd4e6"/><circle cx="70" cy="118" r="9" fill="#e8553d"/><circle cx="292" cy="104" r="11" fill="#d9a066"/><ellipse cx="292" cy="104" rx="18" ry="4" fill="none" stroke="#f3d9a8" stroke-width="2"/><circle cx="120" cy="56" r="5" fill="#c7d2fe"/></svg>`,
+  waves: `<svg viewBox="0 0 320 190" aria-hidden="true"><rect width="320" height="190" rx="20" fill="#eef6ff"/><text x="160" y="36" text-anchor="middle" font-size="22" font-weight="800" fill="#2563eb" font-family="sans-serif">WAVES</text><rect x="20" y="78" width="26" height="36" rx="4" fill="#1f2433"/><path d="M46 84l16-12v48l-16-12z" fill="#1f2433"/><path d="M70 96c15-34 30-34 45 0s30 34 45 0 30-34 45 0 30 34 45 0 30-34 45 0" fill="none" stroke="#2563eb" stroke-width="4"/><path d="M70 96h240" stroke="#94a3b8" stroke-dasharray="4 5"/><path d="M92 54h90" stroke="#e8553d" stroke-width="2"/><text x="137" y="50" text-anchor="middle" font-size="13" fill="#e8553d" font-family="sans-serif">λ</text><path d="M210 62v34" stroke="#f59e0b" stroke-width="2"/><text x="222" y="80" font-size="13" fill="#f59e0b" font-family="sans-serif">A</text><g font-size="18" text-anchor="middle"><text x="80" y="168">💧</text><text x="140" y="168">🔊</text><text x="200" y="168">☀️</text><text x="260" y="168">📡</text></g></svg>`,
+  em: `<svg viewBox="0 0 320 190" aria-hidden="true"><rect width="320" height="190" rx="20" fill="#fff"/><g fill="none" stroke="#1e3a8a" stroke-width="1.6"><path d="M40 95c0-60 120-60 120 0"/><path d="M40 95c0 60 120 60 120 0"/><path d="M60 95c0-36 80-36 80 0"/><path d="M60 95c0 36 80 36 80 0"/></g><rect x="50" y="82" width="50" height="26" fill="#e8553d"/><rect x="100" y="82" width="50" height="26" fill="#3b6fd8"/><text x="75" y="101" text-anchor="middle" font-size="15" font-weight="800" fill="#fff" font-family="sans-serif">N</text><text x="125" y="101" text-anchor="middle" font-size="15" font-weight="800" fill="#fff" font-family="sans-serif">S</text><path d="M170 20v150" stroke="#1e3a8a" stroke-width="3"/><path d="M205 150h80v-90h-40" fill="none" stroke="#1f2433" stroke-width="4"/><circle cx="235" cy="56" r="17" fill="#fde68a" stroke="#1f2433" stroke-width="3"/><path d="M228 72h14v10h-14z" fill="#94a3b8"/><rect x="190" y="118" width="22" height="46" rx="4" fill="#f59e0b"/><rect x="194" y="112" width="14" height="8" fill="#1f2433"/><path d="M205 118v-58h13" fill="none" stroke="#1f2433" stroke-width="4"/><g stroke="#f59e0b" stroke-width="3"><path d="M235 30v-10"/><path d="M256 40l7-7"/><path d="M214 40l-7-7"/></g></svg>`,
+  video: `<svg viewBox="0 0 320 190" aria-hidden="true"><rect width="320" height="190" rx="20" fill="#1c2340"/><rect x="40" y="96" width="70" height="26" rx="6" fill="#94a3b8"/><rect x="104" y="92" width="16" height="34" rx="4" fill="#cbd5e1"/><path d="M120 109l70-6v12z" fill="#fff9db" opacity=".9"/><path d="M190 78l38 66h-76z" fill="#c7e9ff" opacity=".85" stroke="#fff" stroke-width="2"/><g stroke-width="5" stroke-linecap="round"><path d="M222 112l66-26" stroke="#ef4444"/><path d="M223 117l66-18" stroke="#f59e0b"/><path d="M224 122l66-10" stroke="#facc15"/><path d="M225 127l66-2" stroke="#22c55e"/><path d="M226 132l66 6" stroke="#3b82f6"/><path d="M227 137l66 14" stroke="#8b5cf6"/></g><circle cx="270" cy="40" r="20" fill="#fff"/><path d="M264 30l16 10-16 10z" fill="#1c2340"/></svg>`,
+  bank: `<svg viewBox="0 0 320 190" aria-hidden="true"><rect width="320" height="190" rx="20" fill="#fdf2f8"/><rect x="100" y="24" width="120" height="150" rx="12" fill="#fff" stroke="#db2777" stroke-width="3"/><rect x="135" y="16" width="50" height="18" rx="6" fill="#db2777"/><g stroke-width="4" stroke-linecap="round" fill="none"><path d="M118 62l7 7 12-14" stroke="#16a34a"/><path d="M118 98l7 7 12-14" stroke="#16a34a"/><path d="M120 132l14 14M134 132l-14 14" stroke="#e11d48"/></g><g stroke="#cbd5e1" stroke-width="6" stroke-linecap="round"><path d="M150 64h52"/><path d="M150 100h40"/><path d="M150 139h48"/></g><text x="270" y="70" text-anchor="middle" font-size="40">❓</text><text x="50" y="140" text-anchor="middle" font-size="34">✏️</text></svg>`,
+  lab: `<svg viewBox="0 0 320 190" aria-hidden="true"><rect width="320" height="190" rx="20" fill="#e0f2fe"/><rect x="0" y="150" width="320" height="40" fill="#1e293b"/><path d="M40 150c40-150 160-150 220 0" fill="none" stroke="#d946ef" stroke-width="3" stroke-dasharray="6 6"/><circle cx="150" cy="47" r="8" fill="#e8553d"/><rect x="26" y="118" width="26" height="32" rx="4" fill="#ef4444"/><path d="M40 118l18-26" stroke="#ef4444" stroke-width="10" stroke-linecap="round"/><g transform="translate(232 18)"><path d="M14 0h22M18 0v28L0 62a6 6 0 0 0 5 9h40a6 6 0 0 0 5-9L32 28V0" fill="#fff" stroke="#1f2433" stroke-width="3"/><path d="M8 50h34l6 12a6 6 0 0 1-5 9H7a6 6 0 0 1-5-9z" fill="#22c55e"/></g></svg>`,
+  tlib: `<svg viewBox="0 0 320 190" aria-hidden="true"><rect width="320" height="190" rx="20" fill="#f5f3ff"/><rect x="40" y="34" width="130" height="90" rx="8" fill="#fff" stroke="#7c3aed" stroke-width="3"/><rect x="56" y="52" width="60" height="8" rx="4" fill="#7c3aed"/><rect x="56" y="70" width="96" height="6" rx="3" fill="#ddd6fe"/><rect x="56" y="84" width="80" height="6" rx="3" fill="#ddd6fe"/><path d="M60 112l20-14 16 8 24-18" fill="none" stroke="#f59e0b" stroke-width="4"/><g transform="translate(190 50)"><rect width="26" height="100" rx="4" fill="#ef4444"/><rect x="30" y="10" width="26" height="90" rx="4" fill="#3b82f6"/><rect x="60" y="0" width="26" height="100" rx="4" fill="#22c55e"/><rect x="90" y="18" width="20" height="82" rx="4" fill="#f59e0b"/></g><rect x="30" y="150" width="260" height="10" rx="5" fill="#c4b5fd"/></svg>`,
+  achieve: `<svg viewBox="0 0 320 190" aria-hidden="true"><rect width="320" height="190" rx="20" fill="#fffbeb"/><rect x="40" y="120" width="70" height="50" rx="6" fill="#cbd5e1"/><rect x="125" y="96" width="70" height="74" rx="6" fill="#facc15"/><rect x="210" y="132" width="70" height="38" rx="6" fill="#f59e0b"/><text x="75" y="152" text-anchor="middle" font-size="22" font-weight="800" fill="#1f2433" font-family="sans-serif">2</text><text x="160" y="140" text-anchor="middle" font-size="26" font-weight="800" fill="#1f2433" font-family="sans-serif">1</text><text x="245" y="158" text-anchor="middle" font-size="20" font-weight="800" fill="#1f2433" font-family="sans-serif">3</text><path d="M140 30h40v18a20 20 0 0 1-40 0z" fill="#f59e0b"/><path d="M140 36h-10a10 10 0 0 0 12 16M180 36h10a10 10 0 0 1-12 16" fill="none" stroke="#f59e0b" stroke-width="4"/><rect x="154" y="66" width="12" height="12" fill="#f59e0b"/><rect x="144" y="78" width="32" height="8" rx="3" fill="#b45309"/><g font-size="16"><text x="60" y="60">⭐</text><text x="250" y="70">⭐</text></g></svg>`
+};
+const TILE = {
+  summary: ['ملخص الدرس', '#e6effc', '#2563eb', '<path d="M3 5a2 2 0 0 1 2-2h5v17H5a2 2 0 0 0-2 2z"/><path d="M21 5a2 2 0 0 0-2-2h-5v17h5a2 2 0 0 1 2 2z"/>'],
+  video:   ['فيديو الشرح', '#e3f4ea', '#16a34a', '<rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3z"/>'],
+  sim:     ['تجربة ومحاكاة', '#fbefe3', '#ea7a1a', '<path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/><path d="M7 15h10"/>'],
+  ex:      ['أمثلة محلولة', '#f1e8fb', '#9333ea', '<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h2M12 11h2M16 11h0M8 15h2M12 15h2M16 15h0"/>'],
+  train:   ['تدريبات وأسئلة', '#fbe6ef', '#db2777', '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3h6v3H9zM9 11h6M9 15h4"/>'],
+  quiz:    ['اختبر معلوماتك', '#e1f3f6', '#0891b2', '<path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4"/>']
+};
+const tileIcon = (k, size = 26) => `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="${TILE[k][2]}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${TILE[k][3]}</svg>`;
+const ORD = ['الأول', 'الثاني', 'الثالث', 'الرابع', 'الخامس', 'السادس'];
+const badge = i => `<span class="pbadge">القسم ${ORD[i]}</span>`;
+
+/* ---------- بطاقات الأسئلة (مشتركة بين البنك وتدريبات الدرس) ---------- */
+const QREG = new Map();
+function bankAll() {
+  const out = [];
+  COURSES.forEach(c => courseLessons(c).forEach(l => (l.quiz || []).forEach((q, k) => out.push({ id: l.id + 'q' + k, type: 'mcq', text: q[0], opts: q[1], ans: q[1][0], lv: Math.min(3, k + 1), c: c.id, src: l.t }))));
+  BANK_TF.forEach((q, k) => out.push({ id: 'tf' + k, type: 'tf', text: q[0], ans: q[1], c: q[2], lv: q[3] }));
+  BANK_EXPLAIN.forEach((q, k) => out.push({ id: 'ex' + k, type: 'explain', text: q[0], model: q[1], c: q[2], lv: q[3] }));
+  BANK_CALC.forEach((q, k) => out.push({ id: 'ca' + k, type: 'calc', text: q[0], ans: q[1], unit: q[2], c: q[3], lv: q[4] }));
+  BANK_CRIT.forEach((q, k) => out.push({ id: 'cr' + k, type: 'crit', text: q[0], model: q[1], c: q[2], lv: q[3] }));
+  TAHSILI.phy.domains.forEach((d, k) => { if (d) out.push({ id: 'th' + k, type: 'tah', text: d[1], opts: d[2], ans: d[2][0], lv: 1, c: '', src: d[0] }); });
+  cms('question').forEach(x => { const d = x.data; out.push({ id: x.id, cmsId: x.id, type: d.type, text: d.text, opts: d.opts, ans: d.type === 'tf' ? d.ans === true || d.ans === 'true' : d.type === 'calc' ? Number(d.ans) : d.opts ? d.opts[0] : d.ans, unit: d.unit, model: d.model, lv: +d.lv || 1, c: d.c || '' }); });
+  out.forEach(q => QREG.set(q.id, q));
+  return out;
+}
+function qCardHTML(q, n) {
+  QREG.set(q.id, q);
+  const head = `<div class="qmeta"><span class="qt qt-${q.type}">${QTYPES[q.type]}</span><span class="ql ql${q.lv}">${LEVELS_AR[q.lv] || ''}</span>${q.c ? `<span class="qc">${(COURSES.find(c => c.id === q.c) || {}).name || ''}</span>` : ''}${isTeacher() && q.cmsId ? `<button class="qdel" data-delq="${esc(q.cmsId)}">حذف</button>` : ''}</div>`;
+  let body = '';
+  if (q.type === 'mcq' || q.type === 'tah') body = `<div class="popts">${shuffle(q.opts).map(o => `<button class="popt" data-o="${esc(o)}">${esc(o)}</button>`).join('')}</div>`;
+  else if (q.type === 'tf') body = `<div class="popts tf"><button class="popt" data-o="true">✓ صح</button><button class="popt" data-o="false">✗ خطأ</button></div>`;
+  else if (q.type === 'calc') body = `<div class="pcalc"><input class="pin" type="number" step="any" inputmode="decimal" placeholder="الناتج" aria-label="الناتج"><span class="unit" dir="ltr">${esc(q.unit || '')}</span><button class="pbtn sm" data-check>تحقّقي</button></div>`;
+  else body = `<textarea class="pin" rows="3" placeholder="اكتبي إجابتكِ…" aria-label="إجابتكِ"></textarea><button class="pbtn sm" data-sendans style="margin-top:8px">إرسال للمعلمة ✓</button>`;
+  return `<div class="qcard2" data-q="${esc(q.id)}">${head}<p class="qtext">${n ? `<b>${AR(n)})</b> ` : ''}${esc(q.text)}</p>${body}<div class="qfb"></div></div>`;
+}
+function bindQCards(root, section) {
+  $$('.qcard2', root).forEach(card => {
+    const q = QREG.get(card.dataset.q); if (!q || card.dataset.bound) return; card.dataset.bound = 1;
+    const fb = $('.qfb', card);
+    const finish = (ok, given) => {
+      card.dataset.done = 1; sfx(ok ? 'good' : 'bad');
+      fb.innerHTML = ok ? '<span class="okc">إجابة صحيحة 🌟 +٥</span>' : `<span class="badc">الإجابة الصحيحة: ${esc(q.type === 'tf' ? (q.ans ? 'صح' : 'خطأ') : q.type === 'calc' ? q.ans + ' ' + (q.unit || '') : q.ans)}</span>`;
+      logAct(section, q.text.slice(0, 80), ok ? 5 : 0, (ok ? 'صحيحة' : 'خاطئة') + ' — إجابتها: ' + given + ' · ' + QTYPES[q.type], 'q:' + q.id);
+    };
+    $$('.popt', card).forEach(b => b.onclick = () => {
+      if (card.dataset.done) return;
+      const v = b.dataset.o, ok = q.type === 'tf' ? (v === 'true') === q.ans : v === q.ans;
+      $$('.popt', card).forEach(x => { x.disabled = true; const xv = x.dataset.o; if (q.type === 'tf' ? (xv === 'true') === q.ans : xv === q.ans) x.classList.add('right'); });
+      if (!ok) b.classList.add('wrong'); finish(ok, q.type === 'tf' ? (v === 'true' ? 'صح' : 'خطأ') : v);
+    });
+    const ck = $('[data-check]', card);
+    if (ck) ck.onclick = () => {
+      if (card.dataset.done) return; const inp = $('.pin', card), v = parseFloat(String(inp.value).replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)));
+      if (isNaN(v)) { toast('اكتبي الناتج رقمًا'); return; }
+      const ok = Math.abs(v - q.ans) <= Math.max(0.02 * Math.abs(q.ans), 0.01); inp.disabled = true; ck.disabled = true; inp.classList.add(ok ? 'right' : 'wrong'); finish(ok, v + ' ' + (q.unit || ''));
+    };
+    const sa = $('[data-sendans]', card);
+    if (sa) sa.onclick = () => {
+      if (card.dataset.done) return; const t = $('.pin', card).value.trim(); if (t.length < 5) { toast('اكتبي إجابة أطول قليلًا'); return; }
+      card.dataset.done = 1; $('.pin', card).disabled = true; sa.disabled = true; sfx('good');
+      fb.innerHTML = `<span class="okc">وصلت إجابتكِ للمعلمة ✓ +٣</span><div class="model"><b>الإجابة النموذجية:</b> ${esc(q.model || '—')}</div>`;
+      logAct(section, q.text.slice(0, 80), 3, 'إجابتها: ' + t + ' · ' + QTYPES[q.type], 'q:' + q.id);
+    };
+    const del = $('[data-delq]', card); if (del) del.onclick = () => { deleteContent(del.dataset.delq); card.remove(); toast('حُذف السؤال'); };
+  });
+}
+
+/* =========================================================
+   الصفحة الرئيسية لعالم الفيزياء (التصور المقترح لأقسام الموقع)
+   ========================================================= */
+RENDER.physics = el => {
+  const p = phyProg(), pts = myPoints(p), lv = levelOf(pts);
+  const sec = (i, title, items, art, href, extra) => `<section class="psec">${badge(i)}<h2>${title}</h2>${extra || ''}<div class="psec-row"><ul>${items.map(t => `<li>${t}</li>`).join('')}</ul><div class="psec-art">${ART[art]}</div></div><a class="pbtn" href="#${href}">ادخلي القسم ←</a></section>`;
+  el.innerHTML = `<div class="pw">
+    <div class="pw-head"><h1><span class="atom">⚛️</span> عالم الفيزياء</h1><p>نفهم الفيزياء، نشاهدها، ونكتشف أسرارها.</p>
+      <p class="muted2">مرتّب حسب الصفوف الدراسية، وكل درس يحتوي على مواده التعليمية كاملة.</p>
+      ${session.role === 'student' ? `<div class="pw-me"><span>${lv[0]} ${lv[1]}</span><b class="num">${AR(pts)}</b><small>نقطة</small></div>` : ''}</div>
+    <h3 class="pw-strip">التصور المقترح لأقسام الموقع</h3>
+    <section class="psec">${badge(0)}<h2>المقررات والدروس</h2>
+      <div class="ccards">${COURSES.map(c => { const s = courseStats(c); return `<a class="ccard" href="#courses" data-course="${c.id}"><div class="ccart">${ART[c.art]}</div><h3>${c.name}</h3><p>${c.sub}</p><div class="pbar"><i style="width:${s.pct}%"></i></div><small>${AR(s.d)}/${AR(s.n)} درس</small></a>`; }).join('')}</div></section>
+    ${sec(1, 'مكتبة الفيديوهات التعليمية', ['فيديو شرح لكل درس.', 'مقاطع قصيرة لتوضيح الظواهر الفيزيائية.', 'تجارب علمية مصوّرة.', 'فيديوهات من الحياة اليومية.', 'مقاطع إثرائية عن العلماء والاكتشافات.'], 'video', 'vlib')}
+    ${sec(2, 'بنك الأسئلة والاختبارات', ['أسئلة اختيار من متعدد.', 'صح وخطأ.', 'أسئلة تفسير وتعليل.', 'مسائل حسابية.', 'أسئلة تفكير ناقد.', 'أسئلة تحصيلية.', 'اختبارات قصيرة وتصحيح آلي.'], 'bank', 'bank', '<p class="psec-note">مع تصنيف الأسئلة إلى ثلاثة مستويات: سهل، متوسط، متقدم.</p>')}
+    ${sec(3, 'مختبر الفيزياء الافتراضي', ['محاكاة الحركة والتسارع.', 'محاكاة قوانين نيوتن.', 'الجاذبية والمدارات.', 'الموجات والصوت.', 'الضوء والانكسار.', 'الدوائر الكهربائية والحث.'], 'lab', 'lab')}
+    ${sec(4, 'المكتبة التعليمية للمعلمة', Object.values(TLIB_CATS).map(t => t + '.'), 'tlib', 'tlib')}
+    ${sec(5, 'الإنجاز والتنافس', ['مسابقات فيزيائية.', 'تحديات بين المجموعات.', 'لوحة المتصدرات.', 'نقاط الطالبات.', 'شهادات إلكترونية.'], 'achieve', 'achieve')}
+    <div class="pgoal">هدفنا: تفهم الطالبة الدرس ثم تطبّق ثم تختبر نفسها.</div>
+  </div>`;
+  $$('[data-course]', el).forEach(a => a.onclick = () => { phyState.course = a.dataset.course; savePhyState(); });
+};
+
+/* =========================================================
+   القسم الأول: المقررات والدروس
+   ========================================================= */
+RENDER.courses = el => {
+  const cur = COURSES.find(c => c.id === phyState.course) || COURSES[0];
+  const ls = courseLessons(cur);
+  el.innerHTML = `<div class="pw">
+    <div class="pw-top">${badge(0)}<a href="#physics" class="pback">→ عالم الفيزياء</a></div>
+    <h1 class="ptitle">المقررات والدروس</h1>
+    <div class="ccards">${COURSES.map(c => { const s = courseStats(c); return `<button class="ccard ${c.id === cur.id ? 'on' : ''}" data-c="${c.id}"><div class="ccart">${ART[c.art]}</div><h3>${c.name}</h3><p>${c.sub}</p><div class="pbar"><i style="width:${s.pct}%"></i></div><small>${AR(s.d)}/${AR(s.n)} درس مكتمل</small></button>`; }).join('')}</div>
+    <div class="lhead"><h2>${cur.name} — ${cur.sub}</h2>${isTeacher() ? `<button class="pbtn sm" data-addlesson>+ إضافة درس</button>` : ''}</div>
+    <div id="lessonEditor"></div>
+    <div class="llist">${ls.map((l, i) => { const st = phyProg().phy.lessons[l.id] || {}; const nd = ['summary', 'video', 'sim', 'ex', 'train', 'quiz'].filter(k => st[k] != null).length;
+      return `<a class="lrow" href="#lesson" data-l="${esc(l.id)}"><span class="lnum">${AR(i + 1)}</span><span class="lt"><b>${esc(l.t)}</b><small>${l.sim ? '🧪 ' + esc(SIMS[l.sim] || 'محاكاة') + ' · ' : ''}${AR((l.quiz || []).length)} أسئلة</small></span><span class="lprog">${lessonDone(l.id) ? '<span class="okc">✓ مكتمل</span>' : `${AR(nd)}/٦`}</span><span class="chev2">‹</span></a>`; }).join('') || '<div class="pempty">لا توجد دروس بعد.</div>'}</div>
+  </div>`;
+  $$('[data-c]', el).forEach(b => b.onclick = () => { phyState.course = b.dataset.c; savePhyState(); RENDER.courses(el); });
+  $$('[data-l]', el).forEach(a => a.onclick = () => { phyState.lesson = a.dataset.l; phyState.tile = 'summary'; savePhyState(); });
+  const ad = $('[data-addlesson]', el); if (ad) ad.onclick = () => lessonEditor($('#lessonEditor', el), null, cur, () => RENDER.courses(el));
+};
+
+/* محرّر الدرس (للمعلمة) */
+function lessonEditor(box, l, course, done) {
+  const v = l || { t: '', sum: '', laws: [], sim: '', ex: ['', ''], quiz: [], video: '' };
+  const quizTxt = (v.quiz || []).map(q => [q[0]].concat(q[1]).join(' | ')).join('\n');
+  box.innerHTML = `<form class="peditor" id="lf">
+    <h3>${l ? '✎ تعديل الدرس' : '+ درس جديد في ' + course.name}</h3>
+    <label>عنوان الدرس<input class="pin" name="t" value="${esc(v.t)}" required></label>
+    <label>ملخص الدرس<textarea class="pin" name="sum" rows="3">${esc(v.sum)}</textarea></label>
+    <label>القوانين (قانون في كل سطر)<textarea class="pin" name="laws" rows="3" dir="ltr">${esc((v.laws || []).join('\n'))}</textarea></label>
+    <div class="prow"><label>فيديو الشرح (رابط يوتيوب أو Drive)<input class="pin" name="video" dir="ltr" value="${esc(v.video || '')}" placeholder="https://"></label><label>أو ارفعي ملف فيديو<input class="pin" type="file" name="vfile" accept="video/*"></label></div>
+    <label>المحاكاة<select class="pin" name="sim"><option value="">— بدون —</option>${Object.entries(SIMS).map(([k, n]) => `<option value="${k}" ${k === v.sim ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
+    <div class="prow"><label>مثال محلول — المسألة<textarea class="pin" name="exq" rows="2">${esc((v.ex || [])[0] || '')}</textarea></label><label>الحل خطوة بخطوة<textarea class="pin" name="exa" rows="2">${esc((v.ex || [])[1] || '')}</textarea></label></div>
+    <label>أسئلة «اختبر معلوماتك» — سؤال في كل سطر: السؤال | الإجابة الصحيحة | خطأ | خطأ | خطأ<textarea class="pin" name="quiz" rows="4">${esc(quizTxt)}</textarea></label>
+    <div class="pbtns"><button class="pbtn" type="submit">حفظ الدرس</button><button class="pbtn ghost" type="button" data-cancel>إلغاء</button>${l ? `<button class="pbtn danger" type="button" data-hide>${l.cmsId && !l.base && !COURSES.some(c => c.lessons.some(x => x.id === l.id)) ? 'حذف الدرس' : 'إخفاء الدرس'}</button>` : ''}</div>
+    <p class="pnote" id="lfMsg"></p></form>`;
+  const f = $('#lf', box);
+  $('[data-cancel]', f).onclick = () => { box.innerHTML = ''; };
+  const hide = $('[data-hide]', f);
+  if (hide) hide.onclick = () => { const builtin = COURSES.some(c => c.lessons.some(x => x.id === l.id)); if (builtin) saveContent(l.cmsId || uid(), 'lesson', Object.assign({}, cleanLesson(l), { base: l.id, hidden: true })); else deleteContent(l.cmsId); toast('تم'); done && done(); };
+  f.onsubmit = async e => {
+    e.preventDefault(); const fd = new FormData(f), msg = $('#lfMsg', f);
+    let video = String(fd.get('video') || '').trim(); const file = f.vfile.files[0];
+    if (file) { try { msg.textContent = 'جاري رفع الفيديو إلى Drive…'; video = await uploadToDrive(file); } catch (err) { msg.textContent = err.message; return; } }
+    const quiz = String(fd.get('quiz') || '').split('\n').map(s => s.split('|').map(x => x.trim()).filter(Boolean)).filter(a => a.length >= 3).map(a => [a[0], a.slice(1)]);
+    const data = { t: String(fd.get('t')).trim(), sum: String(fd.get('sum')).trim(), laws: String(fd.get('laws') || '').split('\n').map(s => s.trim()).filter(Boolean), video, sim: fd.get('sim'), ex: [String(fd.get('exq')).trim(), String(fd.get('exa')).trim()], quiz };
+    const builtin = l && COURSES.some(c => c.lessons.some(x => x.id === l.id));
+    if (builtin) { data.base = l.id; data.vids = l.vids || []; saveContent(l.cmsId || uid(), 'lesson', data); }
+    else if (l) { data.course = l.course || course.id; saveContent(l.cmsId, 'lesson', data); }
+    else { data.course = course.id; saveContent(uid(), 'lesson', data); }
+    toast('حُفظ الدرس ✓ ويظهر للطالبات'); done && done();
+  };
+}
+const cleanLesson = l => ({ t: l.t, sum: l.sum, laws: l.laws, sim: l.sim, ex: l.ex, quiz: l.quiz, video: l.video || '', vids: l.vids || [] });
+
+/* صفحة الدرس: ٦ بطاقات */
+RENDER.lesson = el => {
+  const f = lessonById(phyState.lesson) || lessonById(COURSES[0].lessons[0].id);
+  const { c, l, i, ls } = f, tile = phyState.tile || 'summary';
+  const st = phyProg().phy.lessons[l.id] || {};
+  el.innerHTML = `<div class="pw">
+    <div class="pw-top">${badge(0)}<a href="#courses" class="pback" data-back>→ ${c.name}</a></div>
+    <div class="lcard">
+      <div class="lbanner"><h1>${esc(l.t)}</h1><p>${c.name} • الدرس ${AR(i + 1)} من ${AR(ls.length)}</p>${isTeacher() ? '<button class="pbtn sm light" data-edit>✎ تعديل الدرس</button>' : ''}</div>
+      <div id="lessonEditor"></div>
+      <div class="tiles">${Object.keys(TILE).map(k => `<button class="tile ${k === tile ? 'on' : ''}" data-tile="${k}" style="background:${TILE[k][1]}" aria-pressed="${k === tile}">${tileIcon(k)}<b>${TILE[k][0]}</b>${st[k] != null ? '<span class="tdone">✓</span>' : ''}</button>`).join('')}</div>
+      <div class="pgoal">هدفنا: تفهم الطالبة الدرس ثم تطبّق ثم تختبر نفسها.</div>
+    </div>
+    <div class="tpanel" id="tpanel"></div>
+    <div class="lnav">${i > 0 ? `<button class="pbtn ghost" data-go="${esc(ls[i - 1].id)}">→ الدرس السابق</button>` : '<span></span>'}${i < ls.length - 1 ? `<button class="pbtn ghost" data-go="${esc(ls[i + 1].id)}">الدرس التالي ←</button>` : ''}</div>
+  </div>`;
+  $('[data-back]', el).onclick = () => { phyState.course = c.id; savePhyState(); };
+  $$('[data-tile]', el).forEach(b => b.onclick = () => { phyState.tile = b.dataset.tile; savePhyState(); $$('[data-tile]', el).forEach(x => { x.classList.toggle('on', x === b); x.setAttribute('aria-pressed', x === b); }); renderTile($('#tpanel', el), c, l, b.dataset.tile, el); });
+  $$('[data-go]', el).forEach(b => b.onclick = () => { phyState.lesson = b.dataset.go; phyState.tile = 'summary'; savePhyState(); RENDER.lesson(el); $('#main').scrollTop = 0; });
+  const ed = $('[data-edit]', el); if (ed) ed.onclick = () => lessonEditor($('#lessonEditor', el), l, c, () => RENDER.lesson(el));
+  renderTile($('#tpanel', el), c, l, tile, el);
+};
+function markTile(l, k, val) { const p = phyProg(); const s = p.phy.lessons[l.id] = p.phy.lessons[l.id] || {}; if (s[k] == null || k === 'quiz') s[k] = val; setProg(p); const b = $(`[data-tile="${k}"]`); if (b && !$('.tdone', b)) b.insertAdjacentHTML('beforeend', '<span class="tdone">✓</span>'); }
+function renderTile(box, c, l, k, el) {
+  const ref = c.name + ' · ' + l.t;
+  if (k === 'summary') {
+    box.innerHTML = `<h2>${tileIcon('summary', 22)} ملخص الدرس</h2><p class="psum">${esc(l.sum || '—')}</p>
+      ${(l.laws || []).length ? `<h3>القوانين والمفاهيم الأساسية</h3><div class="laws">${l.laws.map(x => `<span dir="ltr">${esc(x)}</span>`).join('')}</div>` : ''}
+      <button class="pbtn" data-ok>✓ فهمت الدرس</button>`;
+    $('[data-ok]', box).onclick = () => { markTile(l, 'summary', 1); logAct('المقررات والدروس', ref + ' — ملخص الدرس', 2, 'قرأت الملخص', 'sum:' + l.id); toast('رائع! انتقلي لفيديو الشرح 🎬'); };
+  } else if (k === 'video') {
+    const local = (l.vids || []).map(id => PHY4.find(v => v.id === id)).filter(Boolean);
+    box.innerHTML = `<h2>${tileIcon('video', 22)} فيديو الشرح</h2>
+      ${l.video ? `<div class="pmedia">${mediaEmbed(l.video, l.t)}</div>` : ''}
+      ${local.map(v => v.kind === 'video' ? `<div class="pmedia"><video src="${v.src}" poster="${v.poster}" controls playsinline></video></div><p class="pcap">${esc(v.title)}</p>` : v.kind === 'image' ? `<img class="pimg" src="${v.src}" alt="${esc(v.title)}"><p class="pcap">${esc(v.title)}</p>` : '').join('')}
+      ${!l.video && !local.length ? '<p class="pnote">لم تُضف المعلمة فيديو لهذا الدرس بعد — شاهدي شرحًا مقترحًا من يوتيوب:</p>' : ''}
+      <a class="pbtn ghost" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=${encodeURIComponent('شرح ' + l.t + ' ' + c.name)}" data-yt>▶ شروحات «${esc(l.t)}» على يوتيوب</a>`;
+    markTile(l, 'video', 1); logAct('المقررات والدروس', ref + ' — فيديو الشرح', 3, 'فتحت فيديو الشرح', 'vid:' + l.id);
+  } else if (k === 'sim') {
+    box.innerHTML = `<h2>${tileIcon('sim', 22)} تجربة ومحاكاة</h2>
+      ${l.sim ? `<p class="pnote">جرّبي المحاكاة: غيّري القيم ولاحظي ماذا يحدث. <b>${esc(SIMS[l.sim] || '')}</b></p><div class="psim"><iframe src="${PHET(l.sim)}" title="${esc(SIMS[l.sim] || 'محاكاة')}" allowfullscreen loading="lazy"></iframe></div>
+      <a class="plink" href="${PHET(l.sim)}" target="_blank" rel="noopener">فتح المحاكاة بملء الشاشة ↗</a>` : '<p class="pnote">لا توجد محاكاة لهذا الدرس.</p>'}
+      <label class="plabel">ماذا لاحظتِ؟ اكتبي ملاحظتكِ ونتيجة تجربتكِ<textarea class="pin" rows="3" id="obs" placeholder="مثال: عندما زدت الزاوية…"></textarea></label>
+      <button class="pbtn" data-obs>إرسال الملاحظة للمعلمة (+١٠)</button>`;
+    $('[data-obs]', box).onclick = () => { const t = $('#obs', box).value.trim(); if (t.length < 8) { toast('اكتبي ملاحظة أوضح قليلًا'); return; } markTile(l, 'sim', 1); logAct('المختبر الافتراضي', ref + ' — ' + (SIMS[l.sim] || 'محاكاة'), 10, 'ملاحظتها: ' + t, 'sim:' + l.id); $('#obs', box).disabled = true; toast('وصلت ملاحظتكِ للمعلمة 🔬'); sfx('good'); };
+  } else if (k === 'ex') {
+    const ex = l.ex || ['', ''];
+    box.innerHTML = `<h2>${tileIcon('ex', 22)} أمثلة محلولة</h2>
+      ${ex[0] ? `<div class="pexample"><b>مثال:</b> ${esc(ex[0])}<div class="psol" hidden><b>الحل:</b> <span dir="auto">${esc(ex[1])}</span></div><button class="pbtn sm" data-sol>اعرضي الحل خطوة بخطوة</button></div>` : '<p class="pnote">لا توجد أمثلة بعد.</p>'}
+      <h3>جرّبي بنفسكِ</h3><div id="exq"></div>`;
+    const s = $('[data-sol]', box); if (s) s.onclick = () => { $('.psol', box).hidden = false; s.remove(); markTile(l, 'ex', 1); logAct('المقررات والدروس', ref + ' — مثال محلول', 2, 'راجعت المثال المحلول', 'ex:' + l.id); };
+    const calc = bankAll().filter(q => q.type === 'calc' && q.c === c.id).slice(0, 2);
+    $('#exq', box).innerHTML = calc.map((q, n) => qCardHTML(q, n + 1)).join('') || '<p class="pnote">—</p>'; bindQCards(box, 'أمثلة ' + ref);
+  } else if (k === 'train') {
+    const pool = bankAll().filter(q => q.c === c.id && ['tf', 'explain', 'calc', 'crit'].includes(q.type));
+    const picks = shuffle(pool).slice(0, 4);
+    box.innerHTML = `<h2>${tileIcon('train', 22)} تدريبات وأسئلة</h2><p class="pnote">أسئلة متنوعة من بنك الأسئلة على ${c.name}.</p>${picks.map((q, n) => qCardHTML(q, n + 1)).join('')}<a class="pbtn ghost" href="#bank">المزيد في بنك الأسئلة ←</a>`;
+    bindQCards(box, 'تدريبات ' + ref); markTile(l, 'train', 1);
+  } else if (k === 'quiz') {
+    const qs = (l.quiz || []).map(q => ({ q: q[0], right: q[1][0], opts: shuffle(q[1]) }));
+    const prev = (phyProg().phy.lessons[l.id] || {}).quiz;
+    box.innerHTML = `<h2>${tileIcon('quiz', 22)} اختبر معلوماتك</h2>${prev != null ? `<p class="pnote">آخر درجة: <b>${AR(prev)}٪</b> — يمكنكِ الإعادة.</p>` : ''}
+      ${qs.map((q, n) => `<div class="qcard2" data-mq="${n}"><p class="qtext"><b>${AR(n + 1)})</b> ${esc(q.q)}</p><div class="popts">${q.opts.map(o => `<button class="popt" data-o="${esc(o)}">${esc(o)}</button>`).join('')}</div></div>`).join('') || '<p class="pnote">لا توجد أسئلة بعد.</p>'}
+      ${qs.length ? '<button class="pbtn" data-submit>تسليم الاختبار ✓</button><div class="qfb" id="qres"></div>' : ''}`;
+    const picks = {};
+    $$('[data-mq]', box).forEach(card => $$('.popt', card).forEach(b => b.onclick = () => { if (box.dataset.done) return; picks[card.dataset.mq] = b.dataset.o; $$('.popt', card).forEach(x => x.classList.toggle('sel', x === b)); }));
+    const sb = $('[data-submit]', box);
+    if (sb) sb.onclick = () => {
+      if (Object.keys(picks).length < qs.length) { toast('أجيبي على كل الأسئلة'); return; }
+      box.dataset.done = 1; let sc = 0;
+      $$('[data-mq]', box).forEach(card => { const q = qs[card.dataset.mq]; const ok = picks[card.dataset.mq] === q.right; if (ok) sc++; $$('.popt', card).forEach(x => { x.disabled = true; if (x.dataset.o === q.right) x.classList.add('right'); else if (x.dataset.o === picks[card.dataset.mq]) x.classList.add('wrong'); }); });
+      const pct = Math.round(sc / qs.length * 100); markTile(l, 'quiz', pct);
+      $('#qres', box).innerHTML = `<div class="qresult"><b>${AR(sc)}/${AR(qs.length)}</b> — ${pct >= 80 ? 'ممتازة! 🌟' : pct >= 50 ? 'جيد 👏 راجعي الملخص' : 'راجعي الملخص والفيديو ثم أعيدي 💪'}</div>`;
+      sfx(pct >= 80 ? 'win' : pct >= 50 ? 'good' : 'bad'); if (pct >= 80) confetti(60);
+      logAct('اختبر معلوماتك', ref, sc * 5, `الدرجة ${sc}/${qs.length} (${pct}%)`, null, true);
+      const rec = { id: uid(), name: session.name, role: session.role, grade: session.grade || '', model: 'درس', title: 'اختبر معلوماتك: ' + ref, score: sc, total: qs.length, pct, date: today(), ts: Date.now() };
+      pushItem('results', rec); send('result', rec);
+      const cs = courseStats(c); if (cs.d === cs.n) toast(`أكملتِ ${c.name}! شهادتكِ جاهزة 🏅`);
+    };
+  }
+}
+
+/* =========================================================
+   القسم الثاني: مكتبة الفيديوهات
+   ========================================================= */
+RENDER.vlib = el => {
+  const cat = phyState.vcat || 'lessons';
+  const teacherVids = cms('video').map(x => Object.assign({ id: x.id, cmsId: x.id }, x.data));
+  const lessonVids = []; COURSES.forEach(c => courseLessons(c).forEach(l => lessonVids.push({ id: 'lv' + l.id, cat: 'lessons', title: `${c.name}: ${l.t}`, url: l.video || '', q: !l.video ? 'شرح ' + l.t + ' ' + c.name : '' })));
+  const all = BUILTIN_VIDS.concat(teacherVids, lessonVids).filter(v => v.cat === cat);
+  const seen = phyProg().phy.once;
+  el.innerHTML = `<div class="pw">
+    <div class="pw-top">${badge(1)}<a href="#physics" class="pback">→ عالم الفيزياء</a></div>
+    <h1 class="ptitle">مكتبة الفيديوهات التعليمية</h1>
+    <div class="psec-art wide">${ART.video}</div>
+    <div class="ptabs">${Object.entries(VCATS).map(([k, n]) => `<button data-vc="${k}" aria-pressed="${k === cat}">${n}</button>`).join('')}</div>
+    ${isTeacher() ? `<details class="padd"><summary>+ إضافة فيديو للمكتبة</summary><form id="vf" class="peditor"><div class="prow"><label>العنوان<input class="pin" name="title" required></label><label>القسم<select class="pin" name="cat">${Object.entries(VCATS).map(([k, n]) => `<option value="${k}" ${k === cat ? 'selected' : ''}>${n}</option>`).join('')}</select></label></div><div class="prow"><label>رابط (يوتيوب / Drive)<input class="pin" name="url" dir="ltr" placeholder="https://"></label><label>أو ارفعي ملف فيديو<input class="pin" type="file" name="file" accept="video/*"></label></div><button class="pbtn">إضافة</button><p class="pnote" id="vfMsg"></p></form></details>` : ''}
+    <div class="vgrid">${all.map(v => { const loc = v.ref && PHY4.find(x => x.id === v.ref); const yt = v.yt || ytId(v.url || '');
+      const th = loc ? `<img src="${loc.poster}" alt="">` : yt ? `<img src="https://i.ytimg.com/vi/${yt}/hqdefault.jpg" alt="" onerror="this.remove()">` : '';
+      return `<article class="vcard2" data-v="${esc(v.id)}"><div class="vth">${th}<button class="vplay" aria-label="تشغيل ${esc(v.title)}">▶</button></div><div class="vb"><b>${esc(v.title)}</b><small>${seen['vl:' + v.id] ? '<span class="okc">✓ شاهدتِه</span>' : v.q ? 'بحث في يوتيوب' : 'مشاهدة داخل المنصة'}</small>${isTeacher() && v.cmsId ? `<button class="qdel" data-delv="${esc(v.cmsId)}">حذف</button>` : ''}</div></article>`; }).join('') || '<div class="pempty">لا توجد فيديوهات في هذا القسم بعد.</div>'}</div>
+  </div>`;
+  $$('[data-vc]', el).forEach(b => b.onclick = () => { phyState.vcat = b.dataset.vc; savePhyState(); RENDER.vlib(el); });
+  $$('[data-v]', el).forEach(card => $('.vplay', card).onclick = () => {
+    const v = all.find(x => x.id === card.dataset.v), loc = v.ref && PHY4.find(x => x.id === v.ref), th = $('.vth', card);
+    logAct('مكتبة الفيديوهات', VCATS[v.cat] + ' · ' + v.title, 2, '', 'vl:' + v.id);
+    if (loc && loc.kind === 'video') th.innerHTML = `<video src="${loc.src}" controls autoplay playsinline></video>`;
+    else if (v.yt || ytId(v.url || '') || /drive\.google|\.mp4/.test(v.url || '')) th.innerHTML = mediaEmbed(v.yt ? 'https://youtu.be/' + v.yt : v.url, v.title);
+    else { const a = document.createElement('a'); a.href = v.url || 'https://www.youtube.com/results?search_query=' + encodeURIComponent(v.q || v.title); a.target = '_blank'; a.rel = 'noopener'; a.click(); }
+  });
+  $$('[data-delv]', el).forEach(b => b.onclick = () => { deleteContent(b.dataset.delv); RENDER.vlib(el); });
+  const vf = $('#vf', el);
+  if (vf) vf.onsubmit = async e => { e.preventDefault(); const fd = new FormData(vf); let url = String(fd.get('url') || '').trim(); const file = vf.file.files[0];
+    if (file) { try { $('#vfMsg', el).textContent = 'جاري الرفع إلى Drive…'; url = await uploadToDrive(file); } catch (err) { $('#vfMsg', el).textContent = err.message; return; } }
+    if (!url) { toast('أضيفي رابطًا أو ملفًا'); return; }
+    saveContent(uid(), 'video', { title: fd.get('title'), cat: fd.get('cat'), url }); phyState.vcat = fd.get('cat'); savePhyState(); toast('أُضيف الفيديو ✓'); RENDER.vlib(el); };
+};
+
+/* =========================================================
+   القسم الثالث: بنك الأسئلة والاختبارات
+   ========================================================= */
+RENDER.bank = el => {
+  const f = phyState.bank || (phyState.bank = { type: 'all', lv: 0, c: '', n: 10 });
+  const all = bankAll();
+  const list = all.filter(q => (f.type === 'all' || q.type === f.type) && (!f.lv || q.lv === f.lv) && (!f.c || q.c === f.c));
+  el.innerHTML = `<div class="pw">
+    <div class="pw-top">${badge(2)}<a href="#physics" class="pback">→ عالم الفيزياء</a></div>
+    <h1 class="ptitle">بنك الأسئلة والاختبارات</h1>
+    <div class="ptabs">${[['all', 'الكل']].concat(Object.entries(QTYPES)).map(([k, n]) => `<button data-ty="${k}" aria-pressed="${k === f.type}">${n}</button>`).join('')}</div>
+    <div class="pfilters"><div class="ptabs sm">${[[0, 'كل المستويات'], [1, 'سهل'], [2, 'متوسط'], [3, 'متقدم']].map(([k, n]) => `<button data-lv="${k}" aria-pressed="${k === f.lv}">${n}</button>`).join('')}</div>
+      <select class="pin" id="bc" aria-label="المقرر"><option value="">كل المقررات</option>${COURSES.map(c => `<option value="${c.id}" ${c.id === f.c ? 'selected' : ''}>${c.name}</option>`).join('')}</select></div>
+    <div class="pbar-row"><span>${AR(list.length)} سؤال</span><button class="pbtn" data-quick>⚡ اختبار قصير بتصحيح آلي (١٠ أسئلة)</button></div>
+    ${isTeacher() ? `<details class="padd"><summary>+ إضافة سؤال للبنك</summary><form id="qf" class="peditor">
+      <div class="prow"><label>نوع السؤال<select class="pin" name="type">${Object.entries(QTYPES).filter(([k]) => k !== 'tah').map(([k, n]) => `<option value="${k}">${n}</option>`).join('')}</select></label><label>المستوى<select class="pin" name="lv"><option value="1">سهل</option><option value="2">متوسط</option><option value="3">متقدم</option></select></label><label>المقرر<select class="pin" name="c">${COURSES.map(c => `<option value="${c.id}">${c.name}</option>`).join('')}</select></label></div>
+      <label>نص السؤال<textarea class="pin" name="text" rows="2" required></textarea></label>
+      <label>للاختيار من متعدد: الخيارات مفصولة بـ | والصحيحة أولًا · للصح والخطأ: صح أو خطأ · للمسائل: الناتج رقمًا · للمفتوحة: الإجابة النموذجية<input class="pin" name="ans" required></label>
+      <label>الوحدة (للمسائل الحسابية)<input class="pin" name="unit" dir="ltr" placeholder="m/s"></label>
+      <button class="pbtn">إضافة السؤال</button></form></details>` : ''}
+    <div id="qlist">${list.slice(0, f.n).map((q, n) => qCardHTML(q, n + 1)).join('') || '<div class="pempty">لا توجد أسئلة بهذا التصنيف.</div>'}</div>
+    ${list.length > f.n ? '<button class="pbtn ghost" data-more>عرض المزيد</button>' : ''}
+  </div>`;
+  bindQCards(el, 'بنك الأسئلة');
+  $$('[data-ty]', el).forEach(b => b.onclick = () => { f.type = b.dataset.ty; f.n = 10; savePhyState(); RENDER.bank(el); });
+  $$('[data-lv]', el).forEach(b => b.onclick = () => { f.lv = +b.dataset.lv; f.n = 10; savePhyState(); RENDER.bank(el); });
+  $('#bc', el).onchange = e => { f.c = e.target.value; f.n = 10; savePhyState(); RENDER.bank(el); };
+  const more = $('[data-more]', el); if (more) more.onclick = () => { f.n += 10; savePhyState(); RENDER.bank(el); };
+  $('[data-quick]', el).onclick = () => {
+    const auto = shuffle(list.filter(q => ['mcq', 'tah', 'tf'].includes(q.type))).slice(0, 10);
+    if (auto.length < 3) { toast('اختاري تصنيفًا فيه أسئلة اختيار أو صح وخطأ'); return; }
+    quizState = { m: -1, custom: { title: 'بنك الأسئلة' + (f.c ? ' — ' + COURSES.find(c => c.id === f.c).name : ''), icon: '⚛️', label: 'اختبار قصير', back: 'bank', points: 5 }, i: 0, score: 0, answered: false,
+      qs: auto.map(q => q.type === 'tf' ? { q: q.text, right: q.ans ? 'صح' : 'خطأ', opts: ['صح', 'خطأ'] } : { q: q.text, right: q.ans, opts: shuffle(q.opts) }) };
+    location.hash = 'quizzes';
+  };
+  const qf = $('#qf', el);
+  if (qf) qf.onsubmit = e => { e.preventDefault(); const fd = new FormData(qf), type = fd.get('type'), ans = String(fd.get('ans')).trim();
+    const d = { type, lv: +fd.get('lv'), c: fd.get('c'), text: String(fd.get('text')).trim(), unit: String(fd.get('unit') || '').trim() };
+    if (type === 'mcq') { const o = ans.split('|').map(s => s.trim()).filter(Boolean); if (o.length < 2) { toast('اكتبي خيارين على الأقل مفصولين بـ |'); return; } d.opts = o; d.ans = o[0]; }
+    else if (type === 'tf') d.ans = /^(صح|صحيح|true|✓)/.test(ans); else if (type === 'calc') { d.ans = parseFloat(ans); if (isNaN(d.ans)) { toast('الناتج يجب أن يكون رقمًا'); return; } } else d.model = ans;
+    saveContent(uid(), 'question', d); toast('أُضيف السؤال ✓'); RENDER.bank(el); };
+};
+
+/* =========================================================
+   القسم الرابع: المختبر الافتراضي
+   ========================================================= */
+RENDER.lab = el => {
+  const sims = []; COURSES.forEach(c => courseLessons(c).forEach(l => { if (l.sim && !sims.some(s => s.sim === l.sim)) sims.push({ sim: l.sim, c, l }); }));
+  if (!sims.some(s => s.sim === 'pendulum-lab')) sims.push({ sim: 'pendulum-lab', c: COURSES[2], l: courseLessons(COURSES[2])[1] });
+  const open = phyState.sim, cur = sims.find(s => s.sim === open);
+  el.innerHTML = `<div class="pw">
+    <div class="pw-top">${badge(3)}<a href="#physics" class="pback">→ عالم الفيزياء</a></div>
+    <h1 class="ptitle">مختبر الفيزياء الافتراضي</h1>
+    <p class="pnote">محاكاة تفاعلية من PhET (جامعة كولورادو) باللغة العربية. افتحي التجربة، غيّري القيم، ثم أرسلي ملاحظتكِ للمعلمة.</p>
+    ${cur ? `<div class="labbox"><div class="lbhead"><h2>🧪 ${esc(SIMS[cur.sim])}</h2><span>${cur.c.name} · ${esc(cur.l.t)}</span><button class="pbtn sm ghost" data-close>إغلاق ✕</button></div>
+      <div class="psim"><iframe src="${PHET(cur.sim)}" title="${esc(SIMS[cur.sim])}" allowfullscreen></iframe></div><a class="plink" href="${PHET(cur.sim)}" target="_blank" rel="noopener">فتح بملء الشاشة ↗</a>
+      <label class="plabel">ماذا لاحظتِ؟ (المتغيّر الذي غيّرتِه، وما الذي حدث)<textarea class="pin" rows="3" id="lobs"></textarea></label><button class="pbtn" data-lsend>إرسال الملاحظة (+١٠)</button></div>` : ''}
+    <div class="simgrid">${sims.map(s => `<button class="simcard ${phyProg().phy.once['lab:' + s.sim] ? 'done' : ''}" data-sim="${s.sim}"><span class="simico">🧪</span><b>${esc(SIMS[s.sim])}</b><small>${s.c.name} · ${esc(s.l.t)}</small>${phyProg().phy.once['lab:' + s.sim] ? '<span class="okc">✓ أُرسلت ملاحظتكِ</span>' : ''}</button>`).join('')}</div>
+    <p class="pnote">مزيد من التجارب: <a class="plink" href="https://phet.colorado.edu/ar_SA/simulations/filter?subjects=physics" target="_blank" rel="noopener">مكتبة PhET للفيزياء ↗</a></p>
+  </div>`;
+  $$('[data-sim]', el).forEach(b => b.onclick = () => { phyState.sim = b.dataset.sim; savePhyState(); RENDER.lab(el); $('#main').scrollTop = 0; logAct('المختبر الافتراضي', SIMS[b.dataset.sim], 0, 'فتحت التجربة', 'labopen:' + b.dataset.sim); });
+  const cl = $('[data-close]', el); if (cl) cl.onclick = () => { phyState.sim = ''; savePhyState(); RENDER.lab(el); };
+  const ls = $('[data-lsend]', el); if (ls) ls.onclick = () => { const t = $('#lobs', el).value.trim(); if (t.length < 8) { toast('اكتبي ملاحظة أوضح'); return; } logAct('المختبر الافتراضي', SIMS[cur.sim], 10, 'ملاحظتها: ' + t, 'lab:' + cur.sim); sfx('good'); toast('وصلت ملاحظتكِ للمعلمة 🔬'); RENDER.lab(el); };
+};
+
+/* =========================================================
+   القسم الخامس: المكتبة التعليمية للمعلمة
+   ========================================================= */
+RENDER.tlib = el => {
+  const T = isTeacher(), cat = phyState.tcat || 'laws';
+  const cats = Object.entries(TLIB_CATS).filter(([k]) => T || !TLIB_PRIVATE[k]);
+  const builtin = {
+    laws: COURSES.map(c => ({ id: 'law' + c.id, title: `ملخص قوانين ${c.name}`, desc: c.sub, gen: () => lawsSheet(c) })),
+    maps: COURSES.map(c => ({ id: 'map' + c.id, title: `خريطة مفاهيم ${c.name}`, desc: c.sub, gen: () => conceptMap(c) })),
+    sol: COURSES.map(c => ({ id: 'sol' + c.id, title: `حلول مسائل ${c.name} خطوة بخطوة`, desc: 'الأمثلة المحلولة ومسائل البنك', gen: () => solutionsSheet(c) })),
+    ws: [{ id: 'wsT', title: 'أوراق عمل تفاعلية — خطة قادرون (فيزياء)', desc: 'ورقة لكل مجال مع تصحيح آلي', href: '#tahsili' }],
+    enrich: [{ id: 'enL', title: 'نشاط إثرائي: المختبر الافتراضي', desc: 'تجارب محاكاة مع ملاحظات', href: '#lab' }, { id: 'enB', title: 'نشاط علاجي: أسئلة المستوى السهل', desc: 'من بنك الأسئلة', href: '#bank' }]
+  };
+  const items = (builtin[cat] || []).concat(cms('resource').filter(x => x.data.cat === cat && (T || !x.data.private)).map(x => Object.assign({ id: x.id, cmsId: x.id }, x.data)));
+  el.innerHTML = `<div class="pw">
+    <div class="pw-top">${badge(4)}<a href="#physics" class="pback">→ عالم الفيزياء</a></div>
+    <h1 class="ptitle">المكتبة التعليمية للمعلمة</h1>
+    <div class="psec-art wide">${ART.tlib}</div>
+    <div class="ptabs">${cats.map(([k, n]) => `<button data-tc="${k}" aria-pressed="${k === cat}">${n}${TLIB_PRIVATE[k] ? ' 🔒' : ''}</button>`).join('')}</div>
+    ${TLIB_PRIVATE[cat] ? '<p class="pnote">🔒 هذا القسم يظهر للمعلمة فقط.</p>' : ''}
+    ${T ? `<details class="padd"><summary>+ رفع ملف أو إضافة رابط</summary><form id="rf" class="peditor"><div class="prow"><label>العنوان<input class="pin" name="title" required></label><label>القسم<select class="pin" name="cat">${Object.entries(TLIB_CATS).map(([k, n]) => `<option value="${k}" ${k === cat ? 'selected' : ''}>${n}</option>`).join('')}</select></label></div>
+      <label>وصف قصير<input class="pin" name="desc"></label><div class="prow"><label>ارفعي ملفًا (PDF، بوربوينت، Word…)<input class="pin" type="file" name="file"></label><label>أو الصقي رابطًا<input class="pin" name="url" dir="ltr" placeholder="https://"></label></div>
+      <label class="pcheck"><input type="checkbox" name="private" ${TLIB_PRIVATE[cat] ? 'checked' : ''}> للمعلمة فقط (لا يظهر للطالبات)</label><button class="pbtn">حفظ</button><p class="pnote" id="rfMsg"></p></form></details>` : ''}
+    <div class="rgrid">${items.map(r => `<div class="rcard"><span class="rico">${{ slides: '📊', plans: '🗂️', ws: '📄', maps: '🧠', laws: '📐', sol: '✍️', enrich: '🚀', eval: '📋' }[cat]}</span><div><b>${esc(r.title)}</b><small>${esc(r.desc || '')}${r.private ? ' · 🔒 خاص' : ''}</small></div>
+      ${r.gen ? `<button class="pbtn sm" data-gen="${esc(r.id)}">فتح / طباعة</button>` : r.href ? `<a class="pbtn sm" href="${esc(r.href)}">فتح</a>` : `<a class="pbtn sm" href="${esc(r.url)}" target="_blank" rel="noopener" data-res="${esc(r.id)}">فتح ↗</a>`}
+      ${T && r.cmsId ? `<button class="qdel" data-delr="${esc(r.cmsId)}">حذف</button>` : ''}</div>`).join('') || '<div class="pempty">لا توجد ملفات في هذا القسم بعد.' + (T ? ' أضيفي أول ملف من الأعلى.' : '') + '</div>'}</div>
+  </div>`;
+  $$('[data-tc]', el).forEach(b => b.onclick = () => { phyState.tcat = b.dataset.tc; savePhyState(); RENDER.tlib(el); });
+  $$('[data-gen]', el).forEach(b => b.onclick = () => { const r = items.find(x => x.id === b.dataset.gen); openPrintable(r.title, r.gen()); logAct('المكتبة التعليمية', r.title, 1, '', 'tl:' + r.id); });
+  $$('[data-res]', el).forEach(a => a.addEventListener('click', () => { const r = items.find(x => x.id === a.dataset.res); logAct('المكتبة التعليمية', r.title, 1, '', 'tl:' + r.id); }));
+  $$('[data-delr]', el).forEach(b => b.onclick = () => { deleteContent(b.dataset.delr); RENDER.tlib(el); });
+  const rf = $('#rf', el);
+  if (rf) rf.onsubmit = async e => { e.preventDefault(); const fd = new FormData(rf); let url = String(fd.get('url') || '').trim(); const file = rf.file.files[0];
+    if (file) { try { $('#rfMsg', el).textContent = 'جاري الرفع إلى Drive…'; url = await uploadToDrive(file); } catch (err) { $('#rfMsg', el).textContent = err.message; return; } }
+    if (!url) { toast('ارفعي ملفًا أو الصقي رابطًا'); return; }
+    saveContent(uid(), 'resource', { title: fd.get('title'), cat: fd.get('cat'), desc: fd.get('desc'), url, private: !!fd.get('private') }); phyState.tcat = fd.get('cat'); savePhyState(); toast('حُفظ ✓'); RENDER.tlib(el); };
+};
+function openPrintable(title, body) {
+  const html = `<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><title>${title}</title><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>body{font-family:"IBM Plex Sans Arabic",Tahoma,sans-serif;max-width:900px;margin:24px auto;padding:0 22px;color:#1f2433;line-height:1.9}h1{color:#25213f;border-bottom:3px solid #25213f;padding-bottom:8px}h2{color:#25213f;margin-top:26px}.law{display:inline-block;margin:4px;padding:6px 12px;border-radius:10px;background:#eef2ff;direction:ltr;font-family:Consolas,monospace}.box{border:1px solid #ddd;border-radius:12px;padding:12px 16px;margin:10px 0}.pb{display:block;margin:16px auto;padding:10px 26px;border:0;border-radius:999px;background:#25213f;color:#fff;font:inherit;cursor:pointer}.foot{margin-top:24px;font-size:12px;color:#666;text-align:center}@media print{.pb{display:none}}</style></head><body>
+  <h1>${title}</h1>${body}<button class="pb" onclick="print()">🖨 طباعة</button><div class="foot">أفق STEM | عالم الفيزياء · ${CONFIG.schoolName} · معلمة الفيزياء: ${CONFIG.teacherName}</div></body></html>`;
+  const w = window.open(URL.createObjectURL(new Blob([html], { type: 'text/html' })), '_blank'); if (!w) toast('اسمحي بالنوافذ المنبثقة');
+}
+const lawsSheet = c => courseLessons(c).map((l, i) => `<h2>${AR(i + 1)}. ${esc(l.t)}</h2>${(l.laws || []).map(x => `<span class="law">${esc(x)}</span>`).join('')}`).join('');
+const solutionsSheet = c => courseLessons(c).filter(l => l.ex && l.ex[0]).map(l => `<div class="box"><b>${esc(l.t)} — </b>${esc(l.ex[0])}<br><b>الحل:</b> <span dir="auto">${esc(l.ex[1])}</span></div>`).join('') + BANK_CALC.filter(q => q[3] === c.id).map(q => `<div class="box">${esc(q[0])}<br><b>الناتج:</b> <span dir="ltr">${q[1]} ${q[2]}</span></div>`).join('');
+function conceptMap(c) {
+  const ls = courseLessons(c), n = ls.length, W = 820, H = 560, cx = W / 2, cy = H / 2;
+  const nodes = ls.map((l, i) => { const a = -Math.PI / 2 + i / n * Math.PI * 2; return { x: cx + Math.cos(a) * 300, y: cy + Math.sin(a) * 200, t: l.t, k: (l.laws || [])[0] || '' }; });
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%" style="max-width:${W}px" font-family="IBM Plex Sans Arabic, Tahoma">${nodes.map(p => `<line x1="${cx}" y1="${cy}" x2="${p.x}" y2="${p.y}" stroke="#94a3b8" stroke-width="2"/>`).join('')}
+    <rect x="${cx - 120}" y="${cy - 40}" width="240" height="80" rx="20" fill="#25213f"/><text x="${cx}" y="${cy - 6}" text-anchor="middle" fill="#fff" font-size="22" font-weight="700">${esc(c.name)}</text><text x="${cx}" y="${cy + 22}" text-anchor="middle" fill="#c7c3e6" font-size="12">${esc(c.sub)}</text>
+    ${nodes.map((p, i) => `<rect x="${p.x - 95}" y="${p.y - 32}" width="190" height="64" rx="14" fill="${['#e6effc', '#e3f4ea', '#fbefe3', '#f1e8fb', '#fbe6ef', '#e1f3f6', '#fff4dc'][i % 7]}" stroke="#25213f" stroke-width="1.5"/><text x="${p.x}" y="${p.y - 4}" text-anchor="middle" font-size="15" font-weight="700" fill="#1f2433">${esc(p.t)}</text><text x="${p.x}" y="${p.y + 18}" text-anchor="middle" font-size="12" fill="#475569" direction="ltr">${esc(p.k)}</text>`).join('')}</svg>`;
+}
+
+/* =========================================================
+   القسم السادس: الإنجاز والتنافس
+   ========================================================= */
+function competitions() {
+  const wk = Math.floor(Date.now() / (7 * 864e5)), c = COURSES[wk % COURSES.length];
+  const base = [{ id: 'weekly' + wk, title: 'تحدّي الأسبوع: ' + c.name, c: c.id, n: 10, mins: 5, builtin: true }, { id: 'mix' + wk, title: 'المسابقة الشاملة', c: '', n: 10, mins: 6, builtin: true }];
+  return base.concat(cms('competition').map(x => Object.assign({ id: x.id, cmsId: x.id }, x.data)).filter(x => !x.ends || new Date(x.ends) >= new Date(today())));
+}
+let compRun = null;
+RENDER.achieve = el => {
+  if (compRun) return renderCompetition(el);
+  const p = phyProg(), pts = myPoints(p), lv = levelOf(pts), T = isTeacher();
+  const board = (remote && remote.leaderboard) || [{ name: session.name, grade: session.grade, group: p.phy.group, points: p.phyPts || 0 }];
+  const groups = (remote && remote.groups) || (p.phy.group ? [{ name: p.phy.group, points: p.phyPts || 0, members: 1 }] : []);
+  const gmax = Math.max(1, ...groups.map(g => g.points));
+  el.innerHTML = `<div class="pw">
+    <div class="pw-top">${badge(5)}<a href="#physics" class="pback">→ عالم الفيزياء</a></div>
+    <h1 class="ptitle">الإنجاز والتنافس</h1>
+    <div class="agrid">
+      <div class="acard me"><div class="psec-art">${ART.achieve}</div>${session.role === 'student' ? `<div class="mepts"><span class="lvl">${lv[0]} ${lv[1]}</span><b class="num">${AR(pts)}</b><small>نقطة — كل نشاط في عالم الفيزياء يزيد نقاطكِ</small></div>
+        <label class="plabel">مجموعتي في التحديات<select class="pin" id="grp"><option value="">اختاري مجموعتكِ</option>${GROUPS.map(g => `<option ${g === p.phy.group ? 'selected' : ''}>${g}</option>`).join('')}</select></label>` : '<p class="pnote">تظهر هنا نقاط الطالبات ومجموعاتهن.</p>'}</div>
+      <div class="acard"><h2>🏆 لوحة المتصدرات</h2>${board.length ? `<ol class="lboard">${board.slice(0, 10).map((b, i) => `<li class="${b.name === session.name ? 'mine' : ''}"><span class="rk">${['🥇', '🥈', '🥉'][i] || AR(i + 1)}</span><span class="nm">${esc(b.name)}<small>${esc(b.grade || '')}${b.group ? ' · ' + esc(b.group) : ''}</small></span><b class="num">${AR(b.points)}</b></li>`).join('')}</ol>` : '<div class="pempty">لا توجد نقاط بعد.</div>'}${!remote ? '<p class="pnote">تظهر نقاط كل الطالبات بعد الاتصال بـ Google.</p>' : ''}</div>
+      <div class="acard"><h2>⚔️ تحديات بين المجموعات</h2>${groups.length ? groups.map(g => `<div class="gbar"><span>${esc(g.name)} <small>(${AR(g.members)} طالبة)</small></span><div class="pbar"><i style="width:${g.points / gmax * 100}%"></i></div><b class="num">${AR(g.points)}</b></div>`).join('') : '<div class="pempty">اختاري مجموعتكِ لتبدأ المنافسة.</div>'}</div>
+      <div class="acard"><h2>🎯 مسابقات فيزيائية</h2>${competitions().map(cp => `<div class="comp"><div><b>${esc(cp.title)}</b><small>${AR(cp.n)} أسئلة · ${AR(cp.mins)} دقائق${cp.ends ? ' · حتى ' + esc(cp.ends) : ''}${p.phy.compete[cp.id] != null ? ` · <span class="okc">نتيجتكِ ${AR(p.phy.compete[cp.id])}/${AR(cp.n)}</span>` : ''}</small></div><button class="pbtn sm" data-comp="${esc(cp.id)}">${p.phy.compete[cp.id] != null ? 'إعادة' : 'ابدئي'}</button>${T && cp.cmsId ? `<button class="qdel" data-delc="${esc(cp.cmsId)}">حذف</button>` : ''}</div>`).join('')}
+        ${T ? `<details class="padd"><summary>+ مسابقة جديدة</summary><form id="cf" class="peditor"><label>اسم المسابقة<input class="pin" name="title" required></label><div class="prow"><label>المقرر<select class="pin" name="c"><option value="">كل المقررات</option>${COURSES.map(c => `<option value="${c.id}">${c.name}</option>`).join('')}</select></label><label>عدد الأسئلة<input class="pin" type="number" name="n" value="10" min="3" max="30"></label><label>المدة (دقائق)<input class="pin" type="number" name="mins" value="5" min="1" max="60"></label><label>تنتهي في<input class="pin" type="date" name="ends"></label></div><button class="pbtn">نشر المسابقة</button></form></details>` : ''}</div>
+      <div class="acard"><h2>🏅 شهادات إلكترونية</h2>${COURSES.map(c => { const s = courseStats(c); return `<div class="comp"><div><b>شهادة إتمام ${c.name}</b><small>${AR(s.d)}/${AR(s.n)} درس — أكملي «اختبر معلوماتك» في كل درس</small><div class="pbar"><i style="width:${s.pct}%"></i></div></div>${s.d === s.n && s.n ? '<a class="pbtn sm" href="#certificate">🏅 شهادتي</a>' : '<span class="lock">🔒</span>'}</div>`; }).join('')}
+        <a class="pbtn ghost" href="#certificate">صفحة الشهادات</a></div>
+    </div></div>`;
+  const g = $('#grp', el); if (g) g.onchange = () => { const p2 = phyProg(); p2.phy.group = g.value; setProg(p2); logAct('الإنجاز والتنافس', 'الانضمام لمجموعة ' + g.value, 0, '', 'grp:' + g.value); toast('انضممتِ لمجموعة ' + g.value + ' ⚔️'); RENDER.achieve(el); };
+  $$('[data-comp]', el).forEach(b => b.onclick = () => startCompetition(el, competitions().find(x => x.id === b.dataset.comp)));
+  $$('[data-delc]', el).forEach(b => b.onclick = () => { deleteContent(b.dataset.delc); RENDER.achieve(el); });
+  const cf = $('#cf', el); if (cf) cf.onsubmit = e => { e.preventDefault(); const fd = new FormData(cf); saveContent(uid(), 'competition', { title: fd.get('title'), c: fd.get('c'), n: +fd.get('n') || 10, mins: +fd.get('mins') || 5, ends: fd.get('ends') || '' }); toast('نُشرت المسابقة ✓'); RENDER.achieve(el); };
+};
+function startCompetition(el, cp) {
+  const pool = bankAll().filter(q => ['mcq', 'tf', 'tah'].includes(q.type) && (!cp.c || q.c === cp.c));
+  compRun = { cp, qs: shuffle(pool).slice(0, cp.n).map(q => q.type === 'tf' ? { q: q.text, right: q.ans ? 'صح' : 'خطأ', opts: ['صح', 'خطأ'] } : { q: q.text, right: q.ans, opts: shuffle(q.opts) }), picks: {}, end: Date.now() + cp.mins * 60000 };
+  RENDER.achieve(el); $('#main').scrollTop = 0;
+}
+function renderCompetition(el) {
+  const r = compRun;
+  el.innerHTML = `<div class="pw"><div class="comp-head"><h1>🎯 ${esc(r.cp.title)}</h1><span class="timer num" id="ctimer"></span></div>
+    ${r.qs.map((q, n) => `<div class="qcard2" data-cq="${n}"><p class="qtext"><b>${AR(n + 1)})</b> ${esc(q.q)}</p><div class="popts">${q.opts.map(o => `<button class="popt ${r.picks[n] === o ? 'sel' : ''}" data-o="${esc(o)}">${esc(o)}</button>`).join('')}</div></div>`).join('')}
+    <div class="pbtns"><button class="pbtn" data-fin>تسليم المسابقة ✓</button><button class="pbtn ghost" data-quit>انسحاب</button></div><div id="cres"></div></div>`;
+  $$('[data-cq]', el).forEach(card => $$('.popt', card).forEach(b => b.onclick = () => { if (r.done) return; r.picks[card.dataset.cq] = b.dataset.o; $$('.popt', card).forEach(x => x.classList.toggle('sel', x === b)); }));
+  const tick = () => { const s = Math.max(0, Math.round((r.end - Date.now()) / 1000)); const t = $('#ctimer'); if (!t || r.done) return clearInterval(r.iv); t.textContent = '⏱ ' + AR(Math.floor(s / 60)) + ':' + String(s % 60).padStart(2, '0').replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]); if (!s) finish(); };
+  const finish = () => {
+    if (r.done) return; r.done = true; clearInterval(r.iv); let sc = 0;
+    $$('[data-cq]', el).forEach(card => { const q = r.qs[card.dataset.cq]; if (r.picks[card.dataset.cq] === q.right) sc++; $$('.popt', card).forEach(x => { x.disabled = true; if (x.dataset.o === q.right) x.classList.add('right'); else if (x.dataset.o === r.picks[card.dataset.cq]) x.classList.add('wrong'); }); });
+    const p = phyProg(); const best = Math.max(sc, p.phy.compete[r.cp.id] || 0), gain = Math.max(0, sc - (p.phy.compete[r.cp.id] || 0)) * 10; p.phy.compete[r.cp.id] = best; setProg(p);
+    logAct('مسابقة فيزيائية', r.cp.title, gain, `النتيجة ${sc}/${r.qs.length}`);
+    $('#cres', el).innerHTML = `<div class="qresult big"><b class="num">${AR(sc)}/${AR(r.qs.length)}</b> ${sc >= r.qs.length * .8 ? '🏆 أداء بطولي!' : sc >= r.qs.length / 2 ? '👏 أحسنتِ' : '💪 حاولي مجددًا'} ${gain ? '· +' + AR(gain) + ' نقطة' : ''}<button class="pbtn" data-backa>العودة للإنجاز والتنافس</button></div>`;
+    $('[data-backa]', el).onclick = () => { compRun = null; RENDER.achieve(el); }; if (sc >= r.qs.length * .8) confetti(); sfx('win');
+    $('[data-fin]', el).remove();
+  };
+  $('[data-fin]', el).onclick = finish; $('[data-quit]', el).onclick = () => { clearInterval(r.iv); compRun = null; RENDER.achieve(el); };
+  clearInterval(r.iv); r.iv = setInterval(tick, 1000); tick();
+}
 
 /* =========================================================
    🎮 اللعبة ثلاثية الأبعاد
@@ -2122,6 +2998,7 @@ function endLevel(won) {
     p.game.best[li] = { stars: Math.max(stars, prev ? prev.stars : 0), pts: Math.max(G.pts, prev ? prev.pts : 0) };
     p.game.points += G.pts; p.game.unlocked = Math.max(p.game.unlocked, Math.min(4, li + 2)); setProg(p);
     send('game', { name: session.name, role: session.role, level: li + 1, levelName: L.name, points: G.pts, stars });
+    logAct('اللعبة ثلاثية الأبعاد', L.name, G.pts, `${stars} نجوم`, null, true);
     confetti(120); sfx('win'); if (G.planet) G.planet.userData.jump = 1.2;
   }
   G.orbs.forEach(o => { o.state = 'out'; o.t = 0; });
