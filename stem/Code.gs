@@ -225,6 +225,6 @@ function wrapMail_(title, body) {
     <div style="max-width:600px;margin:auto;background:#fff;border-radius:16px;overflow:hidden">
       <div style="background:linear-gradient(#0d2149,#1a6a88);color:#ffd98a;padding:18px 22px;font-size:18px;font-weight:bold">🌅 ${APP_NAME}</div>
       <div style="padding:22px;color:#1d2450;font-size:15px;line-height:1.9"><h2 style="margin:0 0 10px;font-size:18px">${title}</h2>${body}</div>
-      <div style="padding:12px 22px;background:#f4f6fb;color:#6b7394;font-size:12px">متوسطة وثانوية العطف · معلمة الفيزياء: أ. سماء أحمد المالكي</div>
+      <div style="padding:12px 22px;background:#f4f6fb;color:#6b7394;font-size:12px">متوسطة وثانوية العطف · معلمة الفيزياء: أ. أسماء أحمد المالكي</div>
     </div></div>`;
 }
